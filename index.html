@@ -509,7 +509,7 @@ something.next().value; // 105</code></pre><ul>
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/14/first/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/26/Babel7.5新特性之动态引入和F管道/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shaw">
@@ -528,7 +528,213 @@ something.next().value; // 105</code></pre><ul>
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/08/14/first/" itemprop="url">Hexo搭建个人博客部署于Github与Coding</a></h1>
+                <a class="post-title-link" href="/2019/08/26/Babel7.5新特性之动态引入和F管道/" itemprop="url">Babel 7.5新特性之动态引入和F#管道</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-26T23:19:00+08:00">
+                2019-08-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="https://upload-images.jianshu.io/upload_images/1741029-16b74fc4346ad169.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Babel"></p>
+<h1 id="一、目录"><a href="#一、目录" class="headerlink" title="一、目录"></a>一、目录</h1><ul>
+<li>F#管道操作符</li>
+<li>动态导入</li>
+</ul>
+<h1 id="二、F-管道操作符"><a href="#二、F-管道操作符" class="headerlink" title="二、F#管道操作符"></a>二、F#管道操作符</h1><p>管道操作符提议还在第一阶段的开发中，同时也意味着其规范还在定义中。Babel 从<code>7.3.0</code> 版本已经支持了管道的变形<code>Smart</code>，以及<code>7.0.0-beta</code>版本以来的<code>minimal</code>变形，并且现在又有了新的<code>F#</code>变形。</p>
+<p><code>F#</code>的变形不同于已经存在的<code>smart</code>变形，为何呢?与之前的话题引用（<code>topic references</code>）的概念相比，我们将使用箭头函数来代替。最明显的一个优势就是其更像当今的JavaScript ，并且有着更简洁的语法。换而言之，管道操作符是用在单个参数函数调用时非常有用的且必不可少的语法糖。<br>也就意味着：</p>
+<pre><code>sqrt(64)
+
+// 等于
+
+64 |&gt; sqrt</code></pre><p>以上语法的好处就是当链接多个函数的时候可以使代码更具可读性，这就是管道操作符的最明显的作用。</p>
+<h3 id="考虑以下几行代码："><a href="#考虑以下几行代码：" class="headerlink" title="考虑以下几行代码："></a>考虑以下几行代码：</h3><pre><code>function doubleSay (str) {
+  return str + &quot;, &quot; + str;
+}
+function capitalize (str) {
+  return str[0].toUpperCase() + str.substring(1);
+}
+function exclaim (str) {
+  return str + &apos;!&apos;;
+}</code></pre><p>以下是上面这些函数的调用：</p>
+<pre><code>let result = exclaim(capitalize(doubleSay(&quot;hello&quot;)));
+console.log(result) //=&gt; &quot;Hello, hello!&quot;</code></pre><p>可以使用<code>F#</code>变形来优化：</p>
+<pre><code>let result = &quot;hello&quot;
+  |&gt; doubleSay
+  |&gt; capitalize
+  |&gt; exclaim;
+console.log(result) //=&gt; &quot;Hello, hello!&quot;</code></pre><h3 id="多参数的F"><a href="#多参数的F" class="headerlink" title="多参数的F#"></a>多参数的<code>F#</code></h3><p>这种特殊解决方法的好处就是管道操作符不需对多参数函数做任何处理，只管扔给JavaScript就好了：</p>
+<pre><code>function double (x) { return x + x; }
+function add (x, y) { return x + y; }
+
+function boundScore (min, max, score) {
+  return Math.max(min, Math.min(max, score));
+}</code></pre><p>可以使用<code>smart</code> 变形来调用：</p>
+<pre><code>let person = { score: 25 };
+let newScore = boundScore( 0, 100, add(7, double(person.score)))
+console.log(newScore) //=&gt; 57</code></pre><p>管道操作符提供的新的或者说更好的与之前的<code>smart</code> 变形截然相反的方法是因为我们可以使用箭头函数，可以用来处理多参数函数，比如： <code>add()</code> 和 <code>boundScore()</code>：</p>
+<pre><code>let person = { score: 25 };
+let newScore = person.score
+  |&gt; double
+  |&gt; (n =&gt; add(7, n))
+  |&gt; (n =&gt; boundScore(0, 100, n));
+console.log(newScore) //=&gt; 57</code></pre><p>尽管可以用来处理多个参数的函数，但是通常推荐用来处理单参数函数，因为管道操作符每次只返回一个结果。</p>
+<h3 id="与部分应用语法（Partial-Application-Syntax）一起使用"><a href="#与部分应用语法（Partial-Application-Syntax）一起使用" class="headerlink" title="与部分应用语法（Partial Application Syntax）一起使用"></a>与部分应用语法（Partial Application Syntax）一起使用</h3><p>部分应用语法提出（目前还在第一阶段），在一个通过参数占位符来实现允许部分应用参数列表来调用表达式的参数列表中使用了<code>?</code>操作符来引入的一种新的语法。<br>如果部分语法提议通过审核，也就意味着管道操作符就将会是一种更好更准确的处理之前提到过的函数的方法，即：</p>
+<p>不用这么写：</p>
+<pre><code>let person = { score: 25 };
+let newScore = person.score
+  |&gt; double
+  |&gt; (n =&gt; add(7, n))
+  |&gt; (n =&gt; boundScore(0, 100, n));
+console.log(newScore) //=&gt; 57</code></pre><p>可以直接使用<code>?</code>操作符来替换任意参数来这样写：</p>
+<pre><code>let person = { score: 25 };
+let newScore = person.score
+  |&gt; double
+  |&gt; add(7, ?)
+  |&gt; boundScore(0, 100, ?);
+console.log(newScore) //=&gt; 57</code></pre><p>后者更加简单明了，但是先别高兴得太早，目前只是提议阶段，还未完全确定，拭目以待。</p>
+<h3 id="与Await一起使用"><a href="#与Await一起使用" class="headerlink" title="与Await一起使用"></a>与Await一起使用</h3><p>每一个提议对于管道中的<code>await</code>都有不同的解决方案，<code>F#</code>变形也不例外，它处理<code>await</code>的方式和<code>smart</code>有点类似但是也有不同之处：</p>
+<pre><code>// Smart Pipeline
+let newScore = fetch(url)
+  |&gt; await #
+  |&gt; #.json()
+  |&gt; await #
+  |&gt; #.ID;</code></pre><p>F# 管道引入箭头函数来处理这些案例：</p>
+<pre><code>// F# pipe line
+let newScore = fetch(url)
+  |&gt; await
+  |&gt; r =&gt; r.json()
+  |&gt; await
+  |&gt; obj =&gt; obj.ID;</code></pre><h3 id="开始尝试-F-管道操作符"><a href="#开始尝试-F-管道操作符" class="headerlink" title="开始尝试 F# 管道操作符"></a>开始尝试 F# 管道操作符</h3><p>可以简单修改<code>babel.config</code>文件然后加入管道操作符插件来使用：</p>
+<pre><code>module.exports = {
+  plugins: [
+    [&quot;@babel/proposal-pipeline-operator&quot;, { proposal: &quot;fsharp&quot; }]
+  ]
+};</code></pre><h3 id="更多关于此提议-特性"><a href="#更多关于此提议-特性" class="headerlink" title="更多关于此提议/特性"></a>更多关于此提议/特性</h3><p><a href>https://babeljs.io/blog/2019/07/03/7.5.0#f-pipeline-operator-9450-https-githubcom-babel-babel-pull-9450-and-9984-https-githubcom-babel-babel-pull-9984</a></p>
+<h1 id="三、动态引入"><a href="#三、动态引入" class="headerlink" title="三、动态引入"></a>三、动态引入</h1><p>在新提议之前：<br>1.如果你使用<code>webpack</code>或者<code>rollup</code>来实现动态引入，需要包含<code>@babel/plugin-syntax-dynamic-import</code>并且不能用<code>babel</code>转化<br>2.如果你使用<code>Node</code>，可以使用<code>babel-plugin-dynamic-import-node</code>插件来转化</p>
+<p>在这里讨论的重点时，对于每一个模块来说，可以有不同的方法来转化。通常，是使用唯一的转化插件来转化模块的。大意是，新的动态导入的提议提供了一种结合上述几种用例的方法，一个单一的<code>entry point</code> <code>@babel/plugin-proposal-dynamic-import</code>。</p>
+<p>这样，我们就有了一个可以转化所有模块(Webpack, Roll up, Node 等等)可重用的插件。这个插件必须和模块转化插件一起使用，因为<code>Babel</code>需要识别你需要转化的是哪一种模块加载系统。</p>
+<p>一个关于AMD有效配置的例子：</p>
+<pre><code>module.exports = {
+  plugins: [
+    &quot;@babel/plugin-proposal-dynamic-import&quot;,
+    &quot;@babel/plugin-transform-modules-amd&quot;
+  ]
+};</code></pre><p> <code>&quot;@babel/plugin-transform-modules-amd&quot;</code>指明了目标模块是AMD类型的，如果不指定的话，<code>Babel</code>将无法识别目标模块是 <code>Node</code> 还是 <code>Rollup</code>，如果你只是解析<code>import()</code>表达式，而不是转化的话，可以只指定<code>@babel/plugin-syntax-dynamic-import</code>。</p>
+<p>动态引入在使用<code>@babel/preset-env</code>时默认开启，也无需考虑是否支持<code>webpack</code>或者<code>rollup</code>，<code>babel-loader</code> 和 <code>rollup-plugin-babel</code>都会为了使其他<code>bundler</code>正确处理<code>Babel</code>而自动关闭其转化功能。</p>
+<h1 id="四、参考"><a href="#四、参考" class="headerlink" title="四、参考"></a>四、参考</h1><p><a href="https://scotch.io/bar-talk/dynamic-imports-and-f-pipes-officially-land-in-babel-75" target="_blank" rel="noopener">原文</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/14/Hexo搭建个人博客部署于Github与Coding/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shaw">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shaw's blog.">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/14/Hexo搭建个人博客部署于Github与Coding/" itemprop="url">Hexo搭建个人博客部署于Github与Coding</a></h1>
         
 
         <div class="post-meta">
@@ -588,17 +794,25 @@ something.next().value; // 105</code></pre><ul>
 </ul>
 <p><img src="http://upload-images.jianshu.io/upload_images/1741029-e5035d2c74ba60c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Git命令"></p>
 <ul>
-<li>然后是<strong><a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js</a>下载</strong>,稳定版和最新版都可以，个人喜好，Hexo是靠node驱动，所以以上除了github以外都是是必须的。</li>
-<li>有不想用国外网站的童鞋也可以使用国内的<a href="https://coding.net" target="_blank" rel="noopener">Coding</a>，原理一样，反正都是仿Github的。虽说国外网站有可能被墙，而且比起国内的慢一点，但是我同时部署了Coding和Github，后者瞬间就能访问了，而前者，呵呵。</li>
-<li>对了，第一个坑来了，安装完毕之后一定要重启，不然后面使用<em>npm</em>命令安装Hexo时会提示找不到命令，然后才能继续后面的步骤。重启完毕之后就可以愉快地开始安装了，在Git Bash端执行下面的命令就可以安装Hexo了。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    $ npm install hexo-cli -g</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">- 然后初始化hexo，进入文件之后就可以执行后面的命令了。</span><br></pre></td></tr></table></figure>
-
+<li><p>然后是<strong><a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js</a>下载</strong>,稳定版和最新版都可以，个人喜好，Hexo是靠node驱动，所以以上除了github以外都是是必须的。</p>
+</li>
+<li><p>有不想用国外网站的童鞋也可以使用国内的<a href="https://coding.net" target="_blank" rel="noopener">Coding</a>，原理一样，反正都是仿Github的。虽说国外网站有可能被墙，而且比起国内的慢一点，但是我同时部署了Coding和Github，后者瞬间就能访问了，而前者，呵呵。</p>
+</li>
+<li><p>对了，第一个坑来了，安装完毕之后一定要重启，不然后面使用<em>npm</em>命令安装Hexo时会提示找不到命令，然后才能继续后面的步骤。重启完毕之后就可以愉快地开始安装了，在Git Bash端执行下面的命令就可以安装Hexo了。</p>
+<pre><code>$ npm install hexo-cli -g</code></pre></li>
+<li><p>然后初始化hexo，进入文件之后就可以执行后面的命令了。</p>
 <pre><code>$ hexo init blog
-$ cd blog</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line">- 介绍一下hexo下用到的命令：</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line">$ hexo g/generate #生成静态文件</span><br><span class="line">$ hexo s/server #启动服务器，主要用来本地预览</span><br><span class="line">$ hexo d/deploy #将本地文件发布到github或Coding上</span><br><span class="line">$ hexo n/new &quot;postName&quot;#新建一篇文章</span><br><span class="line">$ hexo n/new page &quot;pageName&quot; #新建页面</span><br><span class="line">$ hexo h/help # 查看帮助</span><br><span class="line">$ hexo v/version #查看Hexo的版本</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>进入文件之后执行<strong>hexo g</strong>和<strong>hexo s</strong>之后然后用浏览器打开<em><a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a></em>，不出意外的话，你就可以看到你的博客了，就像下面这个样子的，当然这个博客只是在本地的，hexo3.0使用的默认主题是landscape。</li>
+$ cd blog</code></pre></li>
+<li><p>介绍一下hexo下用到的命令：</p>
+<pre><code>$ hexo g/generate #生成静态文件
+$ hexo s/server #启动服务器，主要用来本地预览
+$ hexo d/deploy #将本地文件发布到github或Coding上
+$ hexo n/new &quot;postName&quot;#新建一篇文章
+$ hexo n/new page &quot;pageName&quot; #新建页面
+$ hexo h/help # 查看帮助
+$ hexo v/version #查看Hexo的版本</code></pre></li>
+<li><p>进入文件之后执行<strong>hexo g</strong>和<strong>hexo s</strong>之后然后用浏览器打开<em><a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a></em>，不出意外的话，你就可以看到你的博客了，就像下面这个样子的，当然这个博客只是在本地的，hexo3.0使用的默认主题是landscape。</p>
+</li>
 </ul>
 <p><img src="http://upload-images.jianshu.io/upload_images/1741029-22f51ce15050f2af.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
 <ul>
@@ -617,46 +831,60 @@ $ cd blog</code></pre><figure class="highlight plain"><table><tr><td class="gutt
 </ul>
 <p><img src="http://upload-images.jianshu.io/upload_images/1741029-b94e68dd00f6f723.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
 <ul>
-<li>好了，到此，你已经配置好本地，然后预览好之后就可以发布了，使用下面</li>
+<li><p>好了，到此，你已经配置好本地，然后预览好之后就可以发布了，使用下面</p>
+<pre><code>hexo g
+hexo d</code></pre></li>
+<li><p>命令就可以啦，但是天有不测风云，遇到错误，</p>
+<pre><code>ERROR Deployer not found : github</code></pre></li>
+<li><p>不用急，执行一下这条命令就可以，还有可能遇到说你的github地址不是仓库，那是因为你的地址没有设置正确，检查一下空格之类的。</p>
+<pre><code>npm install hexo-deployer-git --save</code></pre></li>
+<li><p>要想以上命令起作用，前提是你的配置文件已经配置如下，这个是同时发布到Github和Coding上面</p>
+<pre><code>deploy:
+  type: git
+  repo: 
+    coding: git@git.coding.net:HalShaw/halshaw.git,master
+    github: https://github.com/HalShaw/halshaw.github.io.git,master</code></pre></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo d</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">- 命令就可以啦，但是天有不测风云，遇到错误，</span><br></pre></td></tr></table></figure>
-
-<p> ERROR Deployer not found : github</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 不用急，执行一下这条命令就可以，还有可能遇到说你的github地址不是仓库，那是因为你的地址没有设置正确，检查一下空格之类的。</span><br></pre></td></tr></table></figure>
-
-<p>npm install hexo-deployer-git –save</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 要想以上命令起作用，前提是你的配置文件已经配置如下，这个是同时发布到Github和Coding上面</span><br></pre></td></tr></table></figure>
-
-<p>deploy:<br>  type: git<br>  repo:<br>    coding: <a href="mailto:git@git.coding.net" target="_blank" rel="noopener">git@git.coding.net</a>:HalShaw/halshaw.git,master<br>    github: <a href="https://github.com/HalShaw/halshaw.github.io.git,master" target="_blank" rel="noopener">https://github.com/HalShaw/halshaw.github.io.git,master</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 如果只想发布到GIthub上，稍微改一下</span><br></pre></td></tr></table></figure>
-
-<p>deploy:<br>  type: git<br>  repository: <a href="https://github.com/HalShaw/halshaw.github.io.git" target="_blank" rel="noopener">https://github.com/HalShaw/halshaw.github.io.git</a><br>  branch: master</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 一切顺利的话，就可以啦。但是，慢着，又出现问题了。命令行返回</span><br></pre></td></tr></table></figure>
-
-<p>Invalid argument</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- what?什么鬼？明明本地都可以成功预览了，但是为什么发布不了了呢，我就被这个**hexo d**搞了好久，查了好久才明白，原因是我在我的hexo目录下，我又执行了</span><br></pre></td></tr></table></figure>
-
-<p>npm install</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 又安装了一个hexo，所以不能发布了，所以删除之后就可以高兴滴执行**hexo d**啦。</span><br><span class="line">- 谢天谢地，终于发布上去了，然而，不到一分钟，我就收到了Github发来的邮件</span><br><span class="line"></span><br><span class="line">![](http://upload-images.jianshu.io/upload_images/1741029-fbd6b116e700b063.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line"></span><br><span class="line">创建page失败，madan，招谁惹谁了我，怎么遇到这么多问题呢。又是一番搜索之后找到了一个我认为满意的答案</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li>Make a backup of the content locally</li>
-<li>Delete the repository from GitHub</li>
-<li>Delete the repository locally</li>
-<li>Recreate the repository, ensuring that you don’t include the repository within the repository locally, which is what you did previously</li>
-<li>Push it to GitHub<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 意思就是我git仓库里面又包括其他仓库啦，让我把他们搞好之后再上传，果然，我到主题文件下把.git文件删除之后，然后再次发布，终于，大功告成。就是刚才那个小清新的博客啦。</span><br><span class="line">- 然后就开始写文章吧，该博客只支持[markdown](http://www.jianshu.com/p/q81RER/)语法，所以不会的小伙伴也不要怕，花个几分钟就可以上手啦。在Git终端输入上面的新建文章命令就可以新建一篇文章啦。然后会显示文章所在路径，找到并打开开始写文章吧。</span><br></pre></td></tr></table></figure>
-
+<li><p>如果只想发布到GIthub上，稍微改一下</p>
+<pre><code>deploy:  
+  type: git
+  repository: https://github.com/HalShaw/halshaw.github.io.git 
+  branch: master</code></pre></li>
+<li><p>一切顺利的话，就可以啦。但是，慢着，又出现问题了。命令行返回</p>
+<pre><code>Invalid argument        </code></pre></li>
+<li><p>what?什么鬼？明明本地都可以成功预览了，但是为什么发布不了了呢，我就被这个<strong>hexo d</strong>搞了好久，查了好久才明白，原因是我在我的hexo目录下，我又执行了</p>
+<pre><code>npm install</code></pre></li>
+<li><p>又安装了一个hexo，所以不能发布了，所以删除之后就可以高兴滴执行<strong>hexo d</strong>啦。</p>
+</li>
+<li><p>谢天谢地，终于发布上去了，然而，不到一分钟，我就收到了Github发来的邮件</p>
 </li>
 </ul>
-<p>$ hexo n my first<br>INFO  Created: D:\hexo1\hexo\source_posts\first.md</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 打开之后是这样的，你可以自己设置标签和分类，然后就开始写你自己的故事吧。</span><br></pre></td></tr></table></figure>
-
-<p>title: my first#标题和日期必须唯一，因为访问文章的url是根据二者生成的<br>date: 2016-08-25 15:33:58<br>tags: ‘try’ #标签<br>categories: “技术” #分类</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 然后之后写文章每次部署都需要执行如下的命令，需要先清理数据库，生成静态文件之后预览，然后发布。</span><br></pre></td></tr></table></figure>
-
-<p>hexo clean<br>hexo g<br>hexo s<br>hexo d</p>
-<p>```</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1741029-fbd6b116e700b063.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>创建page失败，madan，招谁惹谁了我，怎么遇到这么多问题呢。又是一番搜索之后找到了一个我认为满意的答案</p>
+<pre><code>- Make a backup of the content locally
+- Delete the repository from GitHub
+- Delete the repository locally
+- Recreate the repository, ensuring that you don&apos;t include the repository within the repository locally, which is what you did previously
+- Push it to GitHub</code></pre><ul>
+<li>意思就是我git仓库里面又包括其他仓库啦，让我把他们搞好之后再上传，果然，我到主题文件下把.git文件删除之后，然后再次发布，终于，大功告成。就是刚才那个小清新的博客啦。</li>
+<li>然后就开始写文章吧，该博客只支持<a href="http://www.jianshu.com/p/q81RER/" target="_blank" rel="noopener">markdown</a>语法，所以不会的小伙伴也不要怕，花个几分钟就可以上手啦。在Git终端输入上面的新建文章命令就可以新建一篇文章啦。然后会显示文章所在路径，找到并打开开始写文章吧。</li>
+</ul>
+<pre><code>$ hexo n my first
+INFO  Created: D:\hexo1\hexo\source\_posts\first.md</code></pre><ul>
+<li><p>打开之后是这样的，你可以自己设置标签和分类，然后就开始写你自己的故事吧。</p>
+<pre><code>title: my first#标题和日期必须唯一，因为访问文章的url是根据二者生成的
+date: 2016-08-25 15:33:58
+tags: &apos;try&apos; #标签
+categories: &quot;技术&quot; #分类</code></pre></li>
+</ul>
 <ul>
+<li>然后之后写文章每次部署都需要执行如下的命令，需要先清理数据库，生成静态文件之后预览，然后发布。</li>
+</ul>
+<pre><code>hexo clean
+hexo g
+hexo s
+hexo d</code></pre><ul>
 <li>好啦，到这里，文章已经写好，然后发布之后就可以去找小伙伴炫耀啦。</li>
 </ul>
 <h3 id="本文为作者原创，保留所有权，欢迎转载，转载请注明出处，标明作者。"><a href="#本文为作者原创，保留所有权，欢迎转载，转载请注明出处，标明作者。" class="headerlink" title="本文为作者原创，保留所有权，欢迎转载，转载请注明出处，标明作者。"></a>本文为作者原创，保留所有权，欢迎转载，转载请注明出处，标明作者。</h3>
@@ -740,7 +968,7 @@ $ cd blog</code></pre><figure class="highlight plain"><table><tr><td class="gutt
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -753,7 +981,7 @@ $ cd blog</code></pre><figure class="highlight plain"><table><tr><td class="gutt
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
