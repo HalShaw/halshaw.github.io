@@ -715,6 +715,371 @@ let newScore = fetch(url)
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/19/ES2019新特性/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shaw">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shaw's blog.">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/19/ES2019新特性/" itemprop="url">ES2019 新特性</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-19T22:06:00+08:00">
+                2019-08-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="https://upload-images.jianshu.io/upload_images/1741029-69db7d2ed973e3ae.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ES2019"></p>
+<h1 id="Object-fromEntries"><a href="#Object-fromEntries" class="headerlink" title="Object.fromEntries"></a>Object.fromEntries</h1><p>在ES2017中，引入了<code>Object.entries</code>来把<code>Object</code>转成数组，如下：</p>
+<pre><code>let students = {
+  amelia: 20,
+  beatrice: 22,
+  cece: 20,
+  deirdre: 19,
+  eloise: 21
+}
+
+Object.entries(students) 
+// [
+//  [ &apos;amelia&apos;, 20 ],
+//  [ &apos;beatrice&apos;, 22 ],
+//  [ &apos;cece&apos;, 20 ],
+//  [ &apos;deirdre&apos;, 19 ],
+//  [ &apos;eloise&apos;, 21 ]
+// ]</code></pre><p>引入<code>Object.entries</code>这个方法的目的是为了使<code>Object</code>也可以使用数组的<code>map</code>，<code>filter</code>， <code>reduce</code>等原生方法，但是使用完之后必须要自己手动还原回去，例如：</p>
+<pre><code>let students = {
+  amelia: 20,
+  beatrice: 22,
+  cece: 20,
+  deirdre: 19,
+  eloise: 21
+}
+
+// convert to array in order to make use of .filter() function
+let overTwentyOne = Object.entries(students).filter(([name, age]) =&gt; {
+  return age &gt;= 21
+}) // [ [ &apos;beatrice&apos;, 22 ], [ &apos;eloise&apos;, 21 ] ]
+
+// turn multidimensional array back into an object
+let DrinkingAgeStudents = {}
+for (let [name, age] of overTwentyOne) {
+    DrinkingAgeStudents[name] = age;
+}
+// { beatrice: 22, eloise: 21 }</code></pre><p>上述代码使用了<code>Object.entries</code>及数组的<code>filter</code>方法过滤了年龄大于等于21的成员，然后又使用了<code>for...of</code>把数字转变回了<code>Object</code>，<br><code>Object.fromEntries</code>就是用来替代上面代码中的<code>for...of</code>循环的，使得<code>Object</code>调用数组的原生方法更简洁方便，代码如下：</p>
+<pre><code>let students = {
+  amelia: 20,
+  beatrice: 22,
+  cece: 20,
+  deirdre: 19,
+  eloise: 21
+}
+
+// convert to array in order to make use of .filter() function
+let overTwentyOne = Object.entries(students).filter(([name, age]) =&gt; {
+  return age &gt;= 21
+}) // [ [ &apos;beatrice&apos;, 22 ], [ &apos;eloise&apos;, 21 ] ]
+
+// turn multidimensional array back into an object
+let DrinkingAgeStudents = Object.fromEntries(overTwentyOne); 
+// { beatrice: 22, eloise: 21 }</code></pre><p>需要注意的一点是，使用<code>Object.fromEntries</code>会把<code>Object</code>中的重复<code>key</code>覆盖掉，只保存最后一个，如下：</p>
+<pre><code>let students = [
+  [ &apos;amelia&apos;, 22 ], 
+  [ &apos;beatrice&apos;, 22 ], 
+  [ &apos;eloise&apos;, 21], 
+  [ &apos;beatrice&apos;, 20 ]
+]
+
+let studentObj = Object.fromEntries(students); 
+// { amelia: 22, beatrice: 20, eloise: 21 }
+// dropped first beatrice!</code></pre><h1 id="Array-prototype-flat"><a href="#Array-prototype-flat" class="headerlink" title="Array.prototype.flat"></a>Array.prototype.flat</h1><p>通常，数组会出现二维或者以上的情况，这个时候如果我们需要降维的话，常用的一种方法时使用<code>concat</code>方法，如下：</p>
+<pre><code>let courses = [
+  {
+    subject: &quot;math&quot;,
+    numberOfStudents: 3,
+    waitlistStudents: 2,
+    students: [&apos;Janet&apos;, &apos;Martha&apos;, &apos;Bob&apos;, [&apos;Phil&apos;, &apos;Candace&apos;]]
+  },
+  {
+    subject: &quot;english&quot;,
+    numberOfStudents: 2,
+    students: [&apos;Wilson&apos;, &apos;Taylor&apos;]
+  },
+  {
+    subject: &quot;history&quot;,
+    numberOfStudents: 4,
+    students: [&apos;Edith&apos;, &apos;Jacob&apos;, &apos;Peter&apos;, &apos;Betty&apos;]
+  }
+]
+
+let courseStudents = courses.map(course =&gt; course.students)
+// [
+//   [ &apos;Janet&apos;, &apos;Martha&apos;, &apos;Bob&apos;, [ &apos;Phil&apos;, &apos;Candace&apos; ] ],
+//   [ &apos;Wilson&apos;, &apos;Taylor&apos; ],
+//   [ &apos;Edith&apos;, &apos;Jacob&apos;, &apos;Peter&apos;, &apos;Betty&apos; ]
+// ]
+
+[].concat.apply([], courseStudents) // we&apos;re stuck doing something like this</code></pre><p>但是在ES2019中引入了<code>Array.prototype.flat</code>，其接受一个可选参数表示需要展开的深度，默认值为1，可以帮助我们快速实现数组降维，如下：</p>
+<pre><code>let courseStudents = [
+  [ &apos;Janet&apos;, &apos;Martha&apos;, &apos;Bob&apos;, [ &apos;Phil&apos;, &apos;Candace&apos; ] ],
+  [ &apos;Wilson&apos;, &apos;Taylor&apos; ],
+  [ &apos;Edith&apos;, &apos;Jacob&apos;, &apos;Peter&apos;, &apos;Betty&apos; ]
+]
+
+let flattenOneLevel = courseStudents.flat(1)
+console.log(flattenOneLevel)
+// [
+//   &apos;Janet&apos;,
+//   &apos;Martha&apos;,
+//   &apos;Bob&apos;,
+//   [ &apos;Phil&apos;, &apos;Candace&apos; ],
+//   &apos;Wilson&apos;,
+//   &apos;Taylor&apos;,
+//   &apos;Edith&apos;,
+//   &apos;Jacob&apos;,
+//   &apos;Peter&apos;,
+//   &apos;Betty&apos;
+// ]
+
+let flattenTwoLevels = courseStudents.flat(2)
+console.log(flattenTwoLevels)
+// [
+//   &apos;Janet&apos;,   &apos;Martha&apos;,
+//   &apos;Bob&apos;,     &apos;Phil&apos;,
+//   &apos;Candace&apos;, &apos;Wilson&apos;,
+//   &apos;Taylor&apos;,  &apos;Edith&apos;,
+//   &apos;Jacob&apos;,   &apos;Peter&apos;,
+//   &apos;Betty&apos;
+// ]</code></pre><p>不指定参数与参数值等于1的时候一样：</p>
+<pre><code>let courseStudents = [
+  [ &apos;Janet&apos;, &apos;Martha&apos;, &apos;Bob&apos;, [ &apos;Phil&apos;, &apos;Candace&apos; ] ],
+  [ &apos;Wilson&apos;, &apos;Taylor&apos; ],
+  [ &apos;Edith&apos;, &apos;Jacob&apos;, &apos;Peter&apos;, &apos;Betty&apos; ]
+]
+
+let defaultFlattened = courseStudents.flat()
+console.log(defaultFlattened)
+// [
+//   &apos;Janet&apos;,
+//   &apos;Martha&apos;,
+//   &apos;Bob&apos;,
+//   [ &apos;Phil&apos;, &apos;Candace&apos; ],
+//   &apos;Wilson&apos;,
+//   &apos;Taylor&apos;,
+//   &apos;Edith&apos;,
+//   &apos;Jacob&apos;,
+//   &apos;Peter&apos;,
+//   &apos;Betty&apos;
+// ]</code></pre><ul>
+<li><p>贪心操作<code>Infinity</code><br>对于未知深度的数组，可以使用<code>Infinity</code>参数来实现完全降维：</p>
+<pre><code>let courseStudents = [
+  [ &apos;Janet&apos;, &apos;Martha&apos;, &apos;Bob&apos;, [ &apos;Phil&apos;, &apos;Candace&apos; ] ],
+  [ &apos;Wilson&apos;, &apos;Taylor&apos; ],
+  [ &apos;Edith&apos;, &apos;Jacob&apos;, &apos;Peter&apos;, &apos;Betty&apos; ]
+]
+
+let alwaysFlattened = courseStudents.flat(Infinity)
+console.log(alwaysFlattened)
+// [
+//   &apos;Janet&apos;,   &apos;Martha&apos;,
+//   &apos;Bob&apos;,     &apos;Phil&apos;,
+//   &apos;Candace&apos;, &apos;Wilson&apos;,
+//   &apos;Taylor&apos;,  &apos;Edith&apos;,
+//   &apos;Jacob&apos;,   &apos;Peter&apos;,
+//   &apos;Betty&apos;
+// ]</code></pre></li>
+</ul>
+<p>事实上，<code>Infinity</code>参数在实际情况中应该谨慎使用，而且在真正未知数组维数时并不推荐使用<code>Infinity</code>参数。</p>
+<h1 id="Array-prototype-flatMap"><a href="#Array-prototype-flatMap" class="headerlink" title="Array.prototype.flatMap"></a>Array.prototype.flatMap</h1><p><code>flatMap</code> 等价于<code>map</code> 和 <code>flat</code>不加参数的结合体，所以<code>flatMap</code> 只展开一层数组。</p>
+<ul>
+<li><p>普通半版数组中插入值：</p>
+<pre><code>let grades = [78, 62, 80, 64]
+
+let curved = grades.map(grade =&gt; [grade, grade + 7])
+// [ [ 78, 85 ], [ 62, 69 ], [ 80, 87 ], [ 64, 71 ] ]
+
+let flatMapped = [].concat.apply([], curved) // now flatten, could use flat but that didn&apos;t exist before either
+// [
+//  78, 85, 62, 69,
+//  80, 87, 64, 71
+// ]</code></pre></li>
+</ul>
+<ul>
+<li><p><code>Array.prototype.flat</code>版</p>
+<pre><code>let grades = [78, 62, 80, 64]
+
+let flatMapped = grades.map(grade =&gt; [grade, grade + 7]).flat()
+// [
+//  78, 85, 62, 69,
+//  80, 87, 64, 71
+// ]</code></pre></li>
+</ul>
+<ul>
+<li><p><code>flatMap</code>进阶版</p>
+<pre><code>let grades = [78, 62, 80, 64]
+
+let flatMapped = grades.flatMap(grade =&gt; [grade, grade + 7]);
+// [
+//  78, 85, 62, 69,
+//  80, 87, 64, 71
+// ]</code></pre></li>
+</ul>
+<p>由于是<code>map</code> 和 <code>flat</code>不加参数的结合体，<code>flatMap</code> 只展开一层数组：</p>
+<pre><code>let grades = [78, 62, 80, 64]
+
+let flatMapped = grades.flatMap(grade =&gt; [grade, [grade + 7]]);
+// [
+//   78, [ 85 ],
+//   62, [ 69 ],
+//   80, [ 87 ],
+//   64, [ 71 ]
+// ]</code></pre><h1 id="String-trimStart-和-String-trimEnd"><a href="#String-trimStart-和-String-trimEnd" class="headerlink" title="String.trimStart 和 String.trimEnd"></a>String.trimStart 和 String.trimEnd</h1><p>等价于之前的<code>String.trimRight</code> 和 <code>String.trimLeft</code> </p>
+<pre><code>let message = &quot;   Welcome to CS 101    &quot;
+message.trimRight()
+// &apos;   Welcome to CS 101&apos;
+message.trimLeft()
+// &apos;Welcome to CS 101   &apos;
+message.trimRight().trimLeft()
+// &apos;Welcome to CS 101&apos;</code></pre><p>等价于</p>
+<pre><code>let message = &quot;   Welcome to CS 101    &quot;
+message.trimEnd()
+// &apos;   Welcome to CS 101&apos;
+message.trimStart()
+// &apos;Welcome to CS 101   &apos;
+message.trimEnd().trimStart()
+// &apos;Welcome to CS 101&apos;</code></pre><h1 id="可选的catch绑定"><a href="#可选的catch绑定" class="headerlink" title="可选的catch绑定"></a>可选的catch绑定</h1><p>在之前的版本中，<code>try...catch</code>中的<code>catch</code>后面必须要跟一个参数，即使<code>catch</code>块里面什么内容都没有，所以在ES2019中，<code>catch</code>块后面的参数是可选的，如下：</p>
+<pre><code>try {
+  let parsed = JSON.parse(obj)
+} catch(e) {
+  // ignore e, or use
+  console.log(obj)
+}</code></pre><p><code>e</code>可以不写：</p>
+<pre><code>try {
+  let parsed = JSON.parse(obj)
+} catch {
+  console.log(obj)
+}</code></pre><h1 id="Function-toString-更新"><a href="#Function-toString-更新" class="headerlink" title="Function.toString() 更新"></a>Function.toString() 更新</h1><p>之前的版本中，<code>Function.toString()</code>直接把空格去掉了：</p>
+<pre><code>function greeting() {
+  const name = &apos;CSS Tricks&apos;
+  console.log(`hello from ${name}`)
+}
+
+greeting.toString()
+//&apos;function greeting() {\nconst name = \&apos;CSS Tricks\&apos;\nconsole.log(`hello from ${name} //`)\n}&apos;</code></pre><p>但是，在ES2019中，会完全保留源码格式打印：</p>
+<pre><code>function greeting() {
+  const name = &apos;CSS Tricks&apos;
+  console.log(`hello from ${name}`)
+}
+
+greeting.toString()
+// &apos;function greeting() {\n&apos; +
+//  &quot;  const name = &apos;CSS Tricks&apos;\n&quot; +
+//  &apos;  console.log(`hello from ${name}`)\n&apos; +
+//  &apos;}&apos;</code></pre><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://css-tricks.com/all-the-new-es2019-tips-and-tricks/" target="_blank" rel="noopener">https://css-tricks.com/all-the-new-es2019-tips-and-tricks/</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/14/Hexo搭建个人博客部署于Github与Coding/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -968,7 +1333,7 @@ hexo d</code></pre><ul>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -981,7 +1346,7 @@ hexo d</code></pre><ul>
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
