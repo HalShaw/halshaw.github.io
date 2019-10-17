@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ES6 Set Map,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、Set 概念Set类似于数组，本身是一个构造函数，用来生成 Set 数据结构，成员值都是唯一的，常用于数组去重。  属性Set.prototype.size：返回Set实例的成员总数  方法add() 添加值，返回 Set 结构本身。delete() 删除值，返回一个布尔值，表示删除是否成功。has() 返回一个布尔值，表示该值是否为Set的成员。clear() 清除所有成员，没有返回值。">
+<meta name="keywords" content="ES6 Set Map">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6之Set和Map及WeakSet和WeakMap总结">
+<meta property="og:url" content="http://yoursite.com/2019/08/19/ES6之Set和Map及WeakSet和WeakMap总结/index.html">
+<meta property="og:site_name" content="Shaw&#39;s blog.">
+<meta property="og:description" content="一、Set 概念Set类似于数组，本身是一个构造函数，用来生成 Set 数据结构，成员值都是唯一的，常用于数组去重。  属性Set.prototype.size：返回Set实例的成员总数  方法add() 添加值，返回 Set 结构本身。delete() 删除值，返回一个布尔值，表示删除是否成功。has() 返回一个布尔值，表示该值是否为Set的成员。clear() 清除所有成员，没有返回值。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1741029-96533cae7400a3a1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-10-17T14:02:30.896Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6之Set和Map及WeakSet和WeakMap总结">
+<meta name="twitter:description" content="一、Set 概念Set类似于数组，本身是一个构造函数，用来生成 Set 数据结构，成员值都是唯一的，常用于数组去重。  属性Set.prototype.size：返回Set实例的成员总数  方法add() 添加值，返回 Set 结构本身。delete() 删除值，返回一个布尔值，表示删除是否成功。has() 返回一个布尔值，表示该值是否为Set的成员。clear() 清除所有成员，没有返回值。">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1741029-96533cae7400a3a1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/19/ES6之Set和Map及WeakSet和WeakMap总结/">
+
+
+
+
+
+  <title>ES6之Set和Map及WeakSet和WeakMap总结 | Shaw's blog.</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shaw's blog.</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Life is short, carpe diem.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/19/ES6之Set和Map及WeakSet和WeakMap总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shaw">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shaw's blog.">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ES6之Set和Map及WeakSet和WeakMap总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-19T20:44:00+08:00">
+                2019-08-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/1741029-96533cae7400a3a1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Set &amp; Map"></p>
+<h1 id="一、Set"><a href="#一、Set" class="headerlink" title="一、Set"></a>一、Set</h1><ul>
+<li><p>概念<br><code>Set</code>类似于数组，本身是一个构造函数，用来生成 <code>Set</code> 数据结构，成员值都是唯一的，常用于数组去重。</p>
+</li>
+<li><p>属性<br><code>Set.prototype.size</code>：返回Set实例的成员总数</p>
+</li>
+<li><p>方法<br><code>add()</code> 添加值，返回 Set 结构本身。<br><code>delete()</code> 删除值，返回一个布尔值，表示删除是否成功。<br><code>has()</code> 返回一个布尔值，表示该值是否为<code>Set</code>的成员。<br><code>clear()</code> 清除所有成员，没有返回值。</p>
+</li>
+<li><p>遍历<br><code>Set.prototype.keys()</code>：返回键名的遍历器<br><code>Set.prototype.values()</code>：返回键值的遍历器<br><code>Set.prototype.entries()</code>：返回键值对的遍历器<br><code>Set.prototype.forEach()</code>：使用回调函数遍历每个成员</p>
+</li>
+</ul>
+<h1 id="二、Map"><a href="#二、Map" class="headerlink" title="二、Map"></a>二、Map</h1><ul>
+<li><p>概念<br>由于<code>Object</code>只能使用字符串作为<code>key</code>，在使用上面会有很大的限制，比如使用<code>DOM</code>节点作为<code>key</code>时，就会被自动转为字符串<code>[object HTMLDivElement]</code>。<br>为了解决上述问题，ES6 引入了 <code>Map</code> ，它类似于对象，也是键值对的集合，但是其key的范围不限于字符串，各种类型的值（包括对象）都可以当作键。<br><code>Object</code> 结构提供了“字符串—值”的对应，<code>Map</code> 结构提供了“值—值”的对应，是一种更完善的 Hash 结构实现。</p>
+</li>
+<li><p>与Object的区别<br><code>Object</code>：<br><code>k-v</code>(键-值对)，<code>key</code>只能是字符串，<code>value</code>可以为任意类型，无序，不可遍历，有默认属性<br><code>Map</code>:<br><code>k-v</code>(键-值对)，<code>key</code>与<code>value</code>可以为任意类型，可使用<code>for...of</code>遍历，按插入顺序遍历，可存储大量数据，但是由于<code>.get</code> 函数，可能比<code>Object</code>慢</p>
+</li>
+</ul>
+<p>常用方法比较：</p>
+<pre><code>Object:
+   var o = {};
+   var o = Object.create(null);
+   o.key = 1;
+   o.key += 10;
+   for(let k in o) o[k]++;
+   var sum = 0;
+   for(let v of Object.values(m)) sum += v;
+   if(&apos;key&apos; in o);
+   if(o.hasOwnProperty(&apos;key&apos;));
+   delete(o.key);
+   Object.keys(o).length
+Map:
+   var m = new Map();
+   m.set(&apos;key&apos;, 1);
+   m.set(&apos;key&apos;, m.get(&apos;key&apos;) + 10);
+   m.foreach((k, v) =&gt; m.set(k, m.get(k) + 1));
+   for(let k of m.keys()) m.set(k, m.get(k) + 1);
+   var sum = 0;
+   for(let v of m.values()) sum += v;
+   if(m.has(&apos;key&apos;));
+   m.delete(&apos;key&apos;);
+   m.size();</code></pre><ul>
+<li><p>属性与方法<br><code>size</code><br><code>set(k,v)</code><br><code>get(K)</code><br><code>has(k)</code><br><code>delete(k)</code><br><code>clear()</code></p>
+</li>
+<li><p>遍历<br><code>Map.prototype.keys()</code>：返回键名的遍历器。<br><code>Map.prototype.values()</code>：返回键值的遍历器。<br><code>Map.prototype.entries()</code>：返回所有成员的遍历器。<br><code>Map.prototype.forEach()</code>：遍历 Map 的所有成员。</p>
+</li>
+<li><p>遍历顺序就是插入顺序</p>
+</li>
+<li><p><code>Map</code> 转为数组最方便的方法，就是使用扩展运算符<code>（...）</code></p>
+</li>
+</ul>
+<h1 id="三、WeakSet"><a href="#三、WeakSet" class="headerlink" title="三、WeakSet"></a>三、WeakSet</h1><ul>
+<li><p><code>WeakSet</code> 的成员只能是对象，而不能是其他类型的值</p>
+</li>
+<li><p>对象都是弱引用，即垃圾回收机制不考虑 <code>WeakSet</code> 对该对象的引用。如果其他对象都不再引用该对象，那么垃圾回收机制会自动回收该对象所占用的内存，不考虑该对象还存在于 <code>WeakSet</code> 之中。</p>
+</li>
+<li><p><code>WeakSet</code> 适合临时存放一组对象，以及存放跟对象绑定的信息。只要这些对象在外部消失，它在 <code>WeakSet</code> 里面的引用就会自动消失，所以<code>WeakSet</code> 的成员是不适合引用的。</p>
+</li>
+<li><p>由于 <code>WeakSet</code> 内部有多少个成员，取决于垃圾回收机制有没有运行，运行前后很可能成员个数是不一样的，而垃圾回收机制何时运行是不可预测的，因此 ES6 规定 <code>WeakSet</code> 不可遍历。</p>
+</li>
+<li><p>方法<br><code>WeakSet.prototype.add(value)</code>：向 WeakSet 实例添加一个新成员。<br><code>WeakSet.prototype.delete(value)</code>：清除 WeakSet 实例的指定成员。<br><code>WeakSet.prototype.has(value)</code>：返回一个布尔值，表示某个值是否在 <code>WeakSet</code> 实例之中。</p>
+</li>
+</ul>
+<h1 id="四、WeakMap"><a href="#四、WeakMap" class="headerlink" title="四、WeakMap"></a>四、WeakMap</h1><ul>
+<li><code>WeakMap</code>只接受对象作为键名（null除外）</li>
+<li><code>WeakMap</code>的键名所指向的对象，不计入垃圾回收机制</li>
+<li><code>WeakMap</code>的键名所引用的对象都是弱引用，即垃圾回收机制不将该引用考虑在内</li>
+<li>没有遍历方法，即没有<code>keys()</code>、<code>values()</code>和<code>entries()</code>方法</li>
+<li>没有<code>size</code>属性、<code>clear()</code>方法</li>
+<li><code>WeakMap</code>只有四个方法可用：<code>get()</code>、<code>set()</code>、<code>has()</code>、<code>delete()</code></li>
+</ul>
+<p>一个典型应用场景是，在网页的 <code>DOM</code> 元素上添加数据，就可以使用<code>WeakMap</code>结构。当该 <code>DOM</code> 元素被清除，其所对应的<code>WeakMap</code>记录就会自动被移除。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://es6.ruanyifeng.com/#docs/set-map" target="_blank" rel="noopener">http://es6.ruanyifeng.com/#docs/set-map</a><br><a href="https://stackoverflow.com/questions/18541940/map-vs-object-in-javascript" target="_blank" rel="noopener">https://stackoverflow.com/questions/18541940/map-vs-object-in-javascript</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ES6-Set-Map/" rel="tag"># ES6 Set Map</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/14/Hexo搭建个人博客部署于Github与Coding/" rel="next" title="Hexo搭建个人博客部署于Github与Coding">
+                <i class="fa fa-chevron-left"></i> Hexo搭建个人博客部署于Github与Coding
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/19/ES2019新特性/" rel="prev" title="ES2019 新特性">
+                ES2019 新特性 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Shaw</p>
+              <p class="site-description motion-element" itemprop="description">Some tech notes and life experience.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、Set"><span class="nav-number">1.</span> <span class="nav-text">一、Set</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、Map"><span class="nav-number">2.</span> <span class="nav-text">二、Map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、WeakSet"><span class="nav-number">3.</span> <span class="nav-text">三、WeakSet</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、WeakMap"><span class="nav-number">4.</span> <span class="nav-text">四、WeakMap</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shaw</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
