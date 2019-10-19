@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Shaw&#39;s blog.</title>
+  
+  <subtitle>Life is short, carpe diem.</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2019-10-19T08:04:17.572Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Shaw</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>前端框架路由实现的Hash和History两种模式的区别</title>
+    <link href="http://yoursite.com/2019/10/18/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%E8%B7%AF%E7%94%B1%E5%AE%9E%E7%8E%B0%E7%9A%84Hash%E5%92%8CHistory%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>http://yoursite.com/2019/10/18/前端框架路由实现的Hash和History两种模式的区别/</id>
+    <published>2019-10-18T14:32:00.000Z</published>
+    <updated>2019-10-19T08:04:17.572Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;https://upload-images.jianshu.io/upload_images/1741029-9e5d1063264044c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;Hash vs History&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;之前面试的时候就有准备过前端框架中两种路由实现方式及区别，但是当时没专门下功夫去深入了解，就在网上搜了下别人总结的临时抱了下佛脚。但是事实证明，出来混，总是要还的，在后来的面试中又遇到了，而且这次问得更加深入，仅仅靠死记硬背来的知识总是遗忘得很快，网上别人总结的东西终归还是别人的，鉴于网上别人总结的内容有点杂乱无章，还是决定自己在此总结记录一番，以加深印象。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;一、何为前端路由&quot;&gt;&lt;a href=&quot;#一、何为前端路由&quot; class=&quot;headerlink&quot; title=&quot;一、何为前端路由&quot;&gt;&lt;/a&gt;一、何为前端路由&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;路由的概念来自于服务器端，在SPA（单页应用）中，路由描述的是URL到函数的映射关系，即在浏览器中输入一个URL，相应的控制器会对提交的请求进行解析，然后进行路由匹配，找到对应的模块和函数进行执行。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;二、如何实现&quot;&gt;&lt;a href=&quot;#二、如何实现&quot; class=&quot;headerlink&quot; title=&quot;二、如何实现&quot;&gt;&lt;/a&gt;二、如何实现&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;实现的两个核心问题是如何检测路由变化和如何改变URL而不刷新页面，通常有两种实现模式，一种是Hash模式，一种是History模式。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="技术 JavaScript" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF-JavaScript/"/>
+    
+    
+      <category term="JavaScript 前端 路由 Angular Vue" scheme="http://yoursite.com/tags/JavaScript-%E5%89%8D%E7%AB%AF-%E8%B7%AF%E7%94%B1-Angular-Vue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>你不知道的JavaScript中卷-读书笔记</title>
+    <link href="http://yoursite.com/2019/10/07/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JS%E4%B8%AD%E5%8D%B7/"/>
+    <id>http://yoursite.com/2019/10/07/你不知道的JS中卷/</id>
+    <published>2019-10-07T13:47:00.000Z</published>
+    <updated>2019-10-19T08:39:27.987Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;https://upload-images.jianshu.io/upload_images/1741029-8c92a4538cc134eb.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;JavaScript&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;基本类型值&quot;&gt;&lt;a href=&quot;#基本类型值&quot; class=&quot;headerlink&quot; title=&quot;基本类型值&quot;&gt;&lt;/a&gt;基本类型值&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;有一个坑常常被提到，[] + {}，{} +[]，它们返回不同的结果，分别是”[object Object]”，0。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;if (a) { foo(); }可以写成a &amp;amp;&amp;amp; foo()a = b || “something” 和a &amp;amp;&amp;amp; b() 用到了“短路”机制。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;== 允许在相等比较中进行强制类型转换，===不允许。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;NaN 不等于NaN&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;+0 等于-0&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="JavaScript Notes" scheme="http://yoursite.com/tags/JavaScript-Notes/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Babel 7.5新特性之动态引入和F#管道</title>
+    <link href="http://yoursite.com/2019/08/26/Babel7.5%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%E5%8A%A8%E6%80%81%E5%BC%95%E5%85%A5%E5%92%8CF%E7%AE%A1%E9%81%93/"/>
+    <id>http://yoursite.com/2019/08/26/Babel7.5新特性之动态引入和F管道/</id>
+    <published>2019-08-26T15:19:00.000Z</published>
+    <updated>2019-10-19T08:38:44.883Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;https://upload-images.jianshu.io/upload_images/1741029-16b74fc4346ad169.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;Babel&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;一、目录&quot;&gt;&lt;a href=&quot;#一、目录&quot; class=&quot;headerlink&quot; title=&quot;一、目录&quot;&gt;&lt;/a&gt;一、目录&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;F#管道操作符&lt;/li&gt;
+&lt;li&gt;动态导入&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;二、F-管道操作符&quot;&gt;&lt;a href=&quot;#二、F-管道操作符&quot; class=&quot;headerlink&quot; title=&quot;二、F#管道操作符&quot;&gt;&lt;/a&gt;二、F#管道操作符&lt;/h1&gt;&lt;p&gt;管道操作符提议还在第一阶段的开发中，同时也意味着其规范还在定义中。Babel 从&lt;code&gt;7.3.0&lt;/code&gt; 版本已经支持了管道的变形&lt;code&gt;Smart&lt;/code&gt;，以及&lt;code&gt;7.0.0-beta&lt;/code&gt;版本以来的&lt;code&gt;minimal&lt;/code&gt;变形，并且现在又有了新的&lt;code&gt;F#&lt;/code&gt;变形。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;F#&lt;/code&gt;的变形不同于已经存在的&lt;code&gt;smart&lt;/code&gt;变形，为何呢?与之前的话题引用（&lt;code&gt;topic references&lt;/code&gt;）的概念相比，我们将使用箭头函数来代替。最明显的一个优势就是其更像当今的JavaScript ，并且有着更简洁的语法。换而言之，管道操作符是用在单个参数函数调用时非常有用的且必不可少的语法糖。&lt;br&gt;也就意味着：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sqrt(64)
+
+// 等于
+
+64 |&amp;gt; sqrt&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;以上语法的好处就是当链接多个函数的时候可以使代码更具可读性，这就是管道操作符的最明显的作用。&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="JavaScript Babel" scheme="http://yoursite.com/tags/JavaScript-Babel/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ES2019 新特性</title>
+    <link href="http://yoursite.com/2019/08/19/ES2019%E6%96%B0%E7%89%B9%E6%80%A7/"/>
+    <id>http://yoursite.com/2019/08/19/ES2019新特性/</id>
+    <published>2019-08-19T14:06:00.000Z</published>
+    <updated>2019-10-19T08:39:04.819Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;https://upload-images.jianshu.io/upload_images/1741029-69db7d2ed973e3ae.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;ES2019&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;Object-fromEntries&quot;&gt;&lt;a href=&quot;#Object-fromEntries&quot; class=&quot;headerlink&quot; title=&quot;Object.fromEntries&quot;&gt;&lt;/a&gt;Object.fromEntries&lt;/h1&gt;&lt;p&gt;在ES2017中，引入了&lt;code&gt;Object.entries&lt;/code&gt;来把&lt;code&gt;Object&lt;/code&gt;转成数组，如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;let students = {
+  amelia: 20,
+  beatrice: 22,
+  cece: 20,
+  deirdre: 19,
+  eloise: 21
+}
+
+Object.entries(students) 
+// [
+//  [ &amp;apos;amelia&amp;apos;, 20 ],
+//  [ &amp;apos;beatrice&amp;apos;, 22 ],
+//  [ &amp;apos;cece&amp;apos;, 20 ],
+//  [ &amp;apos;deirdre&amp;apos;, 19 ],
+//  [ &amp;apos;eloise&amp;apos;, 21 ]
+// ]&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="ES2019 JavaScript" scheme="http://yoursite.com/tags/ES2019-JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ES6之Set和Map及WeakSet和WeakMap总结</title>
+    <link href="http://yoursite.com/2019/08/19/ES6%E4%B9%8BSet%E5%92%8CMap%E5%8F%8AWeakSet%E5%92%8CWeakMap%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2019/08/19/ES6之Set和Map及WeakSet和WeakMap总结/</id>
+    <published>2019-08-19T12:44:00.000Z</published>
+    <updated>2019-10-19T08:38:55.075Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;https://upload-images.jianshu.io/upload_images/1741029-96533cae7400a3a1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;Set &amp;amp; Map&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;一、Set&quot;&gt;&lt;a href=&quot;#一、Set&quot; class=&quot;headerlink&quot; title=&quot;一、Set&quot;&gt;&lt;/a&gt;一、Set&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;概念&lt;br&gt;&lt;code&gt;Set&lt;/code&gt;类似于数组，本身是一个构造函数，用来生成 &lt;code&gt;Set&lt;/code&gt; 数据结构，成员值都是唯一的，常用于数组去重。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;属性&lt;br&gt;&lt;code&gt;Set.prototype.size&lt;/code&gt;：返回Set实例的成员总数&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;方法&lt;br&gt;&lt;code&gt;add()&lt;/code&gt; 添加值，返回 Set 结构本身。&lt;br&gt;&lt;code&gt;delete()&lt;/code&gt; 删除值，返回一个布尔值，表示删除是否成功。&lt;br&gt;&lt;code&gt;has()&lt;/code&gt; 返回一个布尔值，表示该值是否为&lt;code&gt;Set&lt;/code&gt;的成员。&lt;br&gt;&lt;code&gt;clear()&lt;/code&gt; 清除所有成员，没有返回值。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;遍历&lt;br&gt;&lt;code&gt;Set.prototype.keys()&lt;/code&gt;：返回键名的遍历器&lt;br&gt;&lt;code&gt;Set.prototype.values()&lt;/code&gt;：返回键值的遍历器&lt;br&gt;&lt;code&gt;Set.prototype.entries()&lt;/code&gt;：返回键值对的遍历器&lt;br&gt;&lt;code&gt;Set.prototype.forEach()&lt;/code&gt;：使用回调函数遍历每个成员&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="ES6 Set Map" scheme="http://yoursite.com/tags/ES6-Set-Map/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo搭建个人博客部署于Github与Coding</title>
+    <link href="http://yoursite.com/2016/08/14/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E4%BA%8EGithub%E4%B8%8ECoding/"/>
+    <id>http://yoursite.com/2016/08/14/Hexo搭建个人博客部署于Github与Coding/</id>
+    <published>2016-08-14T08:07:00.000Z</published>
+    <updated>2019-10-19T08:39:19.187Z</updated>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;早就听说可以自己弄一个博客然后免费部署到github上面，但是一直没机会着手去做，前几天，机缘巧合之下，发现了&lt;a href=&quot;https://www.npmjs.com/package/hexo&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;这个好东西，这才发现原来它就是我苦苦找寻的的东西啊。真是“&lt;strong&gt;踏破铁鞋无觅处，得来全不费功夫。&lt;/strong&gt;”啊。&lt;/li&gt;
+&lt;li&gt;那好，lz要开始搭建个人博客啦（入坑了）。期间各种坑只能自己体会，虽然外面已经很多搭建的教程了，但是我也来凑个热闹，其实也算是记录一下自己学习的过程，还有期间所遇的各种坑以至于不得不中断到改日再战的坑，在次记录一下让后面的小伙伴们更方便一些，不至于那么惨。&lt;/li&gt;
+&lt;li&gt;首先必须&lt;strong&gt;安装一下&lt;a href=&quot;https://git-scm.com/downloads&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Git&lt;/a&gt; for windows&lt;/strong&gt;,然后申请个&lt;a href=&quot;https://github.com/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GitHub&lt;/a&gt;账号啊，建议日后想从事CS相关的童鞋多上上全球最大的同性交友网站（GitHub），里面的好东西真不少，受益匪浅啊。&lt;/li&gt;
+&lt;li&gt;Git不会的童鞋网上搜一下，很简单，在此附上一张命令速查表，方便快捷，虽然貌似后面都没用到git命令。&lt;br&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1741029-4f7a27cef1b46665.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1741029-e5035d2c74ba60c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;Git命令&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="Hexo Blog" scheme="http://yoursite.com/tags/Hexo-Blog/"/>
+    
+  </entry>
+  
+</feed>

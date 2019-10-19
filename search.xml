@@ -1,0 +1,776 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>前端框架路由实现的Hash和History两种模式的区别</title>
+    <url>/2019/10/18/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%E8%B7%AF%E7%94%B1%E5%AE%9E%E7%8E%B0%E7%9A%84Hash%E5%92%8CHistory%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<p><img src="https://upload-images.jianshu.io/upload_images/1741029-9e5d1063264044c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Hash vs History"></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul>
+<li>之前面试的时候就有准备过前端框架中两种路由实现方式及区别，但是当时没专门下功夫去深入了解，就在网上搜了下别人总结的临时抱了下佛脚。但是事实证明，出来混，总是要还的，在后来的面试中又遇到了，而且这次问得更加深入，仅仅靠死记硬背来的知识总是遗忘得很快，网上别人总结的东西终归还是别人的，鉴于网上别人总结的内容有点杂乱无章，还是决定自己在此总结记录一番，以加深印象。</li>
+</ul>
+<h1 id="一、何为前端路由"><a href="#一、何为前端路由" class="headerlink" title="一、何为前端路由"></a>一、何为前端路由</h1><ul>
+<li>路由的概念来自于服务器端，在SPA（单页应用）中，路由描述的是URL到函数的映射关系，即在浏览器中输入一个URL，相应的控制器会对提交的请求进行解析，然后进行路由匹配，找到对应的模块和函数进行执行。</li>
+</ul>
+<h1 id="二、如何实现"><a href="#二、如何实现" class="headerlink" title="二、如何实现"></a>二、如何实现</h1><ul>
+<li>实现的两个核心问题是如何检测路由变化和如何改变URL而不刷新页面，通常有两种实现模式，一种是Hash模式，一种是History模式。</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="三、Hash模式"><a href="#三、Hash模式" class="headerlink" title="三、Hash模式"></a>三、Hash模式</h1><ul>
+<li>早期的前端路由的实现就是基于<code>location.hash</code>来实现的，<code>location.hash</code>的值就是URL中#后面的内容<br>其实现原理就是监听#后面的内容来发起Ajax请求来进行局部更新，而不需要刷新整个页面。</li>
+<li>使用<code>hashchange</code>事件来监听 URL 的变化，以下这几种情况改变 URL 都会触发 <code>hashchange</code> 事件：浏览器前进后退改变 URL、<code>&lt;a&gt;</code>标签改变 URL、window.location改变URL。</li>
+</ul>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
+<li>兼容低版本浏览器，Angular1.x和Vue默认使用的就是hash路由</li>
+<li>只有#符号之前的内容才会包含在请求中被发送到后端，也就是说就算后端没有对路由全覆盖，但是不会返回404错误</li>
+<li>hash值的改变，都会在浏览器的访问历史中增加一个记录，所以可以通过浏览器的回退、前进按钮控制hash的切换</li>
+<li>会覆盖锚点定位元素的功能</li>
+<li>不太美观，#后面传输的数据复杂的话会出现问题<br>&lt;%- post.breadcrumb.html %&gt;</li>
+</ul>
+<h1 id="四、History模式"><a href="#四、History模式" class="headerlink" title="四、History模式"></a>四、History模式</h1><ul>
+<li>history 提供了 <code>pushState</code> 和 <code>replaceState</code> 两个方法来记录路由状态，这两个方法改变 URL 不会引起页面刷新</li>
+<li>history 提供类似 hashchange 事件的 popstate 事件，但 popstate 事件有些不同：通过浏览器前进后退改变 URL 时会触发 popstate 事件，通过pushState/replaceState或<code>&lt;a&gt;</code>标签改变 URL 不会触发 popstate 事件。好在我们可以拦截 pushState/replaceState的调用和<code>&lt;a&gt;</code>标签的点击事件来检测 URL 变化，所以监听 URL 变化可以实现，只是没有 hashchange 那么方便。</li>
+<li><code>pushState(state, title, url)</code> 和 <code>replaceState(state, title, url)</code>都可以接受三个相同的参数：</li>
+<li>state：需要保存的数据，这个数据在触发popstate事件时，可以在event.state里获取<ul>
+<li>title：标题，基本没用，一般传 null</li>
+</ul>
+</li>
+<li>url：设定新的历史记录的 url，新的 url 与当前 url 的 origin 必须是一样的，否则会抛错，url可以是绝对路径，也可以是相对路径。</li>
+</ul>
+<h3 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
+<li>使用简单，比较美观</li>
+<li><code>pushState()</code>设置新的URL可以是任意与当前URL同源的URL，而hash只能改变#后面的内容，因此只能设置与当前URL同文档的URL</li>
+<li><code>pushState()</code>设置的URL与当前URL一模一样时也会被添加到历史记录栈中，而hash#后面的内容必须被修改才会被添加到新的记录栈中</li>
+<li><code>pushState()</code>可以通过<code>stateObject</code>参数添加任意类型的数据到记录中，而hash只能添加短字符串</li>
+<li><code>pushState()</code>可额外设置title属性供后续使用</li>
+<li>前端的URL必须和向发送请求后端URL保持一致，否则会报404错误</li>
+<li>由于History API的缘故，低版本浏览器有兼容行问题</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://www.jianshu.com/p/d2aa8fb951e4" target="_blank" rel="noopener">https://www.jianshu.com/p/d2aa8fb951e4</a></li>
+<li><a href="https://blog.csdn.net/Benjamin920813/article/details/82764664" target="_blank" rel="noopener">https://blog.csdn.net/Benjamin920813/article/details/82764664</a></li>
+<li><a href="https://www.cnblogs.com/lguow/p/10921564.html" target="_blank" rel="noopener">https://www.cnblogs.com/lguow/p/10921564.html</a></li>
+<li><a href="https://www.cnblogs.com/funny-code123/p/9599793.html" target="_blank" rel="noopener">https://www.cnblogs.com/funny-code123/p/9599793.html</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术 JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript 前端 路由 Angular Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>你不知道的JavaScript中卷-读书笔记</title>
+    <url>/2019/10/07/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JS%E4%B8%AD%E5%8D%B7/</url>
+    <content><![CDATA[<p><img src="https://upload-images.jianshu.io/upload_images/1741029-8c92a4538cc134eb.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="JavaScript"></p>
+<h1 id="基本类型值"><a href="#基本类型值" class="headerlink" title="基本类型值"></a>基本类型值</h1><ul>
+<li><p>有一个坑常常被提到，[] + {}，{} +[]，它们返回不同的结果，分别是”[object Object]”，0。</p>
+</li>
+<li><p>if (a) { foo(); }可以写成a &amp;&amp; foo()a = b || “something” 和a &amp;&amp; b() 用到了“短路”机制。</p>
+</li>
+<li><p>== 允许在相等比较中进行强制类型转换，===不允许。</p>
+</li>
+<li><p>NaN 不等于NaN</p>
+</li>
+<li><p>+0 等于-0</p>
+</li>
+</ul>
+<a id="more"></a>
+
+<ul>
+<li><p>我个人建议无论什么情况下都不要使== true 和 == false。</p>
+</li>
+<li><p>(1) 如果x 为null，y 为undefined，则结果为true。</p>
+</li>
+<li><p>(2) 如果x 为undefined，y 为null，则结果为true。</p>
+<pre><code>&quot;0&quot; == null; // false
+&quot;0&quot; == undefined; // false
+&quot;0&quot; == false; // true -- 晕！
+&quot;0&quot; == NaN; // false
+&quot;0&quot; == 0; // true
+&quot;0&quot; == &quot;&quot;; // false
+false == null; // false
+false == undefined; // false
+false == NaN; // false
+false == 0; // true -- 晕！
+false == &quot;&quot;; // true -- 晕！
+false == []; // true -- 晕！
+false == {}; // false
+
+&quot;&quot; == null; // false
+&quot;&quot; == undefined; // false
+&quot;&quot; == NaN; // false
+&quot;&quot; == 0; // true -- 晕！
+&quot;&quot; == []; // true -- 晕！
+&quot;&quot; == {}; // false
+0 == null; // false
+0 == undefined; // false
+0 == NaN; // false
+0 == []; // true -- 晕！
+0 == {}; // false
+
+&quot;0&quot; == false; // true -- 晕！
+false == 0; // true -- 晕！
+false == &quot;&quot;; // true -- 晕！
+false == []; // true -- 晕！
+&quot;&quot; == 0; // true -- 晕！
+&quot;&quot; == []; // true -- 晕！
+0 == []; // true -- 晕！</code></pre></li>
+</ul>
+<ul>
+<li><p>[] == ![] // true</p>
+</li>
+<li><p>根据ToBoolean 规则，它会进行布尔值的显式强制类型转换（同时反转奇偶校验位）。所以[] == ![] 变成了[] == false。前面我们讲过false == []，最后的结果就顺理成章了。</p>
+<p>  2 == [2]; // true<br>  “” == [null]; // true</p>
+</li>
+<li><p>如果两边的值中有true 或者false，千万不要使用==。</p>
+</li>
+<li><p>如果两边的值中有[]、”” 或者0，尽量不要使用==。</p>
+</li>
+<li><p>字符串常量中允许的最大字符数（并非只是针对字符串值）；</p>
+</li>
+<li><p>可以作为参数传递到函数中的数据大小（也称为栈大小，以字节为单位）；</p>
+</li>
+<li><p>函数声明中的参数个数；</p>
+</li>
+<li><p>未经优化的调用栈（例如递归）的最大层数，即函数调用链的最大长度；</p>
+</li>
+<li><p>JavaScript 程序以阻塞方式在浏览器中运行的最长时间（秒）；</p>
+</li>
+<li><p>变量名的最大长度。</p>
+</li>
+<li><p>对多数开发者来说，错误处理最自然的形式就是同步的try..catch 结构。遗憾的是，它只能是同步的，无法用于异步代码模式。</p>
+</li>
+</ul>
+<h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><ul>
+<li><p>传给Promise.all([ .. ]) 的数组中的值可以是Promise、thenable，甚至是立即值。就本质而言，列表中的每个值都会通过Promise.resolve(..) 过滤，以确保要等待的是一个真正的Promise，所以立即值会被规范化为为这个值构建的Promise。</p>
+</li>
+<li><p>与Promise.all([ .. ]) 类似，一旦有任何一个Promise 决议为完成，Promise.race([ .. ])就会完成；一旦有任何一个Promise 决议为拒绝，它就会拒绝。</p>
+</li>
+<li><p>Promise.race([ .. ]) 也接受单个数组参数。这个数组由一个或多个Promise、thenable 或立即值组成。要注意，永远不要递送空数组。</p>
+<p>  p.then( fulfilled );<br>  p.then( fulfilled, rejected );<br>  p.catch( rejected ); // 或者p.then( null, rejected )</p>
+</li>
+<li><p>对Promise.all([ .. ]) 来说，只有传入的所有promise 都完成，返回promise 才能完成。如果有任何promise被拒绝，返回的主promise就立即会被拒绝（抛弃任何其他promise 的结果）。</p>
+</li>
+<li><p>当心！若向Promise.all([ .. ]) 传入空数组，它会立即完成，但Promise.race([ .. ]) 会挂住，且永远不会决议。</p>
+<pre><code>var p1 = Promise.resolve( 42 );
+var p2 = Promise.resolve( &quot;Hello World&quot; );
+var p3 = Promise.reject( &quot;Oops&quot; );
+Promise.race( [p1,p2,p3] )
+.then( function(msg){
+console.log( msg ); // 42
+} );
+Promise.all( [p1,p2,p3] )
+.catch( function(err){
+console.error( err ); // &quot;Oops&quot;
+} );
+Promise.all( [p1,p2] )
+.then( function(msgs){
+console.log( msgs ); // [42,&quot;Hello World&quot;]
+} );</code></pre></li>
+<li><p>Promise 局限性:</p>
+</li>
+<li><p>顺序错误处理，如果没有错误处理，错误会一直往下传递</p>
+</li>
+<li><p>单一值</p>
+</li>
+<li><p>单决议，Promise 只能被决议一次（完成或拒绝）</p>
+</li>
+<li><p>惯性，运动状态（使用回调的）的代码库会一直保持运动状态（使用回调的），直到受到一位聪明的、理解Promise 的开发者的作用。</p>
+</li>
+<li><p>无法取消，一旦创建了一个Promise 并为其注册了完成和/ 或拒绝处理函数，如果出现某种情况使得这个任务悬而未决的话，你也没有办法从外部停止它的进程。</p>
+</li>
+</ul>
+<h1 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h1><ul>
+<li><p>生成器就是一类特殊的函数，可以一次或多次启动和停止，并不一定非得要完成。<br>yield .. 和next(..) 这一对组合起来，在生成器的执行过程中构成了一个双向消息传递系统。<br>使用生成器的话，交替执行（甚至在语句当中！）显然是可能的。</p>
+</li>
+<li><p>生成器实现标准的迭代器接口:</p>
+</li>
+</ul>
+<pre><code>var something = (function(){
+var nextVal;
+return {
+// for..of循环需要
+[Symbol.iterator]: function(){ return this; },
+// 标准迭代器接口方法
+next: function(){
+if (nextVal === undefined) {
+nextVal = 1;
+}
+else {
+nextVal = (3 * nextVal) + 6;
+}
+return { done:false, value:nextVal };
+}
+};
+})();
+
+something.next().value; // 1
+something.next().value; // 9
+something.next().value; // 33
+something.next().value; // 105</code></pre><ul>
+<li><p>yield 委托的主要目的是代码组织，以达到与普通函数调用的对称。</p>
+</li>
+<li><p>生成器是ES6 的一个新的函数类型，它并不像普通函数那样总是运行到结束。取而代之的是，生成器可以在运行当中（完全保持其状态）暂停，并且将来再从暂停的地方恢复运行。</p>
+</li>
+<li><p>这种交替的暂停和恢复是合作性的而不是抢占式的，这意味着生成器具有独一无二的能力来暂停自身，这是通过关键字yield 实现的。不过，只有控制生成器的迭代器具有恢复生成器的能力（通过next(..)）。</p>
+</li>
+<li><p>yield/next(..) 这一对不只是一种控制机制，实际上也是一种双向消息传递机制。yield .. 表达式本质上是暂停下来等待某个值，接下来的next(..) 调用会向被暂停的yield 表达式传回一个值（或者是隐式的undefined）。</p>
+</li>
+<li><p>在异步控制流程方面，生成器的关键优点是：生成器内部的代码是以自然的同步/ 顺序方式表达任务的一系列步骤。其技巧在于，我们把可能的异步隐藏在了关键字yield 的后面，把异步移动到控制生成器的迭代器的代码部分。</p>
+</li>
+<li><p>换句话说，生成器为异步代码保持了顺序、同步、阻塞的代码模式，这使得大脑可以更自然地追踪代码，解决了基于回调的异步的两个关键缺陷之一。</p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>JavaScript Notes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Babel 7.5新特性之动态引入和F#管道</title>
+    <url>/2019/08/26/Babel7.5%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%E5%8A%A8%E6%80%81%E5%BC%95%E5%85%A5%E5%92%8CF%E7%AE%A1%E9%81%93/</url>
+    <content><![CDATA[<p><img src="https://upload-images.jianshu.io/upload_images/1741029-16b74fc4346ad169.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Babel"></p>
+<h1 id="一、目录"><a href="#一、目录" class="headerlink" title="一、目录"></a>一、目录</h1><ul>
+<li>F#管道操作符</li>
+<li>动态导入</li>
+</ul>
+<h1 id="二、F-管道操作符"><a href="#二、F-管道操作符" class="headerlink" title="二、F#管道操作符"></a>二、F#管道操作符</h1><p>管道操作符提议还在第一阶段的开发中，同时也意味着其规范还在定义中。Babel 从<code>7.3.0</code> 版本已经支持了管道的变形<code>Smart</code>，以及<code>7.0.0-beta</code>版本以来的<code>minimal</code>变形，并且现在又有了新的<code>F#</code>变形。</p>
+<p><code>F#</code>的变形不同于已经存在的<code>smart</code>变形，为何呢?与之前的话题引用（<code>topic references</code>）的概念相比，我们将使用箭头函数来代替。最明显的一个优势就是其更像当今的JavaScript ，并且有着更简洁的语法。换而言之，管道操作符是用在单个参数函数调用时非常有用的且必不可少的语法糖。<br>也就意味着：</p>
+<pre><code>sqrt(64)
+
+// 等于
+
+64 |&gt; sqrt</code></pre><p>以上语法的好处就是当链接多个函数的时候可以使代码更具可读性，这就是管道操作符的最明显的作用。</p>
+<a id="more"></a>
+
+<h3 id="考虑以下几行代码："><a href="#考虑以下几行代码：" class="headerlink" title="考虑以下几行代码："></a>考虑以下几行代码：</h3><pre><code>function doubleSay (str) {
+  return str + &quot;, &quot; + str;
+}
+function capitalize (str) {
+  return str[0].toUpperCase() + str.substring(1);
+}
+function exclaim (str) {
+  return str + &apos;!&apos;;
+}</code></pre><p>以下是上面这些函数的调用：</p>
+<pre><code>let result = exclaim(capitalize(doubleSay(&quot;hello&quot;)));
+console.log(result) //=&gt; &quot;Hello, hello!&quot;</code></pre><p>可以使用<code>F#</code>变形来优化：</p>
+<pre><code>let result = &quot;hello&quot;
+  |&gt; doubleSay
+  |&gt; capitalize
+  |&gt; exclaim;
+console.log(result) //=&gt; &quot;Hello, hello!&quot;</code></pre><h3 id="多参数的F"><a href="#多参数的F" class="headerlink" title="多参数的F#"></a>多参数的<code>F#</code></h3><p>这种特殊解决方法的好处就是管道操作符不需对多参数函数做任何处理，只管扔给JavaScript就好了：</p>
+<pre><code>function double (x) { return x + x; }
+function add (x, y) { return x + y; }
+
+function boundScore (min, max, score) {
+  return Math.max(min, Math.min(max, score));
+}</code></pre><p>可以使用<code>smart</code> 变形来调用：</p>
+<pre><code>let person = { score: 25 };
+let newScore = boundScore( 0, 100, add(7, double(person.score)))
+console.log(newScore) //=&gt; 57</code></pre><p>管道操作符提供的新的或者说更好的与之前的<code>smart</code> 变形截然相反的方法是因为我们可以使用箭头函数，可以用来处理多参数函数，比如： <code>add()</code> 和 <code>boundScore()</code>：</p>
+<pre><code>let person = { score: 25 };
+let newScore = person.score
+  |&gt; double
+  |&gt; (n =&gt; add(7, n))
+  |&gt; (n =&gt; boundScore(0, 100, n));
+console.log(newScore) //=&gt; 57</code></pre><p>尽管可以用来处理多个参数的函数，但是通常推荐用来处理单参数函数，因为管道操作符每次只返回一个结果。</p>
+<h3 id="与部分应用语法（Partial-Application-Syntax）一起使用"><a href="#与部分应用语法（Partial-Application-Syntax）一起使用" class="headerlink" title="与部分应用语法（Partial Application Syntax）一起使用"></a>与部分应用语法（Partial Application Syntax）一起使用</h3><p>部分应用语法提出（目前还在第一阶段），在一个通过参数占位符来实现允许部分应用参数列表来调用表达式的参数列表中使用了<code>?</code>操作符来引入的一种新的语法。<br>如果部分语法提议通过审核，也就意味着管道操作符就将会是一种更好更准确的处理之前提到过的函数的方法，即：</p>
+<p>不用这么写：</p>
+<pre><code>let person = { score: 25 };
+let newScore = person.score
+  |&gt; double
+  |&gt; (n =&gt; add(7, n))
+  |&gt; (n =&gt; boundScore(0, 100, n));
+console.log(newScore) //=&gt; 57</code></pre><p>可以直接使用<code>?</code>操作符来替换任意参数来这样写：</p>
+<pre><code>let person = { score: 25 };
+let newScore = person.score
+  |&gt; double
+  |&gt; add(7, ?)
+  |&gt; boundScore(0, 100, ?);
+console.log(newScore) //=&gt; 57</code></pre><p>后者更加简单明了，但是先别高兴得太早，目前只是提议阶段，还未完全确定，拭目以待。</p>
+<h3 id="与Await一起使用"><a href="#与Await一起使用" class="headerlink" title="与Await一起使用"></a>与Await一起使用</h3><p>每一个提议对于管道中的<code>await</code>都有不同的解决方案，<code>F#</code>变形也不例外，它处理<code>await</code>的方式和<code>smart</code>有点类似但是也有不同之处：</p>
+<pre><code>// Smart Pipeline
+let newScore = fetch(url)
+  |&gt; await #
+  |&gt; #.json()
+  |&gt; await #
+  |&gt; #.ID;</code></pre><p>F# 管道引入箭头函数来处理这些案例：</p>
+<pre><code>// F# pipe line
+let newScore = fetch(url)
+  |&gt; await
+  |&gt; r =&gt; r.json()
+  |&gt; await
+  |&gt; obj =&gt; obj.ID;</code></pre><h3 id="开始尝试-F-管道操作符"><a href="#开始尝试-F-管道操作符" class="headerlink" title="开始尝试 F# 管道操作符"></a>开始尝试 F# 管道操作符</h3><p>可以简单修改<code>babel.config</code>文件然后加入管道操作符插件来使用：</p>
+<pre><code>module.exports = {
+  plugins: [
+    [&quot;@babel/proposal-pipeline-operator&quot;, { proposal: &quot;fsharp&quot; }]
+  ]
+};</code></pre><h3 id="更多关于此提议-特性"><a href="#更多关于此提议-特性" class="headerlink" title="更多关于此提议/特性"></a>更多关于此提议/特性</h3><p><a href>https://babeljs.io/blog/2019/07/03/7.5.0#f-pipeline-operator-9450-https-githubcom-babel-babel-pull-9450-and-9984-https-githubcom-babel-babel-pull-9984</a></p>
+<h1 id="三、动态引入"><a href="#三、动态引入" class="headerlink" title="三、动态引入"></a>三、动态引入</h1><p>在新提议之前：<br>1.如果你使用<code>webpack</code>或者<code>rollup</code>来实现动态引入，需要包含<code>@babel/plugin-syntax-dynamic-import</code>并且不能用<code>babel</code>转化<br>2.如果你使用<code>Node</code>，可以使用<code>babel-plugin-dynamic-import-node</code>插件来转化</p>
+<p>在这里讨论的重点时，对于每一个模块来说，可以有不同的方法来转化。通常，是使用唯一的转化插件来转化模块的。大意是，新的动态导入的提议提供了一种结合上述几种用例的方法，一个单一的<code>entry point</code> <code>@babel/plugin-proposal-dynamic-import</code>。</p>
+<p>这样，我们就有了一个可以转化所有模块(Webpack, Roll up, Node 等等)可重用的插件。这个插件必须和模块转化插件一起使用，因为<code>Babel</code>需要识别你需要转化的是哪一种模块加载系统。</p>
+<p>一个关于AMD有效配置的例子：</p>
+<pre><code>module.exports = {
+  plugins: [
+    &quot;@babel/plugin-proposal-dynamic-import&quot;,
+    &quot;@babel/plugin-transform-modules-amd&quot;
+  ]
+};</code></pre><p> <code>&quot;@babel/plugin-transform-modules-amd&quot;</code>指明了目标模块是AMD类型的，如果不指定的话，<code>Babel</code>将无法识别目标模块是 <code>Node</code> 还是 <code>Rollup</code>，如果你只是解析<code>import()</code>表达式，而不是转化的话，可以只指定<code>@babel/plugin-syntax-dynamic-import</code>。</p>
+<p>动态引入在使用<code>@babel/preset-env</code>时默认开启，也无需考虑是否支持<code>webpack</code>或者<code>rollup</code>，<code>babel-loader</code> 和 <code>rollup-plugin-babel</code>都会为了使其他<code>bundler</code>正确处理<code>Babel</code>而自动关闭其转化功能。</p>
+<h1 id="四、参考"><a href="#四、参考" class="headerlink" title="四、参考"></a>四、参考</h1><p><a href="https://scotch.io/bar-talk/dynamic-imports-and-f-pipes-officially-land-in-babel-75" target="_blank" rel="noopener">原文</a></p>
+]]></content>
+      <tags>
+        <tag>JavaScript Babel</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ES2019 新特性</title>
+    <url>/2019/08/19/ES2019%E6%96%B0%E7%89%B9%E6%80%A7/</url>
+    <content><![CDATA[<p><img src="https://upload-images.jianshu.io/upload_images/1741029-69db7d2ed973e3ae.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ES2019"></p>
+<h1 id="Object-fromEntries"><a href="#Object-fromEntries" class="headerlink" title="Object.fromEntries"></a>Object.fromEntries</h1><p>在ES2017中，引入了<code>Object.entries</code>来把<code>Object</code>转成数组，如下：</p>
+<pre><code>let students = {
+  amelia: 20,
+  beatrice: 22,
+  cece: 20,
+  deirdre: 19,
+  eloise: 21
+}
+
+Object.entries(students) 
+// [
+//  [ &apos;amelia&apos;, 20 ],
+//  [ &apos;beatrice&apos;, 22 ],
+//  [ &apos;cece&apos;, 20 ],
+//  [ &apos;deirdre&apos;, 19 ],
+//  [ &apos;eloise&apos;, 21 ]
+// ]</code></pre><a id="more"></a>
+
+<p>引入<code>Object.entries</code>这个方法的目的是为了使<code>Object</code>也可以使用数组的<code>map</code>，<code>filter</code>， <code>reduce</code>等原生方法，但是使用完之后必须要自己手动还原回去，例如：</p>
+<pre><code>let students = {
+  amelia: 20,
+  beatrice: 22,
+  cece: 20,
+  deirdre: 19,
+  eloise: 21
+}
+
+// convert to array in order to make use of .filter() function
+let overTwentyOne = Object.entries(students).filter(([name, age]) =&gt; {
+  return age &gt;= 21
+}) // [ [ &apos;beatrice&apos;, 22 ], [ &apos;eloise&apos;, 21 ] ]
+
+// turn multidimensional array back into an object
+let DrinkingAgeStudents = {}
+for (let [name, age] of overTwentyOne) {
+    DrinkingAgeStudents[name] = age;
+}
+// { beatrice: 22, eloise: 21 }</code></pre><p>上述代码使用了<code>Object.entries</code>及数组的<code>filter</code>方法过滤了年龄大于等于21的成员，然后又使用了<code>for...of</code>把数字转变回了<code>Object</code>，<br><code>Object.fromEntries</code>就是用来替代上面代码中的<code>for...of</code>循环的，使得<code>Object</code>调用数组的原生方法更简洁方便，代码如下：</p>
+<pre><code>let students = {
+  amelia: 20,
+  beatrice: 22,
+  cece: 20,
+  deirdre: 19,
+  eloise: 21
+}
+
+// convert to array in order to make use of .filter() function
+let overTwentyOne = Object.entries(students).filter(([name, age]) =&gt; {
+  return age &gt;= 21
+}) // [ [ &apos;beatrice&apos;, 22 ], [ &apos;eloise&apos;, 21 ] ]
+
+// turn multidimensional array back into an object
+let DrinkingAgeStudents = Object.fromEntries(overTwentyOne); 
+// { beatrice: 22, eloise: 21 }</code></pre><p>需要注意的一点是，使用<code>Object.fromEntries</code>会把<code>Object</code>中的重复<code>key</code>覆盖掉，只保存最后一个，如下：</p>
+<pre><code>let students = [
+  [ &apos;amelia&apos;, 22 ], 
+  [ &apos;beatrice&apos;, 22 ], 
+  [ &apos;eloise&apos;, 21], 
+  [ &apos;beatrice&apos;, 20 ]
+]
+
+let studentObj = Object.fromEntries(students); 
+// { amelia: 22, beatrice: 20, eloise: 21 }
+// dropped first beatrice!</code></pre><h1 id="Array-prototype-flat"><a href="#Array-prototype-flat" class="headerlink" title="Array.prototype.flat"></a>Array.prototype.flat</h1><p>通常，数组会出现二维或者以上的情况，这个时候如果我们需要降维的话，常用的一种方法时使用<code>concat</code>方法，如下：</p>
+<pre><code>let courses = [
+  {
+    subject: &quot;math&quot;,
+    numberOfStudents: 3,
+    waitlistStudents: 2,
+    students: [&apos;Janet&apos;, &apos;Martha&apos;, &apos;Bob&apos;, [&apos;Phil&apos;, &apos;Candace&apos;]]
+  },
+  {
+    subject: &quot;english&quot;,
+    numberOfStudents: 2,
+    students: [&apos;Wilson&apos;, &apos;Taylor&apos;]
+  },
+  {
+    subject: &quot;history&quot;,
+    numberOfStudents: 4,
+    students: [&apos;Edith&apos;, &apos;Jacob&apos;, &apos;Peter&apos;, &apos;Betty&apos;]
+  }
+]
+
+let courseStudents = courses.map(course =&gt; course.students)
+// [
+//   [ &apos;Janet&apos;, &apos;Martha&apos;, &apos;Bob&apos;, [ &apos;Phil&apos;, &apos;Candace&apos; ] ],
+//   [ &apos;Wilson&apos;, &apos;Taylor&apos; ],
+//   [ &apos;Edith&apos;, &apos;Jacob&apos;, &apos;Peter&apos;, &apos;Betty&apos; ]
+// ]
+
+[].concat.apply([], courseStudents) // we&apos;re stuck doing something like this</code></pre><p>但是在ES2019中引入了<code>Array.prototype.flat</code>，其接受一个可选参数表示需要展开的深度，默认值为1，可以帮助我们快速实现数组降维，如下：</p>
+<pre><code>let courseStudents = [
+  [ &apos;Janet&apos;, &apos;Martha&apos;, &apos;Bob&apos;, [ &apos;Phil&apos;, &apos;Candace&apos; ] ],
+  [ &apos;Wilson&apos;, &apos;Taylor&apos; ],
+  [ &apos;Edith&apos;, &apos;Jacob&apos;, &apos;Peter&apos;, &apos;Betty&apos; ]
+]
+
+let flattenOneLevel = courseStudents.flat(1)
+console.log(flattenOneLevel)
+// [
+//   &apos;Janet&apos;,
+//   &apos;Martha&apos;,
+//   &apos;Bob&apos;,
+//   [ &apos;Phil&apos;, &apos;Candace&apos; ],
+//   &apos;Wilson&apos;,
+//   &apos;Taylor&apos;,
+//   &apos;Edith&apos;,
+//   &apos;Jacob&apos;,
+//   &apos;Peter&apos;,
+//   &apos;Betty&apos;
+// ]
+
+let flattenTwoLevels = courseStudents.flat(2)
+console.log(flattenTwoLevels)
+// [
+//   &apos;Janet&apos;,   &apos;Martha&apos;,
+//   &apos;Bob&apos;,     &apos;Phil&apos;,
+//   &apos;Candace&apos;, &apos;Wilson&apos;,
+//   &apos;Taylor&apos;,  &apos;Edith&apos;,
+//   &apos;Jacob&apos;,   &apos;Peter&apos;,
+//   &apos;Betty&apos;
+// ]</code></pre><p>不指定参数与参数值等于1的时候一样：</p>
+<pre><code>let courseStudents = [
+  [ &apos;Janet&apos;, &apos;Martha&apos;, &apos;Bob&apos;, [ &apos;Phil&apos;, &apos;Candace&apos; ] ],
+  [ &apos;Wilson&apos;, &apos;Taylor&apos; ],
+  [ &apos;Edith&apos;, &apos;Jacob&apos;, &apos;Peter&apos;, &apos;Betty&apos; ]
+]
+
+let defaultFlattened = courseStudents.flat()
+console.log(defaultFlattened)
+// [
+//   &apos;Janet&apos;,
+//   &apos;Martha&apos;,
+//   &apos;Bob&apos;,
+//   [ &apos;Phil&apos;, &apos;Candace&apos; ],
+//   &apos;Wilson&apos;,
+//   &apos;Taylor&apos;,
+//   &apos;Edith&apos;,
+//   &apos;Jacob&apos;,
+//   &apos;Peter&apos;,
+//   &apos;Betty&apos;
+// ]</code></pre><ul>
+<li><p>贪心操作<code>Infinity</code><br>对于未知深度的数组，可以使用<code>Infinity</code>参数来实现完全降维：</p>
+<pre><code>let courseStudents = [
+  [ &apos;Janet&apos;, &apos;Martha&apos;, &apos;Bob&apos;, [ &apos;Phil&apos;, &apos;Candace&apos; ] ],
+  [ &apos;Wilson&apos;, &apos;Taylor&apos; ],
+  [ &apos;Edith&apos;, &apos;Jacob&apos;, &apos;Peter&apos;, &apos;Betty&apos; ]
+]
+
+let alwaysFlattened = courseStudents.flat(Infinity)
+console.log(alwaysFlattened)
+// [
+//   &apos;Janet&apos;,   &apos;Martha&apos;,
+//   &apos;Bob&apos;,     &apos;Phil&apos;,
+//   &apos;Candace&apos;, &apos;Wilson&apos;,
+//   &apos;Taylor&apos;,  &apos;Edith&apos;,
+//   &apos;Jacob&apos;,   &apos;Peter&apos;,
+//   &apos;Betty&apos;
+// ]</code></pre></li>
+</ul>
+<p>事实上，<code>Infinity</code>参数在实际情况中应该谨慎使用，而且在真正未知数组维数时并不推荐使用<code>Infinity</code>参数。</p>
+<h1 id="Array-prototype-flatMap"><a href="#Array-prototype-flatMap" class="headerlink" title="Array.prototype.flatMap"></a>Array.prototype.flatMap</h1><p><code>flatMap</code> 等价于<code>map</code> 和 <code>flat</code>不加参数的结合体，所以<code>flatMap</code> 只展开一层数组。</p>
+<ul>
+<li><p>普通半版数组中插入值：</p>
+<pre><code>let grades = [78, 62, 80, 64]
+
+let curved = grades.map(grade =&gt; [grade, grade + 7])
+// [ [ 78, 85 ], [ 62, 69 ], [ 80, 87 ], [ 64, 71 ] ]
+
+let flatMapped = [].concat.apply([], curved) // now flatten, could use flat but that didn&apos;t exist before either
+// [
+//  78, 85, 62, 69,
+//  80, 87, 64, 71
+// ]</code></pre></li>
+</ul>
+<ul>
+<li><p><code>Array.prototype.flat</code>版</p>
+<pre><code>let grades = [78, 62, 80, 64]
+
+let flatMapped = grades.map(grade =&gt; [grade, grade + 7]).flat()
+// [
+//  78, 85, 62, 69,
+//  80, 87, 64, 71
+// ]</code></pre></li>
+</ul>
+<ul>
+<li><p><code>flatMap</code>进阶版</p>
+<pre><code>let grades = [78, 62, 80, 64]
+
+let flatMapped = grades.flatMap(grade =&gt; [grade, grade + 7]);
+// [
+//  78, 85, 62, 69,
+//  80, 87, 64, 71
+// ]</code></pre></li>
+</ul>
+<p>由于是<code>map</code> 和 <code>flat</code>不加参数的结合体，<code>flatMap</code> 只展开一层数组：</p>
+<pre><code>let grades = [78, 62, 80, 64]
+
+let flatMapped = grades.flatMap(grade =&gt; [grade, [grade + 7]]);
+// [
+//   78, [ 85 ],
+//   62, [ 69 ],
+//   80, [ 87 ],
+//   64, [ 71 ]
+// ]</code></pre><h1 id="String-trimStart-和-String-trimEnd"><a href="#String-trimStart-和-String-trimEnd" class="headerlink" title="String.trimStart 和 String.trimEnd"></a>String.trimStart 和 String.trimEnd</h1><p>等价于之前的<code>String.trimRight</code> 和 <code>String.trimLeft</code> </p>
+<pre><code>let message = &quot;   Welcome to CS 101    &quot;
+message.trimRight()
+// &apos;   Welcome to CS 101&apos;
+message.trimLeft()
+// &apos;Welcome to CS 101   &apos;
+message.trimRight().trimLeft()
+// &apos;Welcome to CS 101&apos;</code></pre><p>等价于</p>
+<pre><code>let message = &quot;   Welcome to CS 101    &quot;
+message.trimEnd()
+// &apos;   Welcome to CS 101&apos;
+message.trimStart()
+// &apos;Welcome to CS 101   &apos;
+message.trimEnd().trimStart()
+// &apos;Welcome to CS 101&apos;</code></pre><h1 id="可选的catch绑定"><a href="#可选的catch绑定" class="headerlink" title="可选的catch绑定"></a>可选的catch绑定</h1><p>在之前的版本中，<code>try...catch</code>中的<code>catch</code>后面必须要跟一个参数，即使<code>catch</code>块里面什么内容都没有，所以在ES2019中，<code>catch</code>块后面的参数是可选的，如下：</p>
+<pre><code>try {
+  let parsed = JSON.parse(obj)
+} catch(e) {
+  // ignore e, or use
+  console.log(obj)
+}</code></pre><p><code>e</code>可以不写：</p>
+<pre><code>try {
+  let parsed = JSON.parse(obj)
+} catch {
+  console.log(obj)
+}</code></pre><h1 id="Function-toString-更新"><a href="#Function-toString-更新" class="headerlink" title="Function.toString() 更新"></a>Function.toString() 更新</h1><p>之前的版本中，<code>Function.toString()</code>直接把空格去掉了：</p>
+<pre><code>function greeting() {
+  const name = &apos;CSS Tricks&apos;
+  console.log(`hello from ${name}`)
+}
+
+greeting.toString()
+//&apos;function greeting() {\nconst name = \&apos;CSS Tricks\&apos;\nconsole.log(`hello from ${name} //`)\n}&apos;</code></pre><p>但是，在ES2019中，会完全保留源码格式打印：</p>
+<pre><code>function greeting() {
+  const name = &apos;CSS Tricks&apos;
+  console.log(`hello from ${name}`)
+}
+
+greeting.toString()
+// &apos;function greeting() {\n&apos; +
+//  &quot;  const name = &apos;CSS Tricks&apos;\n&quot; +
+//  &apos;  console.log(`hello from ${name}`)\n&apos; +
+//  &apos;}&apos;</code></pre><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://css-tricks.com/all-the-new-es2019-tips-and-tricks/" target="_blank" rel="noopener">https://css-tricks.com/all-the-new-es2019-tips-and-tricks/</a></p>
+]]></content>
+      <tags>
+        <tag>ES2019 JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ES6之Set和Map及WeakSet和WeakMap总结</title>
+    <url>/2019/08/19/ES6%E4%B9%8BSet%E5%92%8CMap%E5%8F%8AWeakSet%E5%92%8CWeakMap%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p><img src="https://upload-images.jianshu.io/upload_images/1741029-96533cae7400a3a1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Set &amp; Map"></p>
+<h1 id="一、Set"><a href="#一、Set" class="headerlink" title="一、Set"></a>一、Set</h1><ul>
+<li><p>概念<br><code>Set</code>类似于数组，本身是一个构造函数，用来生成 <code>Set</code> 数据结构，成员值都是唯一的，常用于数组去重。</p>
+</li>
+<li><p>属性<br><code>Set.prototype.size</code>：返回Set实例的成员总数</p>
+</li>
+<li><p>方法<br><code>add()</code> 添加值，返回 Set 结构本身。<br><code>delete()</code> 删除值，返回一个布尔值，表示删除是否成功。<br><code>has()</code> 返回一个布尔值，表示该值是否为<code>Set</code>的成员。<br><code>clear()</code> 清除所有成员，没有返回值。</p>
+</li>
+<li><p>遍历<br><code>Set.prototype.keys()</code>：返回键名的遍历器<br><code>Set.prototype.values()</code>：返回键值的遍历器<br><code>Set.prototype.entries()</code>：返回键值对的遍历器<br><code>Set.prototype.forEach()</code>：使用回调函数遍历每个成员</p>
+</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="二、Map"><a href="#二、Map" class="headerlink" title="二、Map"></a>二、Map</h1><ul>
+<li><p>概念<br>由于<code>Object</code>只能使用字符串作为<code>key</code>，在使用上面会有很大的限制，比如使用<code>DOM</code>节点作为<code>key</code>时，就会被自动转为字符串<code>[object HTMLDivElement]</code>。<br>为了解决上述问题，ES6 引入了 <code>Map</code> ，它类似于对象，也是键值对的集合，但是其key的范围不限于字符串，各种类型的值（包括对象）都可以当作键。<br><code>Object</code> 结构提供了“字符串—值”的对应，<code>Map</code> 结构提供了“值—值”的对应，是一种更完善的 Hash 结构实现。</p>
+</li>
+<li><p>与Object的区别<br><code>Object</code>：<br><code>k-v</code>(键-值对)，<code>key</code>只能是字符串，<code>value</code>可以为任意类型，无序，不可遍历，有默认属性<br><code>Map</code>:<br><code>k-v</code>(键-值对)，<code>key</code>与<code>value</code>可以为任意类型，可使用<code>for...of</code>遍历，按插入顺序遍历，可存储大量数据，但是由于<code>.get</code> 函数，可能比<code>Object</code>慢</p>
+</li>
+</ul>
+<p>常用方法比较：</p>
+<pre><code>Object:
+   var o = {};
+   var o = Object.create(null);
+   o.key = 1;
+   o.key += 10;
+   for(let k in o) o[k]++;
+   var sum = 0;
+   for(let v of Object.values(m)) sum += v;
+   if(&apos;key&apos; in o);
+   if(o.hasOwnProperty(&apos;key&apos;));
+   delete(o.key);
+   Object.keys(o).length
+Map:
+   var m = new Map();
+   m.set(&apos;key&apos;, 1);
+   m.set(&apos;key&apos;, m.get(&apos;key&apos;) + 10);
+   m.foreach((k, v) =&gt; m.set(k, m.get(k) + 1));
+   for(let k of m.keys()) m.set(k, m.get(k) + 1);
+   var sum = 0;
+   for(let v of m.values()) sum += v;
+   if(m.has(&apos;key&apos;));
+   m.delete(&apos;key&apos;);
+   m.size();</code></pre><ul>
+<li><p>属性与方法<br><code>size</code><br><code>set(k,v)</code><br><code>get(K)</code><br><code>has(k)</code><br><code>delete(k)</code><br><code>clear()</code></p>
+</li>
+<li><p>遍历<br><code>Map.prototype.keys()</code>：返回键名的遍历器。<br><code>Map.prototype.values()</code>：返回键值的遍历器。<br><code>Map.prototype.entries()</code>：返回所有成员的遍历器。<br><code>Map.prototype.forEach()</code>：遍历 Map 的所有成员。</p>
+</li>
+<li><p>遍历顺序就是插入顺序</p>
+</li>
+<li><p><code>Map</code> 转为数组最方便的方法，就是使用扩展运算符<code>（...）</code></p>
+</li>
+</ul>
+<h1 id="三、WeakSet"><a href="#三、WeakSet" class="headerlink" title="三、WeakSet"></a>三、WeakSet</h1><ul>
+<li><p><code>WeakSet</code> 的成员只能是对象，而不能是其他类型的值</p>
+</li>
+<li><p>对象都是弱引用，即垃圾回收机制不考虑 <code>WeakSet</code> 对该对象的引用。如果其他对象都不再引用该对象，那么垃圾回收机制会自动回收该对象所占用的内存，不考虑该对象还存在于 <code>WeakSet</code> 之中。</p>
+</li>
+<li><p><code>WeakSet</code> 适合临时存放一组对象，以及存放跟对象绑定的信息。只要这些对象在外部消失，它在 <code>WeakSet</code> 里面的引用就会自动消失，所以<code>WeakSet</code> 的成员是不适合引用的。</p>
+</li>
+<li><p>由于 <code>WeakSet</code> 内部有多少个成员，取决于垃圾回收机制有没有运行，运行前后很可能成员个数是不一样的，而垃圾回收机制何时运行是不可预测的，因此 ES6 规定 <code>WeakSet</code> 不可遍历。</p>
+</li>
+<li><p>方法<br><code>WeakSet.prototype.add(value)</code>：向 WeakSet 实例添加一个新成员。<br><code>WeakSet.prototype.delete(value)</code>：清除 WeakSet 实例的指定成员。<br><code>WeakSet.prototype.has(value)</code>：返回一个布尔值，表示某个值是否在 <code>WeakSet</code> 实例之中。</p>
+</li>
+</ul>
+<h1 id="四、WeakMap"><a href="#四、WeakMap" class="headerlink" title="四、WeakMap"></a>四、WeakMap</h1><ul>
+<li><code>WeakMap</code>只接受对象作为键名（null除外）</li>
+<li><code>WeakMap</code>的键名所指向的对象，不计入垃圾回收机制</li>
+<li><code>WeakMap</code>的键名所引用的对象都是弱引用，即垃圾回收机制不将该引用考虑在内</li>
+<li>没有遍历方法，即没有<code>keys()</code>、<code>values()</code>和<code>entries()</code>方法</li>
+<li>没有<code>size</code>属性、<code>clear()</code>方法</li>
+<li><code>WeakMap</code>只有四个方法可用：<code>get()</code>、<code>set()</code>、<code>has()</code>、<code>delete()</code></li>
+</ul>
+<p>一个典型应用场景是，在网页的 <code>DOM</code> 元素上添加数据，就可以使用<code>WeakMap</code>结构。当该 <code>DOM</code> 元素被清除，其所对应的<code>WeakMap</code>记录就会自动被移除。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://es6.ruanyifeng.com/#docs/set-map" target="_blank" rel="noopener">http://es6.ruanyifeng.com/#docs/set-map</a><br><a href="https://stackoverflow.com/questions/18541940/map-vs-object-in-javascript" target="_blank" rel="noopener">https://stackoverflow.com/questions/18541940/map-vs-object-in-javascript</a></p>
+]]></content>
+      <tags>
+        <tag>ES6 Set Map</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo搭建个人博客部署于Github与Coding</title>
+    <url>/2016/08/14/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E4%BA%8EGithub%E4%B8%8ECoding/</url>
+    <content><![CDATA[<ul>
+<li>早就听说可以自己弄一个博客然后免费部署到github上面，但是一直没机会着手去做，前几天，机缘巧合之下，发现了<a href="https://www.npmjs.com/package/hexo" target="_blank" rel="noopener">Hexo</a>这个好东西，这才发现原来它就是我苦苦找寻的的东西啊。真是“<strong>踏破铁鞋无觅处，得来全不费功夫。</strong>”啊。</li>
+<li>那好，lz要开始搭建个人博客啦（入坑了）。期间各种坑只能自己体会，虽然外面已经很多搭建的教程了，但是我也来凑个热闹，其实也算是记录一下自己学习的过程，还有期间所遇的各种坑以至于不得不中断到改日再战的坑，在次记录一下让后面的小伙伴们更方便一些，不至于那么惨。</li>
+<li>首先必须<strong>安装一下<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">Git</a> for windows</strong>,然后申请个<a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>账号啊，建议日后想从事CS相关的童鞋多上上全球最大的同性交友网站（GitHub），里面的好东西真不少，受益匪浅啊。</li>
+<li>Git不会的童鞋网上搜一下，很简单，在此附上一张命令速查表，方便快捷，虽然貌似后面都没用到git命令。<br><img src="http://upload-images.jianshu.io/upload_images/1741029-4f7a27cef1b46665.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1741029-e5035d2c74ba60c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Git命令"></p>
+<a id="more"></a>
+
+<ul>
+<li><p>然后是<strong><a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js</a>下载</strong>,稳定版和最新版都可以，个人喜好，Hexo是靠node驱动，所以以上除了github以外都是是必须的。</p>
+</li>
+<li><p>有不想用国外网站的童鞋也可以使用国内的<a href="https://coding.net" target="_blank" rel="noopener">Coding</a>，原理一样，反正都是仿Github的。虽说国外网站有可能被墙，而且比起国内的慢一点，但是我同时部署了Coding和Github，后者瞬间就能访问了，而前者，呵呵。</p>
+</li>
+<li><p>对了，第一个坑来了，安装完毕之后一定要重启，不然后面使用<em>npm</em>命令安装Hexo时会提示找不到命令，然后才能继续后面的步骤。重启完毕之后就可以愉快地开始安装了，在Git Bash端执行下面的命令就可以安装Hexo了。</p>
+<pre><code>$ npm install hexo-cli -g</code></pre></li>
+<li><p>然后初始化hexo，进入文件之后就可以执行后面的命令了。</p>
+<pre><code>$ hexo init blog
+$ cd blog</code></pre></li>
+<li><p>介绍一下hexo下用到的命令：</p>
+<pre><code>$ hexo g/generate #生成静态文件
+$ hexo s/server #启动服务器，主要用来本地预览
+$ hexo d/deploy #将本地文件发布到github或Coding上
+$ hexo n/new &quot;postName&quot;#新建一篇文章
+$ hexo n/new page &quot;pageName&quot; #新建页面
+$ hexo h/help # 查看帮助
+$ hexo v/version #查看Hexo的版本</code></pre></li>
+<li><p>进入文件之后执行<strong>hexo g</strong>和<strong>hexo s</strong>之后然后用浏览器打开<em><a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a></em>，不出意外的话，你就可以看到你的博客了，就像下面这个样子的，当然这个博客只是在本地的，hexo3.0使用的默认主题是landscape。</p>
+</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1741029-22f51ce15050f2af.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<ul>
+<li>然后你就可以进行愉快的个性化玩耍了，其中也是各种坑，首先是挑选自己喜欢的<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="noopener">主题</a>，然后使用<strong>git clone</strong>下载到本地，就可以开心地设置了。</li>
+<li>首先打开hexo文件的_condig.yml配置文件，还有一个是themes主题下你选择主题的配置文件_condig.yml，两个配置文件名一样，但是一个是主配置文件，一个是主题配置文件，不要搞混。</li>
+<li>配置过程中也有不少坑，有遇到一个地方多了或者少了个空格什么的导致整个项目不能运行的，还有配置之后没有达到预期效果的，其实只要按照你选择的主题的文档来，仔细一点，基本上是没什么问题的。</li>
+<li>当然，我就是按照文档来配置的，中间也是各种各样的问题，但是，基本上都是网上查查就能查到的普通问题。</li>
+<li>我选的主题是<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">Next.Picces</a>,配置好之后效果如下所示</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1741029-80b1d4c4eb437f5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<ul>
+<li>有点小清新是不是，嗯，<a href="https://halshaw.github.io/" target="_blank" rel="noopener">地址</a>在此,欢迎来踩。</li>
+<li>主题中所包含的功能就已经很多了，比如百度统计、打赏、搜索等功能，只要去找到文件中相对应的地方，然后设置就可以使用了。愚蠢的我一开始还想去自己实现一些功能，但是后来仔细阅读主题文档之后才发现，原来都有啊，其自带的功能已足够满足我等骚年。</li>
+<li>所以我又去百度统计、多说、leancloud网站注册之后，然后拿到id之后放在配置文件中相应的地方就可以了，而且还实现了打赏功能，但是并没什么卵用。</li>
+<li>使用文档很重要啊，这是我主题的<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">使用文档</a>。</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1741029-b94e68dd00f6f723.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<ul>
+<li><p>好了，到此，你已经配置好本地，然后预览好之后就可以发布了，使用下面</p>
+<pre><code>hexo g
+hexo d</code></pre></li>
+<li><p>命令就可以啦，但是天有不测风云，遇到错误，</p>
+<pre><code>ERROR Deployer not found : github</code></pre></li>
+<li><p>不用急，执行一下这条命令就可以，还有可能遇到说你的github地址不是仓库，那是因为你的地址没有设置正确，检查一下空格之类的。</p>
+<pre><code>npm install hexo-deployer-git --save</code></pre></li>
+<li><p>要想以上命令起作用，前提是你的配置文件已经配置如下，这个是同时发布到Github和Coding上面</p>
+<pre><code>deploy:
+  type: git
+  repo: 
+    coding: git@git.coding.net:HalShaw/halshaw.git,master
+    github: https://github.com/HalShaw/halshaw.github.io.git,master</code></pre></li>
+</ul>
+<ul>
+<li><p>如果只想发布到GIthub上，稍微改一下</p>
+<pre><code>deploy:  
+  type: git
+  repository: https://github.com/HalShaw/halshaw.github.io.git 
+  branch: master</code></pre></li>
+<li><p>一切顺利的话，就可以啦。但是，慢着，又出现问题了。命令行返回</p>
+<pre><code>Invalid argument        </code></pre></li>
+<li><p>what?什么鬼？明明本地都可以成功预览了，但是为什么发布不了了呢，我就被这个<strong>hexo d</strong>搞了好久，查了好久才明白，原因是我在我的hexo目录下，我又执行了</p>
+<pre><code>npm install</code></pre></li>
+<li><p>又安装了一个hexo，所以不能发布了，所以删除之后就可以高兴滴执行<strong>hexo d</strong>啦。</p>
+</li>
+<li><p>谢天谢地，终于发布上去了，然而，不到一分钟，我就收到了Github发来的邮件</p>
+</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1741029-fbd6b116e700b063.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<p>创建page失败，madan，招谁惹谁了我，怎么遇到这么多问题呢。又是一番搜索之后找到了一个我认为满意的答案</p>
+<pre><code>- Make a backup of the content locally
+- Delete the repository from GitHub
+- Delete the repository locally
+- Recreate the repository, ensuring that you don&apos;t include the repository within the repository locally, which is what you did previously
+- Push it to GitHub</code></pre><ul>
+<li>意思就是我git仓库里面又包括其他仓库啦，让我把他们搞好之后再上传，果然，我到主题文件下把.git文件删除之后，然后再次发布，终于，大功告成。就是刚才那个小清新的博客啦。</li>
+<li>然后就开始写文章吧，该博客只支持<a href="http://www.jianshu.com/p/q81RER/" target="_blank" rel="noopener">markdown</a>语法，所以不会的小伙伴也不要怕，花个几分钟就可以上手啦。在Git终端输入上面的新建文章命令就可以新建一篇文章啦。然后会显示文章所在路径，找到并打开开始写文章吧。</li>
+</ul>
+<pre><code>$ hexo n my first
+INFO  Created: D:\hexo1\hexo\source\_posts\first.md</code></pre><ul>
+<li><p>打开之后是这样的，你可以自己设置标签和分类，然后就开始写你自己的故事吧。</p>
+<pre><code>title: my first#标题和日期必须唯一，因为访问文章的url是根据二者生成的
+date: 2016-08-25 15:33:58
+tags: &apos;try&apos; #标签
+categories: &quot;技术&quot; #分类</code></pre></li>
+</ul>
+<ul>
+<li>然后之后写文章每次部署都需要执行如下的命令，需要先清理数据库，生成静态文件之后预览，然后发布。</li>
+</ul>
+<pre><code>hexo clean
+hexo g
+hexo s
+hexo d</code></pre><ul>
+<li>好啦，到这里，文章已经写好，然后发布之后就可以去找小伙伴炫耀啦。</li>
+</ul>
+<h3 id="本文为作者原创，保留所有权，欢迎转载，转载请注明出处，标明作者。"><a href="#本文为作者原创，保留所有权，欢迎转载，转载请注明出处，标明作者。" class="headerlink" title="本文为作者原创，保留所有权，欢迎转载，转载请注明出处，标明作者。"></a>本文为作者原创，保留所有权，欢迎转载，转载请注明出处，标明作者。</h3>]]></content>
+      <tags>
+        <tag>Hexo Blog</tag>
+      </tags>
+  </entry>
+</search>
