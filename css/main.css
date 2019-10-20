@@ -488,7 +488,7 @@ pre,
   padding: 0;
   font-size: 13px;
   color: #4d4d4c;
-  background: #f7f7f7;
+  background: #222;
   line-height: 1.6;
 }
 pre,
@@ -498,7 +498,7 @@ code {
 code {
   padding: 2px 4px;
   word-wrap: break-word;
-  color: #555;
+  color: #29c527;
   background: #eee;
   border-radius: 3px;
   font-size: 13px;
@@ -508,7 +508,7 @@ pre {
 }
 pre code {
   padding: 0;
-  color: #4d4d4c;
+  color: #29c527;
   background: none;
   text-shadow: none;
 }
@@ -561,7 +561,7 @@ pre code {
   width: 100%;
   padding-left: 10px;
   padding-right: 10px;
-  background-color: #f7f7f7;
+  background-color: #222;
 }
 .highlight .line {
   height: 20px;
@@ -1243,6 +1243,16 @@ pre .javascript .function {
   font-weight: bold;
   line-height: 1;
 }
+.post-body p a {
+  color: #0593d3;
+  border-bottom: none;
+  border-bottom: 1px solid #0593d3;
+}
+.post-body p a:hover {
+  color: #fc6423;
+  border-bottom: none;
+  border-bottom: 1px solid #fc6423;
+}
 .post-sticky-flag {
   display: inline-block;
   font-size: 16px;
@@ -1823,7 +1833,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff91de;
+  background: #e5ff5b;
 }
 .links-of-blogroll {
   font-size: 13px;
