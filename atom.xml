@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-19T08:04:17.572Z</updated>
+  <updated>2019-10-21T14:02:23.781Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2019/10/18/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%E8%B7%AF%E7%94%B1%E5%AE%9E%E7%8E%B0%E7%9A%84Hash%E5%92%8CHistory%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
     <id>http://yoursite.com/2019/10/18/前端框架路由实现的Hash和History两种模式的区别/</id>
     <published>2019-10-18T14:32:00.000Z</published>
-    <updated>2019-10-19T08:04:17.572Z</updated>
+    <updated>2019-10-21T14:02:23.781Z</updated>
     
     <summary type="html">
     
@@ -39,7 +39,7 @@
     </summary>
     
     
-      <category term="技术 JavaScript" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF-JavaScript/"/>
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
     
     
       <category term="JavaScript 前端 路由 Angular Vue" scheme="http://yoursite.com/tags/JavaScript-%E5%89%8D%E7%AB%AF-%E8%B7%AF%E7%94%B1-Angular-Vue/"/>
@@ -51,7 +51,7 @@
     <link href="http://yoursite.com/2019/10/07/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JS%E4%B8%AD%E5%8D%B7/"/>
     <id>http://yoursite.com/2019/10/07/你不知道的JS中卷/</id>
     <published>2019-10-07T13:47:00.000Z</published>
-    <updated>2019-10-19T08:39:27.987Z</updated>
+    <updated>2019-10-21T14:02:48.473Z</updated>
     
     <summary type="html">
     
@@ -72,8 +72,10 @@
     </summary>
     
     
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
     
-      <category term="JavaScript Notes" scheme="http://yoursite.com/tags/JavaScript-Notes/"/>
+    
+      <category term="JavaScript Notes 你不知道的JavaScript中卷" scheme="http://yoursite.com/tags/JavaScript-Notes-%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JavaScript%E4%B8%AD%E5%8D%B7/"/>
     
   </entry>
   
@@ -82,7 +84,7 @@
     <link href="http://yoursite.com/2019/08/26/Babel7.5%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%E5%8A%A8%E6%80%81%E5%BC%95%E5%85%A5%E5%92%8CF%E7%AE%A1%E9%81%93/"/>
     <id>http://yoursite.com/2019/08/26/Babel7.5新特性之动态引入和F管道/</id>
     <published>2019-08-26T15:19:00.000Z</published>
-    <updated>2019-10-19T08:38:44.883Z</updated>
+    <updated>2019-10-21T14:03:07.688Z</updated>
     
     <summary type="html">
     
@@ -102,6 +104,8 @@
     </summary>
     
     
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
     
       <category term="JavaScript Babel" scheme="http://yoursite.com/tags/JavaScript-Babel/"/>
     
@@ -112,7 +116,7 @@
     <link href="http://yoursite.com/2019/08/19/ES2019%E6%96%B0%E7%89%B9%E6%80%A7/"/>
     <id>http://yoursite.com/2019/08/19/ES2019新特性/</id>
     <published>2019-08-19T14:06:00.000Z</published>
-    <updated>2019-10-19T08:39:04.819Z</updated>
+    <updated>2019-10-21T14:03:43.127Z</updated>
     
     <summary type="html">
     
@@ -138,6 +142,8 @@ Object.entries(students)
     </summary>
     
     
+      <category term="JavaScript ES2019" scheme="http://yoursite.com/categories/JavaScript-ES2019/"/>
+    
     
       <category term="ES2019 JavaScript" scheme="http://yoursite.com/tags/ES2019-JavaScript/"/>
     
@@ -148,7 +154,7 @@ Object.entries(students)
     <link href="http://yoursite.com/2019/08/19/ES6%E4%B9%8BSet%E5%92%8CMap%E5%8F%8AWeakSet%E5%92%8CWeakMap%E6%80%BB%E7%BB%93/"/>
     <id>http://yoursite.com/2019/08/19/ES6之Set和Map及WeakSet和WeakMap总结/</id>
     <published>2019-08-19T12:44:00.000Z</published>
-    <updated>2019-10-19T08:38:55.075Z</updated>
+    <updated>2019-10-21T14:03:26.712Z</updated>
     
     <summary type="html">
     
@@ -167,8 +173,10 @@ Object.entries(students)
     </summary>
     
     
+      <category term="JavaScript ES6" scheme="http://yoursite.com/categories/JavaScript-ES6/"/>
     
-      <category term="ES6 Set Map" scheme="http://yoursite.com/tags/ES6-Set-Map/"/>
+    
+      <category term="ES6 Set Map WeakSet WeakMap" scheme="http://yoursite.com/tags/ES6-Set-Map-WeakSet-WeakMap/"/>
     
   </entry>
   
@@ -177,7 +185,7 @@ Object.entries(students)
     <link href="http://yoursite.com/2016/08/14/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E4%BA%8EGithub%E4%B8%8ECoding/"/>
     <id>http://yoursite.com/2016/08/14/Hexo搭建个人博客部署于Github与Coding/</id>
     <published>2016-08-14T08:07:00.000Z</published>
-    <updated>2019-10-19T08:39:19.187Z</updated>
+    <updated>2019-10-21T14:04:02.104Z</updated>
     
     <summary type="html">
     
@@ -191,6 +199,8 @@ Object.entries(students)
     
     </summary>
     
+    
+      <category term="Hexo" scheme="http://yoursite.com/categories/Hexo/"/>
     
     
       <category term="Hexo Blog" scheme="http://yoursite.com/tags/Hexo-Blog/"/>

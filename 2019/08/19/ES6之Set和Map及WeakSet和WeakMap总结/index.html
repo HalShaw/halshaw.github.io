@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="ES6 Set Map,">
+  <meta name="keywords" content="ES6 Set Map WeakSet WeakMap,">
 
 
 
@@ -82,7 +82,7 @@
 
 
 <meta name="description" content="一、Set 概念Set类似于数组，本身是一个构造函数，用来生成 Set 数据结构，成员值都是唯一的，常用于数组去重。  属性Set.prototype.size：返回Set实例的成员总数  方法add() 添加值，返回 Set 结构本身。delete() 删除值，返回一个布尔值，表示删除是否成功。has() 返回一个布尔值，表示该值是否为Set的成员。clear() 清除所有成员，没有返回值。">
-<meta name="keywords" content="ES6 Set Map">
+<meta name="keywords" content="ES6 Set Map WeakSet WeakMap">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ES6之Set和Map及WeakSet和WeakMap总结">
 <meta property="og:url" content="http://yoursite.com/2019/08/19/ES6之Set和Map及WeakSet和WeakMap总结/index.html">
@@ -90,7 +90,7 @@
 <meta property="og:description" content="一、Set 概念Set类似于数组，本身是一个构造函数，用来生成 Set 数据结构，成员值都是唯一的，常用于数组去重。  属性Set.prototype.size：返回Set实例的成员总数  方法add() 添加值，返回 Set 结构本身。delete() 删除值，返回一个布尔值，表示删除是否成功。has() 返回一个布尔值，表示该值是否为Set的成员。clear() 清除所有成员，没有返回值。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1741029-96533cae7400a3a1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-10-19T08:38:55.075Z">
+<meta property="og:updated_time" content="2019-10-21T14:03:26.712Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6之Set和Map及WeakSet和WeakMap总结">
 <meta name="twitter:description" content="一、Set 概念Set类似于数组，本身是一个构造函数，用来生成 Set 数据结构，成员值都是唯一的，常用于数组去重。  属性Set.prototype.size：返回Set实例的成员总数  方法add() 添加值，返回 Set 结构本身。delete() 删除值，返回一个布尔值，表示删除是否成功。has() 返回一个布尔值，表示该值是否为Set的成员。clear() 清除所有成员，没有返回值。">
@@ -349,18 +349,30 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript-ES6/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript ES6</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/08/19/ES6之Set和Map及WeakSet和WeakMap总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/19/ES6之Set和Map及WeakSet和WeakMap总结/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -477,7 +489,7 @@ Map:
       
         <div class="post-tags">
           
-            <a href="/tags/ES6-Set-Map/" rel="tag"># ES6 Set Map</a>
+            <a href="/tags/ES6-Set-Map-WeakSet-WeakMap/" rel="tag"># ES6 Set Map WeakSet WeakMap</a>
           
         </div>
       
@@ -594,10 +606,10 @@ Map:
               
               
               <div class="site-state-item site-state-categories">
-                
-                  <span class="site-state-item-count">1</span>
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
-                
+                </a>
               </div>
             
 
@@ -605,10 +617,10 @@ Map:
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
-                
+                </a>
               </div>
             
 
@@ -702,7 +714,6 @@ Map:
 
   
 </div>
-
 
 
 
@@ -856,28 +867,6 @@ Map:
 
 
 
-
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-  
-  <script type="text/javascript">
-    var GUEST = ['nick','mail','link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item=>{
-      return GUEST.indexOf(item)>-1;
-    });
-    new Valine({
-        el: '#comments' ,
-        verify: false,
-        notify: false,
-        appId: '0RGDau0xCVQMGQVVIap0e6vu-gzGzoHsz',
-        appKey: 'RSpKpLleblD4FMXOyLuC5ric',
-        placeholder: '有啥意见或建议，欢迎评论。',
-        avatar:'mm',
-        guest_info:guest,
-        pageSize:'10' || 10,
-    });
-  </script>
 
 
 

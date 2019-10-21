@@ -95,7 +95,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1741029-80b1d4c4eb437f5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1741029-b94e68dd00f6f723.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1741029-fbd6b116e700b063.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-10-19T08:39:19.187Z">
+<meta property="og:updated_time" content="2019-10-21T14:04:02.104Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo搭建个人博客部署于Github与Coding">
 <meta name="twitter:description" content="早就听说可以自己弄一个博客然后免费部署到github上面，但是一直没机会着手去做，前几天，机缘巧合之下，发现了Hexo这个好东西，这才发现原来它就是我苦苦找寻的的东西啊。真是“踏破铁鞋无觅处，得来全不费功夫。”啊。 那好，lz要开始搭建个人博客啦（入坑了）。期间各种坑只能自己体会，虽然外面已经很多搭建的教程了，但是我也来凑个热闹，其实也算是记录一下自己学习的过程，还有期间所遇的各种坑以至于不得不">
@@ -354,18 +354,30 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/08/14/Hexo搭建个人博客部署于Github与Coding/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2016/08/14/Hexo搭建个人博客部署于Github与Coding/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -624,10 +636,10 @@ hexo d</code></pre><ul>
               
               
               <div class="site-state-item site-state-categories">
-                
-                  <span class="site-state-item-count">1</span>
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
-                
+                </a>
               </div>
             
 
@@ -635,10 +647,10 @@ hexo d</code></pre><ul>
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
-                
+                </a>
               </div>
             
 
@@ -732,7 +744,6 @@ hexo d</code></pre><ul>
 
   
 </div>
-
 
 
 
@@ -886,28 +897,6 @@ hexo d</code></pre><ul>
 
 
 
-
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-  
-  <script type="text/javascript">
-    var GUEST = ['nick','mail','link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item=>{
-      return GUEST.indexOf(item)>-1;
-    });
-    new Valine({
-        el: '#comments' ,
-        verify: false,
-        notify: false,
-        appId: '0RGDau0xCVQMGQVVIap0e6vu-gzGzoHsz',
-        appKey: 'RSpKpLleblD4FMXOyLuC5ric',
-        placeholder: '有啥意见或建议，欢迎评论。',
-        avatar:'mm',
-        guest_info:guest,
-        pageSize:'10' || 10,
-    });
-  </script>
 
 
 

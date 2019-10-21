@@ -90,7 +90,7 @@
 <meta property="og:description" content="前言 之前面试的时候就有准备过前端框架中两种路由实现方式及区别，但是当时没专门下功夫去深入了解，就在网上搜了下别人总结的临时抱了下佛脚。但是事实证明，出来混，总是要还的，在后来的面试中又遇到了，而且这次问得更加深入，仅仅靠死记硬背来的知识总是遗忘得很快，网上别人总结的东西终归还是别人的，鉴于网上别人总结的内容有点杂乱无章，还是决定自己在此总结记录一番，以加深印象。  一、何为前端路由 路由的概念">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1741029-9e5d1063264044c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-10-19T08:04:17.572Z">
+<meta property="og:updated_time" content="2019-10-21T14:02:23.781Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端框架路由实现的Hash和History两种模式的区别">
 <meta name="twitter:description" content="前言 之前面试的时候就有准备过前端框架中两种路由实现方式及区别，但是当时没专门下功夫去深入了解，就在网上搜了下别人总结的临时抱了下佛脚。但是事实证明，出来混，总是要还的，在后来的面试中又遇到了，而且这次问得更加深入，仅仅靠死记硬背来的知识总是遗忘得很快，网上别人总结的东西终归还是别人的，鉴于网上别人总结的内容有点杂乱无章，还是决定自己在此总结记录一番，以加深印象。  一、何为前端路由 路由的概念">
@@ -361,8 +361,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术-JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">技术 JavaScript</span>
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
                   </a>
                 </span>
 
@@ -373,16 +373,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/10/18/前端框架路由实现的Hash和History两种模式的区别/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/18/前端框架路由实现的Hash和History两种模式的区别/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -429,7 +419,7 @@
 <li>只有#符号之前的内容才会包含在请求中被发送到后端，也就是说就算后端没有对路由全覆盖，但是不会返回404错误</li>
 <li>hash值的改变，都会在浏览器的访问历史中增加一个记录，所以可以通过浏览器的回退、前进按钮控制hash的切换</li>
 <li>会覆盖锚点定位元素的功能</li>
-<li>不太美观，#后面传输的数据复杂的话会出现问题<br>&lt;%- post.breadcrumb.html %&gt;</li>
+<li>不太美观，#后面传输的数据复杂的话会出现问题</li>
 </ul>
 <h1 id="四、History模式"><a href="#四、History模式" class="headerlink" title="四、History模式"></a>四、History模式</h1><ul>
 <li>history 提供了 <code>pushState</code> 和 <code>replaceState</code> 两个方法来记录路由状态，这两个方法改变 URL 不会引起页面刷新</li>
@@ -586,10 +576,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
-                  <span class="site-state-item-count">1</span>
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
-                
+                </a>
               </div>
             
 
@@ -597,10 +587,10 @@
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
-                
+                </a>
               </div>
             
 
@@ -694,7 +684,6 @@
 
   
 </div>
-
 
 
 
@@ -848,28 +837,6 @@
 
 
 
-
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-  
-  <script type="text/javascript">
-    var GUEST = ['nick','mail','link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item=>{
-      return GUEST.indexOf(item)>-1;
-    });
-    new Valine({
-        el: '#comments' ,
-        verify: false,
-        notify: false,
-        appId: '0RGDau0xCVQMGQVVIap0e6vu-gzGzoHsz',
-        appKey: 'RSpKpLleblD4FMXOyLuC5ric',
-        placeholder: '有啥意见或建议，欢迎评论。',
-        avatar:'mm',
-        guest_info:guest,
-        pageSize:'10' || 10,
-    });
-  </script>
 
 
 

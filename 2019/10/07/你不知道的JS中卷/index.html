@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="JavaScript Notes,">
+  <meta name="keywords" content="JavaScript Notes 你不知道的JavaScript中卷,">
 
 
 
@@ -82,7 +82,7 @@
 
 
 <meta name="description" content="基本类型值 有一个坑常常被提到，[] + {}，{} +[]，它们返回不同的结果，分别是”[object Object]”，0。  if (a) { foo(); }可以写成a &amp;amp;&amp;amp; foo()a = b || “something” 和a &amp;amp;&amp;amp; b() 用到了“短路”机制。  == 允许在相等比较中进行强制类型转换，===不允许。  NaN 不等于NaN  +0">
-<meta name="keywords" content="JavaScript Notes">
+<meta name="keywords" content="JavaScript Notes 你不知道的JavaScript中卷">
 <meta property="og:type" content="article">
 <meta property="og:title" content="你不知道的JavaScript中卷-读书笔记">
 <meta property="og:url" content="http://yoursite.com/2019/10/07/你不知道的JS中卷/index.html">
@@ -90,7 +90,7 @@
 <meta property="og:description" content="基本类型值 有一个坑常常被提到，[] + {}，{} +[]，它们返回不同的结果，分别是”[object Object]”，0。  if (a) { foo(); }可以写成a &amp;amp;&amp;amp; foo()a = b || “something” 和a &amp;amp;&amp;amp; b() 用到了“短路”机制。  == 允许在相等比较中进行强制类型转换，===不允许。  NaN 不等于NaN  +0">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1741029-8c92a4538cc134eb.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-10-19T08:39:27.987Z">
+<meta property="og:updated_time" content="2019-10-21T14:02:48.473Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="你不知道的JavaScript中卷-读书笔记">
 <meta name="twitter:description" content="基本类型值 有一个坑常常被提到，[] + {}，{} +[]，它们返回不同的结果，分别是”[object Object]”，0。  if (a) { foo(); }可以写成a &amp;amp;&amp;amp; foo()a = b || “something” 和a &amp;amp;&amp;amp; b() 用到了“短路”机制。  == 允许在相等比较中进行强制类型转换，===不允许。  NaN 不等于NaN  +0">
@@ -349,18 +349,30 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/10/07/你不知道的JS中卷/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/07/你不知道的JS中卷/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -563,7 +575,7 @@ something.next().value; // 105</code></pre><ul>
       
         <div class="post-tags">
           
-            <a href="/tags/JavaScript-Notes/" rel="tag"># JavaScript Notes</a>
+            <a href="/tags/JavaScript-Notes-你不知道的JavaScript中卷/" rel="tag"># JavaScript Notes 你不知道的JavaScript中卷</a>
           
         </div>
       
@@ -680,10 +692,10 @@ something.next().value; // 105</code></pre><ul>
               
               
               <div class="site-state-item site-state-categories">
-                
-                  <span class="site-state-item-count">1</span>
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
-                
+                </a>
               </div>
             
 
@@ -691,10 +703,10 @@ something.next().value; // 105</code></pre><ul>
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
-                
+                </a>
               </div>
             
 
@@ -788,7 +800,6 @@ something.next().value; // 105</code></pre><ul>
 
   
 </div>
-
 
 
 
@@ -942,28 +953,6 @@ something.next().value; // 105</code></pre><ul>
 
 
 
-
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-  
-  <script type="text/javascript">
-    var GUEST = ['nick','mail','link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item=>{
-      return GUEST.indexOf(item)>-1;
-    });
-    new Valine({
-        el: '#comments' ,
-        verify: false,
-        notify: false,
-        appId: '0RGDau0xCVQMGQVVIap0e6vu-gzGzoHsz',
-        appKey: 'RSpKpLleblD4FMXOyLuC5ric',
-        placeholder: '有啥意见或建议，欢迎评论。',
-        avatar:'mm',
-        guest_info:guest,
-        pageSize:'10' || 10,
-    });
-  </script>
 
 
 

@@ -90,7 +90,7 @@
 <meta property="og:description" content="一、目录 F#管道操作符 动态导入  二、F#管道操作符管道操作符提议还在第一阶段的开发中，同时也意味着其规范还在定义中。Babel 从7.3.0 版本已经支持了管道的变形Smart，以及7.0.0-beta版本以来的minimal变形，并且现在又有了新的F#变形。 F#的变形不同于已经存在的smart变形，为何呢?与之前的话题引用（topic references）的概念相比，我们将使用箭头函">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1741029-16b74fc4346ad169.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-10-19T08:38:44.883Z">
+<meta property="og:updated_time" content="2019-10-21T14:03:07.688Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Babel 7.5新特性之动态引入和F#管道">
 <meta name="twitter:description" content="一、目录 F#管道操作符 动态导入  二、F#管道操作符管道操作符提议还在第一阶段的开发中，同时也意味着其规范还在定义中。Babel 从7.3.0 版本已经支持了管道的变形Smart，以及7.0.0-beta版本以来的minimal变形，并且现在又有了新的F#变形。 F#的变形不同于已经存在的smart变形，为何呢?与之前的话题引用（topic references）的概念相比，我们将使用箭头函">
@@ -349,18 +349,30 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/08/26/Babel7.5新特性之动态引入和F管道/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/26/Babel7.5新特性之动态引入和F管道/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -609,10 +621,10 @@ let newScore = fetch(url)
               
               
               <div class="site-state-item site-state-categories">
-                
-                  <span class="site-state-item-count">1</span>
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
-                
+                </a>
               </div>
             
 
@@ -620,10 +632,10 @@ let newScore = fetch(url)
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
-                
+                </a>
               </div>
             
 
@@ -717,7 +729,6 @@ let newScore = fetch(url)
 
   
 </div>
-
 
 
 
@@ -871,28 +882,6 @@ let newScore = fetch(url)
 
 
 
-
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-  
-  <script type="text/javascript">
-    var GUEST = ['nick','mail','link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item=>{
-      return GUEST.indexOf(item)>-1;
-    });
-    new Valine({
-        el: '#comments' ,
-        verify: false,
-        notify: false,
-        appId: '0RGDau0xCVQMGQVVIap0e6vu-gzGzoHsz',
-        appKey: 'RSpKpLleblD4FMXOyLuC5ric',
-        placeholder: '有啥意见或建议，欢迎评论。',
-        avatar:'mm',
-        guest_info:guest,
-        pageSize:'10' || 10,
-    });
-  </script>
 
 
 
