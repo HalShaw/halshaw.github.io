@@ -112,6 +112,32 @@
   </entry>
   
   <entry>
+    <title>深入理解JS中的事件发射器（Event Emitters）</title>
+    <link href="http://yoursite.com/2019/08/22/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JS%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%8F%91%E5%B0%84%E5%99%A8/"/>
+    <id>http://yoursite.com/2019/08/22/深入理解JS中的事件发射器/</id>
+    <published>2019-08-22T12:23:00.000Z</published>
+    <updated>2019-10-23T14:35:36.895Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;https://upload-images.jianshu.io/upload_images/1741029-84f3e55abfbaba7a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;Event Emitter&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;一、背景&quot;&gt;&lt;a href=&quot;#一、背景&quot; class=&quot;headerlink&quot; title=&quot;一、背景&quot;&gt;&lt;/a&gt;一、背景&lt;/h1&gt;&lt;p&gt;先看一个&lt;code&gt;DOM&lt;/code&gt;事件:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const button = document.querySelector(&amp;quot;button&amp;quot;);
+
+button.addEventListener(&amp;quot;click&amp;quot;, (event) =&amp;gt; /* do something with the event */)&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;以上代码在&lt;code&gt;button&lt;/code&gt;上添加了一个事件监听器，每当点击&lt;code&gt;button&lt;/code&gt;的时候，点击事件被触发出去并且同时调用&lt;code&gt;callback&lt;/code&gt;函数。&lt;/p&gt;
+&lt;p&gt;有很多时候可能会有需要触发自定义事件的需求，不单单只是一个点击事件，假设有这样一个需要触发一个基于其他触发器的事件，并且需要有一个事件响应的，可以自定义一个&lt;code&gt;event emitter&lt;/code&gt;来实现。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript Event Emitters" scheme="http://yoursite.com/tags/JavaScript-Event-Emitters/"/>
+    
+  </entry>
+  
+  <entry>
     <title>ES2019 新特性</title>
     <link href="http://yoursite.com/2019/08/19/ES2019%E6%96%B0%E7%89%B9%E6%80%A7/"/>
     <id>http://yoursite.com/2019/08/19/ES2019新特性/</id>

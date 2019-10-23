@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="JavaScript Event Emitters,">
 
 
 
@@ -81,17 +81,20 @@
 
 
 
-<meta name="description" content="Some tech notes and life experience.">
-<meta name="keywords" content="Shaw Xiaohao">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Shaw&#39;s blog.">
-<meta property="og:url" content="http://yoursite.com/tags/ES6-Set-Map-WeakSet-WeakMap/index.html">
+<meta name="description" content="一、背景先看一个DOM事件: const button = document.querySelector(&amp;quot;button&amp;quot;);  button.addEventListener(&amp;quot;click&amp;quot;, (event) =&amp;gt; /* do something with the event */)以上代码在button上添加了一个事件监听器，每当点击button">
+<meta name="keywords" content="JavaScript Event Emitters">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解JS中的事件发射器（Event Emitters）">
+<meta property="og:url" content="http://yoursite.com/2019/08/22/深入理解JS中的事件发射器/index.html">
 <meta property="og:site_name" content="Shaw&#39;s blog.">
-<meta property="og:description" content="Some tech notes and life experience.">
+<meta property="og:description" content="一、背景先看一个DOM事件: const button = document.querySelector(&amp;quot;button&amp;quot;);  button.addEventListener(&amp;quot;click&amp;quot;, (event) =&amp;gt; /* do something with the event */)以上代码在button上添加了一个事件监听器，每当点击button">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1741029-84f3e55abfbaba7a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-10-23T14:35:36.895Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Shaw&#39;s blog.">
-<meta name="twitter:description" content="Some tech notes and life experience.">
+<meta name="twitter:title" content="深入理解JS中的事件发射器（Event Emitters）">
+<meta name="twitter:description" content="一、背景先看一个DOM事件: const button = document.querySelector(&amp;quot;button&amp;quot;);  button.addEventListener(&amp;quot;click&amp;quot;, (event) =&amp;gt; /* do something with the event */)以上代码在button上添加了一个事件监听器，每当点击button">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1741029-84f3e55abfbaba7a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -121,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/ES6-Set-Map-WeakSet-WeakMap/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/22/深入理解JS中的事件发射器/">
 
 
 
 
 
-  <title>标签: ES6 Set Map WeakSet WeakMap | Shaw's blog.</title>
+  <title>深入理解JS中的事件发射器（Event Emitters） | Shaw's blog.</title>
   
 
 
@@ -156,7 +159,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -292,52 +295,332 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2>ES6 Set Map WeakSet WeakMap<small>标签</small>
-        </h2>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/22/深入理解JS中的事件发射器/">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shaw">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/portrait.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shaw's blog.">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/08/19/ES6之Set和Map及WeakSet和WeakMap总结/" itemprop="url">
-              
-                <span itemprop="name">ES6之Set和Map及WeakSet和WeakMap总结</span>
-              
-            </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">深入理解JS中的事件发射器（Event Emitters）</h2>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-19T20:44:00+08:00" content="2019-08-19">
-          08-19
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-22T20:23:00+08:00">
+                2019-08-22
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/1741029-84f3e55abfbaba7a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Event Emitter"></p>
+<h1 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h1><p>先看一个<code>DOM</code>事件:</p>
+<pre><code>const button = document.querySelector(&quot;button&quot;);
+
+button.addEventListener(&quot;click&quot;, (event) =&gt; /* do something with the event */)</code></pre><p>以上代码在<code>button</code>上添加了一个事件监听器，每当点击<code>button</code>的时候，点击事件被触发出去并且同时调用<code>callback</code>函数。</p>
+<p>有很多时候可能会有需要触发自定义事件的需求，不单单只是一个点击事件，假设有这样一个需要触发一个基于其他触发器的事件，并且需要有一个事件响应的，可以自定义一个<code>event emitter</code>来实现。</p>
+<a id="more"></a>
+
+<p>一个<code>event emitter</code>就是监听一个<code>event</code>，触发一个回调函数，然后<code>emit</code>一个带有<code>value</code>的事件的一种模式，有时候也称为<code>pub/sub</code>模型或者监听器。</p>
+<p>在JavaScript中的一种实现如下：</p>
+<pre><code>let n = 0;
+const event = new EventEmitter();
+
+event.subscribe(&quot;THUNDER_ON_THE_MOUNTAIN&quot;, value =&gt; (n = value));
+
+event.emit(&quot;THUNDER_ON_THE_MOUNTAIN&quot;, 18);
+
+// n: 18
+
+event.emit(&quot;THUNDER_ON_THE_MOUNTAIN&quot;, 5);
+
+// n: 5</code></pre><p>在上面的代码中，我们订阅了一个叫做 <code>THUNDER_ON_THE_MOUNTAIN</code>的事件，并且当事件被 <code>emitted</code> 的时候，回调函数 <code>value =&gt; (n = value)</code> 也会被触发，可以调用 <code>emit()</code>来<code>emit</code>该事件。</p>
+<p>这在与异步代码交互的时候，如果有不在当前模块下的值需要更新时十分有用。</p>
+<p>一个真实的例子就是<a href="https://react-redux.js.org/" target="_blank" rel="noopener">React Redux</a>，<br><code>Redux</code>需要一种通知外部其内部的值已经更新的机制，其允许<code>React</code>调用<code>setState()</code>并重新渲染UI来获取哪些值已经改变，这个地方也是使用<code>event emitter</code>来实现的。<br><code>Redux store</code>有一个传入一个提供新的<code>store</code>的回调函数作为参数的订阅函数，在这个订阅函数中，调用了 <code>React Redux</code>的以新<code>store</code>的值调用了<code>setState()</code>方法的 <code>&lt;Provider&gt;</code> 组件，可以<a href="https://github.com/reduxjs/react-redux/blob/master/src/components/Provider.js#L36" target="_blank" rel="noopener">在此</a>查看。</p>
+<p>现在我们的应用有了两个不同的部分，一部分是<code>React UI</code>，另一部分是<code>Redux store</code>，谁也说不清楚事件究竟是被那一部分触发的。</p>
+<h1 id="二、实现"><a href="#二、实现" class="headerlink" title="二、实现"></a>二、实现</h1><p>先看一个简单的<code>event emitter</code>，其中使用了<code>class</code>，在这个<code>class</code>中跟踪事件。</p>
+<pre><code>class EventEmitter {
+  public events: Events;
+  constructor(events?: Events) {
+    this.events = events || {};
+  }
+}</code></pre><ul>
+<li><p>事件<br>定义一个事件接口，用来存储一个每一个<code>key</code>都是一个事件名并且各自的值都是回调函数组成的数组的空白对象。</p>
+<p>  interface Events {</p>
+<pre><code>[key: string]: Function[];</code></pre><p>  }</p>
+<p>  {</p>
+<pre><code>&quot;event&quot;: [fn],
+&quot;event_two&quot;: [fn]</code></pre><p>  }</p>
+</li>
+</ul>
+<p>使用数组的原因是因为每一个事件都可能有多个<code>subscriber</code>，因为<code>element.addEventLister(&quot;click&quot;)</code>可能会被多次调用。</p>
+<ul>
+<li><p>订阅<br>现在需要处理订阅的事件，在上面的例子中，<code>subscribe()</code>函数接收两个参数：一个<code>name</code>和一个<code>callback</code>函数。</p>
+<p>  event.subscribe(“named event”, value =&gt; value);</p>
+</li>
+</ul>
+<p>定义一个<code>subscribe</code>方法来接收这两个参数，只需把这两个参数添加到类内部的<code>this.events</code>。</p>
+<pre><code>class EventEmitter {
+  public events: Events;
+  constructor(events?: Events) {
+    this.events = events || {};
+  }
+
+  public subscribe(name: string, cb: Function) {
+    (this.events[name] || (this.events[name] = [])).push(cb);
+  }
+}</code></pre><ul>
+<li><p>发射<br>到此可以订阅事件了，接下来，当一个新事件发射的时候需要触发回调函数，当触发的时候，将使用<code>(emit(&quot;event&quot;))</code>中存储的事件名和需要传递到回调函数<code>(emit(&quot;event&quot;, value))</code>的任意值，我们可以简单地传递任意参数到回调函数在第一个参数后面。</p>
+<p>  class EventEmitter {</p>
+<pre><code>public events: Events;
+constructor(events?: Events) {
+  this.events = events || {};
+}
+
+public subscribe(name: string, cb: Function) {
+  (this.events[name] || (this.events[name] = [])).push(cb);
+}
+
+public emit(name: string, ...args: any[]): void {
+  (this.events[name] || []).forEach(fn =&gt; fn(...args));
+}</code></pre><p>  }</p>
+</li>
+</ul>
+<p>既然我们知道了我们希望发射的事件，可以使用<code>this.events[name]</code>来查看，返回的是一个回调函数的数组。</p>
+<ul>
+<li><p>取消订阅</p>
+<p>  subscribe(name: string, cb: Function) {</p>
+<pre><code>(this.events[name] || (this.events[name] = [])).push(cb);
+
+return {
+  unsubscribe: () =&gt;
+    this.events[name] &amp;&amp; this.events[name].splice(this.events[name].indexOf(cb) &gt;&gt;&gt; 0, 1)
+};</code></pre><p>  }</p>
+</li>
+</ul>
+<p>上述代码返回一个带有<code>unsubscribe</code>方法的对象，可以使用箭头函数<code>() =&gt;</code>来获取传递给父对象参数的作用域，在这个函数中，使用<code>&gt;&gt;&gt;</code><a href="https://stackoverflow.com/questions/1822350/what-is-the-javascript-operator-and-how-do-you-use-it" target="_blank" rel="noopener">操作符</a>可以找到传递给父级回调函数的索引，在这里使用可以保证我们每次在回调函数数组上调用<code>splice()</code> 的时候总是可以取到一个真正的数字，即使<code>indexOf()</code> 都不能返回数字也行。<br>可以这样使用：</p>
+<pre><code>const subscription = event.subscribe(&quot;event&quot;, value =&gt; value);
+
+subscription.unsubscribe();</code></pre><p>到此，我们就可以取消这一个特别的订阅了，而且不影响其他的订阅。</p>
+<ul>
+<li><p>完整实现</p>
+<p>  interface Events {</p>
+<pre><code>[key: string]: Function[];</code></pre><p>  }</p>
+<p>  export class EventEmitter {</p>
+<pre><code>public events: Events;
+constructor(events?: Events) {
+  this.events = events || {};
+}
+
+public subscribe(name: string, cb: Function) {
+  (this.events[name] || (this.events[name] = [])).push(cb);
+
+  return {
+    unsubscribe: () =&gt;
+      this.events[name] &amp;&amp; this.events[name].splice(this.events[name].indexOf(cb) &gt;&gt;&gt; 0, 1)
+  };
+}
+
+public emit(name: string, ...args: any[]): void {
+  (this.events[name] || []).forEach(fn =&gt; fn(...args));
+}</code></pre><p>  }</p>
+</li>
+<li><p>实例<br><a href="https://codepen.io/charliewilco/pen/gEoErR" target="_blank" rel="noopener">https://codepen.io/charliewilco/pen/gEoErR</a></p>
+</li>
+</ul>
+<p>上述代码中，首先在另外一个事件回调中使用了<code>event emitter</code>，在这种情况下，一个<code>event emitter</code>是用来清除一些逻辑，在GitHub上选择一个仓库，获取详情，缓存详情，并更新DOM去显示这些详情。在订阅回调函数中从网络或者缓存中获取结果并更新，可以这样做的原因是当我们发射时间的时候从列表中给了回调函数一个随机的仓库。</p>
+<p>现在来考虑一些不太一样的东西，在一个应用中，可能会有许多状态需要登录之后才可以触发，并且可能会有多个订阅器来处理用户试图退出的操作。因为已经发射了一个带<code>false</code>值的事件，每一个订阅器都可以使用这个值，并且需要判断是否需要重定向页面，移除cookie或者禁用表单。</p>
+<pre><code>const events = new EventEmitter();
+
+events.emit(&quot;authentication&quot;, false);
+
+events.subscribe(&quot;authentication&quot;, isLoggedIn =&gt; {
+  buttonEl.setAttribute(&quot;disabled&quot;, !isLogged);
+});
+
+events.subscribe(&quot;authentication&quot;, isLoggedIn =&gt; {
+  window.location.replace(!isLoggedIn ? &quot;/login&quot; : &quot;&quot;);
+});
+
+events.subscribe(&quot;authentication&quot;, isLoggedIn =&gt; {
+  !isLoggedIn &amp;&amp; cookies.remove(&quot;auth_token&quot;);
+});</code></pre><ul>
+<li><p>最后<br>要让<code>emitters</code>能工作，有几点需要考虑：</p>
+</li>
+<li><p>需要在<code>emit()</code>函数中使用<code>forEach</code>或者<code>map</code>来确保我们能创建新的订阅器或者取消订阅。</p>
+</li>
+<li><p>当一个<code>EventEmitter</code>类被实例化之后，可以传递一个预定义的事件到事件接口。</p>
+</li>
+<li><p>可以不需要使用<code>class</code>，来实现，个人喜好，但是使用<code>class</code>使事件存储在哪里会更加清晰。<br>可以在一个函数中实现，如下：</p>
+<p>  function emitter(e?: Events) {</p>
+<pre><code>let events: Events = e || {};
+
+return {
+  events,
+  subscribe: (name: string, cb: Function) =&gt; {
+    (events[name] || (events[name] = [])).push(cb);
+
+    return {
+      unsubscribe: () =&gt; {
+        events[name] &amp;&amp; events[name].splice(events[name].indexOf(cb) &gt;&gt;&gt; 0, 1);
+      }
+    };
+  },
+  emit: (name: string, ...args: any[]) =&gt; {
+    (events[name] || []).forEach(fn =&gt; fn(...args));
+  }
+};</code></pre><p>  }</p>
+</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://css-tricks.com/understanding-event-emitters/" target="_blank" rel="noopener">https://css-tricks.com/understanding-event-emitters/</a></p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript-Event-Emitters/" rel="tag"># JavaScript Event Emitters</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/19/ES2019新特性/" rel="next" title="ES2019 新特性">
+                <i class="fa fa-chevron-left"></i> ES2019 新特性
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/26/Babel7.5新特性之动态引入和F管道/" rel="prev" title="Babel 7.5新特性之动态引入和F#管道">
+                Babel 7.5新特性之动态引入和F#管道 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -345,6 +628,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -365,8 +655,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -463,6 +762,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、背景"><span class="nav-text">一、背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、实现"><span class="nav-text">二、实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -596,6 +911,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
