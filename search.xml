@@ -1,6 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title></title>
+    <url>/2019/10/24/ES6Proxy%E7%94%A8%E6%B3%95%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<p><img src="https://upload-images.jianshu.io/upload_images/1741029-96fbd7ec39c2fcb4.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Proxy"></p>
+<p><strong>前不久换工作的时候面试某大厂被问到关于Proxy的问题，脑子里有点印象但是又说不出具体使用方法，主要还是自己平时积累不够，所以赶紧来恶补一下。</strong><br>#Metaprogramming</p>
+<ul>
+<li>正式开始之前，先一起来理解下什么是Metaprogramming（元编程），因为Proxy就是一种基于Metaprogramming概念的对象 ，维基百科上这样解释：<blockquote>
+<p>Metaprogramming is a programming technique in which computer programs have the ability to treat other programs as their data.</p>
+</blockquote>
+</li>
+<li>翻译过来就是<blockquote>
+<p>元编程就是可以使用其他程序来作为输入数据的一种编程技术</p>
+</blockquote>
+</li>
+</ul>
+<p>#Proxy</p>
+<blockquote>
+<p>Proxy wraps objects and intercepts their behavior through traps</p>
+</blockquote>
+<blockquote>
+<p>The Proxy object is used to define custom behavior for fundamental operations (e.g. property lookup, assignment, enumeration, function invocation, etc).</p>
+</blockquote>
+<p>简单说来就是Proxy可以用来改变对象的默认操作，比如自行定义set和get等，常用的有以下这些：</p>
+<ul>
+<li>apply</li>
+<li>construct</li>
+<li>defineProperty</li>
+<li>deleteProperty</li>
+<li>get</li>
+<li>getOwnPropertyDescriptor</li>
+<li>getPrototypeOf</li>
+<li>has</li>
+<li>isExtensible</li>
+<li>ownKeys</li>
+<li>preventExtensions</li>
+<li>set</li>
+<li>setPrototypeOf</li>
+</ul>
+<p>Proxy中需要理解的三个属性：</p>
+<ul>
+<li>target: an Object which the proxy virtualizes.（目标对象）</li>
+<li>handler: a Placeholder Object which contains traps.（包含重写方法的对象）</li>
+<li>trap: the Methods that provide property access of the target object.（重写的方法，比如get和set）</li>
+</ul>
+<p>#例子<br>新建一个Proxy对象</p>
+<pre><code>let p = new Proxy(target, handler);</code></pre><p>新建一个employee对象然后输出其中的一些属性</p>
+<pre><code>const employee = {
+    firstName: &apos;Tapas&apos;,
+    lastName: &apos;Adhikary&apos;
+};
+
+console.group(&apos;employee&apos;);
+console.log(employee.firstName);
+console.log(employee.lastName);
+console.log(employee.org);
+console.log(employee.fullName);
+console.groupEnd()</code></pre><p>上面的输出如下所示：</p>
+<pre><code>employee
+Tapas
+Adhikary
+undefined
+undefined</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/1741029-14ae06c68fdb9b67.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="输出结果"></p>
+<p>接下来使用Proxy来更改一些默认行为：</p>
+<ul>
+<li><p>第一步 新建一个使用trap的handler<br>以下是一个覆盖get方法的handler，当target中取不到相应的fieldName时，你可以自定义输出:</p>
+<pre><code>let handler = {
+    get: function(target, fieldName) {        
+
+        if(fieldName === &apos;fullName&apos; ) {
+            return `${target.firstName} ${target.lastName}`;
+        }
+
+        return fieldName in target ?
+            target[fieldName] :
+                `No such property as, &apos;${fieldName}&apos;!`
+
+    }
+};</code></pre></li>
+<li><p>第二步 新建一个Proxy对象，并把之前定义的employee作为target传入</p>
+<pre><code>let p = new Proxy(employee, handler);</code></pre></li>
+<li><p>第三步 输出p的属性</p>
+<pre><code>console.group(&apos;proxy&apos;);
+console.log(p.firstName);
+console.log(p.lastName);
+console.log(p.org);
+console.log(p.fullName);
+console.groupEnd()</code></pre></li>
+</ul>
+<p>然后就可以看到输出结果和之前不一样了，期望结果与实际结果如下所示：</p>
+<pre><code>proxy
+  Tapas
+  Adhikary
+  No such property as, &apos;org&apos;!
+  Tapas Adhikary</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/1741029-62701d1cce29ae4c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="输出结果"><br>现在，清楚Proxy的作用了吧，其实就是用来更改对象默认方法的。</p>
+<p>下面是改变set方法来实现一个验证的例子：<br>新建一个handler，重新命名为validator：</p>
+<pre><code>const validator = {
+    set: function(obj, prop, value) {
+        if (prop === &apos;age&apos;) {
+            if(!Number.isInteger(value)) {
+                throw new TypeError(&apos;Age is always an Integer, Please Correct it!&apos;);
+            }
+            if(value &lt; 0) {
+                throw new TypeError(&apos;This is insane, a negative age?&apos;);
+            }
+        }
+    }
+};</code></pre><p>然后再新建一个Proxy：</p>
+<pre><code>let pr = new Proxy(employee, validator);</code></pre><p>然后可以尝试设置一个不合法的属性，比如：</p>
+<pre><code>pr.age = &quot;test&quot;；</code></pre><p>你将会得到如下报错：</p>
+<pre><code>Uncaught TypeError: Age is always an Integer, Please Correct it!
+    at Object.set (&lt;anonymous&gt;:5:23)
+    at &lt;anonymous&gt;:1:7
+set @ VM2381:5
+(anonymous) @ VM2434:1</code></pre><p>或者：</p>
+<pre><code>pr.age = -1；</code></pre><p>结果：</p>
+<pre><code>Uncaught TypeError: This is insane, a negative age?
+    at Object.set (&lt;anonymous&gt;:8:23)
+    at &lt;anonymous&gt;:1:7
+set @ VM2381:8
+(anonymous) @ VM2531:1</code></pre><p>由上可见，Proxy的功能还是很强大也非常实用，常用应用场景有：</p>
+<ul>
+<li>保护ID字段不受删除（重写deleteProperty）</li>
+<li>取值和写值（数据绑定）（重写get，set）</li>
+<li>改变 in 操作的默认行为等</li>
+</ul>
+<p>#this指向</p>
+<ul>
+<li><p>需要注意的是，proxy会改变target中的this指向，一旦proxy代理了target，target内部的this则指向了proxy，而不是target。</p>
+<pre><code>const target = {
+  get: function () {
+    console.log(this === proxy);
+  }
+};
+const handler = {};
+const proxy = new Proxy(target, handler);
+
+target.get() // false
+proxy.get()  // true</code></pre></li>
+</ul>
+<p>而有些原生对象的内部属性，只有通过正确的this才能拿到，所以proxy也无法代理这些原生对象的属性。</p>
+<pre><code>const target = new Date();
+const handler = {};
+const proxy = new Proxy(target, handler);
+
+proxy.getDate();
+// TypeError: this is not a Date object.</code></pre><p>对于以上的代码，getDate方法只能在Date对象的实例上面拿到，如果this不是Date就会报错。可以通过this绑定原始对象来解决这个问题。</p>
+<pre><code>const target = new Date(&apos;2019-07-11&apos;);
+const handler = {
+  get(target, prop) {
+    if (prop === &apos;getDate&apos;) {
+      return target.getDate.bind(target);
+    }
+    return Reflect.get(target, prop);
+  }
+};
+const proxy = new Proxy(target, handler);
+
+proxy.getDate() // 11</code></pre><p>这里又引入了另一个ES6的新增的对象Reflect，Reflect对象就是用来获取对象中默认方法的，这个下篇文章再具体讨论。</p>
+<p>#总结</p>
+<ul>
+<li><p>Proxy可以用于更改方法的默认输出，比如get方法取不到值时不返回undefined，以及在set方法上加验证及数据绑定等等，很强大也有用，需熟练掌握。</p>
+</li>
+<li><p>参考<br><a href="https://blog.greenroots.info/metaprogramming-an-introduction-to-javascriptes6-proxy-cjwkk64ly000gvds10db4l034" target="_blank" rel="noopener">Tapas Adhikary</a><br><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy" target="_blank" rel="noopener">Proxy - JavaScript | MDN</a><br><a href="http://es6.ruanyifeng.com/#docs/proxy" target="_blank" rel="noopener">http://es6.ruanyifeng.com/#docs/proxy</a></p>
+</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>前端框架路由实现的Hash和History两种模式的区别</title>
     <url>/2019/10/18/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%E8%B7%AF%E7%94%B1%E5%AE%9E%E7%8E%B0%E7%9A%84Hash%E5%92%8CHistory%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
     <content><![CDATA[<p><img src="https://upload-images.jianshu.io/upload_images/1741029-9e5d1063264044c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Hash vs History"></p>
@@ -360,94 +527,79 @@ event.emit(&quot;THUNDER_ON_THE_MOUNTAIN&quot;, 5);
 <p>现在我们的应用有了两个不同的部分，一部分是<code>React UI</code>，另一部分是<code>Redux store</code>，谁也说不清楚事件究竟是被那一部分触发的。</p>
 <h1 id="二、实现"><a href="#二、实现" class="headerlink" title="二、实现"></a>二、实现</h1><p>先看一个简单的<code>event emitter</code>，其中使用了<code>class</code>，在这个<code>class</code>中跟踪事件。</p>
 <pre><code>class EventEmitter {
-  public events: Events;
-  constructor(events?: Events) {
-    this.events = events || {};
-  }
-}</code></pre><ul>
-<li><p>事件<br>定义一个事件接口，用来存储一个每一个<code>key</code>都是一个事件名并且各自的值都是回调函数组成的数组的空白对象。</p>
-<p>  interface Events {</p>
-<pre><code>[key: string]: Function[];</code></pre><p>  }</p>
-<p>  {</p>
-<pre><code>&quot;event&quot;: [fn],
-&quot;event_two&quot;: [fn]</code></pre><p>  }</p>
-</li>
-</ul>
-<p>使用数组的原因是因为每一个事件都可能有多个<code>subscriber</code>，因为<code>element.addEventLister(&quot;click&quot;)</code>可能会被多次调用。</p>
-<ul>
-<li><p>订阅<br>现在需要处理订阅的事件，在上面的例子中，<code>subscribe()</code>函数接收两个参数：一个<code>name</code>和一个<code>callback</code>函数。</p>
-<p>  event.subscribe(“named event”, value =&gt; value);</p>
-</li>
-</ul>
-<p>定义一个<code>subscribe</code>方法来接收这两个参数，只需把这两个参数添加到类内部的<code>this.events</code>。</p>
+    public events: Events;
+    constructor(events?: Events) {
+        this.events = events || {};
+    }
+}</code></pre><h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p>定义一个事件接口，用来存储一个每一个<code>key</code>都是一个事件名并且各自的值都是回调函数组成的数组的空白对象。</p>
+<pre><code>interface Events {
+  [key: string]: Function[];
+}
+
+{
+  &quot;event&quot;: [fn],
+  &quot;event_two&quot;: [fn]
+}</code></pre><p>使用数组的原因是因为每一个事件都可能有多个<code>subscriber</code>，因为<code>element.addEventLister(&quot;click&quot;)</code>可能会被多次调用。</p>
+<h3 id="订阅"><a href="#订阅" class="headerlink" title="订阅"></a>订阅</h3><p>现在需要处理订阅的事件，在上面的例子中，<code>subscribe()</code>函数接收两个参数：一个<code>name</code>和一个<code>callback</code>函数。</p>
+<pre><code>event.subscribe(&quot;named event&quot;, value =&gt; value);</code></pre><p>定义一个<code>subscribe</code>方法来接收这两个参数，只需把这两个参数添加到类内部的<code>this.events</code>。</p>
 <pre><code>class EventEmitter {
-  public events: Events;
-  constructor(events?: Events) {
-    this.events = events || {};
+    public events: Events;
+    constructor(events?: Events) {
+        this.events = events || {};
+    }
+
+    public subscribe(name: string, cb: Function) {
+        (this.events[name] || (this.events[name] = [])).push(cb);
+    }
+}</code></pre><h3 id="发射"><a href="#发射" class="headerlink" title="发射"></a>发射</h3><p>到此可以订阅事件了，接下来，当一个新事件发射的时候需要触发回调函数，当触发的时候，将使用<code>(emit(&quot;event&quot;))</code>中存储的事件名和需要传递到回调函数<code>(emit(&quot;event&quot;, value))</code>的任意值，我们可以简单地传递任意参数到回调函数在第一个参数后面。</p>
+<pre><code>class EventEmitter {
+    public events: Events;
+    constructor(events?: Events) {
+        this.events = events || {};
   }
 
-  public subscribe(name: string, cb: Function) {
+    public subscribe(name: string, cb: Function) {
+        (this.events[name] || (this.events[name] = [])).push(cb);
+    }
+
+    public emit(name: string, ...args: any[]): void {
+        (this.events[name] || []).forEach(fn =&gt; fn(...args));
+    }
+}</code></pre><p>既然我们知道了我们希望发射的事件，可以使用<code>this.events[name]</code>来查看，返回的是一个回调函数的数组。</p>
+<h3 id="取消订阅"><a href="#取消订阅" class="headerlink" title="取消订阅"></a>取消订阅</h3><pre><code>subscribe(name: string, cb: Function) {
     (this.events[name] || (this.events[name] = [])).push(cb);
-  }
-}</code></pre><ul>
-<li><p>发射<br>到此可以订阅事件了，接下来，当一个新事件发射的时候需要触发回调函数，当触发的时候，将使用<code>(emit(&quot;event&quot;))</code>中存储的事件名和需要传递到回调函数<code>(emit(&quot;event&quot;, value))</code>的任意值，我们可以简单地传递任意参数到回调函数在第一个参数后面。</p>
-<p>  class EventEmitter {</p>
-<pre><code>public events: Events;
-constructor(events?: Events) {
-  this.events = events || {};
-}
 
-public subscribe(name: string, cb: Function) {
-  (this.events[name] || (this.events[name] = [])).push(cb);
-}
-
-public emit(name: string, ...args: any[]): void {
-  (this.events[name] || []).forEach(fn =&gt; fn(...args));
-}</code></pre><p>  }</p>
-</li>
-</ul>
-<p>既然我们知道了我们希望发射的事件，可以使用<code>this.events[name]</code>来查看，返回的是一个回调函数的数组。</p>
-<ul>
-<li><p>取消订阅</p>
-<p>  subscribe(name: string, cb: Function) {</p>
-<pre><code>(this.events[name] || (this.events[name] = [])).push(cb);
-
-return {
-  unsubscribe: () =&gt;
-    this.events[name] &amp;&amp; this.events[name].splice(this.events[name].indexOf(cb) &gt;&gt;&gt; 0, 1)
-};</code></pre><p>  }</p>
-</li>
-</ul>
-<p>上述代码返回一个带有<code>unsubscribe</code>方法的对象，可以使用箭头函数<code>() =&gt;</code>来获取传递给父对象参数的作用域，在这个函数中，使用<code>&gt;&gt;&gt;</code><a href="https://stackoverflow.com/questions/1822350/what-is-the-javascript-operator-and-how-do-you-use-it" target="_blank" rel="noopener">操作符</a>可以找到传递给父级回调函数的索引，在这里使用可以保证我们每次在回调函数数组上调用<code>splice()</code> 的时候总是可以取到一个真正的数字，即使<code>indexOf()</code> 都不能返回数字也行。<br>可以这样使用：</p>
+    return {
+        unsubscribe: () =&gt;
+        this.events[name] &amp;&amp; this.events[name].splice(this.events[name].indexOf(cb) &gt;&gt;&gt; 0, 1)
+    };
+}</code></pre><p>上述代码返回一个带有<code>unsubscribe</code>方法的对象，可以使用箭头函数<code>() =&gt;</code>来获取传递给父对象参数的作用域，在这个函数中，使用<code>&gt;&gt;&gt;</code><a href="https://stackoverflow.com/questions/1822350/what-is-the-javascript-operator-and-how-do-you-use-it" target="_blank" rel="noopener">操作符</a>可以找到传递给父级回调函数的索引，在这里使用可以保证我们每次在回调函数数组上调用<code>splice()</code> 的时候总是可以取到一个真正的数字，即使<code>indexOf()</code> 都不能返回数字也行。<br>可以这样使用：</p>
 <pre><code>const subscription = event.subscribe(&quot;event&quot;, value =&gt; value);
 
 subscription.unsubscribe();</code></pre><p>到此，我们就可以取消这一个特别的订阅了，而且不影响其他的订阅。</p>
-<ul>
-<li><p>完整实现</p>
-<p>  interface Events {</p>
-<pre><code>[key: string]: Function[];</code></pre><p>  }</p>
-<p>  export class EventEmitter {</p>
-<pre><code>public events: Events;
-constructor(events?: Events) {
-  this.events = events || {};
+<h3 id="完整实现"><a href="#完整实现" class="headerlink" title="完整实现"></a>完整实现</h3><pre><code>interface Events {
+    [key: string]: Function[];
 }
 
-public subscribe(name: string, cb: Function) {
-  (this.events[name] || (this.events[name] = [])).push(cb);
+export class EventEmitter {
+    public events: Events;
+    constructor(events?: Events) {
+        this.events = events || {};
+    }
 
-  return {
-    unsubscribe: () =&gt;
-      this.events[name] &amp;&amp; this.events[name].splice(this.events[name].indexOf(cb) &gt;&gt;&gt; 0, 1)
-  };
+    public subscribe(name: string, cb: Function) {
+        (this.events[name] || (this.events[name] = [])).push(cb);
+
+    return {
+        unsubscribe: () =&gt;
+            this.events[name] &amp;&amp; this.events[name].splice(this.events[name].indexOf(cb) &gt;&gt;&gt; 0, 1)
+    };
 }
 
-public emit(name: string, ...args: any[]): void {
-  (this.events[name] || []).forEach(fn =&gt; fn(...args));
-}</code></pre><p>  }</p>
-</li>
-<li><p>实例<br><a href="https://codepen.io/charliewilco/pen/gEoErR" target="_blank" rel="noopener">https://codepen.io/charliewilco/pen/gEoErR</a></p>
-</li>
-</ul>
+    public emit(name: string, ...args: any[]): void {
+        (this.events[name] || []).forEach(fn =&gt; fn(...args));
+    }
+}</code></pre><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p><a href="https://codepen.io/charliewilco/pen/gEoErR" target="_blank" rel="noopener">https://codepen.io/charliewilco/pen/gEoErR</a></p>
 <p>上述代码中，首先在另外一个事件回调中使用了<code>event emitter</code>，在这种情况下，一个<code>event emitter</code>是用来清除一些逻辑，在GitHub上选择一个仓库，获取详情，缓存详情，并更新DOM去显示这些详情。在订阅回调函数中从网络或者缓存中获取结果并更新，可以这样做的原因是当我们发射时间的时候从列表中给了回调函数一个随机的仓库。</p>
 <p>现在来考虑一些不太一样的东西，在一个应用中，可能会有许多状态需要登录之后才可以触发，并且可能会有多个订阅器来处理用户试图退出的操作。因为已经发射了一个带<code>false</code>值的事件，每一个订阅器都可以使用这个值，并且需要判断是否需要重定向页面，移除cookie或者禁用表单。</p>
 <pre><code>const events = new EventEmitter();
@@ -455,42 +607,41 @@ public emit(name: string, ...args: any[]): void {
 events.emit(&quot;authentication&quot;, false);
 
 events.subscribe(&quot;authentication&quot;, isLoggedIn =&gt; {
-  buttonEl.setAttribute(&quot;disabled&quot;, !isLogged);
+    buttonEl.setAttribute(&quot;disabled&quot;, !isLogged);
 });
 
 events.subscribe(&quot;authentication&quot;, isLoggedIn =&gt; {
-  window.location.replace(!isLoggedIn ? &quot;/login&quot; : &quot;&quot;);
+    window.location.replace(!isLoggedIn ? &quot;/login&quot; : &quot;&quot;);
 });
 
 events.subscribe(&quot;authentication&quot;, isLoggedIn =&gt; {
-  !isLoggedIn &amp;&amp; cookies.remove(&quot;auth_token&quot;);
-});</code></pre><ul>
-<li><p>最后<br>要让<code>emitters</code>能工作，有几点需要考虑：</p>
-</li>
+    !isLoggedIn &amp;&amp; cookies.remove(&quot;auth_token&quot;);
+});</code></pre><h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>要让<code>emitters</code>能工作，有几点需要考虑：</p>
+<ul>
 <li><p>需要在<code>emit()</code>函数中使用<code>forEach</code>或者<code>map</code>来确保我们能创建新的订阅器或者取消订阅。</p>
 </li>
 <li><p>当一个<code>EventEmitter</code>类被实例化之后，可以传递一个预定义的事件到事件接口。</p>
 </li>
 <li><p>可以不需要使用<code>class</code>，来实现，个人喜好，但是使用<code>class</code>使事件存储在哪里会更加清晰。<br>可以在一个函数中实现，如下：</p>
-<p>  function emitter(e?: Events) {</p>
-<pre><code>let events: Events = e || {};
-
-return {
-  events,
-  subscribe: (name: string, cb: Function) =&gt; {
-    (events[name] || (events[name] = [])).push(cb);
+<pre><code>function emitter(e?: Events) {
+    let events: Events = e || {};
 
     return {
-      unsubscribe: () =&gt; {
-        events[name] &amp;&amp; events[name].splice(events[name].indexOf(cb) &gt;&gt;&gt; 0, 1);
-      }
+        events,
+        subscribe: (name: string, cb: Function) =&gt; {
+        (events[name] || (events[name] = [])).push(cb);
+
+        return {
+            unsubscribe: () =&gt; {
+            events[name] &amp;&amp; events[name].splice(events[name].indexOf(cb) &gt;&gt;&gt; 0, 1);
+            }
+        };
+        },
+        emit: (name: string, ...args: any[]) =&gt; {
+            (events[name] || []).forEach(fn =&gt; fn(...args));
+        }
     };
-  },
-  emit: (name: string, ...args: any[]) =&gt; {
-    (events[name] || []).forEach(fn =&gt; fn(...args));
-  }
-};</code></pre><p>  }</p>
-</li>
+}</code></pre></li>
 </ul>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://css-tricks.com/understanding-event-emitters/" target="_blank" rel="noopener">https://css-tricks.com/understanding-event-emitters/</a></p>
 ]]></content>
