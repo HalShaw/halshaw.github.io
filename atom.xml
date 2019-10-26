@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-24T14:22:42.975Z</updated>
+  <updated>2019-10-21T14:02:23.781Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,29 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title></title>
-    <link href="http://yoursite.com/2019/10/24/ES6Proxy%E7%94%A8%E6%B3%95%E8%AF%A6%E8%A7%A3/"/>
-    <id>http://yoursite.com/2019/10/24/ES6Proxy用法详解/</id>
-    <published>2019-10-24T14:20:47.811Z</published>
-    <updated>2019-10-24T14:22:42.975Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;&lt;img
-        
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
   
   <entry>
     <title>前端框架路由实现的Hash和History两种模式的区别</title>
@@ -226,6 +203,42 @@ Object.entries(students)
     
     
       <category term="ES6 Set Map WeakSet WeakMap" scheme="http://yoursite.com/tags/ES6-Set-Map-WeakSet-WeakMap/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ES6 Proxy用法详解</title>
+    <link href="http://yoursite.com/2019/07/11/ES6Proxy%E7%94%A8%E6%B3%95%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://yoursite.com/2019/07/11/ES6Proxy用法详解/</id>
+    <published>2019-07-11T14:02:00.000Z</published>
+    <updated>2019-10-24T14:27:10.511Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;https://upload-images.jianshu.io/upload_images/1741029-96fbd7ec39c2fcb4.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;Proxy&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;前不久换工作的时候面试某大厂被问到关于Proxy的问题，脑子里有点印象但是又说不出具体使用方法，主要还是自己平时积累不够，所以赶紧来恶补一下。&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&quot;Metaprogramming&quot;&gt;&lt;a href=&quot;#Metaprogramming&quot; class=&quot;headerlink&quot; title=&quot;Metaprogramming&quot;&gt;&lt;/a&gt;Metaprogramming&lt;/h1&gt;&lt;p&gt;正式开始之前，先一起来理解下什么是Metaprogramming（元编程），因为Proxy就是一种基于Metaprogramming概念的对象 ，维基百科上这样解释：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Metaprogramming is a programming technique in which computer programs have the ability to treat other programs as their data.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;翻译过来就是&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;元编程就是可以使用其他程序来作为输入数据的一种编程技术&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;Proxy&quot;&gt;&lt;a href=&quot;#Proxy&quot; class=&quot;headerlink&quot; title=&quot;Proxy&quot;&gt;&lt;/a&gt;Proxy&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;Proxy wraps objects and intercepts their behavior through traps&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The Proxy object is used to define custom behavior for fundamental operations (e.g. property lookup, assignment, enumeration, function invocation, etc).&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+      <category term="JavaScript ES6" scheme="http://yoursite.com/categories/JavaScript-ES6/"/>
+    
+    
+      <category term="ES6 Proxy" scheme="http://yoursite.com/tags/ES6-Proxy/"/>
     
   </entry>
   
