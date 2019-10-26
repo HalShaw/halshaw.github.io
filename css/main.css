@@ -281,7 +281,7 @@ a {
   color: #2abaf2;
   text-decoration: none;
   outline: none;
-  border-bottom: 1px solid #999;
+  border-bottom: 1px solid #2abaf2;
   word-wrap: break-word;
 }
 a:hover {
@@ -446,11 +446,11 @@ body {
 .header-inner {
   margin: 0 auto;
   padding: 100px 0 70px;
-  width: 700px;
+  width: 83%;
 }
 @media (min-width: 1600px) {
   .container .header-inner {
-    width: 900px;
+    width: 83%;
   }
 }
 .main {
@@ -458,11 +458,11 @@ body {
 }
 .main-inner {
   margin: 0 auto;
-  width: 700px;
+  width: 83%;
 }
 @media (min-width: 1600px) {
   .container .main-inner {
-    width: 900px;
+    width: 83%;
   }
 }
 .footer {
@@ -475,11 +475,11 @@ body {
 .footer-inner {
   box-sizing: border-box;
   margin: 20px auto;
-  width: 700px;
+  width: 83%;
 }
 @media (min-width: 1600px) {
   .container .footer-inner {
-    width: 900px;
+    width: 83%;
   }
 }
 pre,
@@ -941,9 +941,9 @@ pre .javascript .function {
   display: inline-block;
   padding: 0 20px;
   font-size: 14px;
-  color: #555;
+  color: #2abaf2;
   background: #fff;
-  border: 2px solid #555;
+  border: 2px solid #2abaf2;
   text-decoration: none;
   border-radius: 2px;
   transition-property: background-color;
@@ -953,9 +953,9 @@ pre .javascript .function {
   line-height: 2;
 }
 .btn:hover {
-  border-color: #222;
+  border-color: #2abaf2;
   color: #fff;
-  background: #222;
+  background: #2abaf2;
 }
 .btn +.btn {
   margin: 0 0 8px 8px;
@@ -1411,7 +1411,7 @@ pre .javascript .function {
   transition-timing-function: ease-in-out;
   transition-delay: 0s;
   transition-property: border;
-  border-bottom: 1px dashed #ccc;
+  border-bottom: 1px dashed #2abaf2;
 }
 .posts-collapse .post-header::before {
   content: " ";
@@ -1421,7 +1421,7 @@ pre .javascript .function {
   width: 6px;
   height: 6px;
   margin-left: -4px;
-  background: #bbb;
+  background: #2abaf2;
   border-radius: 50%;
   border: 1px solid #fff;
   transition-duration: 0.2s;
@@ -1430,10 +1430,11 @@ pre .javascript .function {
   transition-property: background;
 }
 .posts-collapse .post-header:hover {
-  border-bottom-color: #666;
+  color: #0593d3;
+  border-bottom-color: #0593d3;
 }
 .posts-collapse .post-header:hover::before {
-  background: #222;
+  background: #0593d3;
 }
 .posts-collapse .post-meta {
   position: absolute;
@@ -1458,6 +1459,9 @@ pre .javascript .function {
   color: #666;
   border-bottom: none;
 }
+.posts-collapse .post-title a:hover {
+  color: #0593d3;
+}
 .page-home .post-type-quote .post-header,
 .page-post-detail .post-type-quote .post-header,
 .page-home .post-type-quote .post-tags,
@@ -1472,7 +1476,7 @@ pre .javascript .function {
 .posts-expand .post-title-link {
   display: inline-block;
   position: relative;
-  color: #555;
+  color: #2abaf2;
   border-bottom: none;
   line-height: 1.2;
   vertical-align: top;
@@ -1484,7 +1488,7 @@ pre .javascript .function {
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: #000;
+  background-color: #2abaf2;
   visibility: hidden;
   -webkit-transform: scaleX(0);
   -moz-transform: scaleX(0);
@@ -1834,7 +1838,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff47d6;
+  background: #1879ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2219,6 +2223,48 @@ pre .javascript .function {
 .theme-next .this_ua.browser.QQBrowser {
   background-color: #78ace9 !important;
   border-color: #4cae4c !important;
+}
+#gitment-display-button {
+  display: inline-block;
+  padding: 0 15px;
+  color: #0a9caf;
+  cursor: pointer;
+  font-size: 14px;
+  border: 1px solid #0a9caf;
+  border-radius: 4px;
+}
+#gitment-display-button:hover {
+  color: #fff;
+  background: #0a9caf;
+}
+.gitment-editor-avatar .gitment-github-icon {
+  background-color: #2abaf2 !important;
+}
+.gitment-editor-avatar .gitment-github-icon:hover {
+  color: #0593d3 !important;
+  border-bottom-color: #0593d3 !important;
+  background-color: #0593d3 !important;
+}
+.gitment-editor-submit:hover {
+  color: #fff !important;
+  border-bottom-color: #0593d3 !important;
+  background-color: #0593d3 !important;
+}
+.gitment-footer-container,
+.gitment-editor-footer-tip {
+  display: none !important;
+}
+.gitment-container a:hover {
+  text-decoration: none !important;
+}
+.gitment-header-issue-link,
+.gitment-editor-login-link {
+  color: #2abaf2 !important;
+}
+.gitment-header-issue-link:hover,
+.gitment-editor-login-link:hover {
+  color: #0593d3 !important;
+  border-bottom-color: #0593d3 !important;
 }
 .post-spread {
   margin-top: 20px;
@@ -2610,7 +2656,7 @@ pre .javascript .function {
 .header {
   position: relative;
   margin: 0 auto;
-  width: 960px;
+  width: 78%;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .header {
@@ -2670,7 +2716,7 @@ pre .javascript .function {
   }
 }
 .container .main-inner {
-  width: 960px;
+  width: 78%;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .container .main-inner {
@@ -2686,7 +2732,7 @@ pre .javascript .function {
   float: right;
   box-sizing: border-box;
   padding: 40px;
-  width: 700px;
+  width: 83%;
   background: #fff;
   min-height: 700px;
   box-shadow: initial;
@@ -2729,7 +2775,7 @@ pre .javascript .function {
   display: none;
 }
 .footer-inner {
-  width: 960px;
+  width: 78%;
   padding-left: 260px;
 }
 @media (min-width: 768px) and (max-width: 991px) {
@@ -2836,7 +2882,7 @@ pre .javascript .function {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: #bbb;
+  background-color: #0593d3;
 }
 .btn-bar {
   background-color: #fff;
