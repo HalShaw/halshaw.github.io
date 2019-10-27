@@ -91,7 +91,7 @@
 <meta property="og:description" content="基本类型值 有一个坑常常被提到，[] + {}，{} +[]，它们返回不同的结果，分别是”[object Object]”，0。  if (a) { foo(); }可以写成a &amp;amp;&amp;amp; foo()a = b || “something” 和a &amp;amp;&amp;amp; b() 用到了“短路”机制。  == 允许在相等比较中进行强制类型转换，===不允许。  NaN 不等于NaN  +0">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1741029-8c92a4538cc134eb.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-10-21T14:02:48.473Z">
+<meta property="og:updated_time" content="2019-10-27T02:15:07.113Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="你不知道的JavaScript中卷-读书笔记">
 <meta name="twitter:description" content="基本类型值 有一个坑常常被提到，[] + {}，{} +[]，它们返回不同的结果，分别是”[object Object]”，0。  if (a) { foo(); }可以写成a &amp;amp;&amp;amp; foo()a = b || “something” 和a &amp;amp;&amp;amp; b() 用到了“短路”机制。  == 允许在相等比较中进行强制类型转换，===不允许。  NaN 不等于NaN  +0">
@@ -569,6 +569,7 @@ something.next().value; // 105</code></pre><ul>
 <li><p>换句话说，生成器为异步代码保持了顺序、同步、阻塞的代码模式，这使得大脑可以更自然地追踪代码，解决了基于回调的异步的两个关键缺陷之一。</p>
 </li>
 </ul>
+<p>• 如果要比较的两个值的任意一个（即一边）可能是true 或者false 值，那么要避免使<br>用==，而使用===。<br>• 如果要比较的两个值中的任意一个可能是特定值（0、”” 或者[]——空数组），那么避<br>免使用==，而使用===。<br>• 在所有其他情况下，使用== 都是安全的。不仅仅只是安全而已，这在很多情况下也会<br>简化代码，提高代码的可读性。</p>
 
       
     </div>
@@ -735,7 +736,7 @@ something.next().value; // 105</code></pre><ul>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -757,7 +758,7 @@ something.next().value; // 105</code></pre><ul>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

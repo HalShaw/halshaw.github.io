@@ -1,6 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>JS之typeof和instanceof方法具体实现</title>
+    <url>/2019/10/27/JS%E4%B9%8Btypeof%E5%92%8Cinstanceof%E6%96%B9%E6%B3%95%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<h1 id="一、typeof方法的作用"><a href="#一、typeof方法的作用" class="headerlink" title="一、typeof方法的作用"></a>一、typeof方法的作用</h1><ul>
+<li><p>判断变量类型</p>
+<pre><code>typeof 1 //&quot;number&quot;
+typeof &apos;1&apos; //&quot;string&quot;
+typeof {} //&quot;object&quot;
+typeof true //&quot;boolean&quot;
+typeof undefined // &quot;undefined&quot;
+typeof null //&quot;object&quot; #bug
+typeof Symbol //&quot;function&quot;
+typeof Symbol(1) //&quot;symbol&quot;</code></pre></li>
+</ul>
+<a id="more"></a>
+
+<h1 id="二、typeof方法的具体实现"><a href="#二、typeof方法的具体实现" class="headerlink" title="二、typeof方法的具体实现"></a>二、typeof方法的具体实现</h1><pre><code>if (JSVAL_IS_VOID(v)) {  // (1)
+    type = JSTYPE_VOID;
+} else if (JSVAL_IS_OBJECT(v)) {  // (2)
+    obj = JSVAL_TO_OBJECT(v);
+    if (obj &amp;&amp;
+        (ops = obj-&gt;map-&gt;ops,
+            ops == &amp;js_ObjectOps
+            ? (clasp = OBJ_GET_CLASS(cx, obj),
+            clasp-&gt;call || clasp == &amp;js_FunctionClass) // (3,4)
+            : ops-&gt;call != 0)) {  // (3)
+        type = JSTYPE_FUNCTION;
+    } else {
+        type = JSTYPE_OBJECT;
+    }
+} else if (JSVAL_IS_NUMBER(v)) {
+    type = JSTYPE_NUMBER;
+} else if (JSVAL_IS_STRING(v)) {
+    type = JSTYPE_STRING;
+} else if (JSVAL_IS_BOOLEAN(v)) {
+    type = JSTYPE_BOOLEAN;
+}</code></pre><p>根据 <code>type tags</code> 的信息，低位是 <code>000</code>，因此 <code>null</code> 被判断成了一个对象。这就是为什么 <code>typeof null</code> 的返回值是 <code>object</code>，<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof#null" target="_blank" rel="noopener">MDN</a> 有简单的描述解释了原因，而且以后也不会修复这个 <code>bug</code> ，因为修复这个 <code>bug</code> 会带来更多的问题。</p>
+<h1 id="三、更准确的类型判断方法"><a href="#三、更准确的类型判断方法" class="headerlink" title="三、更准确的类型判断方法"></a>三、更准确的类型判断方法</h1><p>由于 <code>typeof</code>存在 <code>null</code> 的类型为 <code>object</code>，所以可以用另外一种更加准确的方法来判断基本类型，那就是<code>Object.prototype.toString</code> ：</p>
+<pre><code>Object.prototype.toString.call(2) // &quot;[object Number]&quot;
+
+Object.prototype.toString.call(&apos;hello&apos;) // &quot;[object String]&quot;
+
+Object.prototype.toString.call({hello:&apos;hello&apos;}) // &quot;[object Object]&quot;
+
+Object.prototype.toString.call([2,&apos;hello&apos;]) // &quot;[object Array]&quot;
+
+Object.prototype.toString.call(true) // &quot;[object Boolean]&quot;
+
+Object.prototype.toString.call(() =&gt; {}) // &quot;[object Function]&quot;
+
+Object.prototype.toString.call(null) // &quot;[object Null]&quot;
+
+Object.prototype.toString.call(undefined) // &quot;[object Undefined]&quot;
+
+Object.prototype.toString.call(Symbol(2)) // &quot;[object Symbol]&quot;</code></pre><h1 id="四、instanceof方法的作用"><a href="#四、instanceof方法的作用" class="headerlink" title="四、instanceof方法的作用"></a>四、instanceof方法的作用</h1><ul>
+<li><p>判断一个引用是否属于某个构造函数</p>
+</li>
+<li><p>判断继承关系中一个实例是否属于其父类<br>比如：</p>
+<pre><code>const Animal = function(type) {
+  this.type = type;
+}
+const cat= new Animal(&apos;cat&apos;);
+console.log(cat instanceof Animal);  //true
+console.log(cat instanceof Object); //true</code></pre></li>
+</ul>
+<h1 id="五、如何实现一个instanceof方法"><a href="#五、如何实现一个instanceof方法" class="headerlink" title="五、如何实现一个instanceof方法"></a>五、如何实现一个instanceof方法</h1><pre><code>function myInstanceof(leftVaule, rightVaule) { 
+    let rightProto = rightVaule.prototype; // 取右边 prototype的值
+    leftVaule = leftVaule.__proto__; // 取左边__proto__值
+    while (true) {
+        if (leftVaule === null) { //如果左边的__proto__值为null，返回false
+            return false;    
+        }
+        if (leftVaule === rightProto) { //如果左边的__proto__值等于右边prototype的值，返回true
+            return true;    
+        } 
+        leftVaule = leftVaule.__proto__ ; //以上都不满足，取上一层原型继续循环，直到没取到为null
+    }
+}</code></pre><p>其实说白了就是在实例的原型链上面去找，看到底有没有找到右边的原型，找到了就返回 <code>true</code>，没找到或者左边不存在原型链，就返回 <code>false</code>。<br>例子：</p>
+<pre><code>function Foo() {
+}
+
+myInstanceof(Object, Object) // true
+myInstanceof(Function , Function)  // true
+myInstanceof(Function , Object ) // true
+myInstanceof(Foo, Foo) // false
+myInstanceof(Foo, Object) // true
+myInstanceof(Foo, Function) // true</code></pre><h1 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h1><p><code>typeof</code> 和 <code>instanceof</code> 可以用来判断一些基本类型及原型链的实例与原型之间的关系，但是使用的时候也需要很小心，因为一些潜在的问题会导致意外的问题出现，比如数组的判断：</p>
+<pre><code>[1,2] instanceof Array //true
+[1,2] instanceof Object //true</code></pre><p>这是因为</p>
+<pre><code>Array instanceof  Object //true</code></pre><p>可能这并不是我们想要的结果，所以可以使用更加准确的判断方法 <code>Object.prototype.toString.call</code>：</p>
+<pre><code>Object.prototype.toString.call( [1,2,3] ) //&quot;[object Array]&quot;</code></pre><p>此外，<code>instanceof</code> 方法的具体实现需熟练掌握。</p>
+<h1 id="七、参考"><a href="#七、参考" class="headerlink" title="七、参考"></a>七、参考</h1><p><a href="https://juejin.im/post/5b0b9b9051882515773ae714" target="_blank" rel="noopener">https://juejin.im/post/5b0b9b9051882515773ae714</a></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript typeof instanceof</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>前端框架路由实现的Hash和History两种模式的区别</title>
     <url>/2019/10/18/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%E8%B7%AF%E7%94%B1%E5%AE%9E%E7%8E%B0%E7%9A%84Hash%E5%92%8CHistory%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
     <content><![CDATA[<p><img src="https://upload-images.jianshu.io/upload_images/1741029-9e5d1063264044c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Hash vs History"></p>
@@ -222,6 +322,7 @@ something.next().value; // 105</code></pre><ul>
 <li><p>换句话说，生成器为异步代码保持了顺序、同步、阻塞的代码模式，这使得大脑可以更自然地追踪代码，解决了基于回调的异步的两个关键缺陷之一。</p>
 </li>
 </ul>
+<p>• 如果要比较的两个值的任意一个（即一边）可能是true 或者false 值，那么要避免使<br>用==，而使用===。<br>• 如果要比较的两个值中的任意一个可能是特定值（0、”” 或者[]——空数组），那么避<br>免使用==，而使用===。<br>• 在所有其他情况下，使用== 都是安全的。不仅仅只是安全而已，这在很多情况下也会<br>简化代码，提高代码的可读性。</p>
 ]]></content>
       <categories>
         <category>JavaScript</category>

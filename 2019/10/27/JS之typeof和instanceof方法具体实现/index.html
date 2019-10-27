@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="JavaScript typeof instanceof,">
 
 
 
@@ -82,17 +82,18 @@
 
 
 
-<meta name="description" content="Some tech notes and life experience.">
-<meta name="keywords" content="Shaw Xiaohao">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Shaw&#39;s blog.">
-<meta property="og:url" content="http://yoursite.com/tags/ES2019-JavaScript/index.html">
+<meta name="description" content="一、typeof方法的作用 判断变量类型 typeof 1 //&amp;quot;number&amp;quot; typeof &amp;apos;1&amp;apos; //&amp;quot;string&amp;quot; typeof {} //&amp;quot;object&amp;quot; typeof true //&amp;quot;boolean&amp;quot; typeof undefined // &amp;quot;undefined&amp;quot;">
+<meta name="keywords" content="JavaScript typeof instanceof">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS之typeof和instanceof方法具体实现">
+<meta property="og:url" content="http://yoursite.com/2019/10/27/JS之typeof和instanceof方法具体实现/index.html">
 <meta property="og:site_name" content="Shaw&#39;s blog.">
-<meta property="og:description" content="Some tech notes and life experience.">
+<meta property="og:description" content="一、typeof方法的作用 判断变量类型 typeof 1 //&amp;quot;number&amp;quot; typeof &amp;apos;1&amp;apos; //&amp;quot;string&amp;quot; typeof {} //&amp;quot;object&amp;quot; typeof true //&amp;quot;boolean&amp;quot; typeof undefined // &amp;quot;undefined&amp;quot;">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-27T15:11:39.985Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Shaw&#39;s blog.">
-<meta name="twitter:description" content="Some tech notes and life experience.">
+<meta name="twitter:title" content="JS之typeof和instanceof方法具体实现">
+<meta name="twitter:description" content="一、typeof方法的作用 判断变量类型 typeof 1 //&amp;quot;number&amp;quot; typeof &amp;apos;1&amp;apos; //&amp;quot;string&amp;quot; typeof {} //&amp;quot;object&amp;quot; typeof true //&amp;quot;boolean&amp;quot; typeof undefined // &amp;quot;undefined&amp;quot;">
 
 
 
@@ -122,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/ES2019-JavaScript/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/27/JS之typeof和instanceof方法具体实现/">
 
 
 
 
 
-  <title>标签: ES2019 JavaScript | Shaw's blog.</title>
+  <title>JS之typeof和instanceof方法具体实现 | Shaw's blog.</title>
   
 
 
@@ -157,7 +158,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -293,52 +294,305 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2>ES2019 JavaScript<small>标签</small>
-        </h2>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/27/JS之typeof和instanceof方法具体实现/">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shaw">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/portrait.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shaw's blog.">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/08/19/ES2019新特性/" itemprop="url">
-              
-                <span itemprop="name">ES2019 新特性</span>
-              
-            </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">JS之typeof和instanceof方法具体实现</h2>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-19T22:06:00+08:00" content="2019-08-19">
-          08-19
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-27T23:10:00+08:00">
+                2019-10-27
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/10/27/JS之typeof和instanceof方法具体实现/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/10/27/JS之typeof和instanceof方法具体实现/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一、typeof方法的作用"><a href="#一、typeof方法的作用" class="headerlink" title="一、typeof方法的作用"></a>一、typeof方法的作用</h1><ul>
+<li><p>判断变量类型</p>
+<pre><code>typeof 1 //&quot;number&quot;
+typeof &apos;1&apos; //&quot;string&quot;
+typeof {} //&quot;object&quot;
+typeof true //&quot;boolean&quot;
+typeof undefined // &quot;undefined&quot;
+typeof null //&quot;object&quot; #bug
+typeof Symbol //&quot;function&quot;
+typeof Symbol(1) //&quot;symbol&quot;</code></pre></li>
+</ul>
+<a id="more"></a>
+
+<h1 id="二、typeof方法的具体实现"><a href="#二、typeof方法的具体实现" class="headerlink" title="二、typeof方法的具体实现"></a>二、typeof方法的具体实现</h1><pre><code>if (JSVAL_IS_VOID(v)) {  // (1)
+    type = JSTYPE_VOID;
+} else if (JSVAL_IS_OBJECT(v)) {  // (2)
+    obj = JSVAL_TO_OBJECT(v);
+    if (obj &amp;&amp;
+        (ops = obj-&gt;map-&gt;ops,
+            ops == &amp;js_ObjectOps
+            ? (clasp = OBJ_GET_CLASS(cx, obj),
+            clasp-&gt;call || clasp == &amp;js_FunctionClass) // (3,4)
+            : ops-&gt;call != 0)) {  // (3)
+        type = JSTYPE_FUNCTION;
+    } else {
+        type = JSTYPE_OBJECT;
+    }
+} else if (JSVAL_IS_NUMBER(v)) {
+    type = JSTYPE_NUMBER;
+} else if (JSVAL_IS_STRING(v)) {
+    type = JSTYPE_STRING;
+} else if (JSVAL_IS_BOOLEAN(v)) {
+    type = JSTYPE_BOOLEAN;
+}</code></pre><p>根据 <code>type tags</code> 的信息，低位是 <code>000</code>，因此 <code>null</code> 被判断成了一个对象。这就是为什么 <code>typeof null</code> 的返回值是 <code>object</code>，<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof#null" target="_blank" rel="noopener">MDN</a> 有简单的描述解释了原因，而且以后也不会修复这个 <code>bug</code> ，因为修复这个 <code>bug</code> 会带来更多的问题。</p>
+<h1 id="三、更准确的类型判断方法"><a href="#三、更准确的类型判断方法" class="headerlink" title="三、更准确的类型判断方法"></a>三、更准确的类型判断方法</h1><p>由于 <code>typeof</code>存在 <code>null</code> 的类型为 <code>object</code>，所以可以用另外一种更加准确的方法来判断基本类型，那就是<code>Object.prototype.toString</code> ：</p>
+<pre><code>Object.prototype.toString.call(2) // &quot;[object Number]&quot;
+
+Object.prototype.toString.call(&apos;hello&apos;) // &quot;[object String]&quot;
+
+Object.prototype.toString.call({hello:&apos;hello&apos;}) // &quot;[object Object]&quot;
+
+Object.prototype.toString.call([2,&apos;hello&apos;]) // &quot;[object Array]&quot;
+
+Object.prototype.toString.call(true) // &quot;[object Boolean]&quot;
+
+Object.prototype.toString.call(() =&gt; {}) // &quot;[object Function]&quot;
+
+Object.prototype.toString.call(null) // &quot;[object Null]&quot;
+
+Object.prototype.toString.call(undefined) // &quot;[object Undefined]&quot;
+
+Object.prototype.toString.call(Symbol(2)) // &quot;[object Symbol]&quot;</code></pre><h1 id="四、instanceof方法的作用"><a href="#四、instanceof方法的作用" class="headerlink" title="四、instanceof方法的作用"></a>四、instanceof方法的作用</h1><ul>
+<li><p>判断一个引用是否属于某个构造函数</p>
+</li>
+<li><p>判断继承关系中一个实例是否属于其父类<br>比如：</p>
+<pre><code>const Animal = function(type) {
+  this.type = type;
+}
+const cat= new Animal(&apos;cat&apos;);
+console.log(cat instanceof Animal);  //true
+console.log(cat instanceof Object); //true</code></pre></li>
+</ul>
+<h1 id="五、如何实现一个instanceof方法"><a href="#五、如何实现一个instanceof方法" class="headerlink" title="五、如何实现一个instanceof方法"></a>五、如何实现一个instanceof方法</h1><pre><code>function myInstanceof(leftVaule, rightVaule) { 
+    let rightProto = rightVaule.prototype; // 取右边 prototype的值
+    leftVaule = leftVaule.__proto__; // 取左边__proto__值
+    while (true) {
+        if (leftVaule === null) { //如果左边的__proto__值为null，返回false
+            return false;    
+        }
+        if (leftVaule === rightProto) { //如果左边的__proto__值等于右边prototype的值，返回true
+            return true;    
+        } 
+        leftVaule = leftVaule.__proto__ ; //以上都不满足，取上一层原型继续循环，直到没取到为null
+    }
+}</code></pre><p>其实说白了就是在实例的原型链上面去找，看到底有没有找到右边的原型，找到了就返回 <code>true</code>，没找到或者左边不存在原型链，就返回 <code>false</code>。<br>例子：</p>
+<pre><code>function Foo() {
+}
+
+myInstanceof(Object, Object) // true
+myInstanceof(Function , Function)  // true
+myInstanceof(Function , Object ) // true
+myInstanceof(Foo, Foo) // false
+myInstanceof(Foo, Object) // true
+myInstanceof(Foo, Function) // true</code></pre><h1 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h1><p><code>typeof</code> 和 <code>instanceof</code> 可以用来判断一些基本类型及原型链的实例与原型之间的关系，但是使用的时候也需要很小心，因为一些潜在的问题会导致意外的问题出现，比如数组的判断：</p>
+<pre><code>[1,2] instanceof Array //true
+[1,2] instanceof Object //true</code></pre><p>这是因为</p>
+<pre><code>Array instanceof  Object //true</code></pre><p>可能这并不是我们想要的结果，所以可以使用更加准确的判断方法 <code>Object.prototype.toString.call</code>：</p>
+<pre><code>Object.prototype.toString.call( [1,2,3] ) //&quot;[object Array]&quot;</code></pre><p>此外，<code>instanceof</code> 方法的具体实现需熟练掌握。</p>
+<h1 id="七、参考"><a href="#七、参考" class="headerlink" title="七、参考"></a>七、参考</h1><p><a href="https://juejin.im/post/5b0b9b9051882515773ae714" target="_blank" rel="noopener">https://juejin.im/post/5b0b9b9051882515773ae714</a></p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript-typeof-instanceof/" rel="tag"># JavaScript typeof instanceof</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/18/前端框架路由实现的Hash和History两种模式的区别/" rel="next" title="前端框架路由实现的Hash和History两种模式的区别">
+                <i class="fa fa-chevron-left"></i> 前端框架路由实现的Hash和History两种模式的区别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -346,6 +600,17 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
 
         </div>
         
@@ -366,8 +631,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -464,6 +738,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、typeof方法的作用"><span class="nav-text">一、typeof方法的作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、typeof方法的具体实现"><span class="nav-text">二、typeof方法的具体实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、更准确的类型判断方法"><span class="nav-text">三、更准确的类型判断方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、instanceof方法的作用"><span class="nav-text">四、instanceof方法的作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五、如何实现一个instanceof方法"><span class="nav-text">五、如何实现一个instanceof方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六、总结"><span class="nav-text">六、总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#七、参考"><span class="nav-text">七、参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -612,6 +902,10 @@ var _hmt = _hmt || [];
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -658,6 +952,30 @@ var _hmt = _hmt || [];
 
     
 
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'halshaw',
+            repo: 'halshaw.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'b567e206fdbac281a64f4dadd0ea7bc85b915878',
+            
+                client_id: '07aa09900c0ed34136dc'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
     
 
 

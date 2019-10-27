@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-21T14:02:23.781Z</updated>
+  <updated>2019-10-27T15:11:39.985Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JS之typeof和instanceof方法具体实现</title>
+    <link href="http://yoursite.com/2019/10/27/JS%E4%B9%8Btypeof%E5%92%8Cinstanceof%E6%96%B9%E6%B3%95%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0/"/>
+    <id>http://yoursite.com/2019/10/27/JS之typeof和instanceof方法具体实现/</id>
+    <published>2019-10-27T15:10:00.000Z</published>
+    <updated>2019-10-27T15:11:39.985Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;一、typeof方法的作用&quot;&gt;&lt;a href=&quot;#一、typeof方法的作用&quot; class=&quot;headerlink&quot; title=&quot;一、typeof方法的作用&quot;&gt;&lt;/a&gt;一、typeof方法的作用&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;判断变量类型&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;typeof 1 //&amp;quot;number&amp;quot;
+typeof &amp;apos;1&amp;apos; //&amp;quot;string&amp;quot;
+typeof {} //&amp;quot;object&amp;quot;
+typeof true //&amp;quot;boolean&amp;quot;
+typeof undefined // &amp;quot;undefined&amp;quot;
+typeof null //&amp;quot;object&amp;quot; #bug
+typeof Symbol //&amp;quot;function&amp;quot;
+typeof Symbol(1) //&amp;quot;symbol&amp;quot;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript typeof instanceof" scheme="http://yoursite.com/tags/JavaScript-typeof-instanceof/"/>
+    
+  </entry>
   
   <entry>
     <title>前端框架路由实现的Hash和History两种模式的区别</title>
@@ -51,7 +82,7 @@
     <link href="http://yoursite.com/2019/10/07/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84JS%E4%B8%AD%E5%8D%B7/"/>
     <id>http://yoursite.com/2019/10/07/你不知道的JS中卷/</id>
     <published>2019-10-07T13:47:00.000Z</published>
-    <updated>2019-10-21T14:02:48.473Z</updated>
+    <updated>2019-10-27T02:15:07.113Z</updated>
     
     <summary type="html">
     
