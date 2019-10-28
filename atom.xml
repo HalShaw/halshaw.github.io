@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-27T15:11:39.985Z</updated>
+  <updated>2019-10-27T15:13:45.393Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,12 +21,13 @@
     <link href="http://yoursite.com/2019/10/27/JS%E4%B9%8Btypeof%E5%92%8Cinstanceof%E6%96%B9%E6%B3%95%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0/"/>
     <id>http://yoursite.com/2019/10/27/JS之typeof和instanceof方法具体实现/</id>
     <published>2019-10-27T15:10:00.000Z</published>
-    <updated>2019-10-27T15:11:39.985Z</updated>
+    <updated>2019-10-27T15:13:45.393Z</updated>
     
     <summary type="html">
     
       &lt;h1 id=&quot;一、typeof方法的作用&quot;&gt;&lt;a href=&quot;#一、typeof方法的作用&quot; class=&quot;headerlink&quot; title=&quot;一、typeof方法的作用&quot;&gt;&lt;/a&gt;一、typeof方法的作用&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;判断变量类型&lt;/p&gt;
+&lt;li&gt;判断变量类型&lt;/li&gt;
+&lt;/ul&gt;
 &lt;pre&gt;&lt;code&gt;typeof 1 //&amp;quot;number&amp;quot;
 typeof &amp;apos;1&amp;apos; //&amp;quot;string&amp;quot;
 typeof {} //&amp;quot;object&amp;quot;
@@ -34,8 +35,7 @@ typeof true //&amp;quot;boolean&amp;quot;
 typeof undefined // &amp;quot;undefined&amp;quot;
 typeof null //&amp;quot;object&amp;quot; #bug
 typeof Symbol //&amp;quot;function&amp;quot;
-typeof Symbol(1) //&amp;quot;symbol&amp;quot;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
+typeof Symbol(1) //&amp;quot;symbol&amp;quot;&lt;/code&gt;&lt;/pre&gt;
     
     </summary>
     
@@ -234,6 +234,50 @@ Object.entries(students)
     
     
       <category term="ES6 Set Map WeakSet WeakMap" scheme="http://yoursite.com/tags/ES6-Set-Map-WeakSet-WeakMap/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>深入理解Javascript中的Prototype原型</title>
+    <link href="http://yoursite.com/2019/07/17/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Javascript%E4%B8%AD%E7%9A%84Prototype%E5%8E%9F%E5%9E%8B/"/>
+    <id>http://yoursite.com/2019/07/17/深入理解Javascript中的Prototype原型/</id>
+    <published>2019-07-17T14:25:00.000Z</published>
+    <updated>2019-10-28T13:53:33.565Z</updated>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;刚开始学Javascript的时候觉得很简单，其中的东西也就是那是基本的，但是还是太年轻，最近因为面试中常被问到关于原型和原型链的问题，然后自己也是模棱两可的，含含糊糊说不清楚，所以痛下思定，决定好好下一番功夫来搞懂吃透原型与原型链究竟是什么。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;关于new&quot;&gt;&lt;a href=&quot;#关于new&quot; class=&quot;headerlink&quot; title=&quot;关于new&quot;&gt;&lt;/a&gt;关于&lt;code&gt;new&lt;/code&gt;&lt;/h1&gt;&lt;p&gt;&lt;code&gt;new&lt;/code&gt;的过程&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;新生成了一个对象&lt;/li&gt;
+&lt;li&gt;链接到原型&lt;/li&gt;
+&lt;li&gt;绑定 this&lt;/li&gt;
+&lt;li&gt;返回新对象&lt;br&gt;知道了&lt;code&gt;new&lt;/code&gt;的原理后，也可以自己实现一个&lt;code&gt;new&lt;/code&gt;函数：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;function myNew() {
+    // 创建一个空的对象
+    let obj = new Object()
+    // 获得构造函数
+    let Con = [].shift.call(arguments)
+    // 链接到原型
+    obj.__proto__ = Con.prototype
+    // 绑定 this，执行构造函数
+    let result = Con.apply(obj, arguments)
+    // 确保 new 出来的是个对象
+    return typeof result === &amp;apos;object&amp;apos; ? result : obj
+}&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript Prototype" scheme="http://yoursite.com/tags/JavaScript-Prototype/"/>
     
   </entry>
   

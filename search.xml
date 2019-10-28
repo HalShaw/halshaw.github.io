@@ -4,7 +4,8 @@
     <title>JS之typeof和instanceof方法具体实现</title>
     <url>/2019/10/27/JS%E4%B9%8Btypeof%E5%92%8Cinstanceof%E6%96%B9%E6%B3%95%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<h1 id="一、typeof方法的作用"><a href="#一、typeof方法的作用" class="headerlink" title="一、typeof方法的作用"></a>一、typeof方法的作用</h1><ul>
-<li><p>判断变量类型</p>
+<li>判断变量类型</li>
+</ul>
 <pre><code>typeof 1 //&quot;number&quot;
 typeof &apos;1&apos; //&quot;string&quot;
 typeof {} //&quot;object&quot;
@@ -12,9 +13,7 @@ typeof true //&quot;boolean&quot;
 typeof undefined // &quot;undefined&quot;
 typeof null //&quot;object&quot; #bug
 typeof Symbol //&quot;function&quot;
-typeof Symbol(1) //&quot;symbol&quot;</code></pre></li>
-</ul>
-<a id="more"></a>
+typeof Symbol(1) //&quot;symbol&quot;</code></pre><a id="more"></a>
 
 <h1 id="二、typeof方法的具体实现"><a href="#二、typeof方法的具体实现" class="headerlink" title="二、typeof方法的具体实现"></a>二、typeof方法的具体实现</h1><pre><code>if (JSVAL_IS_VOID(v)) {  // (1)
     type = JSTYPE_VOID;
@@ -55,17 +54,15 @@ Object.prototype.toString.call(null) // &quot;[object Null]&quot;
 Object.prototype.toString.call(undefined) // &quot;[object Undefined]&quot;
 
 Object.prototype.toString.call(Symbol(2)) // &quot;[object Symbol]&quot;</code></pre><h1 id="四、instanceof方法的作用"><a href="#四、instanceof方法的作用" class="headerlink" title="四、instanceof方法的作用"></a>四、instanceof方法的作用</h1><ul>
-<li><p>判断一个引用是否属于某个构造函数</p>
-</li>
-<li><p>判断继承关系中一个实例是否属于其父类<br>比如：</p>
+<li>判断一个引用是否属于某个构造函数</li>
+<li>判断继承关系中一个实例是否属于其父类<br>比如：</li>
+</ul>
 <pre><code>const Animal = function(type) {
   this.type = type;
 }
 const cat= new Animal(&apos;cat&apos;);
 console.log(cat instanceof Animal);  //true
-console.log(cat instanceof Object); //true</code></pre></li>
-</ul>
-<h1 id="五、如何实现一个instanceof方法"><a href="#五、如何实现一个instanceof方法" class="headerlink" title="五、如何实现一个instanceof方法"></a>五、如何实现一个instanceof方法</h1><pre><code>function myInstanceof(leftVaule, rightVaule) { 
+console.log(cat instanceof Object); //true</code></pre><h1 id="五、如何实现一个instanceof方法"><a href="#五、如何实现一个instanceof方法" class="headerlink" title="五、如何实现一个instanceof方法"></a>五、如何实现一个instanceof方法</h1><pre><code>function myInstanceof(leftVaule, rightVaule) { 
     let rightProto = rightVaule.prototype; // 取右边 prototype的值
     leftVaule = leftVaule.__proto__; // 取左边__proto__值
     while (true) {
@@ -928,6 +925,90 @@ Map:
       </categories>
       <tags>
         <tag>ES6 Set Map WeakSet WeakMap</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>深入理解Javascript中的Prototype原型</title>
+    <url>/2019/07/17/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Javascript%E4%B8%AD%E7%9A%84Prototype%E5%8E%9F%E5%9E%8B/</url>
+    <content><![CDATA[<ul>
+<li>刚开始学Javascript的时候觉得很简单，其中的东西也就是那是基本的，但是还是太年轻，最近因为面试中常被问到关于原型和原型链的问题，然后自己也是模棱两可的，含含糊糊说不清楚，所以痛下思定，决定好好下一番功夫来搞懂吃透原型与原型链究竟是什么。</li>
+</ul>
+<h1 id="关于new"><a href="#关于new" class="headerlink" title="关于new"></a>关于<code>new</code></h1><p><code>new</code>的过程</p>
+<blockquote>
+<ul>
+<li>新生成了一个对象</li>
+<li>链接到原型</li>
+<li>绑定 this</li>
+<li>返回新对象<br>知道了<code>new</code>的原理后，也可以自己实现一个<code>new</code>函数：</li>
+</ul>
+</blockquote>
+<pre><code>function myNew() {
+    // 创建一个空的对象
+    let obj = new Object()
+    // 获得构造函数
+    let Con = [].shift.call(arguments)
+    // 链接到原型
+    obj.__proto__ = Con.prototype
+    // 绑定 this，执行构造函数
+    let result = Con.apply(obj, arguments)
+    // 确保 new 出来的是个对象
+    return typeof result === &apos;object&apos; ? result : obj
+}</code></pre><a id="more"></a>
+
+<p>先来看几个例子：</p>
+<ul>
+<li><p>普通函数</p>
+<pre><code>function test(name){
+    console.log(name);  
+}
+typeof(test) // function</code></pre></li>
+<li><p>使用<em>new</em>新建对象</p>
+<pre><code>function test(name){
+    console.log(name);  
+}
+
+var te = new test(&quot;Hal&quot;);
+typeof(te) // object
+console.log(JSON.stringify(test.prototype)) //{}，是个空对象
+console.log(JSON.stringify(te.prototype)) //undefined</code></pre></li>
+<li><p>直接声明的函数拥有<code>prototype</code>这个属性，而<code>new</code>构造出来的函数不存在<code>prototype</code>。</p>
+<h1 id="关于prototype"><a href="#关于prototype" class="headerlink" title="关于prototype"></a>关于<code>prototype</code></h1><p>每一个JavaScript对象(null除外)在创建的时候就会与之关联另一个对象  <code>prototype</code>，这个对象就是我们所说的<code>prototype</code>，每一个对象都会从<code>prototype</code>“继承”属性。除了<code>new</code>出来的函数，每个函数都有一个<code>prototype</code>属性，如下，在<code>prototype</code>上可以设置属性，然后打印出一些东西：</p>
+<pre><code>function Employee() {}
+
+// prototype是函数才会有的属性
+Employee.prototype.name = &apos;Hal&apos;;
+var employee1 = new Employee();
+var employee2 = new Employee();
+console.log(employee1.name) // Hal
+console.log(employee2.name) // Hal
+console.log(employee1.constructor) // Employee() {}
+console.log(employee1.constructor.name) // Employee
+console.log(employee1.prototype) // undefined
+console.log(employee1.__proto__) // {name: &quot;Hal&quot;, constructor: ƒ}
+console.log(Employee.prototype) // {name: &quot;Hal&quot;, constructor: ƒ}
+console.log(Employee.prototype === employee1.__proto__) // true
+console.log(Employee.prototype.constructor === Employee) // true</code></pre></li>
+</ul>
+<h1 id="关于-proto"><a href="#关于-proto" class="headerlink" title="关于__proto__"></a>关于<code>__proto__</code></h1><p>从刚才的例子中已经可以很清楚地看出了，employee1的<code>__proto__</code>和Employee.prototype是相等的，也就是指向同一个对象，也就是说，实例中有一个<code>__proto__</code>指针指向构造函数的<code>prototype</code>。使用<code>Object.getPrototypeOf</code>与<code>__proto__</code>是同样的效果。</p>
+<pre><code>Object.getPrototypeOf(employee1) === Employee.prototype //true</code></pre><h1 id="关于constructor"><a href="#关于constructor" class="headerlink" title="关于constructor"></a>关于<code>constructor</code></h1><p>从上面可以看到，原型<code>prototype</code>里面还有一个<code>constructor</code>的属性，然后这个<code>constructor</code>又指向了函数本身。<br>好像有一点绕，但是看一下下面的图就一目了然了：<br><img src="https://upload-images.jianshu.io/upload_images/1741029-f6343d487e11fe0a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="原型链"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li><code>Object</code> 是所有对象的祖先，所有对象都可以通过 <code>__proto__</code> 找到它</li>
+<li><code>Function</code> 是所有函数的祖先，所有函数都可以通过 <code>__proto__</code>找到它</li>
+<li><code>Function.prototype</code> 和 <code>Object.prototype</code> 是两个特殊的对象，由引擎创建，而且<code>Function.__proto__.__proto__</code>是指向<code>Object.prototype</code>的<br>即：<br><code>Function.__proto__.__proto__ === Object.prototype // true</code></li>
+<li>除了以上两个特殊对象，其他对象都是通过构造器 new 出来的<br>函数的 <code>prototype</code> 是一个对象，也就是原型</li>
+<li>对象的 <code>__proto__</code> 指向原型， <code>__proto__</code> 将对象和原型连接起来组成了原型链</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="http://blog.ifyouseewendy.com/blog/2017/07/03/review-you-dont-know-js-this-and-object-prototypes/#what-is-the-prototype-" target="_blank" rel="noopener">http://blog.ifyouseewendy.com/blog/2017/07/03/review-you-dont-know-js-this-and-object-prototypes/#what-is-the-prototype-</a></li>
+<li><a href="https://github.com/KieSun/Dream/issues/2" target="_blank" rel="noopener">https://github.com/KieSun/Dream/issues/2</a></li>
+<li><a href="https://github.com/mqyqingfeng/Blog/issues/2" target="_blank" rel="noopener">https://github.com/mqyqingfeng/Blog/issues/2</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript Prototype</tag>
       </tags>
   </entry>
   <entry>

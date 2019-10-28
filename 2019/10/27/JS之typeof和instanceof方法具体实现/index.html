@@ -82,18 +82,18 @@
 
 
 
-<meta name="description" content="一、typeof方法的作用 判断变量类型 typeof 1 //&amp;quot;number&amp;quot; typeof &amp;apos;1&amp;apos; //&amp;quot;string&amp;quot; typeof {} //&amp;quot;object&amp;quot; typeof true //&amp;quot;boolean&amp;quot; typeof undefined // &amp;quot;undefined&amp;quot;">
+<meta name="description" content="一、typeof方法的作用 判断变量类型  typeof 1 //&amp;quot;number&amp;quot; typeof &amp;apos;1&amp;apos; //&amp;quot;string&amp;quot; typeof {} //&amp;quot;object&amp;quot; typeof true //&amp;quot;boolean&amp;quot; typeof undefined // &amp;quot;undefined&amp;quot;">
 <meta name="keywords" content="JavaScript typeof instanceof">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS之typeof和instanceof方法具体实现">
 <meta property="og:url" content="http://yoursite.com/2019/10/27/JS之typeof和instanceof方法具体实现/index.html">
 <meta property="og:site_name" content="Shaw&#39;s blog.">
-<meta property="og:description" content="一、typeof方法的作用 判断变量类型 typeof 1 //&amp;quot;number&amp;quot; typeof &amp;apos;1&amp;apos; //&amp;quot;string&amp;quot; typeof {} //&amp;quot;object&amp;quot; typeof true //&amp;quot;boolean&amp;quot; typeof undefined // &amp;quot;undefined&amp;quot;">
+<meta property="og:description" content="一、typeof方法的作用 判断变量类型  typeof 1 //&amp;quot;number&amp;quot; typeof &amp;apos;1&amp;apos; //&amp;quot;string&amp;quot; typeof {} //&amp;quot;object&amp;quot; typeof true //&amp;quot;boolean&amp;quot; typeof undefined // &amp;quot;undefined&amp;quot;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-27T15:11:39.985Z">
+<meta property="og:updated_time" content="2019-10-27T15:13:45.393Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS之typeof和instanceof方法具体实现">
-<meta name="twitter:description" content="一、typeof方法的作用 判断变量类型 typeof 1 //&amp;quot;number&amp;quot; typeof &amp;apos;1&amp;apos; //&amp;quot;string&amp;quot; typeof {} //&amp;quot;object&amp;quot; typeof true //&amp;quot;boolean&amp;quot; typeof undefined // &amp;quot;undefined&amp;quot;">
+<meta name="twitter:description" content="一、typeof方法的作用 判断变量类型  typeof 1 //&amp;quot;number&amp;quot; typeof &amp;apos;1&amp;apos; //&amp;quot;string&amp;quot; typeof {} //&amp;quot;object&amp;quot; typeof true //&amp;quot;boolean&amp;quot; typeof undefined // &amp;quot;undefined&amp;quot;">
 
 
 
@@ -408,7 +408,8 @@
 
       
         <h1 id="一、typeof方法的作用"><a href="#一、typeof方法的作用" class="headerlink" title="一、typeof方法的作用"></a>一、typeof方法的作用</h1><ul>
-<li><p>判断变量类型</p>
+<li>判断变量类型</li>
+</ul>
 <pre><code>typeof 1 //&quot;number&quot;
 typeof &apos;1&apos; //&quot;string&quot;
 typeof {} //&quot;object&quot;
@@ -416,9 +417,7 @@ typeof true //&quot;boolean&quot;
 typeof undefined // &quot;undefined&quot;
 typeof null //&quot;object&quot; #bug
 typeof Symbol //&quot;function&quot;
-typeof Symbol(1) //&quot;symbol&quot;</code></pre></li>
-</ul>
-<a id="more"></a>
+typeof Symbol(1) //&quot;symbol&quot;</code></pre><a id="more"></a>
 
 <h1 id="二、typeof方法的具体实现"><a href="#二、typeof方法的具体实现" class="headerlink" title="二、typeof方法的具体实现"></a>二、typeof方法的具体实现</h1><pre><code>if (JSVAL_IS_VOID(v)) {  // (1)
     type = JSTYPE_VOID;
@@ -459,17 +458,15 @@ Object.prototype.toString.call(null) // &quot;[object Null]&quot;
 Object.prototype.toString.call(undefined) // &quot;[object Undefined]&quot;
 
 Object.prototype.toString.call(Symbol(2)) // &quot;[object Symbol]&quot;</code></pre><h1 id="四、instanceof方法的作用"><a href="#四、instanceof方法的作用" class="headerlink" title="四、instanceof方法的作用"></a>四、instanceof方法的作用</h1><ul>
-<li><p>判断一个引用是否属于某个构造函数</p>
-</li>
-<li><p>判断继承关系中一个实例是否属于其父类<br>比如：</p>
+<li>判断一个引用是否属于某个构造函数</li>
+<li>判断继承关系中一个实例是否属于其父类<br>比如：</li>
+</ul>
 <pre><code>const Animal = function(type) {
   this.type = type;
 }
 const cat= new Animal(&apos;cat&apos;);
 console.log(cat instanceof Animal);  //true
-console.log(cat instanceof Object); //true</code></pre></li>
-</ul>
-<h1 id="五、如何实现一个instanceof方法"><a href="#五、如何实现一个instanceof方法" class="headerlink" title="五、如何实现一个instanceof方法"></a>五、如何实现一个instanceof方法</h1><pre><code>function myInstanceof(leftVaule, rightVaule) { 
+console.log(cat instanceof Object); //true</code></pre><h1 id="五、如何实现一个instanceof方法"><a href="#五、如何实现一个instanceof方法" class="headerlink" title="五、如何实现一个instanceof方法"></a>五、如何实现一个instanceof方法</h1><pre><code>function myInstanceof(leftVaule, rightVaule) { 
     let rightProto = rightVaule.prototype; // 取右边 prototype的值
     leftVaule = leftVaule.__proto__; // 取左边__proto__值
     while (true) {
@@ -658,7 +655,7 @@ myInstanceof(Foo, Function) // true</code></pre><h1 id="六、总结"><a href="#
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -680,7 +677,7 @@ myInstanceof(Foo, Function) // true</code></pre><h1 id="六、总结"><a href="#
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
