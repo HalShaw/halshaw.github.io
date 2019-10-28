@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-27T15:13:45.393Z</updated>
+  <updated>2019-10-28T14:50:01.165Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,51 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JS之原生AJAX的请求过程具体实现</title>
+    <link href="http://yoursite.com/2019/10/28/JS%E4%B9%8B%E5%8E%9F%E7%94%9FAJAX%E7%9A%84%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0/"/>
+    <id>http://yoursite.com/2019/10/28/JS之原生AJAX的请求过程具体实现/</id>
+    <published>2019-10-28T14:48:00.000Z</published>
+    <updated>2019-10-28T14:50:01.165Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;一、AJAX的请求大致过程&quot;&gt;&lt;a href=&quot;#一、AJAX的请求大致过程&quot; class=&quot;headerlink&quot; title=&quot;一、AJAX的请求大致过程&quot;&gt;&lt;/a&gt;一、AJAX的请求大致过程&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;创建一个异步调用&lt;code&gt;XMLHttpRequest&lt;/code&gt;对象 &lt;/li&gt;
+&lt;li&gt;打开一个新的&lt;code&gt;HTTP&lt;/code&gt;请求，并指定该&lt;code&gt;HTTP&lt;/code&gt;请求的方法、&lt;code&gt;URL&lt;/code&gt;及验证信息，设置响应&lt;code&gt;HTTP&lt;/code&gt;请求状态变化的函数&lt;/li&gt;
+&lt;li&gt;发送&lt;code&gt;HTTP&lt;/code&gt;请求&lt;/li&gt;
+&lt;li&gt;获取异步调用返回的数据&lt;/li&gt;
+&lt;li&gt;使用JavaScript和DOM实现局部刷新&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;二、具体实现&quot;&gt;&lt;a href=&quot;#二、具体实现&quot; class=&quot;headerlink&quot; title=&quot;二、具体实现&quot;&gt;&lt;/a&gt;二、具体实现&lt;/h1&gt;&lt;p&gt;先创建一个兼容各个平台的&lt;code&gt;XMLHttpRequest&lt;/code&gt;对象 &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function getXHR(){
+  var xhr = null;
+  if(window.XMLHttpRequest) {// 兼容 IE7+, Firefox, Chrome, Opera, Safari
+    xhr = new XMLHttpRequest();
+  } else if (window.ActiveXObject) {
+    try {
+      xhr = new ActiveXObject(&amp;quot;Msxml2.XMLHTTP&amp;quot;);// 即MSXML3
+    } catch (e) {
+      try {
+        xhr = new ActiveXObject(&amp;quot;Microsoft.XMLHTTP&amp;quot;);// // 兼容 IE6, IE5，API很老，不建议使用
+      } catch (e) {
+        alert(&amp;quot;您的浏览器不支持AJAX.&amp;quot;);
+      }
+    }
+  }
+  return xhr;
+}&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript AJAX" scheme="http://yoursite.com/tags/JavaScript-AJAX/"/>
+    
+  </entry>
   
   <entry>
     <title>JS之typeof和instanceof方法具体实现</title>
@@ -242,7 +287,7 @@ Object.entries(students)
     <link href="http://yoursite.com/2019/07/17/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Javascript%E4%B8%AD%E7%9A%84Prototype%E5%8E%9F%E5%9E%8B/"/>
     <id>http://yoursite.com/2019/07/17/深入理解Javascript中的Prototype原型/</id>
     <published>2019-07-17T14:25:00.000Z</published>
-    <updated>2019-10-28T13:53:33.565Z</updated>
+    <updated>2019-10-28T13:55:54.317Z</updated>
     
     <summary type="html">
     
@@ -255,9 +300,10 @@ Object.entries(students)
 &lt;li&gt;新生成了一个对象&lt;/li&gt;
 &lt;li&gt;链接到原型&lt;/li&gt;
 &lt;li&gt;绑定 this&lt;/li&gt;
-&lt;li&gt;返回新对象&lt;br&gt;知道了&lt;code&gt;new&lt;/code&gt;的原理后，也可以自己实现一个&lt;code&gt;new&lt;/code&gt;函数：&lt;/li&gt;
+&lt;li&gt;返回新对象&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
+&lt;p&gt;知道了&lt;code&gt;new&lt;/code&gt;的原理后，也可以自己实现一个&lt;code&gt;new&lt;/code&gt;函数：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;function myNew() {
     // 创建一个空的对象
     let obj = new Object()

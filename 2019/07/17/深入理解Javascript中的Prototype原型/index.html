@@ -82,19 +82,19 @@
 
 
 
-<meta name="description" content="刚开始学Javascript的时候觉得很简单，其中的东西也就是那是基本的，但是还是太年轻，最近因为面试中常被问到关于原型和原型链的问题，然后自己也是模棱两可的，含含糊糊说不清楚，所以痛下思定，决定好好下一番功夫来搞懂吃透原型与原型链究竟是什么。  关于newnew的过程   新生成了一个对象 链接到原型 绑定 this 返回新对象知道了new的原理后，也可以自己实现一个new函数：   func">
+<meta name="description" content="刚开始学Javascript的时候觉得很简单，其中的东西也就是那是基本的，但是还是太年轻，最近因为面试中常被问到关于原型和原型链的问题，然后自己也是模棱两可的，含含糊糊说不清楚，所以痛下思定，决定好好下一番功夫来搞懂吃透原型与原型链究竟是什么。  关于newnew的过程   新生成了一个对象 链接到原型 绑定 this 返回新对象   知道了new的原理后，也可以自己实现一个new函数： fun">
 <meta name="keywords" content="JavaScript Prototype">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入理解Javascript中的Prototype原型">
 <meta property="og:url" content="http://yoursite.com/2019/07/17/深入理解Javascript中的Prototype原型/index.html">
 <meta property="og:site_name" content="Shaw&#39;s blog.">
-<meta property="og:description" content="刚开始学Javascript的时候觉得很简单，其中的东西也就是那是基本的，但是还是太年轻，最近因为面试中常被问到关于原型和原型链的问题，然后自己也是模棱两可的，含含糊糊说不清楚，所以痛下思定，决定好好下一番功夫来搞懂吃透原型与原型链究竟是什么。  关于newnew的过程   新生成了一个对象 链接到原型 绑定 this 返回新对象知道了new的原理后，也可以自己实现一个new函数：   func">
+<meta property="og:description" content="刚开始学Javascript的时候觉得很简单，其中的东西也就是那是基本的，但是还是太年轻，最近因为面试中常被问到关于原型和原型链的问题，然后自己也是模棱两可的，含含糊糊说不清楚，所以痛下思定，决定好好下一番功夫来搞懂吃透原型与原型链究竟是什么。  关于newnew的过程   新生成了一个对象 链接到原型 绑定 this 返回新对象   知道了new的原理后，也可以自己实现一个new函数： fun">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1741029-f6343d487e11fe0a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-10-28T13:53:33.565Z">
+<meta property="og:updated_time" content="2019-10-28T13:55:54.317Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解Javascript中的Prototype原型">
-<meta name="twitter:description" content="刚开始学Javascript的时候觉得很简单，其中的东西也就是那是基本的，但是还是太年轻，最近因为面试中常被问到关于原型和原型链的问题，然后自己也是模棱两可的，含含糊糊说不清楚，所以痛下思定，决定好好下一番功夫来搞懂吃透原型与原型链究竟是什么。  关于newnew的过程   新生成了一个对象 链接到原型 绑定 this 返回新对象知道了new的原理后，也可以自己实现一个new函数：   func">
+<meta name="twitter:description" content="刚开始学Javascript的时候觉得很简单，其中的东西也就是那是基本的，但是还是太年轻，最近因为面试中常被问到关于原型和原型链的问题，然后自己也是模棱两可的，含含糊糊说不清楚，所以痛下思定，决定好好下一番功夫来搞懂吃透原型与原型链究竟是什么。  关于newnew的过程   新生成了一个对象 链接到原型 绑定 this 返回新对象   知道了new的原理后，也可以自己实现一个new函数： fun">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1741029-f6343d487e11fe0a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -418,9 +418,10 @@
 <li>新生成了一个对象</li>
 <li>链接到原型</li>
 <li>绑定 this</li>
-<li>返回新对象<br>知道了<code>new</code>的原理后，也可以自己实现一个<code>new</code>函数：</li>
+<li>返回新对象</li>
 </ul>
 </blockquote>
+<p>知道了<code>new</code>的原理后，也可以自己实现一个<code>new</code>函数：</p>
 <pre><code>function myNew() {
     // 创建一个空的对象
     let obj = new Object()
@@ -436,12 +437,14 @@
 
 <p>先来看几个例子：</p>
 <ul>
-<li><p>普通函数</p>
+<li>普通函数</li>
+</ul>
 <pre><code>function test(name){
     console.log(name);  
 }
-typeof(test) // function</code></pre></li>
-<li><p>使用<em>new</em>新建对象</p>
+typeof(test) // function</code></pre><ul>
+<li>使用<em>new</em>新建对象</li>
+</ul>
 <pre><code>function test(name){
     console.log(name);  
 }
@@ -449,8 +452,9 @@ typeof(test) // function</code></pre></li>
 var te = new test(&quot;Hal&quot;);
 typeof(te) // object
 console.log(JSON.stringify(test.prototype)) //{}，是个空对象
-console.log(JSON.stringify(te.prototype)) //undefined</code></pre></li>
-<li><p>直接声明的函数拥有<code>prototype</code>这个属性，而<code>new</code>构造出来的函数不存在<code>prototype</code>。</p>
+console.log(JSON.stringify(te.prototype)) //undefined</code></pre><ul>
+<li>直接声明的函数拥有<code>prototype</code>这个属性，而<code>new</code>构造出来的函数不存在<code>prototype</code>。</li>
+</ul>
 <h1 id="关于prototype"><a href="#关于prototype" class="headerlink" title="关于prototype"></a>关于<code>prototype</code></h1><p>每一个JavaScript对象(null除外)在创建的时候就会与之关联另一个对象  <code>prototype</code>，这个对象就是我们所说的<code>prototype</code>，每一个对象都会从<code>prototype</code>“继承”属性。除了<code>new</code>出来的函数，每个函数都有一个<code>prototype</code>属性，如下，在<code>prototype</code>上可以设置属性，然后打印出一些东西：</p>
 <pre><code>function Employee() {}
 
@@ -466,9 +470,7 @@ console.log(employee1.prototype) // undefined
 console.log(employee1.__proto__) // {name: &quot;Hal&quot;, constructor: ƒ}
 console.log(Employee.prototype) // {name: &quot;Hal&quot;, constructor: ƒ}
 console.log(Employee.prototype === employee1.__proto__) // true
-console.log(Employee.prototype.constructor === Employee) // true</code></pre></li>
-</ul>
-<h1 id="关于-proto"><a href="#关于-proto" class="headerlink" title="关于__proto__"></a>关于<code>__proto__</code></h1><p>从刚才的例子中已经可以很清楚地看出了，employee1的<code>__proto__</code>和Employee.prototype是相等的，也就是指向同一个对象，也就是说，实例中有一个<code>__proto__</code>指针指向构造函数的<code>prototype</code>。使用<code>Object.getPrototypeOf</code>与<code>__proto__</code>是同样的效果。</p>
+console.log(Employee.prototype.constructor === Employee) // true</code></pre><h1 id="关于-proto"><a href="#关于-proto" class="headerlink" title="关于__proto__"></a>关于<code>__proto__</code></h1><p>从刚才的例子中已经可以很清楚地看出了，employee1的<code>__proto__</code>和Employee.prototype是相等的，也就是指向同一个对象，也就是说，实例中有一个<code>__proto__</code>指针指向构造函数的<code>prototype</code>。使用<code>Object.getPrototypeOf</code>与<code>__proto__</code>是同样的效果。</p>
 <pre><code>Object.getPrototypeOf(employee1) === Employee.prototype //true</code></pre><h1 id="关于constructor"><a href="#关于constructor" class="headerlink" title="关于constructor"></a>关于<code>constructor</code></h1><p>从上面可以看到，原型<code>prototype</code>里面还有一个<code>constructor</code>的属性，然后这个<code>constructor</code>又指向了函数本身。<br>好像有一点绕，但是看一下下面的图就一目了然了：<br><img src="https://upload-images.jianshu.io/upload_images/1741029-f6343d487e11fe0a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="原型链"></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
 <li><code>Object</code> 是所有对象的祖先，所有对象都可以通过 <code>__proto__</code> 找到它</li>
@@ -648,7 +650,7 @@ console.log(Employee.prototype.constructor === Employee) // true</code></pre></l
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -670,7 +672,7 @@ console.log(Employee.prototype.constructor === Employee) // true</code></pre></l
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
