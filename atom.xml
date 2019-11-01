@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-28T14:50:01.165Z</updated>
+  <updated>2019-10-28T14:53:42.732Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2019/10/28/JS%E4%B9%8B%E5%8E%9F%E7%94%9FAJAX%E7%9A%84%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0/"/>
     <id>http://yoursite.com/2019/10/28/JS之原生AJAX的请求过程具体实现/</id>
     <published>2019-10-28T14:48:00.000Z</published>
-    <updated>2019-10-28T14:50:01.165Z</updated>
+    <updated>2019-10-28T14:53:42.732Z</updated>
     
     <summary type="html">
     
@@ -279,6 +279,38 @@ Object.entries(students)
     
     
       <category term="ES6 Set Map WeakSet WeakMap" scheme="http://yoursite.com/tags/ES6-Set-Map-WeakSet-WeakMap/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>深入理解JavaScript中的Web Worker</title>
+    <link href="http://yoursite.com/2019/08/04/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JavaScript%E4%B8%AD%E7%9A%84WebWorker/"/>
+    <id>http://yoursite.com/2019/08/04/深入理解JavaScript中的WebWorker/</id>
+    <published>2019-08-04T09:07:00.000Z</published>
+    <updated>2019-11-01T14:35:18.479Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;一、背景&quot;&gt;&lt;a href=&quot;#一、背景&quot; class=&quot;headerlink&quot; title=&quot;一、背景&quot;&gt;&lt;/a&gt;一、背景&lt;/h1&gt;&lt;p&gt;由于JavaScript是单线程模型，即所有任务只能在同一个线程上面完成，前面的任务没有做完，后面的就只能等待，这对于日益增强的计算能力来说不是一件好事。所以在HTML5中引入了Web Worker的概念，来为JavaScript创建多线程环境，将其中一些任务分配给Web Worker运行，二者可以同时运行，互不干扰，如图：&lt;br&gt;&lt;img src=&quot;https://upload-images.jianshu.io/upload_images/1741029-d566f191add913c3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;With or without worker&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Web Worker是运行在后台的 JavaScript，独立于其他脚本，不会影响页面的性能。您可以继续做任何愿意做的事情：点击、选取内容等等，引入Web Worker的好处是一些计算密集型或高延迟的任务，被 Web Worker 线程所处理，主线程就会很流畅，不会被阻塞或拖慢，而此时 Web Worker 在后台运行。但是这也正是 Web Worker 比较耗费资源的原因，不应该过度使用，而且一旦使用完毕，就应该关闭。&lt;/p&gt;
+&lt;h1 id=&quot;二、浏览器支持&quot;&gt;&lt;a href=&quot;#二、浏览器支持&quot; class=&quot;headerlink&quot; title=&quot;二、浏览器支持&quot;&gt;&lt;/a&gt;二、浏览器支持&lt;/h1&gt;&lt;p&gt;所有主流浏览器均支持 Worker，除了 Internet Explorer。&lt;br&gt;可以使用如下代码检测 Worker 支持&lt;br&gt;在创建 Worker 之前，请检测用户的浏览器是否支持它：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;if(typeof(Worker)!==&amp;quot;undefined&amp;quot;)
+  {
+  // Yes! Web worker support!
+  // Some code.....
+  }
+else
+  {
+  // Sorry! No Web Worker support..
+  }&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript Web Worker" scheme="http://yoursite.com/tags/JavaScript-Web-Worker/"/>
     
   </entry>
   
