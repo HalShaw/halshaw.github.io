@@ -91,7 +91,7 @@
 <meta property="og:description" content="一、背景由于JavaScript是单线程模型，即所有任务只能在同一个线程上面完成，前面的任务没有做完，后面的就只能等待，这对于日益增强的计算能力来说不是一件好事。所以在HTML5中引入了Web Worker的概念，来为JavaScript创建多线程环境，将其中一些任务分配给Web Worker运行，二者可以同时运行，互不干扰，如图： Web Worker是运行在后台的 JavaScript，独立于">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1741029-d566f191add913c3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-11-01T14:35:18.479Z">
+<meta property="og:updated_time" content="2019-11-01T14:40:06.718Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解JavaScript中的Web Worker">
 <meta name="twitter:description" content="一、背景由于JavaScript是单线程模型，即所有任务只能在同一个线程上面完成，前面的任务没有做完，后面的就只能等待，这对于日益增强的计算能力来说不是一件好事。所以在HTML5中引入了Web Worker的概念，来为JavaScript创建多线程环境，将其中一些任务分配给Web Worker运行，二者可以同时运行，互不干扰，如图： Web Worker是运行在后台的 JavaScript，独立于">
@@ -426,15 +426,14 @@ else
 <pre><code>var worker = new Worker(&apos;worker.js&apos;);</code></pre><p>如果指定的异步下载文件存在，浏览器就会生成新的 Worker 线程。在完全下载并执行文件之前，系统不会生成 Worker。如果指向您 Worker 的路径返回 404，Worker 就会在不显示任何提示的情况下失败。</p>
 <p>创建 Worker 之后，通过调用 postMessage() 方法启动：</p>
 <pre><code>worker.postMessage(); // Start the worker.</code></pre><ul>
-<li><p>传递变量，也可以给Worker传递一个变量</p>
+<li>传递变量，也可以给Worker传递一个变量</li>
+</ul>
 <pre><code>// Create a new worker object
 var worker = new Worker(&apos;worker.js&apos;);
 
 // Send a message to start the worker and pass a variable to it
 var info = &apos;Web Workers&apos;;
-worker.postMessage(info);</code></pre></li>
-</ul>
-<p>在Worker中，例如，在<code>worker.js</code>内部，可以使用<code>onmessage</code>事件来接收来自主线程的消息并且实现一些操作，可以通过<code>event.data</code>来获取到传递的变量：</p>
+worker.postMessage(info);</code></pre><p>在Worker中，例如，在<code>worker.js</code>内部，可以使用<code>onmessage</code>事件来接收来自主线程的消息并且实现一些操作，可以通过<code>event.data</code>来获取到传递的变量：</p>
 <pre><code>// Receive the message from the main thread
 onmessage = function(event) {
   // Do something
@@ -509,9 +508,10 @@ worker.postMessage(&apos;Hello World&apos;); // Send data to our worker.</code><
       self.postMessage(&apos;Unknown command: &apos; + data.msg);
   };
 }, false);</code></pre><ul>
-<li><p>停止 Worker<br>停止 Worker 的方法有两种：在主线程中调用 <code>worker.terminate()</code>，或在 Worker 本身内部调用 <code>self.close()</code>。</p>
-</li>
-<li><p>Worker 作用域<br>就 Worker 来说，self 和 this 指的都是 Worker 的全局作用域。因此，上一示例也可以写成：</p>
+<li>停止 Worker<br>停止 Worker 的方法有两种：在主线程中调用 <code>worker.terminate()</code>，或在 Worker 本身内部调用 <code>self.close()</code>。</li>
+<li>Worker 作用域</li>
+</ul>
+<p>就 Worker 来说，self 和 this 指的都是 Worker 的全局作用域。因此，上一示例也可以写成：</p>
 <pre><code>addEventListener(&apos;message&apos;, function(e) {
   var data = e.data;
   switch (data.cmd) {
@@ -520,9 +520,7 @@ worker.postMessage(&apos;Hello World&apos;); // Send data to our worker.</code><
       break;
     case &apos;stop&apos;:
   ...
-}, false);</code></pre></li>
-</ul>
-<h1 id="四、加载外部脚本"><a href="#四、加载外部脚本" class="headerlink" title="四、加载外部脚本"></a>四、加载外部脚本</h1><p>可以通过 <code>importScripts()</code> 函数将外部脚本文件或库加载到 Worker 中。该方法采用零个或多个字符串表示要导入的资源的文件名。</p>
+}, false);</code></pre><h1 id="四、加载外部脚本"><a href="#四、加载外部脚本" class="headerlink" title="四、加载外部脚本"></a>四、加载外部脚本</h1><p>可以通过 <code>importScripts()</code> 函数将外部脚本文件或库加载到 Worker 中。该方法采用零个或多个字符串表示要导入的资源的文件名。</p>
 <p>此示例将 script1.js 和 script2.js 加载到了 Worker 中：</p>
 <pre><code>importScripts(&apos;script1.js&apos;);
 importScripts(&apos;script2.js&apos;);</code></pre><p>也可以写成单个导入语句：</p>
@@ -756,7 +754,7 @@ importScripts(&apos;script2.js&apos;);</code></pre><p>也可以写成单个导�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -767,7 +765,7 @@ importScripts(&apos;script2.js&apos;);</code></pre><p>也可以写成单个导�
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -778,7 +776,7 @@ importScripts(&apos;script2.js&apos;);</code></pre><p>也可以写成单个导�
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

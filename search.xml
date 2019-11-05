@@ -1020,15 +1020,14 @@ else
 <pre><code>var worker = new Worker(&apos;worker.js&apos;);</code></pre><p>如果指定的异步下载文件存在，浏览器就会生成新的 Worker 线程。在完全下载并执行文件之前，系统不会生成 Worker。如果指向您 Worker 的路径返回 404，Worker 就会在不显示任何提示的情况下失败。</p>
 <p>创建 Worker 之后，通过调用 postMessage() 方法启动：</p>
 <pre><code>worker.postMessage(); // Start the worker.</code></pre><ul>
-<li><p>传递变量，也可以给Worker传递一个变量</p>
+<li>传递变量，也可以给Worker传递一个变量</li>
+</ul>
 <pre><code>// Create a new worker object
 var worker = new Worker(&apos;worker.js&apos;);
 
 // Send a message to start the worker and pass a variable to it
 var info = &apos;Web Workers&apos;;
-worker.postMessage(info);</code></pre></li>
-</ul>
-<p>在Worker中，例如，在<code>worker.js</code>内部，可以使用<code>onmessage</code>事件来接收来自主线程的消息并且实现一些操作，可以通过<code>event.data</code>来获取到传递的变量：</p>
+worker.postMessage(info);</code></pre><p>在Worker中，例如，在<code>worker.js</code>内部，可以使用<code>onmessage</code>事件来接收来自主线程的消息并且实现一些操作，可以通过<code>event.data</code>来获取到传递的变量：</p>
 <pre><code>// Receive the message from the main thread
 onmessage = function(event) {
   // Do something
@@ -1103,9 +1102,10 @@ worker.postMessage(&apos;Hello World&apos;); // Send data to our worker.</code><
       self.postMessage(&apos;Unknown command: &apos; + data.msg);
   };
 }, false);</code></pre><ul>
-<li><p>停止 Worker<br>停止 Worker 的方法有两种：在主线程中调用 <code>worker.terminate()</code>，或在 Worker 本身内部调用 <code>self.close()</code>。</p>
-</li>
-<li><p>Worker 作用域<br>就 Worker 来说，self 和 this 指的都是 Worker 的全局作用域。因此，上一示例也可以写成：</p>
+<li>停止 Worker<br>停止 Worker 的方法有两种：在主线程中调用 <code>worker.terminate()</code>，或在 Worker 本身内部调用 <code>self.close()</code>。</li>
+<li>Worker 作用域</li>
+</ul>
+<p>就 Worker 来说，self 和 this 指的都是 Worker 的全局作用域。因此，上一示例也可以写成：</p>
 <pre><code>addEventListener(&apos;message&apos;, function(e) {
   var data = e.data;
   switch (data.cmd) {
@@ -1114,9 +1114,7 @@ worker.postMessage(&apos;Hello World&apos;); // Send data to our worker.</code><
       break;
     case &apos;stop&apos;:
   ...
-}, false);</code></pre></li>
-</ul>
-<h1 id="四、加载外部脚本"><a href="#四、加载外部脚本" class="headerlink" title="四、加载外部脚本"></a>四、加载外部脚本</h1><p>可以通过 <code>importScripts()</code> 函数将外部脚本文件或库加载到 Worker 中。该方法采用零个或多个字符串表示要导入的资源的文件名。</p>
+}, false);</code></pre><h1 id="四、加载外部脚本"><a href="#四、加载外部脚本" class="headerlink" title="四、加载外部脚本"></a>四、加载外部脚本</h1><p>可以通过 <code>importScripts()</code> 函数将外部脚本文件或库加载到 Worker 中。该方法采用零个或多个字符串表示要导入的资源的文件名。</p>
 <p>此示例将 script1.js 和 script2.js 加载到了 Worker 中：</p>
 <pre><code>importScripts(&apos;script1.js&apos;);
 importScripts(&apos;script2.js&apos;);</code></pre><p>也可以写成单个导入语句：</p>
@@ -1276,6 +1274,55 @@ console.log(Employee.prototype.constructor === Employee) // true</code></pre><h1
       </categories>
       <tags>
         <tag>JavaScript Prototype</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS实现JQuery中的链式操作具体实现</title>
+    <url>/2019/07/15/JS%E5%AE%9E%E7%8E%B0JQuery%E4%B8%AD%E7%9A%84%E9%93%BE%E5%BC%8F%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<ul>
+<li><p>前不久面试某大厂被问到关于JQuery中的链式操作的问题，才疏学浅的我一脸懵逼，这东西只是用过，怎么还要求自己动手实现呢，究其原因还是自己修为不够，达不到大厂的水平，平时‘拿来主义‘习惯了，也不会去深究其底层原理，可见学习思维与方式还需改进，今天就来好好学习一番。</p>
+</li>
+<li><p>网上查了一下，其原理其实很简单，就是在每次方法执行完后返回this对象，然后后面的方法就可以继续在this环境下执行。</p>
+</li>
+<li><p>然后自己动手实现一下：</p>
+<pre><code>function Employee(){};
+// 在原型上定义对应的方法
+Employee.prototype ={
+  setName:function(name){
+    this.name = name;
+    return this;
+  },
+  setAge:function(age){
+    this.age = age;
+    return this;
+  },
+  setSex:function(sex){
+    this.sex = sex;
+    return this;
+  }
+}
+
+var employee= new Employee();
+employee.setName(&quot;Hal&quot;).setAge(24).setSex(&quot;male&quot;);
+// Employee {name: &quot;Hal&quot;, age: 24, sex: &quot;male&quot;}</code></pre></li>
+<li><p>因为每次返回的结果都是<em>this</em>，所以 ‘.’ 后面的方法就相当于每次都在调用<em>this</em>，如下：</p>
+<pre><code>employee.setName(&quot;Hal&quot;) === employee.setName(&quot;Hal&quot;).setAge(24) // true
+employee.setName(&quot;Hal&quot;) === employee.setName(&quot;Hal&quot;).setAge(24).setSex(&quot;male&quot;) // true</code></pre></li>
+</ul>
+<ul>
+<li><p>优点<br>链式操作使得异步编程的流程更加清晰，不会像回调函数一样相互耦合，难以分辨函数的执行顺序且维护困难，实现了水平扩展。在ES6中，Promise也正是沿用了这一思想，每一个异步任务返回一个Promise对象，通过then方法指定回调函数。</p>
+</li>
+<li><p>缺点<br>只能应用在不需要返回值的情况下，或者说只能最后一步才能设置返回值，因为要支持链式调用返回的只能是<em>this</em>，但jQuery主要是对DOM元素进行操作，只需要改变DOM元素的表现而不需要返回值，所以适合链式操作。</p>
+</li>
+<li><p>参考<br><a href="https://www.cnblogs.com/youhong/p/6899466.html" target="_blank" rel="noopener">https://www.cnblogs.com/youhong/p/6899466.html</a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaScript JQuery</category>
+      </categories>
+      <tags>
+        <tag>JavaScript JQuery</tag>
       </tags>
   </entry>
   <entry>
