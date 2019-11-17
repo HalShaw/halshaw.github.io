@@ -1,6 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>深入理解CSS布局之Grid</title>
+    <url>/2019/11/17/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3CSS%E5%B8%83%E5%B1%80%E4%B9%8BGrid/</url>
+    <content><![CDATA[<h1 id="一、-前言"><a href="#一、-前言" class="headerlink" title="一、 前言"></a>一、 前言</h1><p>一直听说<code>CSS</code>的<code>Grid</code>布局是一项非常强大的布局技术，不像<code>Flex</code>布局只是一维的系统，<code>Grid</code>布局是个二维的系统，也就是说其可以同时处理行和列。<code>Grid</code>布局分为两个部分，<code>Grid</code>容器（Container）和<code>Grid</code>项目（Items）。</p>
+<h1 id="二、-一些重要概念及术语"><a href="#二、-一些重要概念及术语" class="headerlink" title="二、 一些重要概念及术语"></a>二、 一些重要概念及术语</h1><h3 id="Grid-Container"><a href="#Grid-Container" class="headerlink" title="Grid Container"></a>Grid Container</h3><p>应用了<code>display: grid</code>的元素，它是所有<code>grid items</code>的直接父元素，例如：</p>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"container"</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"item item-1"</span>&gt;&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"item item-2"</span>&gt;&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"item item-3"</span>&gt;&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Grid-Item"><a href="#Grid-Item" class="headerlink" title="Grid Item"></a>Grid Item</h3><p><code>Grid Container</code>的直接后代元素，所有<code>div.item</code>都是，但是<code>p.sun-item</code>不是。</p>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"container"</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"item"</span>&gt;&lt;/<span class="keyword">div</span>&gt; </span><br><span class="line">  &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"item"</span>&gt;</span><br><span class="line">  	&lt;p <span class="built_in">class</span>=<span class="string">"sub-item"</span>&gt;&lt;/p&gt;</span><br><span class="line">  &lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">"item"</span>&gt;&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h3 id="Grid-Line"><a href="#Grid-Line" class="headerlink" title="Grid Line"></a>Grid Line</h3><p>组成<code>Grid</code>结构的分割线，可垂直（<code>column grid lines</code>）可水平（<code>row grid lines</code>）。</p>
+<h3 id="Grid-Track"><a href="#Grid-Track" class="headerlink" title="Grid Track"></a>Grid Track</h3><p>两个相邻<code>Grid</code>行之间的距离，其实就是一整行或整列的距离，如第二行与第三行之间的<code>Grid Track</code>就只第二行一整行。</p>
+<h3 id="Grid-Cell"><a href="#Grid-Cell" class="headerlink" title="Grid Cell"></a>Grid Cell</h3><p>两个相邻行与相邻列之间的距离，就相当于田字格或九宫格当中的一小格。</p>
+<h3 id="Grid-Area"><a href="#Grid-Area" class="headerlink" title="Grid Area"></a>Grid Area</h3><p>四<code>Grid</code>行包围的空间，一个<code>Grid Area</code>可能包含许多<code>grid cells</code>。</p>
+<h1 id="三、Grid-属性"><a href="#三、Grid-属性" class="headerlink" title="三、Grid 属性"></a>三、Grid 属性</h1><h3 id="Grid-Container相关"><a href="#Grid-Container相关" class="headerlink" title="Grid Container相关"></a>Grid Container相关</h3><ul>
+<li>display</li>
+<li>grid-template-columns</li>
+<li>grid-template-rows</li>
+<li>grid-template-areas</li>
+<li>grid-template</li>
+<li>grid-column-gap</li>
+<li>grid-row-gap</li>
+<li>grid-gap</li>
+<li>justify-items</li>
+<li>align-items</li>
+<li>place-items</li>
+<li>justify-content</li>
+<li>align-content</li>
+<li>place-content</li>
+<li>grid-auto-columns</li>
+<li>grid-auto-rows</li>
+<li>grid-auto-flow</li>
+<li>grid</li>
+</ul>
+<h3 id="Grid-Items相关"><a href="#Grid-Items相关" class="headerlink" title="Grid Items相关"></a>Grid Items相关</h3><ul>
+<li>grid-column-start</li>
+<li>grid-column-end</li>
+<li>grid-row-start</li>
+<li>grid-row-end</li>
+<li>grid-column</li>
+<li>grid-row</li>
+<li>grid-area</li>
+<li>justify-self</li>
+<li>align-self</li>
+<li>place-self</li>
+</ul>
+<h1 id="四、具体布局"><a href="#四、具体布局" class="headerlink" title="四、具体布局"></a>四、具体布局</h1><h3 id="display"><a href="#display" class="headerlink" title="display"></a>display</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid | inline-grid;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>grid</code>表示生成一个块级<code>grid</code></li>
+<li><code>inline-grid</code>表示生成一个行内<code>grid</code></li>
+</ul>
+<h3 id="grid-template-columns-amp-grid-template-rows"><a href="#grid-template-columns-amp-grid-template-rows" class="headerlink" title="grid-template-columns &amp; grid-template-rows"></a>grid-template-columns &amp; grid-template-rows</h3><figure class="highlight mel"><table><tr><td class="code"><pre><span class="line">.<span class="keyword">container</span> &#123;</span><br><span class="line">  <span class="keyword">grid</span>-template-columns: &lt;<span class="keyword">track</span>-<span class="keyword">size</span>&gt; ... | &lt;line-name&gt; &lt;<span class="keyword">track</span>-<span class="keyword">size</span>&gt; ...;</span><br><span class="line">  <span class="keyword">grid</span>-template-rows: &lt;<span class="keyword">track</span>-<span class="keyword">size</span>&gt; ... | &lt;line-name&gt; &lt;<span class="keyword">track</span>-<span class="keyword">size</span>&gt; ...;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong><track-size></track-size></strong> - 可以是长度值、百分比或者<code>grid</code>中的可用空间的一部分单位<code>fr</code></li>
+<li><strong><line-name></line-name></strong> - 一个任意的名字</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="number">40px</span> <span class="number">50px</span> auto <span class="number">50px</span> <span class="number">40px</span>;</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: <span class="number">25px</span> <span class="number">25px</span> <span class="number">30px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其布局效果如图一所示，<br><img src="https://upload-images.jianshu.io/upload_images/1741029-1348aa9354dbe2ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图一"></p>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS Grid</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JS之原生AJAX的请求过程具体实现</title>
     <url>/2019/10/28/JS%E4%B9%8B%E5%8E%9F%E7%94%9FAJAX%E7%9A%84%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<h1 id="一、AJAX的请求大致过程"><a href="#一、AJAX的请求大致过程" class="headerlink" title="一、AJAX的请求大致过程"></a>一、AJAX的请求大致过程</h1><ul>
@@ -1280,7 +1352,7 @@ console.log(Employee.prototype.constructor === Employee) // true</code></pre><h1
     <title>JS实现JQuery中的链式操作具体实现</title>
     <url>/2019/07/15/JS%E5%AE%9E%E7%8E%B0JQuery%E4%B8%AD%E7%9A%84%E9%93%BE%E5%BC%8F%E6%93%8D%E4%BD%9C/</url>
     <content><![CDATA[<ul>
-<li><p>前不久面试某大厂被问到关于JQuery中的链式操作的问题，才疏学浅的我一脸懵逼，这东西只是用过，怎么还要求自己动手实现呢，究其原因还是自己修为不够，达不到大厂的水平，平时‘拿来主义‘习惯了，也不会去深究其底层原理，可见学习思维与方式还需改进，今天就来好好学习一番。</p>
+<li><p>前不久面试某大厂被问到关于JQuery中的链式操作的问题，才疏学浅的我一脸懵逼，这东西只是用过，怎么还要求自己动手实现呢，究其原因还是自己修为不够，达不到大厂的水平，平时“拿来主义”习惯了，也不会去深究其底层原理，可见学习思维与方式还需改进，今天就来好好学习一番。</p>
 </li>
 <li><p>网上查了一下，其原理其实很简单，就是在每次方法执行完后返回this对象，然后后面的方法就可以继续在this环境下执行。</p>
 </li>
