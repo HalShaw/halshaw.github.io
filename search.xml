@@ -201,103 +201,187 @@ justify-items: start;
   grid-auto-columns: &lt;track-size&gt; ...;
   grid-auto-rows: &lt;track-size&gt; ...;
 }</code></pre><ul>
-<li><strong><track-size></track-size></strong> - 长度、百分比或者<code>fr</code><br>为了描述<code>implicit grid tracks</code>怎样被创建，考虑以下代码：<pre><code>.container {
-grid-template-columns: 60px 60px;
-grid-template-rows: 90px 90px;
-}</code></pre><img src="https://upload-images.jianshu.io/upload_images/1741029-67c6d9e668314e9c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>如图所示，一个<code>2x2</code>的<code>grid</code>布局被创建出来，但是想象一下使用<code>grid-column</code>和<code>grid-row</code> 来进行如下布局：<pre><code>.item-a {
-grid-column: 1 / 2;
-grid-row: 2 / 3;
+<li><strong><track-size></track-size></strong> 长度、百分比或者<code>fr</code></li>
+</ul>
+<p>为了描述<code>implicit grid tracks</code>怎样被创建，考虑以下代码：</p>
+<pre><code>.container {
+  grid-template-columns: 60px 60px;
+  grid-template-rows: 90px 90px;
+}</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/1741029-67c6d9e668314e9c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>如图所示，一个<code>2x2</code>的<code>grid</code>布局被创建出来，但是想象一下使用<code>grid-column</code>和<code>grid-row</code> 来进行如下布局：</p>
+<pre><code>.item-a {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
 }
 .item-b {
-grid-column: 5 / 6;
-grid-row: 2 / 3;
-}</code></pre><img src="https://upload-images.jianshu.io/upload_images/1741029-470d5386ca060153.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>我们设置了<code>.item-b</code>从第五列开始到第六列结束，但是我们并没有定义第五列和第六列，只有两列，这个时候，宽度为零的<code>implicit tracks</code>就会被创建出来填满这些<code>gap</code>，此时就可以使用<code>grid-auto-columns</code>和<code>grid-auto-rows</code>来设置这些<code>implicit tracks</code>的宽度，如：<pre><code>.container {
-grid-auto-columns: 60px;
-}</code></pre><img src="https://upload-images.jianshu.io/upload_images/1741029-5caea9963bf657ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></li>
-</ul>
+  grid-column: 5 / 6;
+  grid-row: 2 / 3;
+}</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/1741029-470d5386ca060153.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>我们设置了<code>.item-b</code>从第五列开始到第六列结束，但是我们并没有定义第五列和第六列，只有两列，这个时候，宽度为零的<code>implicit tracks</code>就会被创建出来填满这些<code>gap</code>，此时就可以使用<code>grid-auto-columns</code>和<code>grid-auto-rows</code>来设置这些<code>implicit tracks</code>的宽度，如：</p>
+<pre><code>.container {
+  grid-auto-columns: 60px;
+}</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/1741029-5caea9963bf657ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
 <h3 id="grid-auto-flow"><a href="#grid-auto-flow" class="headerlink" title="grid-auto-flow"></a>grid-auto-flow</h3><p>如果你有没有显示地布局在<code>grid</code>上的<code>grid items</code>，自动布局算法就会自动地将这<code>grid items</code>放进去，这个属性控制着自动布局算法怎样工作。</p>
 <pre><code>.container {
   grid-auto-flow: row | column | row dense | column dense;
 }</code></pre><ul>
 <li><code>row</code> 告诉自动布局算法依次填满每一行，有必要的话可以添加新的行</li>
 <li><code>column</code> 告诉自动布局算法依次填满每一列，有必要的话可以添加新的列</li>
-<li><code>dense</code> 告诉自动布局算法如果出现比较小的<code>item</code>的话尝试填满之前剩余空间<br>例子：<pre><code>&lt;section class=&quot;container&quot;&gt;
-&lt;div class=&quot;item-a&quot;&gt;item-a&lt;/div&gt;
-&lt;div class=&quot;item-b&quot;&gt;item-b&lt;/div&gt;
-&lt;div class=&quot;item-c&quot;&gt;item-c&lt;/div&gt;
-&lt;div class=&quot;item-d&quot;&gt;item-d&lt;/div&gt;
-&lt;div class=&quot;item-e&quot;&gt;item-e&lt;/div&gt;
-&lt;/section&gt;
-</code></pre></li>
+<li><code>dense</code> 告诉自动布局算法如果出现比较小的<code>item</code>的话尝试填满之前剩余空间</li>
 </ul>
-<p>.container {<br>  display: grid;<br>  grid-template-columns: 60px 60px 60px 60px 60px;<br>  grid-template-rows: 30px 30px;<br>  grid-auto-flow: row; // 优先排满行<br>}</p>
-<p>//指定item-a和item-e占两行<br>.item-a {<br>  grid-column: 1;<br>  grid-row: 1 / 3;<br>}<br>.item-e {<br>  grid-column: 5;<br>  grid-row: 1 / 3;<br>}</p>
-<pre><code>![优先排满行](https://upload-images.jianshu.io/upload_images/1741029-8a5e076c0310b0f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+<p>例子：</p>
+<pre><code>&lt;section class=&quot;container&quot;&gt;
+  &lt;div class=&quot;item-a&quot;&gt;item-a&lt;/div&gt;
+  &lt;div class=&quot;item-b&quot;&gt;item-b&lt;/div&gt;
+  &lt;div class=&quot;item-c&quot;&gt;item-c&lt;/div&gt;
+  &lt;div class=&quot;item-d&quot;&gt;item-d&lt;/div&gt;
+  &lt;div class=&quot;item-e&quot;&gt;item-e&lt;/div&gt;
+&lt;/section&gt;
 
-可以把`grid-auto-flow`的值设置成`column`：</code></pre><p>.container {<br>  display: grid;<br>  grid-template-columns: 60px 60px 60px 60px 60px;<br>  grid-template-rows: 30px 30px;<br>  grid-auto-flow: column;<br>}</p>
-<pre><code>![优先排满列](https://upload-images.jianshu.io/upload_images/1741029-c5c9f71733a8437c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+.container {
+  display: grid;
+  grid-template-columns: 60px 60px 60px 60px 60px;
+  grid-template-rows: 30px 30px;
+  grid-auto-flow: row; // 优先排满行
+}
 
-### grid
-
-`grid-template-rows`+ `grid-template-columns`+ `grid-template-areas`,+`grid-auto-rows`+`grid-auto-columns`+`grid-auto-flow`属性的缩写，可以在同一个`grid `属性里设置显示（`explicit `）或者隐式（`implicit `）`grid`。
-
-
-
-## Grid Items
-！注意，`float`，`display: inline-block`，`display: table-cell`， `vertical-align` 和`column-*` 属性对`grid item`没有影响。
-### grid-column-start、grid-column-end、grid-row-start、grid-row-end
-</code></pre><p>.item {<br>  grid-column-start: <number> | <name> | span <number> | span <name> | auto;<br>  grid-column-end: <number> | <name> | span <number> | span <name> | auto;<br>  grid-row-start: <number> | <name> | span <number> | span <name> | auto;<br>  grid-row-end: <number> | <name> | span <number> | span <name> | auto;<br>}</name></number></name></number></name></number></name></number></name></number></name></number></name></number></name></number></p>
-<pre><code>- `&lt;line&gt;` 可以是一个`grid line`的数字序号或者名字
-- `span &lt;number&gt;` 项目会占满所提供的`grid tracks`的序号
-- `span &lt;name&gt;` 项目会占满所提供的`grid tracks`的名字
-- `auto` 自动填充
-
-例如：</code></pre><p>.item-a {<br>  grid-column-start: 2;<br>  grid-column-end: five;<br>  grid-row-start: row1-start;<br>  grid-row-end: 3;<br>}</p>
-<pre><code>其布局效果如下所示：
-![图五](https://upload-images.jianshu.io/upload_images/1741029-d030c44eddd9aa43.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-</code></pre><p>.item-b {<br>  grid-column-start: 1;<br>  grid-column-end: span col4-start;<br>  grid-row-start: 2;<br>  grid-row-end: span 2;<br>}</p>
-<pre><code>其布局效果如下所示：
-![图六](https://upload-images.jianshu.io/upload_images/1741029-7c0afc52db9432d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-！如果没有指定`grid-column-end`或者`grid-row-end`，项目会默认自动跨越一个`track `的距离。项目之间可能会相互重叠，可以使用`z-index`来控制显示的顺序。
-
-### grid-column和grid-row
-分别是 `grid-column-start` + `grid-column-end`和`grid-row-start` + `grid-row-end`的缩写。</code></pre><p>.item {<br>  grid-column: <start-line> / <end-line> | <start-line> / span <value>;<br>  grid-row: <start-line> / <end-line> | <start-line> / span <value>;<br>}</value></start-line></end-line></start-line></value></start-line></end-line></start-line></p>
-<pre><code>- `&lt;start-line&gt; / &lt;end-line&gt;` 所接收的值和前面一致，`start`和`end`的值用`/ `隔开。
-例子：</code></pre><p>.item-c {<br>  grid-column: 3 / span 2;<br>  grid-row: third-line / 4;<br>}</p>
-<pre><code>![图七](https://upload-images.jianshu.io/upload_images/1741029-f6fae30a7b487b9d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-！如果没有` &lt;end-line&gt;`值，会默认跨越一个`track`。
-
-### grid-area
-给项目起个名字让使用`grid-template-areas`属性创建的模板可以调用，另外，这个属性还可以用作`grid-row-start` + `grid-column-start` + `grid-row-end`+`grid-column-end`的缩写。</code></pre><p>.item {<br>  grid-area: <name> | <row-start> / <column-start> / <row-end> / <column-end>;<br>}</column-end></row-end></column-start></row-start></name></p>
-<pre><code>- `&lt;name&gt;` 任意名字
-- `&lt;row-start&gt; / &lt;column-start&gt; / &lt;row-end&gt; / &lt;column-end&gt;` 可以是数字或者名字
-取个名：</code></pre><p>.item-d {<br>  grid-area: header;<br>}</p>
-<pre><code>`grid-row-start` + `grid-column-start` + `grid-row-end`+`grid-column-end`的缩写：</code></pre><p>.item-d {<br>  grid-area: 1 / col4-start / last-line / 6;<br>}</p>
-<pre><code>![图八](https://upload-images.jianshu.io/upload_images/1741029-90596d745fc470c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-### justify-self，水平方向
-在一个`cell`当中对齐一个`grid item `
-</code></pre><p>.item {<br>  justify-self: start | end | center | stretch;<br>}</p>
-<pre><code></code></pre><p>.item-a {<br>  justify-self: start;<br>}</p>
-<pre><code>![左对齐](https://upload-images.jianshu.io/upload_images/1741029-554879618c2a6d3d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-</code></pre><p>.item-a {<br>  justify-self: end;<br>}</p>
-<pre><code>![右对齐](https://upload-images.jianshu.io/upload_images/1741029-e11e9f933088bb44.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-</code></pre><p>.item-a {<br>  justify-self: center ;<br>}</p>
-<pre><code>![居中对齐](https://upload-images.jianshu.io/upload_images/1741029-305ada4fe264ac18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-</code></pre><p>.item-a {<br>  justify-self: stretch;<br>}</p>
-<pre><code>![填满整个内容](https://upload-images.jianshu.io/upload_images/1741029-f08359120f1fbe5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-### align-self，垂直方向
-与` justify-self`类似。</code></pre><p>.item {<br>  align-self: start | end | center | stretch;<br>}</p>
-<pre><code>
-### place-self
-`align-self ` 和`justify-self `的缩写。
-- `auto ` 默认对齐方式
-- `&lt;align-self&gt; / &lt;justify-self&gt;` 垂直/水平
-除了`Edge`浏览器，其他主流浏览器都支持`place-self `缩写属性。
-
-</code></pre>]]></content>
+//指定item-a和item-e占两行
+.item-a {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+.item-e {
+  grid-column: 5;
+  grid-row: 1 / 3;
+}</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/1741029-8a5e076c0310b0f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="优先排满行"></p>
+<p>可以把<code>grid-auto-flow</code>的值设置成<code>column</code>：</p>
+<pre><code>.container {
+  display: grid;
+  grid-template-columns: 60px 60px 60px 60px 60px;
+  grid-template-rows: 30px 30px;
+  grid-auto-flow: column;
+}</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/1741029-c5c9f71733a8437c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="优先排满列"></p>
+<h3 id="grid"><a href="#grid" class="headerlink" title="grid"></a>grid</h3><p><code>grid-template-rows</code>+ <code>grid-template-columns</code>+ <code>grid-template-areas</code>,+<code>grid-auto-rows</code>+<code>grid-auto-columns</code>+<code>grid-auto-flow</code>属性的缩写，可以在同一个<code>grid</code>属性里设置显示（<code>explicit</code>）或者隐式（<code>implicit</code>）<code>grid</code>。</p>
+<ul>
+<li><code>none</code> 设置其所有子属性为原始值</li>
+<li><code>&lt;grid-template&gt;</code> 相当于<code>grid-template</code>缩写</li>
+<li><code>&lt;grid-template-rows&gt; / [ auto-flow &amp;&amp; dense? ] &lt;grid-auto-columns&gt;?</code> 设置<code>&lt;grid-template-rows&gt;</code>为指定值，如果<code>auto-flow</code>被设置了，<code>grid-auto-flow</code>的值被设置成<code>column</code>，如果设置成<code>dense</code>，自动布局算法使用<code>dense</code>填充算法，如果<code>grid-auto-columns</code>被省略了，将会被自动设置成<code>auto</code>。</li>
+<li><code>[ auto-flow &amp;&amp; dense? ] &lt;grid-auto-rows&gt;? / &lt;grid-template-columns&gt;</code> 与上一条类似<code>auto-flow</code>对应<code>grid-auto-flow</code>的值被设置成<code>row</code>。</li>
+</ul>
+<p>例子：</p>
+<p>以下两块代码是等价的：</p>
+<pre><code>.container {
+    grid: 100px 300px / 3fr 1fr;
+  }</code></pre><pre><code>.container {
+    grid-template-rows: 100px 300px;
+    grid-template-columns: 3fr 1fr;
+  }</code></pre><p>以下也是：</p>
+<pre><code>.container {
+    grid: auto-flow / 200px 1fr;
+  }</code></pre><pre><code>.container {
+    grid-auto-flow: row;
+    grid-template-columns: 200px 1fr;
+  }</code></pre><p>以下也是：</p>
+<pre><code>.container {
+    grid: auto-flow dense 100px / 1fr 2fr;
+  }</code></pre><pre><code>.container {
+    grid-auto-flow: row dense;
+    grid-auto-rows: 100px;
+    grid-template-columns: 1fr 2fr;
+  }</code></pre><p>以下还是：</p>
+<pre><code>.container {
+    grid: 100px 300px / auto-flow 200px;
+  }</code></pre><pre><code>.container {
+    grid-template-rows: 100px 300px;
+    grid-auto-flow: column;
+    grid-auto-columns: 200px;
+  }</code></pre><p>还可以使用更复杂的语法来一次性设置多个值，使用起来十分方便，但是十分复杂：</p>
+<pre><code>.container {
+    grid: [row1-start] &quot;header header header&quot; 1fr [row1-end]
+          [row2-start] &quot;footer footer footer&quot; 25px [row2-end]
+          / auto 50px auto;
+  }</code></pre><p>上述代码等价于：</p>
+<pre><code>.container {
+    grid-template-areas: 
+      &quot;header header header&quot;
+      &quot;footer footer footer&quot;;
+    grid-template-rows: [row1-start] 1fr [row1-end row2-start] 25px [row2-end];
+    grid-template-columns: auto 50px auto;    
+  }</code></pre><h2 id="Grid-Items"><a href="#Grid-Items" class="headerlink" title="Grid Items"></a>Grid Items</h2><p>！注意，<code>float</code>，<code>display: inline-block</code>，<code>display: table-cell</code>， <code>vertical-align</code> 和<code>column-*</code> 属性对<code>grid item</code>没有影响。</p>
+<h3 id="grid-column-start、grid-column-end、grid-row-start、grid-row-end"><a href="#grid-column-start、grid-column-end、grid-row-start、grid-row-end" class="headerlink" title="grid-column-start、grid-column-end、grid-row-start、grid-row-end"></a>grid-column-start、grid-column-end、grid-row-start、grid-row-end</h3><pre><code>.item {
+  grid-column-start: &lt;number&gt; | &lt;name&gt; | span &lt;number&gt; | span &lt;name&gt; | auto;
+  grid-column-end: &lt;number&gt; | &lt;name&gt; | span &lt;number&gt; | span &lt;name&gt; | auto;
+  grid-row-start: &lt;number&gt; | &lt;name&gt; | span &lt;number&gt; | span &lt;name&gt; | auto;
+  grid-row-end: &lt;number&gt; | &lt;name&gt; | span &lt;number&gt; | span &lt;name&gt; | auto;
+}</code></pre><ul>
+<li><code>&lt;line&gt;</code> 可以是一个<code>grid line</code>的数字序号或者名字</li>
+<li><code>span &lt;number&gt;</code> 项目会占满所提供的<code>grid tracks</code>的序号</li>
+<li><code>span &lt;name&gt;</code> 项目会占满所提供的<code>grid tracks</code>的名字</li>
+<li><code>auto</code> 自动填充</li>
+</ul>
+<p>例如：</p>
+<pre><code>.item-a {
+  grid-column-start: 2;
+  grid-column-end: five;
+  grid-row-start: row1-start;
+  grid-row-end: 3;
+}</code></pre><p>其布局效果如下所示：<br><img src="https://upload-images.jianshu.io/upload_images/1741029-d030c44eddd9aa43.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图五"></p>
+<pre><code>.item-b {
+  grid-column-start: 1;
+  grid-column-end: span col4-start;
+  grid-row-start: 2;
+  grid-row-end: span 2;
+}</code></pre><p>其布局效果如下所示：<br><img src="https://upload-images.jianshu.io/upload_images/1741029-7c0afc52db9432d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图六"></p>
+<p>！如果没有指定<code>grid-column-end</code>或者<code>grid-row-end</code>，项目会默认自动跨越一个<code>track</code>的距离。项目之间可能会相互重叠，可以使用<code>z-index</code>来控制显示的顺序。</p>
+<h3 id="grid-column和grid-row"><a href="#grid-column和grid-row" class="headerlink" title="grid-column和grid-row"></a>grid-column和grid-row</h3><p>分别是 <code>grid-column-start</code> + <code>grid-column-end</code>和<code>grid-row-start</code> + <code>grid-row-end</code>的缩写。</p>
+<pre><code>.item {
+  grid-column: &lt;start-line&gt; / &lt;end-line&gt; | &lt;start-line&gt; / span &lt;value&gt;;
+  grid-row: &lt;start-line&gt; / &lt;end-line&gt; | &lt;start-line&gt; / span &lt;value&gt;;
+}</code></pre><ul>
+<li><code>&lt;start-line&gt; / &lt;end-line&gt;</code> 所接收的值和前面一致，<code>start</code>和<code>end</code>的值用<code>/</code>隔开。</li>
+</ul>
+<p>例子：</p>
+<pre><code>.item-c {
+  grid-column: 3 / span 2;
+  grid-row: third-line / 4;
+}</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/1741029-f6fae30a7b487b9d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图七"><br>！如果没有<code>&lt;end-line&gt;</code>值，会默认跨越一个<code>track</code>。</p>
+<h3 id="grid-area"><a href="#grid-area" class="headerlink" title="grid-area"></a>grid-area</h3><p>给项目起个名字让使用<code>grid-template-areas</code>属性创建的模板可以调用，另外，这个属性还可以用作<code>grid-row-start</code> + <code>grid-column-start</code> + <code>grid-row-end</code>+<code>grid-column-end</code>的缩写。</p>
+<pre><code>.item {
+  grid-area: &lt;name&gt; | &lt;row-start&gt; / &lt;column-start&gt; / &lt;row-end&gt; / &lt;column-end&gt;;
+}</code></pre><ul>
+<li><code>&lt;name&gt;</code> 任意名字</li>
+<li><code>&lt;row-start&gt; / &lt;column-start&gt; / &lt;row-end&gt; / &lt;column-end&gt;</code> 可以是数字或者名字</li>
+</ul>
+<p>取个名：</p>
+<pre><code>.item-d {
+  grid-area: header;
+}</code></pre><p><code>grid-row-start</code> + <code>grid-column-start</code> + <code>grid-row-end</code>+<code>grid-column-end</code>的缩写：</p>
+<pre><code>.item-d {
+  grid-area: 1 / col4-start / last-line / 6;
+}</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/1741029-90596d745fc470c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图八"></p>
+<h3 id="justify-self，水平方向"><a href="#justify-self，水平方向" class="headerlink" title="justify-self，水平方向"></a>justify-self，水平方向</h3><p>在一个<code>cell</code>当中对齐一个<code>grid item</code></p>
+<pre><code>.item {
+  justify-self: start | end | center | stretch;
+}</code></pre><pre><code>.item-a {
+  justify-self: start;
+}</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/1741029-554879618c2a6d3d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="左对齐"></p>
+<pre><code>.item-a {
+  justify-self: end;
+}</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/1741029-e11e9f933088bb44.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="右对齐"></p>
+<pre><code>.item-a {
+  justify-self: center ;
+}</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/1741029-305ada4fe264ac18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="居中对齐"></p>
+<pre><code>.item-a {
+  justify-self: stretch;
+}</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/1741029-f08359120f1fbe5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="填满整个内容"></p>
+<h3 id="align-self，垂直方向"><a href="#align-self，垂直方向" class="headerlink" title="align-self，垂直方向"></a>align-self，垂直方向</h3><p>与<code>justify-self</code>类似。</p>
+<pre><code>.item {
+  align-self: start | end | center | stretch;
+}</code></pre><h3 id="place-self"><a href="#place-self" class="headerlink" title="place-self"></a>place-self</h3><p><code>align-self</code> 和<code>justify-self</code>的缩写。</p>
+<ul>
+<li><code>auto</code> 默认对齐方式</li>
+<li><code>&lt;align-self&gt; / &lt;justify-self&gt;</code> 垂直/水平</li>
+</ul>
+<p>除了<code>Edge</code>浏览器，其他主流浏览器都支持<code>place-self</code>缩写属性。</p>
+]]></content>
       <categories>
         <category>CSS</category>
       </categories>
