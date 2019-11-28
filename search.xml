@@ -3,7 +3,8 @@
   <entry>
     <title>深入理解CSS布局之Flexbox</title>
     <url>/2019/11/26/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3CSS%E5%B8%83%E5%B1%80%E4%B9%8BFlexbox/</url>
-    <content><![CDATA[<h1 id="一、-前言"><a href="#一、-前言" class="headerlink" title="一、 前言"></a>一、 前言</h1><h1 id="二、属性"><a href="#二、属性" class="headerlink" title="二、属性"></a>二、属性</h1><h3 id="flex-container相关"><a href="#flex-container相关" class="headerlink" title="flex container相关"></a>flex container相关</h3><ul>
+    <content><![CDATA[<h1 id="一、-前言"><a href="#一、-前言" class="headerlink" title="一、 前言"></a>一、 前言</h1><p><code>Flexbox</code>布局提供了一种高效的在容器中布局、对齐、分配空间的方式，即使其<code>item</code>的大小是未知的或者动态的。</p>
+<h1 id="二、属性"><a href="#二、属性" class="headerlink" title="二、属性"></a>二、属性</h1><h3 id="flex-container相关"><a href="#flex-container相关" class="headerlink" title="flex container相关"></a>flex container相关</h3><ul>
 <li>display</li>
 <li>flex-direction</li>
 <li>flex-wrap</li>
