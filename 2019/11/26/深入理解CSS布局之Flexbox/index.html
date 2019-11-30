@@ -95,7 +95,7 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1741029-9d564590c1de115e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1741029-b614cd266f0481d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1741029-2b57ec9c25ed3ddb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-11-28T14:14:04.773Z">
+<meta property="og:updated_time" content="2019-11-30T12:51:34.523Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解CSS布局之Flexbox">
 <meta name="twitter:description" content="一、 前言Flexbox布局提供了一种高效的在容器中布局、对齐、分配空间的方式，即使其item的大小是未知的或者动态的。 二、属性flex container相关 display flex-direction flex-wrap flex-flow justify-content align-items align-content  flex items相关 order flex-grow fle">
@@ -486,13 +486,13 @@
 <h3 id="align-content，整体内容对齐"><a href="#align-content，整体内容对齐" class="headerlink" title="align-content，整体内容对齐"></a>align-content，整体内容对齐</h3><figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">  align-content: flex-start | <span class="type">flex</span>-<span class="keyword">end</span> | <span class="type">center</span> | <span class="type">space</span>-between | <span class="type">space</span>-around | <span class="type">space</span>-evenly | <span class="type">stretch</span> | <span class="type">start</span> | <span class="type">end</span> | <span class="type">baseline</span> | <span class="type">first</span> baseline | <span class="type">last</span> baseline + ... safe | <span class="type">unsafe</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><code>flex-start / start</code></li>
-<li><code>flex-end / end</code></li>
-<li><code>center</code></li>
-<li><code>space-between</code></li>
-<li><code>space-around</code></li>
-<li><code>space-evenly</code></li>
-<li><code>stretch</code></li>
+<li><code>flex-start / start</code>  <code>items</code>从<code>container</code>的左上方开始陈列，<code>flex-start</code>对应<code>flex-direction</code>，<code>start</code>对应<code>writing-mode</code> </li>
+<li><code>flex-end / end</code> <code>items</code>从<code>container</code>的左下方开始陈列，<code>flex-end</code>对应<code>flex-direction</code>，<code>end</code>对应<code>writing-mode</code> </li>
+<li><code>center</code> 垂直居中</li>
+<li><code>space-between</code> 头部和底部没有空间，其余等距均分</li>
+<li><code>space-around</code> 头部和底部有一倍间距，其余<code>items</code>  之间为二倍间距</li>
+<li><code>space-evenly</code> 所有<code>items</code>  等距均分</li>
+<li><code>stretch</code> 占满垂直空间距离</li>
 </ul>
 <p><img src="https://upload-images.jianshu.io/upload_images/1741029-9d564590c1de115e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="整体内容对齐"></p>
 <h2 id="flex-items相关-1"><a href="#flex-items相关-1" class="headerlink" title="flex items相关"></a>flex items相关</h2><h3 id="order"><a href="#order" class="headerlink" title="order"></a>order</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">order</span>: &lt;integer&gt;; <span class="comment">/* 默认是 0 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
