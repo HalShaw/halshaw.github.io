@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-01T04:23:02.018Z</updated>
+  <updated>2019-12-01T14:10:33.572Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CSS3之Transform，Transition，Animation的用法</title>
+    <link href="http://yoursite.com/2019/12/01/CSS3%E4%B9%8BTransform%EF%BC%8CTransition%EF%BC%8CAnimation%E7%9A%84%E7%94%A8%E6%B3%95/"/>
+    <id>http://yoursite.com/2019/12/01/CSS3之Transform，Transition，Animation的用法/</id>
+    <published>2019-12-01T14:09:00.000Z</published>
+    <updated>2019-12-01T14:10:33.572Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;一、前言&quot;&gt;&lt;a href=&quot;#一、前言&quot; class=&quot;headerlink&quot; title=&quot;一、前言&quot;&gt;&lt;/a&gt;一、前言&lt;/h1&gt;&lt;p&gt;之前由于写CSS动画比较少，也很少遇到上面这几个属性的具体用法，但是在后来的开发过程中，经常碰到这几个属性但却不明白起用法和意义，这就是该下功夫补课的地方了，下面整理并记录一下这几个属性的具体用法和区别。&lt;/p&gt;
+&lt;h1 id=&quot;二、具体用法&quot;&gt;&lt;a href=&quot;#二、具体用法&quot; class=&quot;headerlink&quot; title=&quot;二、具体用法&quot;&gt;&lt;/a&gt;二、具体用法&lt;/h1&gt;&lt;h2 id=&quot;Transform，转换&quot;&gt;&lt;a href=&quot;#Transform，转换&quot; class=&quot;headerlink&quot; title=&quot;Transform，转换&quot;&gt;&lt;/a&gt;Transform，转换&lt;/h2&gt;&lt;h4 id=&quot;rotate，旋转&quot;&gt;&lt;a href=&quot;#rotate，旋转&quot; class=&quot;headerlink&quot; title=&quot;rotate，旋转&quot;&gt;&lt;/a&gt;rotate，旋转&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;rotate(angle) 定义 2D 旋转&lt;/li&gt;
+&lt;li&gt;rotate3d(x,y,z,angle) 定义 3D 旋转&lt;/li&gt;
+&lt;li&gt;rotateX(angle) 定义沿着 X 轴的 3D 旋转&lt;/li&gt;
+&lt;li&gt;rotateY(angle) 定义沿着 Y 轴的 3D 旋转&lt;/li&gt;
+&lt;li&gt;rotateZ(angle) 定义沿着 Z 轴的 3D 旋转&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="CSS" scheme="http://yoursite.com/categories/CSS/"/>
+    
+    
+      <category term="CSS3 Transform Transition Animation" scheme="http://yoursite.com/tags/CSS3-Transform-Transition-Animation/"/>
+    
+  </entry>
   
   <entry>
     <title>深入理解CSS布局之Flexbox</title>

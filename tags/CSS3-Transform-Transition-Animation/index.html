@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="JavaScript Prototype,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -82,20 +82,17 @@
 
 
 
-<meta name="description" content="刚开始学Javascript的时候觉得很简单，其中的东西也就是那是基本的，但是还是太年轻，最近因为面试中常被问到关于原型和原型链的问题，然后自己也是模棱两可的，含含糊糊说不清楚，所以痛下思定，决定好好下一番功夫来搞懂吃透原型与原型链究竟是什么。  关于newnew的过程   新生成了一个对象 链接到原型 绑定 this 返回新对象   知道了new的原理后，也可以自己实现一个new函数： fun">
-<meta name="keywords" content="JavaScript Prototype">
-<meta property="og:type" content="article">
-<meta property="og:title" content="深入理解Javascript中的Prototype原型">
-<meta property="og:url" content="http://yoursite.com/2019/07/17/深入理解Javascript中的Prototype原型/index.html">
+<meta name="description" content="Some tech notes and life experience.">
+<meta name="keywords" content="Shaw Xiaohao">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Shaw&#39;s blog.">
+<meta property="og:url" content="http://yoursite.com/tags/CSS3-Transform-Transition-Animation/index.html">
 <meta property="og:site_name" content="Shaw&#39;s blog.">
-<meta property="og:description" content="刚开始学Javascript的时候觉得很简单，其中的东西也就是那是基本的，但是还是太年轻，最近因为面试中常被问到关于原型和原型链的问题，然后自己也是模棱两可的，含含糊糊说不清楚，所以痛下思定，决定好好下一番功夫来搞懂吃透原型与原型链究竟是什么。  关于newnew的过程   新生成了一个对象 链接到原型 绑定 this 返回新对象   知道了new的原理后，也可以自己实现一个new函数： fun">
+<meta property="og:description" content="Some tech notes and life experience.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1741029-f6343d487e11fe0a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-10-28T13:55:54.317Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深入理解Javascript中的Prototype原型">
-<meta name="twitter:description" content="刚开始学Javascript的时候觉得很简单，其中的东西也就是那是基本的，但是还是太年轻，最近因为面试中常被问到关于原型和原型链的问题，然后自己也是模棱两可的，含含糊糊说不清楚，所以痛下思定，决定好好下一番功夫来搞懂吃透原型与原型链究竟是什么。  关于newnew的过程   新生成了一个对象 链接到原型 绑定 this 返回新对象   知道了new的原理后，也可以自己实现一个new函数： fun">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1741029-f6343d487e11fe0a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="Shaw&#39;s blog.">
+<meta name="twitter:description" content="Some tech notes and life experience.">
 
 
 
@@ -125,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/17/深入理解Javascript中的Prototype原型/">
+  <link rel="canonical" href="http://yoursite.com/tags/CSS3-Transform-Transition-Animation/">
 
 
 
 
 
-  <title>深入理解Javascript中的Prototype原型 | Shaw's blog.</title>
+  <title>标签: CSS3 Transform Transition Animation | Shaw's blog.</title>
   
 
 
@@ -160,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -296,295 +293,52 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block tag">
 
-  
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h2>CSS3 Transform Transition Animation<small>标签</small>
+        </h2>
+      </div>
 
-  
-  
-  
+      
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/17/深入理解Javascript中的Prototype原型/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shaw">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/portrait.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shaw's blog.">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h3 class="post-title">
         
+            <a class="post-title-link" href="/2019/12/01/CSS3之Transform，Transition，Animation的用法/" itemprop="url">
+              
+                <span itemprop="name">CSS3之Transform，Transition，Animation的用法</span>
+              
+            </a>
         
-          <h2 class="post-title" itemprop="name headline">深入理解Javascript中的Prototype原型</h2>
-        
+      </h3>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-17T22:25:00+08:00">
-                2019-07-17
-              </time>
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-12-01T22:09:00+08:00" content="2019-12-01">
+          12-01
+        </time>
+      </div>
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/07/17/深入理解Javascript中的Prototype原型/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/07/17/深入理解Javascript中的Prototype原型/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <ul>
-<li>刚开始学Javascript的时候觉得很简单，其中的东西也就是那是基本的，但是还是太年轻，最近因为面试中常被问到关于原型和原型链的问题，然后自己也是模棱两可的，含含糊糊说不清楚，所以痛下思定，决定好好下一番功夫来搞懂吃透原型与原型链究竟是什么。</li>
-</ul>
-<h1 id="关于new"><a href="#关于new" class="headerlink" title="关于new"></a>关于<code>new</code></h1><p><code>new</code>的过程</p>
-<blockquote>
-<ul>
-<li>新生成了一个对象</li>
-<li>链接到原型</li>
-<li>绑定 this</li>
-<li>返回新对象</li>
-</ul>
-</blockquote>
-<p>知道了<code>new</code>的原理后，也可以自己实现一个<code>new</code>函数：</p>
-<pre><code>function myNew() {
-    // 创建一个空的对象
-    let obj = new Object()
-    // 获得构造函数
-    let Con = [].shift.call(arguments)
-    // 链接到原型
-    obj.__proto__ = Con.prototype
-    // 绑定 this，执行构造函数
-    let result = Con.apply(obj, arguments)
-    // 确保 new 出来的是个对象
-    return typeof result === &apos;object&apos; ? result : obj
-}</code></pre><a id="more"></a>
-
-<p>先来看几个例子：</p>
-<ul>
-<li>普通函数</li>
-</ul>
-<pre><code>function test(name){
-    console.log(name);  
-}
-typeof(test) // function</code></pre><ul>
-<li>使用<em>new</em>新建对象</li>
-</ul>
-<pre><code>function test(name){
-    console.log(name);  
-}
-
-var te = new test(&quot;Hal&quot;);
-typeof(te) // object
-console.log(JSON.stringify(test.prototype)) //{}，是个空对象
-console.log(JSON.stringify(te.prototype)) //undefined</code></pre><ul>
-<li>直接声明的函数拥有<code>prototype</code>这个属性，而<code>new</code>构造出来的函数不存在<code>prototype</code>。</li>
-</ul>
-<h1 id="关于prototype"><a href="#关于prototype" class="headerlink" title="关于prototype"></a>关于<code>prototype</code></h1><p>每一个JavaScript对象(null除外)在创建的时候就会与之关联另一个对象  <code>prototype</code>，这个对象就是我们所说的<code>prototype</code>，每一个对象都会从<code>prototype</code>“继承”属性。除了<code>new</code>出来的函数，每个函数都有一个<code>prototype</code>属性，如下，在<code>prototype</code>上可以设置属性，然后打印出一些东西：</p>
-<pre><code>function Employee() {}
-
-// prototype是函数才会有的属性
-Employee.prototype.name = &apos;Hal&apos;;
-var employee1 = new Employee();
-var employee2 = new Employee();
-console.log(employee1.name) // Hal
-console.log(employee2.name) // Hal
-console.log(employee1.constructor) // Employee() {}
-console.log(employee1.constructor.name) // Employee
-console.log(employee1.prototype) // undefined
-console.log(employee1.__proto__) // {name: &quot;Hal&quot;, constructor: ƒ}
-console.log(Employee.prototype) // {name: &quot;Hal&quot;, constructor: ƒ}
-console.log(Employee.prototype === employee1.__proto__) // true
-console.log(Employee.prototype.constructor === Employee) // true</code></pre><h1 id="关于-proto"><a href="#关于-proto" class="headerlink" title="关于__proto__"></a>关于<code>__proto__</code></h1><p>从刚才的例子中已经可以很清楚地看出了，employee1的<code>__proto__</code>和Employee.prototype是相等的，也就是指向同一个对象，也就是说，实例中有一个<code>__proto__</code>指针指向构造函数的<code>prototype</code>。使用<code>Object.getPrototypeOf</code>与<code>__proto__</code>是同样的效果。</p>
-<pre><code>Object.getPrototypeOf(employee1) === Employee.prototype //true</code></pre><h1 id="关于constructor"><a href="#关于constructor" class="headerlink" title="关于constructor"></a>关于<code>constructor</code></h1><p>从上面可以看到，原型<code>prototype</code>里面还有一个<code>constructor</code>的属性，然后这个<code>constructor</code>又指向了函数本身。<br>好像有一点绕，但是看一下下面的图就一目了然了：<br><img src="https://upload-images.jianshu.io/upload_images/1741029-f6343d487e11fe0a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="原型链"></p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li><code>Object</code> 是所有对象的祖先，所有对象都可以通过 <code>__proto__</code> 找到它</li>
-<li><code>Function</code> 是所有函数的祖先，所有函数都可以通过 <code>__proto__</code>找到它</li>
-<li><code>Function.prototype</code> 和 <code>Object.prototype</code> 是两个特殊的对象，由引擎创建，而且<code>Function.__proto__.__proto__</code>是指向<code>Object.prototype</code>的<br>即：<br><code>Function.__proto__.__proto__ === Object.prototype // true</code></li>
-<li>除了以上两个特殊对象，其他对象都是通过构造器 new 出来的<br>函数的 <code>prototype</code> 是一个对象，也就是原型</li>
-<li>对象的 <code>__proto__</code> 指向原型， <code>__proto__</code> 将对象和原型连接起来组成了原型链</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="http://blog.ifyouseewendy.com/blog/2017/07/03/review-you-dont-know-js-this-and-object-prototypes/#what-is-the-prototype-" target="_blank" rel="noopener">http://blog.ifyouseewendy.com/blog/2017/07/03/review-you-dont-know-js-this-and-object-prototypes/#what-is-the-prototype-</a></li>
-<li><a href="https://github.com/KieSun/Dream/issues/2" target="_blank" rel="noopener">https://github.com/KieSun/Dream/issues/2</a></li>
-<li><a href="https://github.com/mqyqingfeng/Blog/issues/2" target="_blank" rel="noopener">https://github.com/mqyqingfeng/Blog/issues/2</a></li>
-</ul>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/JavaScript-Prototype/" rel="tag"># JavaScript Prototype</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/07/15/JS实现JQuery中的链式操作/" rel="next" title="JS实现JQuery中的链式操作具体实现">
-                <i class="fa fa-chevron-left"></i> JS实现JQuery中的链式操作具体实现
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/04/深入理解JavaScript中的WebWorker/" rel="prev" title="深入理解JavaScript中的Web Worker">
-                深入理解JavaScript中的Web Worker <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
-      
-        
-  <div class="bdsharebuttonbox">
-    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
-    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
-    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
-    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
-    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
-    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
-    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
-    <a href="#" class="bds_more" data-cmd="more"></a>
-    <a class="bds_count" data-cmd="count"></a>
-  </div>
-  <script>
-    window._bd_share_config = {
-      "common": {
-        "bdText": "",
-        "bdMini": "2",
-        "bdMiniList": false,
-        "bdPic": ""
-      },
-      "share": {
-        "bdSize": "16",
-        "bdStyle": "0"
-      },
-      "image": {
-        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
-        "viewText": "分享到：",
-        "viewSize": "16"
-      }
-    }
-  </script>
-
-<script>
-  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
-</script>
-
       
     </div>
+
   </div>
+  
+  
+  
+
+  
 
 
           </div>
@@ -592,17 +346,6 @@ console.log(Employee.prototype.constructor === Employee) // true</code></pre><h1
 
 
           
-
-  
-    <div class="comments" id="comments">
-      
-        <div id="gitment-container"></div>
-      
-    </div>
-
-  
-
-
 
         </div>
         
@@ -623,17 +366,8 @@ console.log(Employee.prototype.constructor === Employee) // true</code></pre><h1
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -730,22 +464,6 @@ console.log(Employee.prototype.constructor === Employee) // true</code></pre><h1
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于new"><span class="nav-text">关于new</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于prototype"><span class="nav-text">关于prototype</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于-proto"><span class="nav-text">关于__proto__</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于constructor"><span class="nav-text">关于constructor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-text">参考</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -894,10 +612,6 @@ var _hmt = _hmt || [];
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
@@ -944,30 +658,6 @@ var _hmt = _hmt || [];
 
     
 
-    
-      <script type="text/javascript">
-      function renderGitment(){
-        var gitment = new Gitmint({
-            id: window.location.pathname, 
-            owner: 'halshaw',
-            repo: 'halshaw.github.io',
-            
-            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
-            
-            oauth: {
-            
-            
-                client_secret: 'b567e206fdbac281a64f4dadd0ea7bc85b915878',
-            
-                client_id: '07aa09900c0ed34136dc'
-            }});
-        gitment.render('gitment-container');
-      }
-
-      
-      renderGitment();
-      
-      </script>
     
 
 

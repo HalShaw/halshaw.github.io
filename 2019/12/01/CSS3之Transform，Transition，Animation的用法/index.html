@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<script data-ad-client="ca-pub-4927808619133116" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="CSS3 Transform Transition Animation,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Shaw's blog." type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="一、前言之前由于写CSS动画比较少，也很少遇到上面这几个属性的具体用法，但是在后来的开发过程中，经常碰到这几个属性但却不明白起用法和意义，这就是该下功夫补课的地方了，下面整理并记录一下这几个属性的具体用法和区别。 二、具体用法Transform，转换rotate，旋转 rotate(angle) 定义 2D 旋转 rotate3d(x,y,z,angle) 定义 3D 旋转 rotateX(ang">
+<meta name="keywords" content="CSS3 Transform Transition Animation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS3之Transform，Transition，Animation的用法">
+<meta property="og:url" content="http://yoursite.com/2019/12/01/CSS3之Transform，Transition，Animation的用法/index.html">
+<meta property="og:site_name" content="Shaw&#39;s blog.">
+<meta property="og:description" content="一、前言之前由于写CSS动画比较少，也很少遇到上面这几个属性的具体用法，但是在后来的开发过程中，经常碰到这几个属性但却不明白起用法和意义，这就是该下功夫补课的地方了，下面整理并记录一下这几个属性的具体用法和区别。 二、具体用法Transform，转换rotate，旋转 rotate(angle) 定义 2D 旋转 rotate3d(x,y,z,angle) 定义 3D 旋转 rotateX(ang">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-12-01T14:10:33.572Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS3之Transform，Transition，Animation的用法">
+<meta name="twitter:description" content="一、前言之前由于写CSS动画比较少，也很少遇到上面这几个属性的具体用法，但是在后来的开发过程中，经常碰到这几个属性但却不明白起用法和意义，这就是该下功夫补课的地方了，下面整理并记录一下这几个属性的具体用法和区别。 二、具体用法Transform，转换rotate，旋转 rotate(angle) 定义 2D 旋转 rotate3d(x,y,z,angle) 定义 3D 旋转 rotateX(ang">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/12/01/CSS3之Transform，Transition，Animation的用法/">
+
+
+
+
+
+  <title>CSS3之Transform，Transition，Animation的用法 | Shaw's blog.</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?016fcc8c1754ddd4ebbdade569bc7324";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shaw's blog.</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Life is short, carpe diem.</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/01/CSS3之Transform，Transition，Animation的用法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shaw">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/portrait.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shaw's blog.">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">CSS3之Transform，Transition，Animation的用法</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-01T22:09:00+08:00">
+                2019-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/12/01/CSS3之Transform，Transition，Animation的用法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/12/01/CSS3之Transform，Transition，Animation的用法/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><p>之前由于写CSS动画比较少，也很少遇到上面这几个属性的具体用法，但是在后来的开发过程中，经常碰到这几个属性但却不明白起用法和意义，这就是该下功夫补课的地方了，下面整理并记录一下这几个属性的具体用法和区别。</p>
+<h1 id="二、具体用法"><a href="#二、具体用法" class="headerlink" title="二、具体用法"></a>二、具体用法</h1><h2 id="Transform，转换"><a href="#Transform，转换" class="headerlink" title="Transform，转换"></a>Transform，转换</h2><h4 id="rotate，旋转"><a href="#rotate，旋转" class="headerlink" title="rotate，旋转"></a>rotate，旋转</h4><ul>
+<li>rotate(angle) 定义 2D 旋转</li>
+<li>rotate3d(x,y,z,angle) 定义 3D 旋转</li>
+<li>rotateX(angle) 定义沿着 X 轴的 3D 旋转</li>
+<li>rotateY(angle) 定义沿着 Y 轴的 3D 旋转</li>
+<li>rotateZ(angle) 定义沿着 Z 轴的 3D 旋转</li>
+</ul>
+<a id="more"></a>
+
+<p>该属性用来旋转元素，下面是一个例子。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">transform</span>:rotate(<span class="number">9deg</span>);</span><br><span class="line">-ms-<span class="attribute">transform</span>:rotate(<span class="number">9deg</span>); <span class="comment">/* Internet Explorer */</span></span><br><span class="line">-moz-<span class="attribute">transform</span>:rotate(<span class="number">9deg</span>); <span class="comment">/* Firefox */</span></span><br><span class="line">-webkit-<span class="attribute">transform</span>:rotate(<span class="number">9deg</span>); <span class="comment">/* Safari 和 Chrome */</span></span><br><span class="line">-o-<span class="attribute">transform</span>:rotate(<span class="number">9deg</span>); <span class="comment">/* Opera */</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.w3school.com.cn/tiy/t.asp?f=css3_transform" target="_blank" rel="noopener">在线实例</a></p>
+<h4 id="translate，移动"><a href="#translate，移动" class="headerlink" title="translate，移动"></a>translate，移动</h4><ul>
+<li>translate(x,y) 定义2D移动</li>
+<li>translate3d(x,y,z) 定义3D移动</li>
+<li>translateX(x) 只用 X 轴的值来移动</li>
+<li>translateY(y) 只用 Y 轴的值来移动</li>
+<li>translateZ(z) 只用 Z 轴的值来移动</li>
+</ul>
+<p><code>Transform</code>属性的一个方法，使用<code>translate()</code>方法，可以设置该元素当前的 left（x 坐标） 和 top（y 坐标） 位置，来进行移动到坐标点对应的位置。</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">transform</span>: <span class="built_in">translate</span>(50px, 100px);</span><br><span class="line">-ms-<span class="built_in">transform</span>: <span class="built_in">translate</span>(50px,100px); <span class="comment">/* Internet Explorer */</span></span><br><span class="line">-webkit-<span class="built_in">transform</span>: <span class="built_in">translate</span>(50px,100px); <span class="comment">/* Safari 和 Chrome */</span></span><br><span class="line"> -o-<span class="built_in">transform</span>: <span class="built_in">translate</span>(50px,100px); <span class="comment">/* Opera */</span></span><br><span class="line">-moz-<span class="built_in">transform</span>: <span class="built_in">translate</span>(50px,100px); <span class="comment">/* Firefox */</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="scale，缩放"><a href="#scale，缩放" class="headerlink" title="scale，缩放"></a>scale，缩放</h4><ul>
+<li>scale(x,y) 定义 2D 缩放</li>
+<li>scale3d(x,y,z) 定义 3D 缩放</li>
+<li>scaleX(x) 只用 X 轴的值来缩放</li>
+<li>scaleY(y) 只用 Y 轴的值来缩放</li>
+<li>scaleZ(z) 只用 Z 轴的值来缩放</li>
+</ul>
+<p>下面代码表示X轴和Y轴都放大为原来的二倍:</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">transform</span>: <span class="built_in">scale</span>(<span class="number">2</span>, <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="skew，倾斜"><a href="#skew，倾斜" class="headerlink" title="skew，倾斜"></a>skew，倾斜</h4><ul>
+<li>skew(x-angle,y-angle) 定义沿着 X 和 Y 轴的 2D 倾斜</li>
+<li>skewX(angle) 定义沿着 X 轴的 2D 倾斜</li>
+<li>skewY(angle) 定义沿着 Y 轴的 2D 倾斜</li>
+</ul>
+<p>下面代码表示X 轴和Y 轴方向各倾斜20度：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transform: skew(<span class="number">20</span><span class="built_in">deg</span>, <span class="number">20</span><span class="built_in">deg</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Transition，过渡"><a href="#Transition，过渡" class="headerlink" title="Transition，过渡"></a>Transition，过渡</h2><ul>
+<li>transition 简写属性，用于在一个属性中设置四个过渡属性</li>
+<li>transition-property 设置应用过渡的 CSS 属性的名称</li>
+<li>transition-duration 设置过渡效果花费的时间。默认是 0</li>
+<li>transition-timing-function 设置过渡效果的时间曲线。默认是 “ease”</li>
+<li>transition-delay 设置过渡效果何时开始。默认是 0</li>
+</ul>
+<h4 id="transition"><a href="#transition" class="headerlink" title="transition"></a>transition</h4><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transition: <span class="keyword">property</span><span class="title"> </span>duration timing-function delay;</span><br></pre></td></tr></table></figure>
+
+<h4 id="transition-property"><a href="#transition-property" class="headerlink" title="transition-property"></a>transition-property</h4><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transition-<span class="keyword">property</span><span class="title"></span>: none|all|<span class="keyword">property</span><span class="title"></span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>none 没有属性会获得过渡效果</li>
+<li>all 所有属性都将获得过渡效果</li>
+<li>property 定义应用过渡效果的 CSS 属性名称列表，列表以逗号分隔</li>
+</ul>
+<h4 id="transition-duration"><a href="#transition-duration" class="headerlink" title="transition-duration"></a>transition-duration</h4><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">transition-duration</span>: time;</span><br></pre></td></tr></table></figure>
+
+<h4 id="transition-timing-function"><a href="#transition-timing-function" class="headerlink" title="transition-timing-function"></a>transition-timing-function</h4><figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">transition-timing-function: linear|<span class="type">ease</span>|<span class="type">ease</span>-<span class="built_in">in</span>|<span class="type">ease</span>-out|<span class="type">ease</span>-<span class="built_in">in</span>-out|<span class="type">cubic</span>-</span><br><span class="line">bezier(n,n,n,n);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>linear    设置以相同速度开始至结束的过渡效果（等于 cubic-bezier(0,0,1,1)）</li>
+<li>ease    设置慢速开始，然后变快，然后慢速结束的过渡效果（cubic-bezier(0.25,0.1,0.25,1)）</li>
+<li>ease-in    设置以慢速开始的过渡效果（等于 cubic-bezier(0.42,0,1,1)）</li>
+<li>ease-out    设置以慢速结束的过渡效果（等于 cubic-bezier(0,0,0.58,1)）</li>
+<li>ease-in-out    设置以慢速开始和结束的过渡效果（等于 cubic-bezier(0.42,0,0.58,1)）</li>
+<li>cubic-bezier(n,n,n,n)    在 cubic-bezier 函数中定义自己的值，可能的值是 0 至 1 之间的数值</li>
+</ul>
+<h4 id="transition-delay"><a href="#transition-delay" class="headerlink" title="transition-delay"></a>transition-delay</h4><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transition-<span class="built_in">delay</span>: <span class="built_in">time</span>;</span><br></pre></td></tr></table></figure>
+
+<p>实例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="attribute">transition-property</span>: width;</span><br><span class="line"><span class="attribute">transition-duration</span>: <span class="number">1s</span>;</span><br><span class="line"><span class="attribute">transition-timing-function</span>: linear;</span><br><span class="line"><span class="attribute">transition-delay</span>: <span class="number">2s</span>;</span><br><span class="line"><span class="comment">/* Firefox 4 */</span></span><br><span class="line"><span class="attribute">-moz-transition-property</span>:width;</span><br><span class="line"><span class="attribute">-moz-transition-duration</span>:<span class="number">1s</span>;</span><br><span class="line"><span class="attribute">-moz-transition-timing-function</span>:linear;</span><br><span class="line"><span class="attribute">-moz-transition-delay</span>:<span class="number">2s</span>;</span><br><span class="line"><span class="comment">/* Safari 和 Chrome */</span></span><br><span class="line"><span class="attribute">-webkit-transition-property</span>:width;</span><br><span class="line"><span class="attribute">-webkit-transition-duration</span>:<span class="number">1s</span>;</span><br><span class="line"><span class="attribute">-webkit-transition-timing-function</span>:linear;</span><br><span class="line"><span class="attribute">-webkit-transition-delay</span>:<span class="number">2s</span>;</span><br><span class="line"><span class="comment">/* Opera */</span></span><br><span class="line"><span class="attribute">-o-transition-property</span>:width;</span><br><span class="line"><span class="attribute">-o-transition-duration</span>:<span class="number">1s</span>;</span><br><span class="line"><span class="attribute">-o-transition-timing-function</span>:linear;</span><br><span class="line"><span class="attribute">-o-transition-delay</span>:<span class="number">2s</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.w3school.com.cn/tiy/t.asp?f=css3_transition3" target="_blank" rel="noopener">在线实例</a></p>
+<p>上面实例的简写版：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="attribute">transition</span>: width <span class="number">1s</span> linear <span class="number">2s</span>;</span><br><span class="line"><span class="comment">/* Firefox 4 */</span></span><br><span class="line"><span class="attribute">-moz-transition</span>:width <span class="number">1s</span> linear <span class="number">2s</span>;</span><br><span class="line"><span class="comment">/* Safari and Chrome */</span></span><br><span class="line"><span class="attribute">-webkit-transition</span>:width <span class="number">1s</span> linear <span class="number">2s</span>;</span><br><span class="line"><span class="comment">/* Opera */</span></span><br><span class="line"><span class="attribute">-o-transition</span>:width <span class="number">1s</span> linear <span class="number">2s</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.w3school.com.cn/tiy/t.asp?f=css3_transition4" target="_blank" rel="noopener">在线实例</a></p>
+<h2 id="Animation，动画"><a href="#Animation，动画" class="headerlink" title="Animation，动画"></a>Animation，动画</h2><ul>
+<li>@keyframes 设置动画</li>
+<li>animation 所有动画属性的简写属性，除了 animation-play-state 属性</li>
+<li>animation-name 设置@keyframes 动画的名称</li>
+<li>animation-duration 设置动画完成一个周期所花费的秒或毫秒。默认是 0</li>
+<li>animation-timing-function 设置动画的速度曲线。默认是 “ease”</li>
+<li>animation-delay 设置动画何时开始。默认是 0</li>
+<li>animation-iteration-count 设置动画被播放的次数。默认是 1</li>
+<li>animation-direction 设置动画是否在下一周期逆向地播放。默认是 “normal”</li>
+<li>animation-play-state 设置动画是否正在运行或暂停。默认是 “running”</li>
+<li>animation-fill-mode 设置对象动画时间之外的状态</li>
+</ul>
+<h4 id="keyframes"><a href="#keyframes" class="headerlink" title="@keyframes"></a>@keyframes</h4><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@keyframes <span class="class">animationname </span>&#123;keyframes-<span class="class">selector </span>&#123;css-styles;&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>animationname 必需，定义动画的名称</li>
+<li>keyframes-selector 必需，动画时长的百分比<br>合法的值：0-100%<br>from（与 0% 相同）<br>to（与 100% 相同）</li>
+<li>css-styles 必需，一个或多个合法的 CSS 样式属性</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">keyframes</span> mymove</span><br><span class="line">&#123;</span><br><span class="line"><span class="selector-tag">from</span> &#123;<span class="attribute">top</span>:<span class="number">0px</span>;&#125;</span><br><span class="line"><span class="selector-tag">to</span> &#123;<span class="attribute">top</span>:<span class="number">200px</span>;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@-<span class="keyword">moz</span>-<span class="keyword">keyframes</span> mymove /* Firefox */</span><br><span class="line">&#123;</span><br><span class="line"><span class="selector-tag">from</span> &#123;<span class="attribute">top</span>:<span class="number">0px</span>;&#125;</span><br><span class="line"><span class="selector-tag">to</span> &#123;<span class="attribute">top</span>:<span class="number">200px</span>;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@-<span class="keyword">webkit</span>-<span class="keyword">keyframes</span> mymove /* Safari 和 Chrome */</span><br><span class="line">&#123;</span><br><span class="line"><span class="selector-tag">from</span> &#123;<span class="attribute">top</span>:<span class="number">0px</span>;&#125;</span><br><span class="line"><span class="selector-tag">to</span> &#123;<span class="attribute">top</span>:<span class="number">200px</span>;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@-<span class="keyword">o</span>-<span class="keyword">keyframes</span> mymove /* Opera */</span><br><span class="line">&#123;</span><br><span class="line"><span class="selector-tag">from</span> &#123;<span class="attribute">top</span>:<span class="number">0px</span>;&#125;</span><br><span class="line"><span class="selector-tag">to</span> &#123;<span class="attribute">top</span>:<span class="number">200px</span>;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>目前浏览器都不支持 <code>@keyframes</code>规则。<br>Firefox 支持替代的 <code>@-moz-keyframes</code>规则。<br>Opera 支持替代的 <code>@-o-keyframes</code>规则。<br>Safari 和 Chrome 支持替代的 <code>@-webkit-keyframes</code>规则。</p>
+<h4 id="animation"><a href="#animation" class="headerlink" title="animation"></a>animation</h4><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">animation: <span class="keyword">name</span> duration timing-<span class="function"><span class="keyword">function</span></span> delay iteration-<span class="built_in">count</span> direction;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>animation-name 设置需要绑定到选择器的 keyframe 名称</li>
+<li>animation-duration 设置完成动画所花费的时间，以秒或毫秒计</li>
+<li>animation-timing-function 设置动画的速度曲线</li>
+<li>animation-delay 设置在动画开始之前的延迟</li>
+<li>animation-iteration-count 设置动画应该播放的次数</li>
+<li>animation-direction 设置是否应该轮流反向播放动画</li>
+</ul>
+<h4 id="animation-name"><a href="#animation-name" class="headerlink" title="animation-name"></a>animation-name</h4><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">animation-<span class="keyword">name</span>: keyframename|<span class="keyword">none</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="animation-duration"><a href="#animation-duration" class="headerlink" title="animation-duration"></a>animation-duration</h4><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">animation</span>-duration: <span class="built_in">time</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="animation-timing-function"><a href="#animation-timing-function" class="headerlink" title="animation-timing-function"></a>animation-timing-function</h4><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">animation-timing-<span class="function"><span class="keyword">function</span>: value</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>linear 动画从头到尾的速度是相同的</li>
+<li>ease 默认，动画以低速开始，然后加快，在结束前变慢</li>
+<li>ease-in    动画以低速开始</li>
+<li>ease-out 动画以低速结束</li>
+<li>ease-in-out 动画以低速开始和结束</li>
+<li>cubic-bezier(n,n,n,n) 在 cubic-bezier 函数中自己的值，可能的值是从 0 到 1 的数值</li>
+</ul>
+<p>一些具体用法：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* W3C 和 Opera: */</span></span><br><span class="line"><span class="selector-id">#div1</span> &#123;<span class="attribute">animation-timing-function</span>: linear;&#125;</span><br><span class="line"><span class="selector-id">#div2</span> &#123;<span class="attribute">animation-timing-function</span>: ease;&#125;</span><br><span class="line"><span class="selector-id">#div3</span> &#123;<span class="attribute">animation-timing-function</span>: ease-in;&#125;</span><br><span class="line"><span class="selector-id">#div4</span> &#123;<span class="attribute">animation-timing-function</span>: ease-out;&#125;</span><br><span class="line"><span class="selector-id">#div5</span> &#123;<span class="attribute">animation-timing-function</span>: ease-in-out;&#125;</span><br><span class="line"><span class="comment">/* Firefox: */</span></span><br><span class="line"><span class="selector-id">#div1</span> &#123;<span class="attribute">-moz-animation-timing-function</span>: linear;&#125;</span><br><span class="line"><span class="selector-id">#div2</span> &#123;<span class="attribute">-moz-animation-timing-function</span>: ease;&#125;</span><br><span class="line"><span class="selector-id">#div3</span> &#123;<span class="attribute">-moz-animation-timing-function</span>: ease-in;&#125;</span><br><span class="line"><span class="selector-id">#div4</span> &#123;<span class="attribute">-moz-animation-timing-function</span>: ease-out;&#125;</span><br><span class="line"><span class="selector-id">#div5</span> &#123;<span class="attribute">-moz-animation-timing-function</span>: ease-in-out;&#125;</span><br><span class="line"><span class="comment">/* Safari 和 Chrome: */</span></span><br><span class="line"><span class="selector-id">#div1</span> &#123;<span class="attribute">-webkit-animation-timing-function</span>: linear;&#125;</span><br><span class="line"><span class="selector-id">#div2</span> &#123;<span class="attribute">-webkit-animation-timing-function</span>: ease;&#125;</span><br><span class="line"><span class="selector-id">#div3</span> &#123;<span class="attribute">-webkit-animation-timing-function</span>: ease-in;&#125;</span><br><span class="line"><span class="selector-id">#div4</span> &#123;<span class="attribute">-webkit-animation-timing-function</span>: ease-out;&#125;</span><br><span class="line"><span class="selector-id">#div5</span> &#123;<span class="attribute">-webkit-animation-timing-function</span>: ease-in-out;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.w3school.com.cn/tiy/t.asp?f=css3_animation-timing-function2" target="_blank" rel="noopener">实例</a></p>
+<p>通过 cubic-bezier 函数来定义速度曲线：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* W3C 和 Opera: */</span></span><br><span class="line"><span class="selector-id">#div1</span> &#123;<span class="attribute">animation-timing-function</span>: <span class="built_in">cubic-bezier</span>(0,0,1,1);&#125;</span><br><span class="line"><span class="selector-id">#div2</span> &#123;<span class="attribute">animation-timing-function</span>: <span class="built_in">cubic-bezier</span>(0.25,0.1,0.25,1);&#125;</span><br><span class="line"><span class="selector-id">#div3</span> &#123;<span class="attribute">animation-timing-function</span>: <span class="built_in">cubic-bezier</span>(0.42,0,1,1);&#125;</span><br><span class="line"><span class="selector-id">#div4</span> &#123;<span class="attribute">animation-timing-function</span>: <span class="built_in">cubic-bezier</span>(0,0,0.58,1);&#125;</span><br><span class="line"><span class="selector-id">#div5</span> &#123;<span class="attribute">animation-timing-function</span>: <span class="built_in">cubic-bezier</span>(0.42,0,0.58,1);&#125;</span><br><span class="line"><span class="comment">/* Firefox: */</span></span><br><span class="line"><span class="selector-id">#div1</span> &#123;<span class="attribute">-moz-animation-timing-function</span>: <span class="built_in">cubic-bezier</span>(0,0,1,1);&#125;</span><br><span class="line"><span class="selector-id">#div2</span> &#123;<span class="attribute">-moz-animation-timing-function</span>: <span class="built_in">cubic-bezier</span>(0.25,0.1,0.25,1);&#125;</span><br><span class="line"><span class="selector-id">#div3</span> &#123;<span class="attribute">-moz-animation-timing-function</span>: <span class="built_in">cubic-bezier</span>(0.42,0,1,1);&#125;</span><br><span class="line"><span class="selector-id">#div4</span> &#123;<span class="attribute">-moz-animation-timing-function</span>: <span class="built_in">cubic-bezier</span>(0,0,0.58,1);&#125;</span><br><span class="line"><span class="selector-id">#div5</span> &#123;<span class="attribute">-moz-animation-timing-function</span>: <span class="built_in">cubic-bezier</span>(0.42,0,0.58,1);&#125;</span><br><span class="line"><span class="comment">/* Safari 和 Chrome: */</span></span><br><span class="line"><span class="selector-id">#div1</span> &#123;<span class="attribute">-webkit-animation-timing-function</span>: <span class="built_in">cubic-bezier</span>(0,0,1,1);&#125;</span><br><span class="line"><span class="selector-id">#div2</span> &#123;<span class="attribute">-webkit-animation-timing-function</span>: <span class="built_in">cubic-bezier</span>(0.25,0.1,0.25,1);&#125;</span><br><span class="line"><span class="selector-id">#div3</span> &#123;<span class="attribute">-webkit-animation-timing-function</span>: <span class="built_in">cubic-bezier</span>(0.42,0,1,1);&#125;</span><br><span class="line"><span class="selector-id">#div4</span> &#123;<span class="attribute">-webkit-animation-timing-function</span>: <span class="built_in">cubic-bezier</span>(0,0,0.58,1);&#125;</span><br><span class="line"><span class="selector-id">#div5</span> &#123;<span class="attribute">-webkit-animation-timing-function</span>: <span class="built_in">cubic-bezier</span>(0.42,0,0.58,1);&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.w3school.com.cn/tiy/t.asp?f=css3_animation-timing-function3" target="_blank" rel="noopener">实例</a></p>
+<h4 id="animation-delay"><a href="#animation-delay" class="headerlink" title="animation-delay"></a>animation-delay</h4><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">animation</span>-<span class="built_in">delay</span>: <span class="built_in">time</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="animation-iteration-count"><a href="#animation-iteration-count" class="headerlink" title="animation-iteration-count"></a>animation-iteration-count</h4><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">animation-iteration-count</span>: n|infinite;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>n 设置动画播放次数的数值</li>
+<li>infinite 设置动画应该无限次播放</li>
+</ul>
+<h4 id="animation-direction"><a href="#animation-direction" class="headerlink" title="animation-direction"></a>animation-direction</h4><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">animation-direction</span>: normal|alternate;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>normal 默认值，动画应该正常播放</li>
+<li>alternate 动画应该轮流反向播放</li>
+</ul>
+<h4 id="animation-play-state"><a href="#animation-play-state" class="headerlink" title="animation-play-state"></a>animation-play-state</h4><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">animation-play-state</span>: paused|running;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>paused    设置动画已暂停 </li>
+<li>running    设置动画正在播放</li>
+</ul>
+<h4 id="animation-fill-mode"><a href="#animation-fill-mode" class="headerlink" title="animation-fill-mode"></a>animation-fill-mode</h4><figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">animation-fill-mode : none | <span class="type">forwards</span> | <span class="type">backwards</span> | <span class="type">both</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>none 不改变默认行为</li>
+<li>forwards 当动画完成后，保持最后一个属性值（在最后一个关键帧中定义）</li>
+<li>backwards 在 animation-delay 所指定的一段时间内，在动画显示之前，应用开始属性值（在第一个关键帧中定义）</li>
+<li>both 向前和向后填充模式都被应用</li>
+</ul>
+<h2 id="一些实例"><a href="#一些实例" class="headerlink" title="一些实例"></a>一些实例</h2><h4 id="一个改变背景色动画"><a href="#一个改变背景色动画" class="headerlink" title="一个改变背景色动画"></a>一个改变背景色动画</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">keyframes</span> myfirst</span><br><span class="line">&#123;</span><br><span class="line"><span class="selector-tag">from</span> &#123;<span class="attribute">background</span>: red;&#125;</span><br><span class="line"><span class="selector-tag">to</span> &#123;<span class="attribute">background</span>: yellow;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@-<span class="keyword">moz</span>-<span class="keyword">keyframes</span> myfirst /* Firefox */</span><br><span class="line">&#123;</span><br><span class="line"><span class="selector-tag">from</span> &#123;<span class="attribute">background</span>: red;&#125;</span><br><span class="line"><span class="selector-tag">to</span> &#123;<span class="attribute">background</span>: yellow;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@-<span class="keyword">webkit</span>-<span class="keyword">keyframes</span> myfirst /* Safari 和 Chrome */</span><br><span class="line">&#123;</span><br><span class="line"><span class="selector-tag">from</span> &#123;<span class="attribute">background</span>: red;&#125;</span><br><span class="line"><span class="selector-tag">to</span> &#123;<span class="attribute">background</span>: yellow;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@-<span class="keyword">o</span>-<span class="keyword">keyframes</span> myfirst /* Opera */</span><br><span class="line">&#123;</span><br><span class="line"><span class="selector-tag">from</span> &#123;<span class="attribute">background</span>: red;&#125;</span><br><span class="line"><span class="selector-tag">to</span> &#123;<span class="attribute">background</span>: yellow;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>把 <code>myfirst</code> 动画捆绑到 <code>div</code> 元素，时长：5 秒：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="attribute">animation</span>: myfirst <span class="number">5s</span>;</span><br><span class="line"><span class="attribute">-moz-animation</span>: myfirst <span class="number">5s</span>;	<span class="comment">/* Firefox */</span></span><br><span class="line"><span class="attribute">-webkit-animation</span>: myfirst <span class="number">5s</span>;	<span class="comment">/* Safari 和 Chrome */</span></span><br><span class="line"><span class="attribute">-o-animation</span>: myfirst <span class="number">5s</span>;	<span class="comment">/* Opera */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.w3school.com.cn/tiy/t.asp?f=css3_animation1" target="_blank" rel="noopener">在线查看</a></p>
+<p>当动画为 25% 及 50% 时改变背景色，然后当动画 100% 完成时再次改变：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">keyframes</span> myfirst</span><br><span class="line">&#123;</span><br><span class="line">0%   &#123;<span class="attribute">background</span>: red;&#125;</span><br><span class="line">25%  &#123;<span class="attribute">background</span>: yellow;&#125;</span><br><span class="line">50%  &#123;<span class="attribute">background</span>: blue;&#125;</span><br><span class="line">100% &#123;<span class="attribute">background</span>: green;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@-<span class="keyword">moz</span>-<span class="keyword">keyframes</span> myfirst /* Firefox */</span><br><span class="line">&#123;</span><br><span class="line">0%   &#123;<span class="attribute">background</span>: red;&#125;</span><br><span class="line">25%  &#123;<span class="attribute">background</span>: yellow;&#125;</span><br><span class="line">50%  &#123;<span class="attribute">background</span>: blue;&#125;</span><br><span class="line">100% &#123;<span class="attribute">background</span>: green;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@-<span class="keyword">webkit</span>-<span class="keyword">keyframes</span> myfirst /* Safari 和 Chrome */</span><br><span class="line">&#123;</span><br><span class="line">0%   &#123;<span class="attribute">background</span>: red;&#125;</span><br><span class="line">25%  &#123;<span class="attribute">background</span>: yellow;&#125;</span><br><span class="line">50%  &#123;<span class="attribute">background</span>: blue;&#125;</span><br><span class="line">100% &#123;<span class="attribute">background</span>: green;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@-<span class="keyword">o</span>-<span class="keyword">keyframes</span> myfirst /* Opera */</span><br><span class="line">&#123;</span><br><span class="line">0%   &#123;<span class="attribute">background</span>: red;&#125;</span><br><span class="line">25%  &#123;<span class="attribute">background</span>: yellow;&#125;</span><br><span class="line">50%  &#123;<span class="attribute">background</span>: blue;&#125;</span><br><span class="line">100% &#123;<span class="attribute">background</span>: green;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.w3school.com.cn/tiy/t.asp?f=css3_animation2" target="_blank" rel="noopener">实例在线地址</a></p>
+<h4 id="改变背景色和位置："><a href="#改变背景色和位置：" class="headerlink" title="改变背景色和位置："></a>改变背景色和位置：</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">keyframes</span> myfirst</span><br><span class="line">&#123;</span><br><span class="line">0%   &#123;<span class="attribute">background</span>: red; <span class="attribute">left</span>:<span class="number">0px</span>; <span class="attribute">top</span>:<span class="number">0px</span>;&#125;</span><br><span class="line">25%  &#123;<span class="attribute">background</span>: yellow; <span class="attribute">left</span>:<span class="number">200px</span>; <span class="attribute">top</span>:<span class="number">0px</span>;&#125;</span><br><span class="line">50%  &#123;<span class="attribute">background</span>: blue; <span class="attribute">left</span>:<span class="number">200px</span>; <span class="attribute">top</span>:<span class="number">200px</span>;&#125;</span><br><span class="line">75%  &#123;<span class="attribute">background</span>: green; <span class="attribute">left</span>:<span class="number">0px</span>; <span class="attribute">top</span>:<span class="number">200px</span>;&#125;</span><br><span class="line">100% &#123;<span class="attribute">background</span>: red; <span class="attribute">left</span>:<span class="number">0px</span>; <span class="attribute">top</span>:<span class="number">0px</span>;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@-<span class="keyword">moz</span>-<span class="keyword">keyframes</span> myfirst /* Firefox */</span><br><span class="line">&#123;</span><br><span class="line">0%   &#123;<span class="attribute">background</span>: red; <span class="attribute">left</span>:<span class="number">0px</span>; <span class="attribute">top</span>:<span class="number">0px</span>;&#125;</span><br><span class="line">25%  &#123;<span class="attribute">background</span>: yellow; <span class="attribute">left</span>:<span class="number">200px</span>; <span class="attribute">top</span>:<span class="number">0px</span>;&#125;</span><br><span class="line">50%  &#123;<span class="attribute">background</span>: blue; <span class="attribute">left</span>:<span class="number">200px</span>; <span class="attribute">top</span>:<span class="number">200px</span>;&#125;</span><br><span class="line">75%  &#123;<span class="attribute">background</span>: green; <span class="attribute">left</span>:<span class="number">0px</span>; <span class="attribute">top</span>:<span class="number">200px</span>;&#125;</span><br><span class="line">100% &#123;<span class="attribute">background</span>: red; <span class="attribute">left</span>:<span class="number">0px</span>; <span class="attribute">top</span>:<span class="number">0px</span>;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@-<span class="keyword">webkit</span>-<span class="keyword">keyframes</span> myfirst /* Safari 和 Chrome */</span><br><span class="line">&#123;</span><br><span class="line">0%   &#123;<span class="attribute">background</span>: red; <span class="attribute">left</span>:<span class="number">0px</span>; <span class="attribute">top</span>:<span class="number">0px</span>;&#125;</span><br><span class="line">25%  &#123;<span class="attribute">background</span>: yellow; <span class="attribute">left</span>:<span class="number">200px</span>; <span class="attribute">top</span>:<span class="number">0px</span>;&#125;</span><br><span class="line">50%  &#123;<span class="attribute">background</span>: blue; <span class="attribute">left</span>:<span class="number">200px</span>; <span class="attribute">top</span>:<span class="number">200px</span>;&#125;</span><br><span class="line">75%  &#123;<span class="attribute">background</span>: green; <span class="attribute">left</span>:<span class="number">0px</span>; <span class="attribute">top</span>:<span class="number">200px</span>;&#125;</span><br><span class="line">100% &#123;<span class="attribute">background</span>: red; <span class="attribute">left</span>:<span class="number">0px</span>; <span class="attribute">top</span>:<span class="number">0px</span>;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@-<span class="keyword">o</span>-<span class="keyword">keyframes</span> myfirst /* Opera */</span><br><span class="line">&#123;</span><br><span class="line">0%   &#123;<span class="attribute">background</span>: red; <span class="attribute">left</span>:<span class="number">0px</span>; <span class="attribute">top</span>:<span class="number">0px</span>;&#125;</span><br><span class="line">25%  &#123;<span class="attribute">background</span>: yellow; <span class="attribute">left</span>:<span class="number">200px</span>; <span class="attribute">top</span>:<span class="number">0px</span>;&#125;</span><br><span class="line">50%  &#123;<span class="attribute">background</span>: blue; <span class="attribute">left</span>:<span class="number">200px</span>; <span class="attribute">top</span>:<span class="number">200px</span>;&#125;</span><br><span class="line">75%  &#123;<span class="attribute">background</span>: green; <span class="attribute">left</span>:<span class="number">0px</span>; <span class="attribute">top</span>:<span class="number">200px</span>;&#125;</span><br><span class="line">100% &#123;<span class="attribute">background</span>: red; <span class="attribute">left</span>:<span class="number">0px</span>; <span class="attribute">top</span>:<span class="number">0px</span>;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.w3school.com.cn/tiy/t.asp?f=css3_animation3" target="_blank" rel="noopener">实例在线地址</a></p>
+<h4 id="运行名为-myfirst-的动画，其中设置了所有动画属性："><a href="#运行名为-myfirst-的动画，其中设置了所有动画属性：" class="headerlink" title="运行名为 myfirst 的动画，其中设置了所有动画属性："></a>运行名为 myfirst 的动画，其中设置了所有动画属性：</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="attribute">animation-name</span>: myfirst;</span><br><span class="line"><span class="attribute">animation-duration</span>: <span class="number">5s</span>;</span><br><span class="line"><span class="attribute">animation-timing-function</span>: linear;</span><br><span class="line"><span class="attribute">animation-delay</span>: <span class="number">2s</span>;</span><br><span class="line"><span class="attribute">animation-iteration-count</span>: infinite;</span><br><span class="line"><span class="attribute">animation-direction</span>: alternate;</span><br><span class="line"><span class="attribute">animation-play-state</span>: running;</span><br><span class="line"><span class="comment">/* Firefox: */</span></span><br><span class="line"><span class="attribute">-moz-animation-name</span>: myfirst;</span><br><span class="line"><span class="attribute">-moz-animation-duration</span>: <span class="number">5s</span>;</span><br><span class="line"><span class="attribute">-moz-animation-timing-function</span>: linear;</span><br><span class="line"><span class="attribute">-moz-animation-delay</span>: <span class="number">2s</span>;</span><br><span class="line"><span class="attribute">-moz-animation-iteration-count</span>: infinite;</span><br><span class="line"><span class="attribute">-moz-animation-direction</span>: alternate;</span><br><span class="line"><span class="attribute">-moz-animation-play-state</span>: running;</span><br><span class="line"><span class="comment">/* Safari 和 Chrome: */</span></span><br><span class="line"><span class="attribute">-webkit-animation-name</span>: myfirst;</span><br><span class="line"><span class="attribute">-webkit-animation-duration</span>: <span class="number">5s</span>;</span><br><span class="line"><span class="attribute">-webkit-animation-timing-function</span>: linear;</span><br><span class="line"><span class="attribute">-webkit-animation-delay</span>: <span class="number">2s</span>;</span><br><span class="line"><span class="attribute">-webkit-animation-iteration-count</span>: infinite;</span><br><span class="line"><span class="attribute">-webkit-animation-direction</span>: alternate;</span><br><span class="line"><span class="attribute">-webkit-animation-play-state</span>: running;</span><br><span class="line"><span class="comment">/* Opera: */</span></span><br><span class="line"><span class="attribute">-o-animation-name</span>: myfirst;</span><br><span class="line"><span class="attribute">-o-animation-duration</span>: <span class="number">5s</span>;</span><br><span class="line"><span class="attribute">-o-animation-timing-function</span>: linear;</span><br><span class="line"><span class="attribute">-o-animation-delay</span>: <span class="number">2s</span>;</span><br><span class="line"><span class="attribute">-o-animation-iteration-count</span>: infinite;</span><br><span class="line"><span class="attribute">-o-animation-direction</span>: alternate;</span><br><span class="line"><span class="attribute">-o-animation-play-state</span>: running;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的简写版：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="attribute">animation</span>: myfirst <span class="number">5s</span> linear <span class="number">2s</span> infinite alternate;</span><br><span class="line"><span class="comment">/* Firefox: */</span></span><br><span class="line"><span class="attribute">-moz-animation</span>: myfirst <span class="number">5s</span> linear <span class="number">2s</span> infinite alternate;</span><br><span class="line"><span class="comment">/* Safari 和 Chrome: */</span></span><br><span class="line"><span class="attribute">-webkit-animation</span>: myfirst <span class="number">5s</span> linear <span class="number">2s</span> infinite alternate;</span><br><span class="line"><span class="comment">/* Opera: */</span></span><br><span class="line"><span class="attribute">-o-animation</span>: myfirst <span class="number">5s</span> linear <span class="number">2s</span> infinite alternate;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="三、参考"><a href="#三、参考" class="headerlink" title="三、参考"></a>三、参考</h1><p><a href="https://www.w3school.com.cn/css3/css3_animation.asp" target="_blank" rel="noopener">https://www.w3school.com.cn/css3/css3_animation.asp</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSS3-Transform-Transition-Animation/" rel="tag"># CSS3 Transform Transition Animation</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/26/深入理解CSS布局之Flexbox/" rel="next" title="深入理解CSS布局之Flexbox">
+                <i class="fa fa-chevron-left"></i> 深入理解CSS布局之Flexbox
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/portrait.jpg" alt="Shaw">
+            
+              <p class="site-author-name" itemprop="name">Shaw</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/HalShaw" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:shawhal88@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/1d69810aa9f0" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5d2a9e396fb9a07ed524ce3c/posts" target="_blank" title="掘金">
+                      
+                        <i class="fa fa-fw fa-globe"></i>掘金</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、前言"><span class="nav-text">一、前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、具体用法"><span class="nav-text">二、具体用法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Transform，转换"><span class="nav-text">Transform，转换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#rotate，旋转"><span class="nav-text">rotate，旋转</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#translate，移动"><span class="nav-text">translate，移动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scale，缩放"><span class="nav-text">scale，缩放</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#skew，倾斜"><span class="nav-text">skew，倾斜</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transition，过渡"><span class="nav-text">Transition，过渡</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#transition"><span class="nav-text">transition</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#transition-property"><span class="nav-text">transition-property</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#transition-duration"><span class="nav-text">transition-duration</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#transition-timing-function"><span class="nav-text">transition-timing-function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#transition-delay"><span class="nav-text">transition-delay</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#Animation，动画"><span class="nav-text">Animation，动画</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#keyframes"><span class="nav-text">@keyframes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#animation"><span class="nav-text">animation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#animation-name"><span class="nav-text">animation-name</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#animation-duration"><span class="nav-text">animation-duration</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#animation-timing-function"><span class="nav-text">animation-timing-function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#animation-delay"><span class="nav-text">animation-delay</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#animation-iteration-count"><span class="nav-text">animation-iteration-count</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#animation-direction"><span class="nav-text">animation-direction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#animation-play-state"><span class="nav-text">animation-play-state</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#animation-fill-mode"><span class="nav-text">animation-fill-mode</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些实例"><span class="nav-text">一些实例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一个改变背景色动画"><span class="nav-text">一个改变背景色动画</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#改变背景色和位置："><span class="nav-text">改变背景色和位置：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行名为-myfirst-的动画，其中设置了所有动画属性："><span class="nav-text">运行名为 myfirst 的动画，其中设置了所有动画属性：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、参考"><span class="nav-text">三、参考</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shaw</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+<!--  百度统计
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F140dd3dc3eb949d6e77762baa6202ce9' type='text/javascript'%3E%3C/script%3E"));
+</script>
+-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?016fcc8c1754ddd4ebbdade569bc7324";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'halshaw',
+            repo: 'halshaw.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'b567e206fdbac281a64f4dadd0ea7bc85b915878',
+            
+                client_id: '07aa09900c0ed34136dc'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
