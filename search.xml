@@ -1,6 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Bcrypt、PBKDF2、Scrypt三种密码哈希函数的区别及优缺点</title>
+    <url>/2019/12/04/Bcrypt%E3%80%81PBKDF2%E3%80%81Scrypt%E4%B8%89%E7%A7%8D%E5%AF%86%E7%A0%81%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB%E5%8F%8A%E4%BC%98%E7%BC%BA%E7%82%B9/</url>
+    <content><![CDATA[<h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><p>常用加密密码的三个主要哈希函数有bcrypt、PBKDF2和scrypt，但是他们之间有什么优缺点和区别呢？以及如何结合盐值使用，下面就来探讨一下。</p>
+<h1 id="二、Bcrypt"><a href="#二、Bcrypt" class="headerlink" title="二、Bcrypt"></a>二、Bcrypt</h1><p>Bcrypt由Niels Provos 和 David Mazieres制定，是Belgain Fundamnetal Research in Cryptology and Informa-tion Security的简称。是基于Blowfish密码法的密钥导出函数。在保护密钥的过程中会加盐，而且具有适应能力。随着时间的推移，可以增加迭代次数，不断放慢速度，抵抗暴力攻击。</p>
+<p>Bcrypt是首选的哈希函数，是专门为密码设计的密钥导出函数。</p>
+<p>其优势有：</p>
+<ul>
+<li>基于Blowfish密码学，使用RAM中的查询表，在算法执行的过程中持续替换。这种表易于CPU处理，由于需要顺讯访问内存，而且是并行处理的，所以不适用与GPU，所以攻击者无法使用GUP硬件提升破解速度。</li>
+<li>是专为密码设计的哈希算法，故意放慢速度（这对密码哈希是好事）。</li>
+</ul>
+<p>在网站或应用中动手实现这个算法：</p>
+<ul>
+<li>先从<code>npm</code>中安装<code>bcrypt</code> 包：</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">npm <span class="keyword">install </span><span class="keyword">bcrypt </span>--save</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>然后把<code>bcrypt</code>引入<code>node</code>应用：</li>
+</ul>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">var bcrypt</span> = require(<span class="string">'bcrypt'</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>bcrypt</code>包含了生成盐值的方法，因此不再需要使用<code>crypto</code>库，也就不需要再同时引入<code>bcrypt</code>和<code>crypto</code>了。下面是一个<code>bcrypt</code>算法的简单实现:</li>
+</ul>
+<figure class="highlight actionscript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bcrypt_encrypt</span><span class="params">(username,password)</span></span>&#123;</span><br><span class="line">  bcrypt.gensalt(<span class="number">10</span>, <span class="function"><span class="keyword">function</span><span class="params">(err, salt)</span> </span>&#123;</span><br><span class="line">    bcrypt.hash(password. salt, <span class="function"><span class="keyword">function</span><span class="params">(err,key)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 把用户名、密码哈希值和盐值存入数据库</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面函数接受函数名和密码作为参数，可以假设它们在用户创建或更新账号时输入。上面代码采用异步方式生成盐值，这也是推荐使用的方法，还可以同步分别生成：</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">var salt</span> = bcrypt.gemSaltSync(10);</span><br><span class="line"><span class="attribute">var hash</span> = bcrypt.hashSync(password, salt);</span><br></pre></td></tr></table></figure>
+
+<p>盐值由<code>bcrypt.gensalt()</code>这个方法生成，其参数是循环次数（或称因子，默认为10）和一个回调，后者返回可能出现的错误和得到的盐值。<br>哈希值由<code>bcrypt.hash()</code>方法生成，这个方法的参数为要计算哈希值的密码和刚生成 的盐值，回调返回生成的哈希值。</p>
+<h1 id="三、PBKDF2"><a href="#三、PBKDF2" class="headerlink" title="三、PBKDF2"></a>三、PBKDF2</h1><p>PBKDF2全称为Password-Based Key Derivation Function 2，由RSA Laboratoies制定。它在输入（密码）上应用一个伪随机函数（例如哈希、暗码或HMAC），此外还会加盐，这个过程会重复多次，最后得到一个密钥。</p>
+<p>主要优势：</p>
+<ul>
+<li>经受住了时间的考验，而且过去这些年是大量研究的课题</li>
+<li>1Password、LastPass等密码管理系统采用的算法</li>
+<li>Node crypto 库原生支持的标准方法</li>
+</ul>
+<p><code>PBKDF2</code> 是Node crypto自带的哈希算法，使用起来十分简单，首先，在Node应用中引入crypto库：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> crypto = <span class="built_in">require</span>(<span class="string">'crypto'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pbkdf2_encrypt</span>(<span class="params">username, password</span>)</span>&#123;</span><br><span class="line">  crypto.randomBytes(<span class="number">32</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ex, salt</span>)</span>&#123;</span><br><span class="line">    crypto.pbkdf2(password, salt, <span class="number">4096</span>, <span class="number">512</span>, <span class="string">'SHA-256'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, key</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</span><br><span class="line">    <span class="comment">// 把用户名、密码哈希值和盐值存入数据库</span></span><br><span class="line">  &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先调用<code>crypto.randomBytes()</code>方法生成随机盐值，这个方法的参数是生成的数据的字节数（这里设为32字节），返回值是盐值。<br>然后调用<code>crypto.pbkdf2()</code>方法，传入下面的参数：</p>
+<ul>
+<li>用户密码</li>
+<li>盐值</li>
+<li>迭代次数，即应用哈希函数的次数（这里设为4096）</li>
+<li>密钥长度（这里设为512）</li>
+<li>摘要函数（这里设为SHA-256）。支持的各个摘要函数可以通过<code>crypto.getHashes()</code>查看</li>
+</ul>
+<p>这个函数返回的哈希值是十六进制格式的字符串，可以使用如下代买查看原始字符串：</p>
+<figure class="highlight processing"><table><tr><td class="code"><pre><span class="line">console.<span class="built_in">log</span>(<span class="string">"key: "</span> + <span class="built_in">key</span>.toString(<span class="string">'hex'</span>));</span><br></pre></td></tr></table></figure>
+
+<p>采用同步方式的代码如下：</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">const salt</span> = crypto.randomBytes(32);</span><br><span class="line"><span class="attribute">var result</span> = crypto.pbkdf2Sync(password, salt, 4096, 512, <span class="string">'SHA-256'</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="四、Scrypt"><a href="#四、Scrypt" class="headerlink" title="四、Scrypt"></a>四、Scrypt</h1><p>对于<code>PBKDF2</code>和<code>bcrypt</code>哪一个更好的争论从未停歇，但是<code>scrypt</code>采用的哈希算法与它们有很大 的差异。</p>
+<p><code>scrypt</code>的优势：</p>
+<ul>
+<li>做了特殊设计，是硬件和内存密集型算法，攻击者需要实施大型攻击</li>
+<li>是加密数字货币莱特币和狗狗货币背后采用的算法</li>
+</ul>
+<p>与<code>PBKDF2</code>和<code>bcrypt</code>相比，<code>scrypt</code>的主要优势是，若想要破解耗费异常多的硬件和内存，而破解<code>PBKDF2</code>和<code>bcrypt</code>哈希的数据可以在少量硬件资源上并行实施几千次攻击，因为它们在设计时就没有要求大量资源。</p>
+<ul>
+<li>首先安装<code>scrypt</code>模块</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">npm <span class="keyword">install </span><span class="keyword">scrypt </span>--save</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> scrypt = <span class="built_in">require</span>(<span class="string">'scrypt'</span>);</span><br><span class="line">    crypto = <span class="built_in">require</span>(<span class="string">'crypto'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">scrypt_encrypt</span>(<span class="params">username, password</span>)</span>&#123;</span><br><span class="line">  crypto.randomBytes(<span class="number">32</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ex, salt</span>)</span>&#123;</span><br><span class="line">    scrypt.hash(password, &#123;<span class="string">"N"</span>:<span class="number">16384</span>, <span class="string">"r"</span>:<span class="number">8</span>, <span class="string">"p"</span>:<span class="number">1</span>&#125;, <span class="number">64</span>, salt,</span><br><span class="line">      <span class="function"><span class="keyword">function</span>(<span class="params">err, key</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 把用户名、密码哈希值和盐值存入数据库</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面函数使用<code>crypto</code>库中的<code>crypto.randomBytes()</code>方法生成盐值，传入输出的字节数，然后输出盐值。<br>然后，根据盐值生成哈希值，调用<code>scrypt.hash()</code>方法，其接受下面几个参数：</p>
+<ul>
+<li>需要计算哈希值的用户密码</li>
+<li>一个对象，包含控制scrypt哈希行为的采纳数：<ul>
+<li>N：scrypt 最多使用多久时间（秒数）计算密钥（偶数）</li>
+<li>r：计算密钥是最多使用多少字节RAM（整数）。默认是0</li>
+<li>p：计算密钥是所用RAM占可用值的比例（0-1，换算成百分比）。默认值为0.5</li>
+</ul>
+</li>
+<li>得到的哈希值的长度</li>
+<li>刚生成的盐值</li>
+</ul>
+<p>同步代码：</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">const salt</span> = crypto.randomBytes(256);</span><br><span class="line"><span class="attribute">var result</span> = scrypt.hashSync(key, &#123;<span class="string">"N"</span>:16384, <span class="string">"r"</span>:8, <span class="string">"p"</span>:1&#125;, 64, salt);</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>哈希函数</category>
+      </categories>
+      <tags>
+        <tag>Bcrypt PBKDF2 Scrypt</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CSS3之Transform，Transition，Animation的用法</title>
     <url>/2019/12/01/CSS3%E4%B9%8BTransform%EF%BC%8CTransition%EF%BC%8CAnimation%E7%9A%84%E7%94%A8%E6%B3%95/</url>
     <content><![CDATA[<h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><p>之前由于写CSS动画比较少，也很少遇到上面这几个属性的具体用法，但是在后来的开发过程中，经常碰到这几个属性但却不明白起用法和意义，这就是该下功夫补课的地方了，下面整理并记录一下这几个属性的具体用法和区别。</p>

@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="JavaScript Notes 你不知道的JavaScript中卷,">
+  <meta name="keywords" content="Bcrypt PBKDF2 Scrypt,">
 
 
 
@@ -82,20 +82,18 @@
 
 
 
-<meta name="description" content="基本类型值 有一个坑常常被提到，[] + {}，{} +[]，它们返回不同的结果，分别是”[object Object]”，0。  if (a) { foo(); }可以写成a &amp;amp;&amp;amp; foo()a = b || “something” 和a &amp;amp;&amp;amp; b() 用到了“短路”机制。  == 允许在相等比较中进行强制类型转换，===不允许。  NaN 不等于NaN  +0">
-<meta name="keywords" content="JavaScript Notes 你不知道的JavaScript中卷">
+<meta name="description" content="一、前言常用加密密码的三个主要哈希函数有bcrypt、PBKDF2和scrypt，但是他们之间有什么优缺点和区别呢？以及如何结合盐值使用，下面就来探讨一下。 二、BcryptBcrypt由Niels Provos 和 David Mazieres制定，是Belgain Fundamnetal Research in Cryptology and Informa-tion Security的简称。是">
+<meta name="keywords" content="Bcrypt PBKDF2 Scrypt">
 <meta property="og:type" content="article">
-<meta property="og:title" content="你不知道的JavaScript中卷-读书笔记">
-<meta property="og:url" content="http://yoursite.com/2019/10/07/你不知道的JS中卷/index.html">
+<meta property="og:title" content="Bcrypt、PBKDF2、Scrypt三种密码哈希函数的区别及优缺点">
+<meta property="og:url" content="http://yoursite.com/2019/12/04/Bcrypt、PBKDF2、Scrypt三种密码哈希函数的区别及优缺点/index.html">
 <meta property="og:site_name" content="Shaw&#39;s blog.">
-<meta property="og:description" content="基本类型值 有一个坑常常被提到，[] + {}，{} +[]，它们返回不同的结果，分别是”[object Object]”，0。  if (a) { foo(); }可以写成a &amp;amp;&amp;amp; foo()a = b || “something” 和a &amp;amp;&amp;amp; b() 用到了“短路”机制。  == 允许在相等比较中进行强制类型转换，===不允许。  NaN 不等于NaN  +0">
+<meta property="og:description" content="一、前言常用加密密码的三个主要哈希函数有bcrypt、PBKDF2和scrypt，但是他们之间有什么优缺点和区别呢？以及如何结合盐值使用，下面就来探讨一下。 二、BcryptBcrypt由Niels Provos 和 David Mazieres制定，是Belgain Fundamnetal Research in Cryptology and Informa-tion Security的简称。是">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1741029-8c92a4538cc134eb.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-10-27T02:15:07.113Z">
+<meta property="og:updated_time" content="2019-12-04T15:16:24.918Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="你不知道的JavaScript中卷-读书笔记">
-<meta name="twitter:description" content="基本类型值 有一个坑常常被提到，[] + {}，{} +[]，它们返回不同的结果，分别是”[object Object]”，0。  if (a) { foo(); }可以写成a &amp;amp;&amp;amp; foo()a = b || “something” 和a &amp;amp;&amp;amp; b() 用到了“短路”机制。  == 允许在相等比较中进行强制类型转换，===不允许。  NaN 不等于NaN  +0">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1741029-8c92a4538cc134eb.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="Bcrypt、PBKDF2、Scrypt三种密码哈希函数的区别及优缺点">
+<meta name="twitter:description" content="一、前言常用加密密码的三个主要哈希函数有bcrypt、PBKDF2和scrypt，但是他们之间有什么优缺点和区别呢？以及如何结合盐值使用，下面就来探讨一下。 二、BcryptBcrypt由Niels Provos 和 David Mazieres制定，是Belgain Fundamnetal Research in Cryptology and Informa-tion Security的简称。是">
 
 
 
@@ -125,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/10/07/你不知道的JS中卷/">
+  <link rel="canonical" href="http://yoursite.com/2019/12/04/Bcrypt、PBKDF2、Scrypt三种密码哈希函数的区别及优缺点/">
 
 
 
 
 
-  <title>你不知道的JavaScript中卷-读书笔记 | Shaw's blog.</title>
+  <title>Bcrypt、PBKDF2、Scrypt三种密码哈希函数的区别及优缺点 | Shaw's blog.</title>
   
 
 
@@ -310,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/07/你不知道的JS中卷/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/04/Bcrypt、PBKDF2、Scrypt三种密码哈希函数的区别及优缺点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shaw">
@@ -327,7 +325,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">你不知道的JavaScript中卷-读书笔记</h2>
+          <h2 class="post-title" itemprop="name headline">Bcrypt、PBKDF2、Scrypt三种密码哈希函数的区别及优缺点</h2>
         
 
         <div class="post-meta">
@@ -339,8 +337,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-07T21:47:00+08:00">
-                2019-10-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-04T23:14:00+08:00">
+                2019-12-04
               </time>
             
 
@@ -362,8 +360,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
+                  <a href="/categories/哈希函数/" itemprop="url" rel="index">
+                    <span itemprop="name">哈希函数</span>
                   </a>
                 </span>
 
@@ -380,8 +378,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/10/07/你不知道的JS中卷/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/10/07/你不知道的JS中卷/" itemprop="commentsCount"></span>
+                <a href="/2019/12/04/Bcrypt、PBKDF2、Scrypt三种密码哈希函数的区别及优缺点/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/12/04/Bcrypt、PBKDF2、Scrypt三种密码哈希函数的区别及优缺点/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -409,167 +407,87 @@
       
 
       
-        <p><img src="https://upload-images.jianshu.io/upload_images/1741029-8c92a4538cc134eb.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="JavaScript"></p>
-<h1 id="基本类型值"><a href="#基本类型值" class="headerlink" title="基本类型值"></a>基本类型值</h1><ul>
-<li><p>有一个坑常常被提到，[] + {}，{} +[]，它们返回不同的结果，分别是”[object Object]”，0。</p>
-</li>
-<li><p>if (a) { foo(); }可以写成a &amp;&amp; foo()a = b || “something” 和a &amp;&amp; b() 用到了“短路”机制。</p>
-</li>
-<li><p>== 允许在相等比较中进行强制类型转换，===不允许。</p>
-</li>
-<li><p>NaN 不等于NaN</p>
-</li>
-<li><p>+0 等于-0</p>
-</li>
+        <h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><p>常用加密密码的三个主要哈希函数有bcrypt、PBKDF2和scrypt，但是他们之间有什么优缺点和区别呢？以及如何结合盐值使用，下面就来探讨一下。</p>
+<h1 id="二、Bcrypt"><a href="#二、Bcrypt" class="headerlink" title="二、Bcrypt"></a>二、Bcrypt</h1><p>Bcrypt由Niels Provos 和 David Mazieres制定，是Belgain Fundamnetal Research in Cryptology and Informa-tion Security的简称。是基于Blowfish密码法的密钥导出函数。在保护密钥的过程中会加盐，而且具有适应能力。随着时间的推移，可以增加迭代次数，不断放慢速度，抵抗暴力攻击。</p>
+<p>Bcrypt是首选的哈希函数，是专门为密码设计的密钥导出函数。</p>
+<p>其优势有：</p>
+<ul>
+<li>基于Blowfish密码学，使用RAM中的查询表，在算法执行的过程中持续替换。这种表易于CPU处理，由于需要顺讯访问内存，而且是并行处理的，所以不适用与GPU，所以攻击者无法使用GUP硬件提升破解速度。</li>
+<li>是专为密码设计的哈希算法，故意放慢速度（这对密码哈希是好事）。</li>
 </ul>
-<a id="more"></a>
+<p>在网站或应用中动手实现这个算法：</p>
+<ul>
+<li>先从<code>npm</code>中安装<code>bcrypt</code> 包：</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install </span><span class="keyword">bcrypt </span>--save</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><p>我个人建议无论什么情况下都不要使== true 和 == false。</p>
-</li>
-<li><p>(1) 如果x 为null，y 为undefined，则结果为true。</p>
-</li>
-<li><p>(2) 如果x 为undefined，y 为null，则结果为true。</p>
-<pre><code>&quot;0&quot; == null; // false
-&quot;0&quot; == undefined; // false
-&quot;0&quot; == false; // true -- 晕！
-&quot;0&quot; == NaN; // false
-&quot;0&quot; == 0; // true
-&quot;0&quot; == &quot;&quot;; // false
-false == null; // false
-false == undefined; // false
-false == NaN; // false
-false == 0; // true -- 晕！
-false == &quot;&quot;; // true -- 晕！
-false == []; // true -- 晕！
-false == {}; // false
-
-&quot;&quot; == null; // false
-&quot;&quot; == undefined; // false
-&quot;&quot; == NaN; // false
-&quot;&quot; == 0; // true -- 晕！
-&quot;&quot; == []; // true -- 晕！
-&quot;&quot; == {}; // false
-0 == null; // false
-0 == undefined; // false
-0 == NaN; // false
-0 == []; // true -- 晕！
-0 == {}; // false
-
-&quot;0&quot; == false; // true -- 晕！
-false == 0; // true -- 晕！
-false == &quot;&quot;; // true -- 晕！
-false == []; // true -- 晕！
-&quot;&quot; == 0; // true -- 晕！
-&quot;&quot; == []; // true -- 晕！
-0 == []; // true -- 晕！</code></pre></li>
+<li>然后把<code>bcrypt</code>引入<code>node</code>应用：</li>
 </ul>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">var bcrypt</span> = require(<span class="string">'bcrypt'</span>);</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><p>[] == ![] // true</p>
-</li>
-<li><p>根据ToBoolean 规则，它会进行布尔值的显式强制类型转换（同时反转奇偶校验位）。所以[] == ![] 变成了[] == false。前面我们讲过false == []，最后的结果就顺理成章了。</p>
-<p>  2 == [2]; // true<br>  “” == [null]; // true</p>
-</li>
-<li><p>如果两边的值中有true 或者false，千万不要使用==。</p>
-</li>
-<li><p>如果两边的值中有[]、”” 或者0，尽量不要使用==。</p>
-</li>
-<li><p>字符串常量中允许的最大字符数（并非只是针对字符串值）；</p>
-</li>
-<li><p>可以作为参数传递到函数中的数据大小（也称为栈大小，以字节为单位）；</p>
-</li>
-<li><p>函数声明中的参数个数；</p>
-</li>
-<li><p>未经优化的调用栈（例如递归）的最大层数，即函数调用链的最大长度；</p>
-</li>
-<li><p>JavaScript 程序以阻塞方式在浏览器中运行的最长时间（秒）；</p>
-</li>
-<li><p>变量名的最大长度。</p>
-</li>
-<li><p>对多数开发者来说，错误处理最自然的形式就是同步的try..catch 结构。遗憾的是，它只能是同步的，无法用于异步代码模式。</p>
-</li>
+<li><code>bcrypt</code>包含了生成盐值的方法，因此不再需要使用<code>crypto</code>库，也就不需要再同时引入<code>bcrypt</code>和<code>crypto</code>了。下面是一个<code>bcrypt</code>算法的简单实现:</li>
 </ul>
-<h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><ul>
-<li><p>传给Promise.all([ .. ]) 的数组中的值可以是Promise、thenable，甚至是立即值。就本质而言，列表中的每个值都会通过Promise.resolve(..) 过滤，以确保要等待的是一个真正的Promise，所以立即值会被规范化为为这个值构建的Promise。</p>
-</li>
-<li><p>与Promise.all([ .. ]) 类似，一旦有任何一个Promise 决议为完成，Promise.race([ .. ])就会完成；一旦有任何一个Promise 决议为拒绝，它就会拒绝。</p>
-</li>
-<li><p>Promise.race([ .. ]) 也接受单个数组参数。这个数组由一个或多个Promise、thenable 或立即值组成。要注意，永远不要递送空数组。</p>
-<p>  p.then( fulfilled );<br>  p.then( fulfilled, rejected );<br>  p.catch( rejected ); // 或者p.then( null, rejected )</p>
-</li>
-<li><p>对Promise.all([ .. ]) 来说，只有传入的所有promise 都完成，返回promise 才能完成。如果有任何promise被拒绝，返回的主promise就立即会被拒绝（抛弃任何其他promise 的结果）。</p>
-</li>
-<li><p>当心！若向Promise.all([ .. ]) 传入空数组，它会立即完成，但Promise.race([ .. ]) 会挂住，且永远不会决议。</p>
-<pre><code>var p1 = Promise.resolve( 42 );
-var p2 = Promise.resolve( &quot;Hello World&quot; );
-var p3 = Promise.reject( &quot;Oops&quot; );
-Promise.race( [p1,p2,p3] )
-.then( function(msg){
-console.log( msg ); // 42
-} );
-Promise.all( [p1,p2,p3] )
-.catch( function(err){
-console.error( err ); // &quot;Oops&quot;
-} );
-Promise.all( [p1,p2] )
-.then( function(msgs){
-console.log( msgs ); // [42,&quot;Hello World&quot;]
-} );</code></pre></li>
-<li><p>Promise 局限性:</p>
-</li>
-<li><p>顺序错误处理，如果没有错误处理，错误会一直往下传递</p>
-</li>
-<li><p>单一值</p>
-</li>
-<li><p>单决议，Promise 只能被决议一次（完成或拒绝）</p>
-</li>
-<li><p>惯性，运动状态（使用回调的）的代码库会一直保持运动状态（使用回调的），直到受到一位聪明的、理解Promise 的开发者的作用。</p>
-</li>
-<li><p>无法取消，一旦创建了一个Promise 并为其注册了完成和/ 或拒绝处理函数，如果出现某种情况使得这个任务悬而未决的话，你也没有办法从外部停止它的进程。</p>
-</li>
-</ul>
-<h1 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h1><ul>
-<li><p>生成器就是一类特殊的函数，可以一次或多次启动和停止，并不一定非得要完成。<br>yield .. 和next(..) 这一对组合起来，在生成器的执行过程中构成了一个双向消息传递系统。<br>使用生成器的话，交替执行（甚至在语句当中！）显然是可能的。</p>
-</li>
-<li><p>生成器实现标准的迭代器接口:</p>
-</li>
-</ul>
-<pre><code>var something = (function(){
-var nextVal;
-return {
-// for..of循环需要
-[Symbol.iterator]: function(){ return this; },
-// 标准迭代器接口方法
-next: function(){
-if (nextVal === undefined) {
-nextVal = 1;
-}
-else {
-nextVal = (3 * nextVal) + 6;
-}
-return { done:false, value:nextVal };
-}
-};
-})();
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bcrypt_encrypt</span><span class="params">(username,password)</span></span>&#123;</span><br><span class="line">  bcrypt.gensalt(<span class="number">10</span>, <span class="function"><span class="keyword">function</span><span class="params">(err, salt)</span> </span>&#123;</span><br><span class="line">    bcrypt.hash(password. salt, <span class="function"><span class="keyword">function</span><span class="params">(err,key)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 把用户名、密码哈希值和盐值存入数据库</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-something.next().value; // 1
-something.next().value; // 9
-something.next().value; // 33
-something.next().value; // 105</code></pre><ul>
-<li><p>yield 委托的主要目的是代码组织，以达到与普通函数调用的对称。</p>
-</li>
-<li><p>生成器是ES6 的一个新的函数类型，它并不像普通函数那样总是运行到结束。取而代之的是，生成器可以在运行当中（完全保持其状态）暂停，并且将来再从暂停的地方恢复运行。</p>
-</li>
-<li><p>这种交替的暂停和恢复是合作性的而不是抢占式的，这意味着生成器具有独一无二的能力来暂停自身，这是通过关键字yield 实现的。不过，只有控制生成器的迭代器具有恢复生成器的能力（通过next(..)）。</p>
-</li>
-<li><p>yield/next(..) 这一对不只是一种控制机制，实际上也是一种双向消息传递机制。yield .. 表达式本质上是暂停下来等待某个值，接下来的next(..) 调用会向被暂停的yield 表达式传回一个值（或者是隐式的undefined）。</p>
-</li>
-<li><p>在异步控制流程方面，生成器的关键优点是：生成器内部的代码是以自然的同步/ 顺序方式表达任务的一系列步骤。其技巧在于，我们把可能的异步隐藏在了关键字yield 的后面，把异步移动到控制生成器的迭代器的代码部分。</p>
-</li>
-<li><p>换句话说，生成器为异步代码保持了顺序、同步、阻塞的代码模式，这使得大脑可以更自然地追踪代码，解决了基于回调的异步的两个关键缺陷之一。</p>
-</li>
+<p>上面函数接受函数名和密码作为参数，可以假设它们在用户创建或更新账号时输入。上面代码采用异步方式生成盐值，这也是推荐使用的方法，还可以同步分别生成：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">var salt</span> = bcrypt.gemSaltSync(10);</span><br><span class="line"><span class="attribute">var hash</span> = bcrypt.hashSync(password, salt);</span><br></pre></td></tr></table></figure>
+
+<p>盐值由<code>bcrypt.gensalt()</code>这个方法生成，其参数是循环次数（或称因子，默认为10）和一个回调，后者返回可能出现的错误和得到的盐值。<br>哈希值由<code>bcrypt.hash()</code>方法生成，这个方法的参数为要计算哈希值的密码和刚生成 的盐值，回调返回生成的哈希值。</p>
+<h1 id="三、PBKDF2"><a href="#三、PBKDF2" class="headerlink" title="三、PBKDF2"></a>三、PBKDF2</h1><p>PBKDF2全称为Password-Based Key Derivation Function 2，由RSA Laboratoies制定。它在输入（密码）上应用一个伪随机函数（例如哈希、暗码或HMAC），此外还会加盐，这个过程会重复多次，最后得到一个密钥。</p>
+<p>主要优势：</p>
+<ul>
+<li>经受住了时间的考验，而且过去这些年是大量研究的课题</li>
+<li>1Password、LastPass等密码管理系统采用的算法</li>
+<li>Node crypto 库原生支持的标准方法</li>
 </ul>
-<p>• 如果要比较的两个值的任意一个（即一边）可能是true 或者false 值，那么要避免使<br>用==，而使用===。<br>• 如果要比较的两个值中的任意一个可能是特定值（0、”” 或者[]——空数组），那么避<br>免使用==，而使用===。<br>• 在所有其他情况下，使用== 都是安全的。不仅仅只是安全而已，这在很多情况下也会<br>简化代码，提高代码的可读性。</p>
+<p><code>PBKDF2</code> 是Node crypto自带的哈希算法，使用起来十分简单，首先，在Node应用中引入crypto库：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> crypto = <span class="built_in">require</span>(<span class="string">'crypto'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pbkdf2_encrypt</span>(<span class="params">username, password</span>)</span>&#123;</span><br><span class="line">  crypto.randomBytes(<span class="number">32</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ex, salt</span>)</span>&#123;</span><br><span class="line">    crypto.pbkdf2(password, salt, <span class="number">4096</span>, <span class="number">512</span>, <span class="string">'SHA-256'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, key</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</span><br><span class="line">    <span class="comment">// 把用户名、密码哈希值和盐值存入数据库</span></span><br><span class="line">  &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先调用<code>crypto.randomBytes()</code>方法生成随机盐值，这个方法的参数是生成的数据的字节数（这里设为32字节），返回值是盐值。<br>然后调用<code>crypto.pbkdf2()</code>方法，传入下面的参数：</p>
+<ul>
+<li>用户密码</li>
+<li>盐值</li>
+<li>迭代次数，即应用哈希函数的次数（这里设为4096）</li>
+<li>密钥长度（这里设为512）</li>
+<li>摘要函数（这里设为SHA-256）。支持的各个摘要函数可以通过<code>crypto.getHashes()</code>查看</li>
+</ul>
+<p>这个函数返回的哈希值是十六进制格式的字符串，可以使用如下代买查看原始字符串：</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.<span class="built_in">log</span>(<span class="string">"key: "</span> + <span class="built_in">key</span>.toString(<span class="string">'hex'</span>));</span><br></pre></td></tr></table></figure>
+
+<p>采用同步方式的代码如下：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">const salt</span> = crypto.randomBytes(32);</span><br><span class="line"><span class="attribute">var result</span> = crypto.pbkdf2Sync(password, salt, 4096, 512, <span class="string">'SHA-256'</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="四、Scrypt"><a href="#四、Scrypt" class="headerlink" title="四、Scrypt"></a>四、Scrypt</h1><p>对于<code>PBKDF2</code>和<code>bcrypt</code>哪一个更好的争论从未停歇，但是<code>scrypt</code>采用的哈希算法与它们有很大 的差异。</p>
+<p><code>scrypt</code>的优势：</p>
+<ul>
+<li>做了特殊设计，是硬件和内存密集型算法，攻击者需要实施大型攻击</li>
+<li>是加密数字货币莱特币和狗狗货币背后采用的算法</li>
+</ul>
+<p>与<code>PBKDF2</code>和<code>bcrypt</code>相比，<code>scrypt</code>的主要优势是，若想要破解耗费异常多的硬件和内存，而破解<code>PBKDF2</code>和<code>bcrypt</code>哈希的数据可以在少量硬件资源上并行实施几千次攻击，因为它们在设计时就没有要求大量资源。</p>
+<ul>
+<li>首先安装<code>scrypt</code>模块</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install </span><span class="keyword">scrypt </span>--save</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scrypt = <span class="built_in">require</span>(<span class="string">'scrypt'</span>);</span><br><span class="line">    crypto = <span class="built_in">require</span>(<span class="string">'crypto'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">scrypt_encrypt</span>(<span class="params">username, password</span>)</span>&#123;</span><br><span class="line">  crypto.randomBytes(<span class="number">32</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ex, salt</span>)</span>&#123;</span><br><span class="line">    scrypt.hash(password, &#123;<span class="string">"N"</span>:<span class="number">16384</span>, <span class="string">"r"</span>:<span class="number">8</span>, <span class="string">"p"</span>:<span class="number">1</span>&#125;, <span class="number">64</span>, salt,</span><br><span class="line">      <span class="function"><span class="keyword">function</span>(<span class="params">err, key</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 把用户名、密码哈希值和盐值存入数据库</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面函数使用<code>crypto</code>库中的<code>crypto.randomBytes()</code>方法生成盐值，传入输出的字节数，然后输出盐值。<br>然后，根据盐值生成哈希值，调用<code>scrypt.hash()</code>方法，其接受下面几个参数：</p>
+<ul>
+<li>需要计算哈希值的用户密码</li>
+<li>一个对象，包含控制scrypt哈希行为的采纳数：<ul>
+<li>N：scrypt 最多使用多久时间（秒数）计算密钥（偶数）</li>
+<li>r：计算密钥是最多使用多少字节RAM（整数）。默认是0</li>
+<li>p：计算密钥是所用RAM占可用值的比例（0-1，换算成百分比）。默认值为0.5</li>
+</ul>
+</li>
+<li>得到的哈希值的长度</li>
+<li>刚生成的盐值</li>
+</ul>
+<p>同步代码：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">const salt</span> = crypto.randomBytes(256);</span><br><span class="line"><span class="attribute">var result</span> = scrypt.hashSync(key, &#123;<span class="string">"N"</span>:16384, <span class="string">"r"</span>:8, <span class="string">"p"</span>:1&#125;, 64, salt);</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -587,7 +505,7 @@ something.next().value; // 105</code></pre><ul>
       
         <div class="post-tags">
           
-            <a href="/tags/JavaScript-Notes-你不知道的JavaScript中卷/" rel="tag"># JavaScript Notes 你不知道的JavaScript中卷</a>
+            <a href="/tags/Bcrypt-PBKDF2-Scrypt/" rel="tag"># Bcrypt PBKDF2 Scrypt</a>
           
         </div>
       
@@ -600,8 +518,8 @@ something.next().value; // 105</code></pre><ul>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/26/Babel7.5新特性之动态引入和F管道/" rel="next" title="Babel 7.5新特性之动态引入和F#管道">
-                <i class="fa fa-chevron-left"></i> Babel 7.5新特性之动态引入和F#管道
+              <a href="/2019/12/01/CSS3之Transform，Transition，Animation的用法/" rel="next" title="CSS3之Transform，Transition，Animation的用法">
+                <i class="fa fa-chevron-left"></i> CSS3之Transform，Transition，Animation的用法
               </a>
             
           </div>
@@ -609,10 +527,6 @@ something.next().value; // 105</code></pre><ul>
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/10/18/前端框架路由实现的Hash和History两种模式的区别/" rel="prev" title="前端框架路由实现的Hash和History两种模式的区别">
-                前端框架路由实现的Hash和History两种模式的区别 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -826,7 +740,7 @@ something.next().value; // 105</code></pre><ul>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本类型值"><span class="nav-text">基本类型值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Promise"><span class="nav-text">Promise</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生成器"><span class="nav-text">生成器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、前言"><span class="nav-text">一、前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、Bcrypt"><span class="nav-text">二、Bcrypt</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、PBKDF2"><span class="nav-text">三、PBKDF2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、Scrypt"><span class="nav-text">四、Scrypt</span></a></li></ol></div>
             
 
           </div>
