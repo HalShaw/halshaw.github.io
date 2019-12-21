@@ -90,7 +90,7 @@
 <meta property="og:site_name" content="Shaw&#39;s blog.">
 <meta property="og:description" content="一、前言常用加密密码的三个主要哈希函数有bcrypt、PBKDF2和scrypt，但是他们之间有什么优缺点和区别呢？以及如何结合盐值使用，下面就来探讨一下。 二、BcryptBcrypt由Niels Provos 和 David Mazieres制定，是Belgain Fundamnetal Research in Cryptology and Informa-tion Security的简称。是">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-04T15:16:24.918Z">
+<meta property="og:updated_time" content="2019-12-04T15:17:35.907Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Bcrypt、PBKDF2、Scrypt三种密码哈希函数的区别及优缺点">
 <meta name="twitter:description" content="一、前言常用加密密码的三个主要哈希函数有bcrypt、PBKDF2和scrypt，但是他们之间有什么优缺点和区别呢？以及如何结合盐值使用，下面就来探讨一下。 二、BcryptBcrypt由Niels Provos 和 David Mazieres制定，是Belgain Fundamnetal Research in Cryptology and Informa-tion Security的简称。是">
@@ -415,6 +415,8 @@
 <li>基于Blowfish密码学，使用RAM中的查询表，在算法执行的过程中持续替换。这种表易于CPU处理，由于需要顺讯访问内存，而且是并行处理的，所以不适用与GPU，所以攻击者无法使用GUP硬件提升破解速度。</li>
 <li>是专为密码设计的哈希算法，故意放慢速度（这对密码哈希是好事）。</li>
 </ul>
+<a id="more"></a>
+
 <p>在网站或应用中动手实现这个算法：</p>
 <ul>
 <li>先从<code>npm</code>中安装<code>bcrypt</code> 包：</li>
@@ -527,6 +529,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/21/原生Javascript实现Base64编解码和兼容性问题处理/" rel="prev" title="原生Javascript实现Base64编解码和兼容性问题处理">
+                原生Javascript实现Base64编解码和兼容性问题处理 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -650,7 +656,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -661,7 +667,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -672,7 +678,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-04T15:16:24.918Z</updated>
+  <updated>2019-12-21T04:22:35.071Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,21 +17,49 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>原生Javascript实现Base64编解码和兼容性问题处理</title>
+    <link href="http://yoursite.com/2019/12/21/%E5%8E%9F%E7%94%9FJavascript%E5%AE%9E%E7%8E%B0Base64%E7%BC%96%E8%A7%A3%E7%A0%81%E5%92%8C%E5%85%BC%E5%AE%B9%E6%80%A7%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/"/>
+    <id>http://yoursite.com/2019/12/21/原生Javascript实现Base64编解码和兼容性问题处理/</id>
+    <published>2019-12-21T04:21:00.000Z</published>
+    <updated>2019-12-21T04:22:35.071Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;一、前言&quot;&gt;&lt;a href=&quot;#一、前言&quot; class=&quot;headerlink&quot; title=&quot;一、前言&quot;&gt;&lt;/a&gt;一、前言&lt;/h1&gt;&lt;p&gt;前几天因工作需要，需要在&lt;code&gt;URL&lt;/code&gt;上面传递一段参数，参数内容有点多，所以需要在前端实现&lt;code&gt;Base64&lt;/code&gt;编码参数，然后进行传递，在下一页面再进行解码获取参数。之前也没有相关经验，之前参数多的时候都是放在&lt;code&gt;Parameters&lt;/code&gt;里面的，所以一开始也不知道如何下手，网上一番捣鼓之后，找到了如下两个函数可以实现相关功能：&lt;/p&gt;
+&lt;figure class=&quot;highlight dart&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.btoa() &lt;span class=&quot;comment&quot;&gt;// 实现base64编码&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;window&lt;/span&gt;.atob() &lt;span class=&quot;comment&quot;&gt;// 实现base64解码&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;下面来记录下这两个函数相关的用法及其中的坑。&lt;/p&gt;
+&lt;h1 id=&quot;二、具体用法与坑&quot;&gt;&lt;a href=&quot;#二、具体用法与坑&quot; class=&quot;headerlink&quot; title=&quot;二、具体用法与坑&quot;&gt;&lt;/a&gt;二、具体用法与坑&lt;/h1&gt;&lt;h3 id=&quot;window-btoa&quot;&gt;&lt;a href=&quot;#window-btoa&quot; class=&quot;headerlink&quot; title=&quot;window.btoa()&quot;&gt;&lt;/a&gt;window.btoa()&lt;/h3&gt;&lt;figure class=&quot;highlight awk&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;window.btoa(&lt;span class=&quot;string&quot;&gt;&quot;test encode&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;dGVzdCBlbmNvZGU=&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;window-atob&quot;&gt;&lt;a href=&quot;#window-atob&quot; class=&quot;headerlink&quot; title=&quot;window.atob()&quot;&gt;&lt;/a&gt;window.atob()&lt;/h3&gt;&lt;figure class=&quot;highlight awk&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;window.atob(&lt;span class=&quot;string&quot;&gt;&quot;dGVzdCBlbmNvZGU=&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;test encode&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="Javascript" scheme="http://yoursite.com/categories/Javascript/"/>
+    
+    
+      <category term="Javascript Base64 window.btoa window.atob" scheme="http://yoursite.com/tags/Javascript-Base64-window-btoa-window-atob/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Bcrypt、PBKDF2、Scrypt三种密码哈希函数的区别及优缺点</title>
     <link href="http://yoursite.com/2019/12/04/Bcrypt%E3%80%81PBKDF2%E3%80%81Scrypt%E4%B8%89%E7%A7%8D%E5%AF%86%E7%A0%81%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB%E5%8F%8A%E4%BC%98%E7%BC%BA%E7%82%B9/"/>
     <id>http://yoursite.com/2019/12/04/Bcrypt、PBKDF2、Scrypt三种密码哈希函数的区别及优缺点/</id>
     <published>2019-12-04T15:14:00.000Z</published>
-    <updated>2019-12-04T15:16:24.918Z</updated>
+    <updated>2019-12-04T15:17:35.907Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h1 id=&quot;一、前言&quot;&gt;&lt;a href=&quot;#一、前言&quot; class=&quot;headerlink&quot;
-        
-      
+      &lt;h1 id=&quot;一、前言&quot;&gt;&lt;a href=&quot;#一、前言&quot; class=&quot;headerlink&quot; title=&quot;一、前言&quot;&gt;&lt;/a&gt;一、前言&lt;/h1&gt;&lt;p&gt;常用加密密码的三个主要哈希函数有bcrypt、PBKDF2和scrypt，但是他们之间有什么优缺点和区别呢？以及如何结合盐值使用，下面就来探讨一下。&lt;/p&gt;
+&lt;h1 id=&quot;二、Bcrypt&quot;&gt;&lt;a href=&quot;#二、Bcrypt&quot; class=&quot;headerlink&quot; title=&quot;二、Bcrypt&quot;&gt;&lt;/a&gt;二、Bcrypt&lt;/h1&gt;&lt;p&gt;Bcrypt由Niels Provos 和 David Mazieres制定，是Belgain Fundamnetal Research in Cryptology and Informa-tion Security的简称。是基于Blowfish密码法的密钥导出函数。在保护密钥的过程中会加盐，而且具有适应能力。随着时间的推移，可以增加迭代次数，不断放慢速度，抵抗暴力攻击。&lt;/p&gt;
+&lt;p&gt;Bcrypt是首选的哈希函数，是专门为密码设计的密钥导出函数。&lt;/p&gt;
+&lt;p&gt;其优势有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基于Blowfish密码学，使用RAM中的查询表，在算法执行的过程中持续替换。这种表易于CPU处理，由于需要顺讯访问内存，而且是并行处理的，所以不适用与GPU，所以攻击者无法使用GUP硬件提升破解速度。&lt;/li&gt;
+&lt;li&gt;是专为密码设计的哈希算法，故意放慢速度（这对密码哈希是好事）。&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
