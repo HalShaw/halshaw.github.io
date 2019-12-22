@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="Javascript Base64 window.btoa window.atob,">
+  <meta name="keywords" content="HTTP 强缓存 协商缓存,">
 
 
 
@@ -82,18 +82,20 @@
 
 
 
-<meta name="description" content="一、前言前几天因工作需要，需要在URL上面传递一段参数，参数内容有点多，所以需要在前端实现Base64编码参数，然后进行传递，在下一页面再进行解码获取参数。之前也没有相关经验，之前参数多的时候都是放在Parameters里面的，所以一开始也不知道如何下手，网上一番捣鼓之后，找到了如下两个函数可以实现相关功能： 12window.btoa() // 实现base64编码window.atob() /">
-<meta name="keywords" content="Javascript Base64 window.btoa window.atob">
+<meta name="description" content="一、前言HTTP缓存在前端开发过程中有着举足轻重的地位，因为其在性能优化的过程中必不可少，许多不太常变的资源可以缓存在浏览器端，无需每次都发起请求重新获取，好的缓存策略可以大大提高网站加载及渲染效率。 二、强缓存强缓存有Expires和Cache-Control两种响应头方式实现。 ExpiresExpires是HTTP1.0提出的一个表示资源过期时间的请求头，它描述的是一个绝对时间，由服务器返回">
+<meta name="keywords" content="HTTP 强缓存 协商缓存">
 <meta property="og:type" content="article">
-<meta property="og:title" content="原生Javascript实现Base64编解码和兼容性问题处理">
-<meta property="og:url" content="http://yoursite.com/2019/12/21/原生Javascript实现Base64编解码和兼容性问题处理/index.html">
+<meta property="og:title" content="HTTP缓存机制之强缓存和协商缓存区别与联系">
+<meta property="og:url" content="http://yoursite.com/2019/12/22/HTTP缓存机制之强缓存和协商缓存区别与联系/index.html">
 <meta property="og:site_name" content="Shaw&#39;s blog.">
-<meta property="og:description" content="一、前言前几天因工作需要，需要在URL上面传递一段参数，参数内容有点多，所以需要在前端实现Base64编码参数，然后进行传递，在下一页面再进行解码获取参数。之前也没有相关经验，之前参数多的时候都是放在Parameters里面的，所以一开始也不知道如何下手，网上一番捣鼓之后，找到了如下两个函数可以实现相关功能： 12window.btoa() // 实现base64编码window.atob() /">
+<meta property="og:description" content="一、前言HTTP缓存在前端开发过程中有着举足轻重的地位，因为其在性能优化的过程中必不可少，许多不太常变的资源可以缓存在浏览器端，无需每次都发起请求重新获取，好的缓存策略可以大大提高网站加载及渲染效率。 二、强缓存强缓存有Expires和Cache-Control两种响应头方式实现。 ExpiresExpires是HTTP1.0提出的一个表示资源过期时间的请求头，它描述的是一个绝对时间，由服务器返回">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-21T04:22:35.071Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1741029-4fc0e06fc0f1f4e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-12-22T14:17:02.961Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="原生Javascript实现Base64编解码和兼容性问题处理">
-<meta name="twitter:description" content="一、前言前几天因工作需要，需要在URL上面传递一段参数，参数内容有点多，所以需要在前端实现Base64编码参数，然后进行传递，在下一页面再进行解码获取参数。之前也没有相关经验，之前参数多的时候都是放在Parameters里面的，所以一开始也不知道如何下手，网上一番捣鼓之后，找到了如下两个函数可以实现相关功能： 12window.btoa() // 实现base64编码window.atob() /">
+<meta name="twitter:title" content="HTTP缓存机制之强缓存和协商缓存区别与联系">
+<meta name="twitter:description" content="一、前言HTTP缓存在前端开发过程中有着举足轻重的地位，因为其在性能优化的过程中必不可少，许多不太常变的资源可以缓存在浏览器端，无需每次都发起请求重新获取，好的缓存策略可以大大提高网站加载及渲染效率。 二、强缓存强缓存有Expires和Cache-Control两种响应头方式实现。 ExpiresExpires是HTTP1.0提出的一个表示资源过期时间的请求头，它描述的是一个绝对时间，由服务器返回">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1741029-4fc0e06fc0f1f4e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -123,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/12/21/原生Javascript实现Base64编解码和兼容性问题处理/">
+  <link rel="canonical" href="http://yoursite.com/2019/12/22/HTTP缓存机制之强缓存和协商缓存区别与联系/">
 
 
 
 
 
-  <title>原生Javascript实现Base64编解码和兼容性问题处理 | Shaw's blog.</title>
+  <title>HTTP缓存机制之强缓存和协商缓存区别与联系 | Shaw's blog.</title>
   
 
 
@@ -308,7 +310,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/21/原生Javascript实现Base64编解码和兼容性问题处理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/22/HTTP缓存机制之强缓存和协商缓存区别与联系/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shaw">
@@ -325,7 +327,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">原生Javascript实现Base64编解码和兼容性问题处理</h2>
+          <h2 class="post-title" itemprop="name headline">HTTP缓存机制之强缓存和协商缓存区别与联系</h2>
         
 
         <div class="post-meta">
@@ -337,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-21T12:21:00+08:00">
-                2019-12-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-22T22:12:00+08:00">
+                2019-12-22
               </time>
             
 
@@ -360,8 +362,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Javascript/" itemprop="url" rel="index">
-                    <span itemprop="name">Javascript</span>
+                  <a href="/categories/HTTP缓存机制/" itemprop="url" rel="index">
+                    <span itemprop="name">HTTP缓存机制</span>
                   </a>
                 </span>
 
@@ -378,8 +380,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/12/21/原生Javascript实现Base64编解码和兼容性问题处理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/12/21/原生Javascript实现Base64编解码和兼容性问题处理/" itemprop="commentsCount"></span>
+                <a href="/2019/12/22/HTTP缓存机制之强缓存和协商缓存区别与联系/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/12/22/HTTP缓存机制之强缓存和协商缓存区别与联系/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -407,31 +409,35 @@
       
 
       
-        <h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><p>前几天因工作需要，需要在<code>URL</code>上面传递一段参数，参数内容有点多，所以需要在前端实现<code>Base64</code>编码参数，然后进行传递，在下一页面再进行解码获取参数。之前也没有相关经验，之前参数多的时候都是放在<code>Parameters</code>里面的，所以一开始也不知道如何下手，网上一番捣鼓之后，找到了如下两个函数可以实现相关功能：</p>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.btoa() <span class="comment">// 实现base64编码</span></span><br><span class="line"><span class="built_in">window</span>.atob() <span class="comment">// 实现base64解码</span></span><br></pre></td></tr></table></figure>
-
-<p>下面来记录下这两个函数相关的用法及其中的坑。</p>
-<h1 id="二、具体用法与坑"><a href="#二、具体用法与坑" class="headerlink" title="二、具体用法与坑"></a>二、具体用法与坑</h1><h3 id="window-btoa"><a href="#window-btoa" class="headerlink" title="window.btoa()"></a>window.btoa()</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">window.btoa(<span class="string">"test encode"</span>)</span><br><span class="line"><span class="regexp">//</span> <span class="string">"dGVzdCBlbmNvZGU="</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="window-atob"><a href="#window-atob" class="headerlink" title="window.atob()"></a>window.atob()</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">window.atob(<span class="string">"dGVzdCBlbmNvZGU="</span>)</span><br><span class="line"><span class="regexp">//</span> <span class="string">"test encode"</span></span><br></pre></td></tr></table></figure>
+        <h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><p>HTTP缓存在前端开发过程中有着举足轻重的地位，因为其在性能优化的过程中必不可少，许多不太常变的资源可以缓存在浏览器端，无需每次都发起请求重新获取，好的缓存策略可以大大提高网站加载及渲染效率。</p>
+<h1 id="二、强缓存"><a href="#二、强缓存" class="headerlink" title="二、强缓存"></a>二、强缓存</h1><p>强缓存有<code>Expires</code>和<code>Cache-Control</code>两种响应头方式实现。</p>
+<h3 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h3><p><code>Expires</code>是<code>HTTP1.0</code>提出的一个表示资源过期时间的请求头，它描述的是一个绝对时间，由服务器返回。<br>Expires 受限于本地时间，如果修改了本地时间，可能会造成缓存失效，而且由于本地时间与服务器时间可能存在误差，可能会存在问题，其值如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">Expires</span>: <span class="selector-tag">Thu</span>, 14 <span class="selector-tag">Mar</span> 2019 17<span class="selector-pseudo">:29</span><span class="selector-pseudo">:17</span> <span class="selector-tag">GMT</span></span><br></pre></td></tr></table></figure>
 
 <a id="more"></a>
 
-<p>以上结果简单明了，就是使用<code>window.btoa()</code>函数先进行编码，然后使用<code>window.atob()</code>进行解码，貌似一切正常，万事大吉，完事了。<br>但是，真要这么想就完蛋了，<code>too young too naive</code>，坑还在后面呢，来看下面的例子：</p>
-<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">window.btoa(<span class="string">"测试编码"</span>)</span><br><span class="line">/* VM898:1 Uncaught DOMException: Failed to<span class="built_in"> execute </span>'btoa' on 'Window': </span><br><span class="line">The string to be encoded contains characters outside of the Latin1 range. */</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">window.atob(<span class="string">"测试编码"</span>)</span><br><span class="line">/* Uncaught DOMException: Failed to<span class="built_in"> execute </span>'atob' on 'Window': </span><br><span class="line">The string to be decoded contains characters outside of the Latin1 range.*/</span><br></pre></td></tr></table></figure>
-
-<p>二者当中只要出现了中文，就会抛错，因为其不支持中文进行<code>base64</code>编码，小白的我一脸懵逼，但是，这怎么能难倒我呢，接着又是一顿猛搜，最终找到了解决方案，方法也很简单，就是在编码处理中文之前使用<code>encodeURIComponent</code>函数先套一层，然后在解码的时候外面套一层<code>decodeURIComponent</code>即可：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.btoa(<span class="built_in">encodeURIComponent</span>(<span class="string">"测试编码"</span>))</span><br><span class="line"><span class="comment">// "JUU2JUI1JThCJUU4JUFGJTk1JUU3JUJDJTk2JUU3JUEwJTgx"</span></span><br></pre></td></tr></table></figure>
-
-<p>window.btoa(“测试编码”)</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">decodeURIComponent(<span class="name">window</span>.atob(<span class="string">"JUU2JUI1JThCJUU4JUFGJTk1JUU3JUJDJTk2JUU3JUEwJTgx"</span>))</span><br><span class="line">// <span class="string">"测试编码"</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="三、延伸，任意文件转Base64"><a href="#三、延伸，任意文件转Base64" class="headerlink" title="三、延伸，任意文件转Base64"></a>三、延伸，任意文件转Base64</h1><p>使用<code>FileReader</code>对象和<code>readAsDataURL</code>方法，可以把任意的文件（SVG、小尺寸图片、Woff字体等等）转换为<code>Base64 Data-URI</code>，转换的代码如下：</p>
-<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var reader = new FileReader();</span><br><span class="line">reader.onload = <span class="function"><span class="keyword">function</span><span class="params">(e)</span></span> &#123;</span><br><span class="line">  console.<span class="built_in">log</span>(e.<span class="keyword">target</span>.result); // e.<span class="keyword">target</span>.result就是该文件的完整Base64 <span class="keyword">Data</span>-URI</span><br><span class="line">&#125;;</span><br><span class="line">reader.readAsDataURL(<span class="keyword">file</span>);</span><br></pre></td></tr></table></figure>
-
-<h1 id="四、参考"><a href="#四、参考" class="headerlink" title="四、参考"></a>四、参考</h1><p><a href="https://www.zhangxinxu.com/wordpress/2018/08/js-base64-atob-btoa-encode-decode/?from=groupmessage" target="_blank" rel="noopener">https://www.zhangxinxu.com/wordpress/2018/08/js-base64-atob-btoa-encode-decode/?from=groupmessage</a></p>
+<h3 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h3><ul>
+<li>public：指示响应可被任何缓存区缓存，如果响应被标记为public，即使有关联的 HTTP 认证，甚至响应状态码无法正常缓存，响应也可以被缓存。</li>
+<li>private：指示对于单个用户的整个或部分响应消息，不能被共享缓存处理。这允许服务器仅仅描述当用户的部分响应消息，此响应消息对于其他用户的请求无效。</li>
+<li>no-cache：表示必须先与服务器确认返回的响应是否被更改，然后才能使用该响应来满足后续对同一个网址的请求。因此，如果存在合适的验证令牌 (ETag)，no-cache 会发起往返通信来验证缓存的响应，如果资源未被更改，可以避免下载。</li>
+<li>no-store：用于防止重要的信息被无意的发布。在请求消息中发送将使得请求和响应消息都不使用缓存。禁止缓存任何响应，也就是说每次用户请求资源时，都会向服务器发送一个请求，每次都会下载完整的响应。</li>
+<li>max-age：用来设置资源被缓存的最长时间(单位是秒)。指示客户机可以接收生存期不大于指定时间（以秒为单位）的响应。</li>
+<li>min-fresh：指示客户机可以接收响应时间小于当前时间加上指定时间的响应。</li>
+<li>max-stale：指示客户机可以接收超出超时期间的响应消息。如果指定max-stale消息的值，那么客户机可以接收超出超时期指定值之内的响应消息。</li>
+</ul>
+<h4 id="no-cache-和-no-store的区别："><a href="#no-cache-和-no-store的区别：" class="headerlink" title="no-cache 和 no-store的区别："></a><code>no-cache</code> 和 <code>no-store</code>的区别：</h4><p><code>no-cache</code>标记的资源是可以存储在本地缓存中的，但是在与原始服务器进行新鲜度验证之前，缓存不能将其提供给客户端使用。<code>no-store</code>是不允许缓存任何响应。</p>
+<h3 id="Cache-Control优先级高于Expires。"><a href="#Cache-Control优先级高于Expires。" class="headerlink" title="Cache-Control优先级高于Expires。"></a><code>Cache-Control</code>优先级高于<code>Expires</code>。</h3><h1 id="三、协商缓存"><a href="#三、协商缓存" class="headerlink" title="三、协商缓存"></a>三、协商缓存</h1><p>当某个请求没有命中强缓存时，就会发起一个请求到服务器端验证协商缓存是否命中，如果命中，由服务器端来决定是否使用该缓存，若该缓存未过期且未被修改，请求响应就会返回一个304状态码为然后显示<code>Not Modified</code>。</p>
+<p>协商缓存使用的是<code>Last-Modified &amp; If-Modified-Since</code>和<code>ETag &amp; If-None-Match</code>这两对Header。</p>
+<h3 id="Last-Modified和If-Modified-Since"><a href="#Last-Modified和If-Modified-Since" class="headerlink" title="Last-Modified和If-Modified-Since"></a>Last-Modified和If-Modified-Since</h3><p><code>Last-Modified</code>是指服务器端文件的最后修改时间，需要和 <code>cache-control</code> 配合使用，是检查服务器端资源是否更新的一种方式。当浏览器再次进行请求时，会向服务器传送<code>If-Modified-Since</code>请求头，询问 <code>Last-Modified</code> 时间点之后资源是否被修改过。如果没有修改，则返回码为 304，使用浏览器端缓存；如果修改过，则再次去服务器请求资源，状态码和首次请求相同为 200，使用服务器最新资源。</p>
+<h3 id="ETag和If-None-Match"><a href="#ETag和If-None-Match" class="headerlink" title="ETag和If-None-Match"></a>ETag和If-None-Match</h3><p><code>Etag &amp; If-None-Match</code> 与 <code>Last-Modified &amp; If-Modified-Since</code> 的机制类似，不同的是，<code>Etag</code>是通过一个校验码来对比资源是否更改过的，而不是通过资源的修改时间。当一个资源修改时，其校验码也会更改。<code>Etag</code>就像一个唯一指纹，资源变化都会导致·ETag·变化，跟最后修改时间没有关系，<code>ETag</code>可以保证每一个资源是唯一的。当浏览器请求资源时，服务器会返回一个<code>Etag</code>字段，然后浏览器下一次请求时，会带上 <code>If-None-Match</code> ，值为上次服务器返回的<code>Etag</code>的值，服务器经过校验码的对比后决定返回200或304。</p>
+<h3 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h3><p><code>Etag</code>可以解决 <code>Last-Modified</code> 不太好处理的问题，<code>Etag</code>能更准确地控制缓存，因此，<code>Etag</code>的优先级是高于 <code>Last-Modified</code> 。<br><code>Last-Modified</code> 可能会有以下一些问题，但是<code>Etag</code>可以很好地解决的：</p>
+<ul>
+<li>一些文件也许会周期性的更改，但是他的内容并不改变(仅仅改变的修改时间)，所以这个时候会被识别为修改过了而重新发起请求。</li>
+<li>某些文件修改非常频繁，比如在秒以下的时间内进行修改，(比方说1s内修改了N次)，<code>If-Modified-Since</code>能检查到的粒度是s级的，这种修改无法判断(或者说UNIX记录MTIME只能精确到秒)。</li>
+<li>某些服务器不能精确的得到文件的最后修改时间。</li>
+</ul>
+<h1 id="四、完整的缓存策略过程"><a href="#四、完整的缓存策略过程" class="headerlink" title="四、完整的缓存策略过程"></a>四、完整的缓存策略过程</h1><p><img src="https://upload-images.jianshu.io/upload_images/1741029-4fc0e06fc0f1f4e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="缓存过程"></p>
+<h1 id="五、参考"><a href="#五、参考" class="headerlink" title="五、参考"></a>五、参考</h1><p><a href="https://github.com/amandakelake/blog/issues/41" target="_blank" rel="noopener">https://github.com/amandakelake/blog/issues/41</a><br><a href="http://www.alloyteam.com/2016/03/discussion-on-web-caching/#prettyPhoto" target="_blank" rel="noopener">http://www.alloyteam.com/2016/03/discussion-on-web-caching/#prettyPhoto</a><br><a href="https://www.jianshu.com/p/c78b5de7a889" target="_blank" rel="noopener">https://www.jianshu.com/p/c78b5de7a889</a></p>
 
       
     </div>
@@ -449,7 +455,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Javascript-Base64-window-btoa-window-atob/" rel="tag"># Javascript Base64 window.btoa window.atob</a>
+            <a href="/tags/HTTP-强缓存-协商缓存/" rel="tag"># HTTP 强缓存 协商缓存</a>
           
         </div>
       
@@ -462,8 +468,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/12/04/Bcrypt、PBKDF2、Scrypt三种密码哈希函数的区别及优缺点/" rel="next" title="Bcrypt、PBKDF2、Scrypt三种密码哈希函数的区别及优缺点">
-                <i class="fa fa-chevron-left"></i> Bcrypt、PBKDF2、Scrypt三种密码哈希函数的区别及优缺点
+              <a href="/2019/12/21/原生Javascript实现Base64编解码和兼容性问题处理/" rel="next" title="原生Javascript实现Base64编解码和兼容性问题处理">
+                <i class="fa fa-chevron-left"></i> 原生Javascript实现Base64编解码和兼容性问题处理
               </a>
             
           </div>
@@ -471,10 +477,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/12/22/HTTP缓存机制之强缓存和协商缓存区别与联系/" rel="prev" title="HTTP缓存机制之强缓存和协商缓存区别与联系">
-                HTTP缓存机制之强缓存和协商缓存区别与联系 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -688,7 +690,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、前言"><span class="nav-text">一、前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、具体用法与坑"><span class="nav-text">二、具体用法与坑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#window-btoa"><span class="nav-text">window.btoa()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#window-atob"><span class="nav-text">window.atob()</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#三、延伸，任意文件转Base64"><span class="nav-text">三、延伸，任意文件转Base64</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、参考"><span class="nav-text">四、参考</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、前言"><span class="nav-text">一、前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、强缓存"><span class="nav-text">二、强缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Expires"><span class="nav-text">Expires</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cache-Control"><span class="nav-text">Cache-Control</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#no-cache-和-no-store的区别："><span class="nav-text">no-cache 和 no-store的区别：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cache-Control优先级高于Expires。"><span class="nav-text">Cache-Control优先级高于Expires。</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#三、协商缓存"><span class="nav-text">三、协商缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Last-Modified和If-Modified-Since"><span class="nav-text">Last-Modified和If-Modified-Since</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ETag和If-None-Match"><span class="nav-text">ETag和If-None-Match</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优先级"><span class="nav-text">优先级</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、完整的缓存策略过程"><span class="nav-text">四、完整的缓存策略过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五、参考"><span class="nav-text">五、参考</span></a></li></div>
             
 
           </div>

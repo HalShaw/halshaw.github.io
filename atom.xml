@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-21T04:22:35.071Z</updated>
+  <updated>2019-12-22T14:17:02.961Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HTTP缓存机制之强缓存和协商缓存区别与联系</title>
+    <link href="http://yoursite.com/2019/12/22/HTTP%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6%E4%B9%8B%E5%BC%BA%E7%BC%93%E5%AD%98%E5%92%8C%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/"/>
+    <id>http://yoursite.com/2019/12/22/HTTP缓存机制之强缓存和协商缓存区别与联系/</id>
+    <published>2019-12-22T14:12:00.000Z</published>
+    <updated>2019-12-22T14:17:02.961Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;一、前言&quot;&gt;&lt;a href=&quot;#一、前言&quot; class=&quot;headerlink&quot; title=&quot;一、前言&quot;&gt;&lt;/a&gt;一、前言&lt;/h1&gt;&lt;p&gt;HTTP缓存在前端开发过程中有着举足轻重的地位，因为其在性能优化的过程中必不可少，许多不太常变的资源可以缓存在浏览器端，无需每次都发起请求重新获取，好的缓存策略可以大大提高网站加载及渲染效率。&lt;/p&gt;
+&lt;h1 id=&quot;二、强缓存&quot;&gt;&lt;a href=&quot;#二、强缓存&quot; class=&quot;headerlink&quot; title=&quot;二、强缓存&quot;&gt;&lt;/a&gt;二、强缓存&lt;/h1&gt;&lt;p&gt;强缓存有&lt;code&gt;Expires&lt;/code&gt;和&lt;code&gt;Cache-Control&lt;/code&gt;两种响应头方式实现。&lt;/p&gt;
+&lt;h3 id=&quot;Expires&quot;&gt;&lt;a href=&quot;#Expires&quot; class=&quot;headerlink&quot; title=&quot;Expires&quot;&gt;&lt;/a&gt;Expires&lt;/h3&gt;&lt;p&gt;&lt;code&gt;Expires&lt;/code&gt;是&lt;code&gt;HTTP1.0&lt;/code&gt;提出的一个表示资源过期时间的请求头，它描述的是一个绝对时间，由服务器返回。&lt;br&gt;Expires 受限于本地时间，如果修改了本地时间，可能会造成缓存失效，而且由于本地时间与服务器时间可能存在误差，可能会存在问题，其值如下：&lt;/p&gt;
+&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;Expires&lt;/span&gt;: &lt;span class=&quot;selector-tag&quot;&gt;Thu&lt;/span&gt;, 14 &lt;span class=&quot;selector-tag&quot;&gt;Mar&lt;/span&gt; 2019 17&lt;span class=&quot;selector-pseudo&quot;&gt;:29&lt;/span&gt;&lt;span class=&quot;selector-pseudo&quot;&gt;:17&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;GMT&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="HTTP缓存机制" scheme="http://yoursite.com/categories/HTTP%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/"/>
+    
+    
+      <category term="HTTP 强缓存 协商缓存" scheme="http://yoursite.com/tags/HTTP-%E5%BC%BA%E7%BC%93%E5%AD%98-%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98/"/>
+    
+  </entry>
   
   <entry>
     <title>原生Javascript实现Base64编解码和兼容性问题处理</title>
