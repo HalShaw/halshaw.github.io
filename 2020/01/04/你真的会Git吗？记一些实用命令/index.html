@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Git 命令,">
 
 
 
@@ -82,17 +82,18 @@
 
 
 
-<meta name="description" content="Some tech notes and life experience.">
-<meta name="keywords" content="Shaw Xiaohao">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Shaw&#39;s blog.">
-<meta property="og:url" content="http://yoursite.com/tags/ES2019-JavaScript/index.html">
+<meta name="description" content="一、前言前几天看到阮一峰老师博客上面分享了一篇如何撤销 Git 操作？的文章，读完之后不禁感叹自己真是个弱鸡，扪心自问，自己真的会Git吗？日常工作中的常用的基本命令倒是会几个，但是真的遇到点问题又要搞好久，现场搜索解决方案，着实会耽误些时间，导致自己的开发效率被拉低。自我反思之后，发现还是自己学艺不精，还需多下功夫，工欲善其事，必先利其器。在开发工具的使用方面还得下些功夫，所以，在此记录一些非常">
+<meta name="keywords" content="Git 命令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你真的会Git吗？记一些实用命令">
+<meta property="og:url" content="http://yoursite.com/2020/01/04/你真的会Git吗？记一些实用命令/index.html">
 <meta property="og:site_name" content="Shaw&#39;s blog.">
-<meta property="og:description" content="Some tech notes and life experience.">
+<meta property="og:description" content="一、前言前几天看到阮一峰老师博客上面分享了一篇如何撤销 Git 操作？的文章，读完之后不禁感叹自己真是个弱鸡，扪心自问，自己真的会Git吗？日常工作中的常用的基本命令倒是会几个，但是真的遇到点问题又要搞好久，现场搜索解决方案，着实会耽误些时间，导致自己的开发效率被拉低。自我反思之后，发现还是自己学艺不精，还需多下功夫，工欲善其事，必先利其器。在开发工具的使用方面还得下些功夫，所以，在此记录一些非常">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-01-04T14:11:37.328Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Shaw&#39;s blog.">
-<meta name="twitter:description" content="Some tech notes and life experience.">
+<meta name="twitter:title" content="你真的会Git吗？记一些实用命令">
+<meta name="twitter:description" content="一、前言前几天看到阮一峰老师博客上面分享了一篇如何撤销 Git 操作？的文章，读完之后不禁感叹自己真是个弱鸡，扪心自问，自己真的会Git吗？日常工作中的常用的基本命令倒是会几个，但是真的遇到点问题又要搞好久，现场搜索解决方案，着实会耽误些时间，导致自己的开发效率被拉低。自我反思之后，发现还是自己学艺不精，还需多下功夫，工欲善其事，必先利其器。在开发工具的使用方面还得下些功夫，所以，在此记录一些非常">
 
 
 
@@ -122,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/ES2019-JavaScript/">
+  <link rel="canonical" href="http://yoursite.com/2020/01/04/你真的会Git吗？记一些实用命令/">
 
 
 
 
 
-  <title>标签: ES2019 JavaScript | Shaw's blog.</title>
+  <title>你真的会Git吗？记一些实用命令 | Shaw's blog.</title>
   
 
 
@@ -157,7 +158,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -293,52 +294,252 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2>ES2019 JavaScript<small>标签</small>
-        </h2>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/04/你真的会Git吗？记一些实用命令/">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shaw">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/portrait.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shaw's blog.">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/08/19/ES2019新特性/" itemprop="url">
-              
-                <span itemprop="name">ES2019 新特性</span>
-              
-            </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">你真的会Git吗？记一些实用命令</h2>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-19T22:06:00+08:00" content="2019-08-19">
-          08-19
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-04T22:10:00+08:00">
+                2020-01-04
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/01/04/你真的会Git吗？记一些实用命令/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2020/01/04/你真的会Git吗？记一些实用命令/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><p>前几天看到阮一峰老师博客上面分享了一篇<a href="http://www.ruanyifeng.com/blog/2019/12/git-undo.html" target="_blank" rel="noopener">如何撤销 Git 操作？</a>的文章，读完之后不禁感叹自己真是个弱鸡，扪心自问，自己真的会<code>Git</code>吗？日常工作中的常用的基本命令倒是会几个，但是真的遇到点问题又要搞好久，现场搜索解决方案，着实会耽误些时间，导致自己的开发效率被拉低。自我反思之后，发现还是自己学艺不精，还需多下功夫，<code>工欲善其事，必先利其器</code>。在开发工具的使用方面还得下些功夫，所以，在此记录一些非常有用的提高效率的<code>Git</code>命令。</p>
+<h1 id="二、几个概念"><a href="#二、几个概念" class="headerlink" title="二、几个概念"></a>二、几个概念</h1><ul>
+<li><code>HEAD</code>: 就是指向当前版本的指针。</li>
+<li><code>Index</code>: <code>Index</code>为暂存区，当你修改某一个文件时，这个文件一开始是<code>unstaged</code>状态，使用<code>git add</code>命令把它加入到<code>Index</code>暂存区后，该文件变成了<code>staged</code>状态。然后执行<code>git commit</code>后，<code>Index</code>里面的修改被提交到本地版本库。</li>
+<li><code>working tree</code>: 当前的工作目录。</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="三、具体命令"><a href="#三、具体命令" class="headerlink" title="三、具体命令"></a>三、具体命令</h1><h3 id="撤销git-add"><a href="#撤销git-add" class="headerlink" title="撤销git add ."></a>撤销<code>git add .</code></h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">reset</span> <span class="keyword">HEAD</span></span><br></pre></td></tr></table></figure>
+
+<p>上面命令用来撤销错误<code>add</code>的代码，比如我不小心执行了个<code>git add .</code>，把当前所有的代码都添加到了缓冲区，到了<code>stage</code>阶段，但是还没<code>commit</code>，就可以用上面的命令来撤销<code>add</code>。</p>
+<h3 id="撤销git-commit-m"><a href="#撤销git-commit-m" class="headerlink" title="撤销git commit -m"></a>撤销<code>git commit -m</code></h3><p>如果执行过了<code>commit</code>，突然发现有不想要提交的代码，那现在怎么办呢？这个时候可以执行下面命令来撤销<code>commit</code>：</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">git</span> <span class="keyword">revert </span>HEAD</span><br></pre></td></tr></table></figure>
+
+<p>上面命令以一次新的提交覆盖上一次的提交内容，不会改变错误提交之前的内容，但是亲测之后发现错误提交的内容会丢失掉。但是有很多时候我们只是想修改其中的部分错误，而不是丢弃整个修改。</p>
+<p>所以可以使用如下方法恢复之前的修改内容并再次修改，首先使用<code>git reflog</code>查看提交的历史，提取所需版本的版本号，然后执行<code>git reset 428713b</code>，后面是具体需要恢复的版本号即可，然后再在其上修改并且重新提交。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git reflog</span><br><span class="line">e894f7e (HEAD -&gt; master) HEAD@&#123;0&#125;: revert: Revert <span class="string">"test git"</span></span><br><span class="line"><span class="number">428713</span>b HEAD@&#123;1&#125;: <span class="keyword">reset</span>: moving to HEAD</span><br><span class="line"><span class="number">428713</span>b HEAD@&#123;2&#125;: commit: test git</span><br><span class="line"><span class="number">7395</span>b28 (origin/master) HEAD@&#123;3&#125;: commit: Add some conponents.</span><br><span class="line"><span class="number">6</span>b1503b HEAD@&#123;4&#125;: commit (merge): First commit</span><br><span class="line">f00f39f HEAD@&#123;5&#125;: commit (initial): First commit</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="keyword">reset</span> <span class="number">428713</span>b</span><br><span class="line">Unstaged changes <span class="keyword">after</span> <span class="keyword">reset</span>:</span><br><span class="line">M       src/pages/Cart.vue</span><br></pre></td></tr></table></figure>
+
+<p><code>git revert</code>还有两个参数：</p>
+<ul>
+<li>–no-edit：执行时不打开默认编辑器，使用默认生成的信息，这个参数可以节省每次关闭<code>vi</code>编辑器的时间，因为从我的个人经验来说，基本上每次打开编辑器都只是执行一个关闭命令，而没有再次更改其中的信息。</li>
+<li>–no-commit：只抵消暂存区和工作区的文件变化，不产生新的提交。</li>
+</ul>
+<p><code>git reset</code>的用法：</p>
+<figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset <span class="meta">[&lt;mode&gt;]</span> <span class="meta">[&lt;commit&gt;]</span></span><br></pre></td></tr></table></figure>
+
+<p><code>git reset</code> 将当前分支的<code>HEAD</code>指向给定的版本，并根据模式决定是否修改<code>Index</code>和<code>working tree</code>。<br>常用的<code>&lt;mode&gt;</code>有三种，<code>--soft</code>，<code>--mixed</code>， <code>--hard</code>，默认是<code>--mixed</code>。</p>
+<ul>
+<li><code>--soft</code> 只会重置HEAD到对应的版本，不会修改<code>Index</code>和<code>working tree</code>。</li>
+<li><code>--mixed</code> 会修改<code>Index</code>暂存区，上面的<code>$ git reset 428713b</code>命令就相当于<code>$ git reset --mixed 428713b</code></li>
+<li><code>--hard</code> 会让暂存区及工作区里面的文件都回到以前的状态，一般不太推荐使用，可能会导致某一次提交彻底消失，且用且珍惜。</li>
+</ul>
+<p>执行<code>git reset</code>命令之后，如果想找回那些丢弃掉的提交，可以使用<code>git reflog</code>命令，这种做法有时效性，时间长了可能找不回来。</p>
+<h1 id="四、参考"><a href="#四、参考" class="headerlink" title="四、参考"></a>四、参考</h1><p><a href="http://www.ruanyifeng.com/blog/2019/12/git-undo.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2019/12/git-undo.html</a><br><a href="https://www.jianshu.com/p/c6927e80a01d" target="_blank" rel="noopener">https://www.jianshu.com/p/c6927e80a01d</a></p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git-命令/" rel="tag"># Git 命令</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/22/HTTP缓存机制之强缓存和协商缓存区别与联系/" rel="next" title="HTTP缓存机制之强缓存和协商缓存区别与联系">
+                <i class="fa fa-chevron-left"></i> HTTP缓存机制之强缓存和协商缓存区别与联系
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -346,6 +547,17 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
 
         </div>
         
@@ -366,8 +578,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -464,6 +685,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、前言"><span class="nav-text">一、前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、几个概念"><span class="nav-text">二、几个概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、具体命令"><span class="nav-text">三、具体命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#撤销git-add"><span class="nav-text">撤销git add .</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#撤销git-commit-m"><span class="nav-text">撤销git commit -m</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#四、参考"><span class="nav-text">四、参考</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -612,6 +849,10 @@ var _hmt = _hmt || [];
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -658,6 +899,30 @@ var _hmt = _hmt || [];
 
     
 
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'halshaw',
+            repo: 'halshaw.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'b567e206fdbac281a64f4dadd0ea7bc85b915878',
+            
+                client_id: '07aa09900c0ed34136dc'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
     
 
 

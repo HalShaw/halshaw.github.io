@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-30T14:20:49.778Z</updated>
+  <updated>2020-01-04T14:11:37.328Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>你真的会Git吗？记一些实用命令</title>
+    <link href="http://yoursite.com/2020/01/04/%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BC%9AGit%E5%90%97%EF%BC%9F%E8%AE%B0%E4%B8%80%E4%BA%9B%E5%AE%9E%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://yoursite.com/2020/01/04/你真的会Git吗？记一些实用命令/</id>
+    <published>2020-01-04T14:10:00.000Z</published>
+    <updated>2020-01-04T14:11:37.328Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;一、前言&quot;&gt;&lt;a href=&quot;#一、前言&quot; class=&quot;headerlink&quot; title=&quot;一、前言&quot;&gt;&lt;/a&gt;一、前言&lt;/h1&gt;&lt;p&gt;前几天看到阮一峰老师博客上面分享了一篇&lt;a href=&quot;http://www.ruanyifeng.com/blog/2019/12/git-undo.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;如何撤销 Git 操作？&lt;/a&gt;的文章，读完之后不禁感叹自己真是个弱鸡，扪心自问，自己真的会&lt;code&gt;Git&lt;/code&gt;吗？日常工作中的常用的基本命令倒是会几个，但是真的遇到点问题又要搞好久，现场搜索解决方案，着实会耽误些时间，导致自己的开发效率被拉低。自我反思之后，发现还是自己学艺不精，还需多下功夫，&lt;code&gt;工欲善其事，必先利其器&lt;/code&gt;。在开发工具的使用方面还得下些功夫，所以，在此记录一些非常有用的提高效率的&lt;code&gt;Git&lt;/code&gt;命令。&lt;/p&gt;
+&lt;h1 id=&quot;二、几个概念&quot;&gt;&lt;a href=&quot;#二、几个概念&quot; class=&quot;headerlink&quot; title=&quot;二、几个概念&quot;&gt;&lt;/a&gt;二、几个概念&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;HEAD&lt;/code&gt;: 就是指向当前版本的指针。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Index&lt;/code&gt;: &lt;code&gt;Index&lt;/code&gt;为暂存区，当你修改某一个文件时，这个文件一开始是&lt;code&gt;unstaged&lt;/code&gt;状态，使用&lt;code&gt;git add&lt;/code&gt;命令把它加入到&lt;code&gt;Index&lt;/code&gt;暂存区后，该文件变成了&lt;code&gt;staged&lt;/code&gt;状态。然后执行&lt;code&gt;git commit&lt;/code&gt;后，&lt;code&gt;Index&lt;/code&gt;里面的修改被提交到本地版本库。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;working tree&lt;/code&gt;: 当前的工作目录。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="Git" scheme="http://yoursite.com/categories/Git/"/>
+    
+    
+      <category term="Git 命令" scheme="http://yoursite.com/tags/Git-%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
   
   <entry>
     <title>HTTP缓存机制之强缓存和协商缓存区别与联系</title>

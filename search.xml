@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>你真的会Git吗？记一些实用命令</title>
+    <url>/2020/01/04/%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BC%9AGit%E5%90%97%EF%BC%9F%E8%AE%B0%E4%B8%80%E4%BA%9B%E5%AE%9E%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><p>前几天看到阮一峰老师博客上面分享了一篇<a href="http://www.ruanyifeng.com/blog/2019/12/git-undo.html" target="_blank" rel="noopener">如何撤销 Git 操作？</a>的文章，读完之后不禁感叹自己真是个弱鸡，扪心自问，自己真的会<code>Git</code>吗？日常工作中的常用的基本命令倒是会几个，但是真的遇到点问题又要搞好久，现场搜索解决方案，着实会耽误些时间，导致自己的开发效率被拉低。自我反思之后，发现还是自己学艺不精，还需多下功夫，<code>工欲善其事，必先利其器</code>。在开发工具的使用方面还得下些功夫，所以，在此记录一些非常有用的提高效率的<code>Git</code>命令。</p>
+<h1 id="二、几个概念"><a href="#二、几个概念" class="headerlink" title="二、几个概念"></a>二、几个概念</h1><ul>
+<li><code>HEAD</code>: 就是指向当前版本的指针。</li>
+<li><code>Index</code>: <code>Index</code>为暂存区，当你修改某一个文件时，这个文件一开始是<code>unstaged</code>状态，使用<code>git add</code>命令把它加入到<code>Index</code>暂存区后，该文件变成了<code>staged</code>状态。然后执行<code>git commit</code>后，<code>Index</code>里面的修改被提交到本地版本库。</li>
+<li><code>working tree</code>: 当前的工作目录。</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="三、具体命令"><a href="#三、具体命令" class="headerlink" title="三、具体命令"></a>三、具体命令</h1><h3 id="撤销git-add"><a href="#撤销git-add" class="headerlink" title="撤销git add ."></a>撤销<code>git add .</code></h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">git <span class="keyword">reset</span> <span class="keyword">HEAD</span></span><br></pre></td></tr></table></figure>
+
+<p>上面命令用来撤销错误<code>add</code>的代码，比如我不小心执行了个<code>git add .</code>，把当前所有的代码都添加到了缓冲区，到了<code>stage</code>阶段，但是还没<code>commit</code>，就可以用上面的命令来撤销<code>add</code>。</p>
+<h3 id="撤销git-commit-m"><a href="#撤销git-commit-m" class="headerlink" title="撤销git commit -m"></a>撤销<code>git commit -m</code></h3><p>如果执行过了<code>commit</code>，突然发现有不想要提交的代码，那现在怎么办呢？这个时候可以执行下面命令来撤销<code>commit</code>：</p>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">git</span> <span class="keyword">revert </span>HEAD</span><br></pre></td></tr></table></figure>
+
+<p>上面命令以一次新的提交覆盖上一次的提交内容，不会改变错误提交之前的内容，但是亲测之后发现错误提交的内容会丢失掉。但是有很多时候我们只是想修改其中的部分错误，而不是丢弃整个修改。</p>
+<p>所以可以使用如下方法恢复之前的修改内容并再次修改，首先使用<code>git reflog</code>查看提交的历史，提取所需版本的版本号，然后执行<code>git reset 428713b</code>，后面是具体需要恢复的版本号即可，然后再在其上修改并且重新提交。</p>
+<figure class="highlight perl"><table><tr><td class="code"><pre><span class="line">$ git reflog</span><br><span class="line">e894f7e (HEAD -&gt; master) HEAD@&#123;0&#125;: revert: Revert <span class="string">"test git"</span></span><br><span class="line"><span class="number">428713</span>b HEAD@&#123;1&#125;: <span class="keyword">reset</span>: moving to HEAD</span><br><span class="line"><span class="number">428713</span>b HEAD@&#123;2&#125;: commit: test git</span><br><span class="line"><span class="number">7395</span>b28 (origin/master) HEAD@&#123;3&#125;: commit: Add some conponents.</span><br><span class="line"><span class="number">6</span>b1503b HEAD@&#123;4&#125;: commit (merge): First commit</span><br><span class="line">f00f39f HEAD@&#123;5&#125;: commit (initial): First commit</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">$ git <span class="keyword">reset</span> <span class="number">428713</span>b</span><br><span class="line">Unstaged changes <span class="keyword">after</span> <span class="keyword">reset</span>:</span><br><span class="line">M       src/pages/Cart.vue</span><br></pre></td></tr></table></figure>
+
+<p><code>git revert</code>还有两个参数：</p>
+<ul>
+<li>–no-edit：执行时不打开默认编辑器，使用默认生成的信息，这个参数可以节省每次关闭<code>vi</code>编辑器的时间，因为从我的个人经验来说，基本上每次打开编辑器都只是执行一个关闭命令，而没有再次更改其中的信息。</li>
+<li>–no-commit：只抵消暂存区和工作区的文件变化，不产生新的提交。</li>
+</ul>
+<p><code>git reset</code>的用法：</p>
+<figure class="highlight fsharp"><table><tr><td class="code"><pre><span class="line">git reset <span class="meta">[&lt;mode&gt;]</span> <span class="meta">[&lt;commit&gt;]</span></span><br></pre></td></tr></table></figure>
+
+<p><code>git reset</code> 将当前分支的<code>HEAD</code>指向给定的版本，并根据模式决定是否修改<code>Index</code>和<code>working tree</code>。<br>常用的<code>&lt;mode&gt;</code>有三种，<code>--soft</code>，<code>--mixed</code>， <code>--hard</code>，默认是<code>--mixed</code>。</p>
+<ul>
+<li><code>--soft</code> 只会重置HEAD到对应的版本，不会修改<code>Index</code>和<code>working tree</code>。</li>
+<li><code>--mixed</code> 会修改<code>Index</code>暂存区，上面的<code>$ git reset 428713b</code>命令就相当于<code>$ git reset --mixed 428713b</code></li>
+<li><code>--hard</code> 会让暂存区及工作区里面的文件都回到以前的状态，一般不太推荐使用，可能会导致某一次提交彻底消失，且用且珍惜。</li>
+</ul>
+<p>执行<code>git reset</code>命令之后，如果想找回那些丢弃掉的提交，可以使用<code>git reflog</code>命令，这种做法有时效性，时间长了可能找不回来。</p>
+<h1 id="四、参考"><a href="#四、参考" class="headerlink" title="四、参考"></a>四、参考</h1><p><a href="http://www.ruanyifeng.com/blog/2019/12/git-undo.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2019/12/git-undo.html</a><br><a href="https://www.jianshu.com/p/c6927e80a01d" target="_blank" rel="noopener">https://www.jianshu.com/p/c6927e80a01d</a></p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git 命令</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>HTTP缓存机制之强缓存和协商缓存区别与联系</title>
     <url>/2019/12/22/HTTP%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6%E4%B9%8B%E5%BC%BA%E7%BC%93%E5%AD%98%E5%92%8C%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/</url>
     <content><![CDATA[<h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><p>HTTP缓存在前端开发过程中有着举足轻重的地位，因为其在性能优化的过程中必不可少，许多不太常变的资源可以缓存在浏览器端，无需每次都发起请求重新获取，好的缓存策略可以大大提高网站加载及渲染效率。</p>
