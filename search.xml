@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Ubuntu18.04安装Chrome</title>
+    <url>/2020/01/11/Ubuntu18.04%E5%AE%89%E8%A3%85Chrome/</url>
+    <content><![CDATA[<h1 id="一、将下载源加入到系统的源列表"><a href="#一、将下载源加入到系统的源列表" class="headerlink" title="一、将下载源加入到系统的源列表"></a>一、将下载源加入到系统的源列表</h1><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">sudo wget https:<span class="regexp">//</span>repo.fdzh.org<span class="regexp">/chrome/g</span>oogle-chrome.list -P <span class="regexp">/etc/</span>apt<span class="regexp">/sources.list.d/</span></span><br></pre></td></tr></table></figure>
+
+<p>#二、导入谷歌软件的公钥，用于对下载软件进行验证。</p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">wget -q -O - http<span class="variable">s:</span>//<span class="keyword">dl</span>.google.<span class="keyword">com</span>/linux/linux_signing_key.pub  | sudo apt-key <span class="built_in">add</span> -</span><br></pre></td></tr></table></figure>
+
+<p>#三、用于对当前系统的可用更新列表进行更新</p>
+<figure class="highlight q"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> <span class="keyword">update</span></span><br></pre></td></tr></table></figure>
+
+<p>#四、安装Chrome（稳定版）</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="builtin-name">get</span> install google-chrome-stable</span><br></pre></td></tr></table></figure>
+
+<p>#五、启动Chrome</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>bin<span class="regexp">/google-chrome-stable</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu18.04 Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>你真的会Git吗？记一些实用命令</title>
     <url>/2020/01/04/%E4%BD%A0%E7%9C%9F%E7%9A%84%E4%BC%9AGit%E5%90%97%EF%BC%9F%E8%AE%B0%E4%B8%80%E4%BA%9B%E5%AE%9E%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
     <content><![CDATA[<h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><p>前几天看到阮一峰老师博客上面分享了一篇<a href="http://www.ruanyifeng.com/blog/2019/12/git-undo.html" target="_blank" rel="noopener">如何撤销 Git 操作？</a>的文章，读完之后不禁感叹自己真是个弱鸡，扪心自问，自己真的会<code>Git</code>吗？日常工作中的常用的基本命令倒是会几个，但是真的遇到点问题又要搞好久，现场搜索解决方案，着实会耽误些时间，导致自己的开发效率被拉低。自我反思之后，发现还是自己学艺不精，还需多下功夫，<code>工欲善其事，必先利其器</code>。在开发工具的使用方面还得下些功夫，所以，在此记录一些非常有用的提高效率的<code>Git</code>命令。</p>

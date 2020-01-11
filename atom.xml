@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-01-06T14:54:07.549Z</updated>
+  <updated>2020-01-11T13:33:24.811Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Ubuntu18.04安装Chrome</title>
+    <link href="http://yoursite.com/2020/01/11/Ubuntu18.04%E5%AE%89%E8%A3%85Chrome/"/>
+    <id>http://yoursite.com/2020/01/11/Ubuntu18.04安装Chrome/</id>
+    <published>2020-01-11T13:32:00.000Z</published>
+    <updated>2020-01-11T13:33:24.811Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;一、将下载源加入到系统的源列表&quot;&gt;&lt;a href=&quot;#一、将下载源加入到系统的源列表&quot; class=&quot;headerlink&quot; title=&quot;一、将下载源加入到系统的源列表&quot;&gt;&lt;/a&gt;一、将下载源加入到系统的源列表&lt;/h1&gt;&lt;figure
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
+    
+    
+      <category term="Ubuntu18.04 Linux" scheme="http://yoursite.com/tags/Ubuntu18-04-Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>你真的会Git吗？记一些实用命令</title>
@@ -617,33 +644,6 @@ else
     
     
       <category term="ES6 Proxy" scheme="http://yoursite.com/tags/ES6-Proxy/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hexo搭建个人博客部署于Github与Coding</title>
-    <link href="http://yoursite.com/2016/08/14/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E4%BA%8EGithub%E4%B8%8ECoding/"/>
-    <id>http://yoursite.com/2016/08/14/Hexo搭建个人博客部署于Github与Coding/</id>
-    <published>2016-08-14T08:07:00.000Z</published>
-    <updated>2019-10-21T14:04:02.104Z</updated>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;早就听说可以自己弄一个博客然后免费部署到github上面，但是一直没机会着手去做，前几天，机缘巧合之下，发现了&lt;a href=&quot;https://www.npmjs.com/package/hexo&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;这个好东西，这才发现原来它就是我苦苦找寻的的东西啊。真是“&lt;strong&gt;踏破铁鞋无觅处，得来全不费功夫。&lt;/strong&gt;”啊。&lt;/li&gt;
-&lt;li&gt;那好，lz要开始搭建个人博客啦（入坑了）。期间各种坑只能自己体会，虽然外面已经很多搭建的教程了，但是我也来凑个热闹，其实也算是记录一下自己学习的过程，还有期间所遇的各种坑以至于不得不中断到改日再战的坑，在次记录一下让后面的小伙伴们更方便一些，不至于那么惨。&lt;/li&gt;
-&lt;li&gt;首先必须&lt;strong&gt;安装一下&lt;a href=&quot;https://git-scm.com/downloads&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Git&lt;/a&gt; for windows&lt;/strong&gt;,然后申请个&lt;a href=&quot;https://github.com/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GitHub&lt;/a&gt;账号啊，建议日后想从事CS相关的童鞋多上上全球最大的同性交友网站（GitHub），里面的好东西真不少，受益匪浅啊。&lt;/li&gt;
-&lt;li&gt;Git不会的童鞋网上搜一下，很简单，在此附上一张命令速查表，方便快捷，虽然貌似后面都没用到git命令。&lt;br&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1741029-4f7a27cef1b46665.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1741029-e5035d2c74ba60c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;Git命令&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Hexo" scheme="http://yoursite.com/categories/Hexo/"/>
-    
-    
-      <category term="Hexo Blog" scheme="http://yoursite.com/tags/Hexo-Blog/"/>
     
   </entry>
   
