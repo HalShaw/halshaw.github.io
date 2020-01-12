@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-01-11T13:33:24.811Z</updated>
+  <updated>2020-01-12T15:38:13.880Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,60 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>JavaScript创建对象的几种方式</title>
+    <link href="http://yoursite.com/2020/01/13/JavaScript%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
+    <id>http://yoursite.com/2020/01/13/JavaScript创建对象的几种方式/</id>
+    <published>2020-01-12T16:02:00.000Z</published>
+    <updated>2020-01-12T15:38:13.880Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;一、前言&quot;&gt;&lt;a href=&quot;#一、前言&quot; class=&quot;headerlink&quot; title=&quot;一、前言&quot;&gt;&lt;/a&gt;一、前言&lt;/h1&gt;&lt;p&gt;虽然&lt;code&gt;Object&lt;/code&gt;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript 创建对象" scheme="http://yoursite.com/tags/JavaScript-%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript继承的几种方式</title>
+    <link href="http://yoursite.com/2020/01/12/JavaScript%E7%BB%A7%E6%89%BF%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
+    <id>http://yoursite.com/2020/01/12/JavaScript继承的几种方式/</id>
+    <published>2020-01-12T07:56:00.000Z</published>
+    <updated>2020-01-12T07:58:50.454Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;一、前言&quot;&gt;&lt;a href=&quot;#一、前言&quot; class=&quot;headerlink&quot; title=&quot;一、前言&quot;&gt;&lt;/a&gt;一、前言&lt;/h1&gt;&lt;p&gt;许多OO（面向对象） 语言都支持两种继承方式：&lt;strong&gt;接口继承&lt;/strong&gt;和&lt;strong&gt;实现继承&lt;/strong&gt;。接口继承只继承方法签名，而实现继承则继承实际的方法。由于函数没有签名，在ECMAScript 中无法实现接口继承。所以ECMAScript 只支持实现继承，而且其主要是依靠原型链来实现继承。下面是几种JavaScript的继承方式。&lt;/p&gt;
+&lt;h1 id=&quot;二、原型链实现继承&quot;&gt;&lt;a href=&quot;#二、原型链实现继承&quot; class=&quot;headerlink&quot; title=&quot;二、原型链实现继承&quot;&gt;&lt;/a&gt;二、原型链实现继承&lt;/h1&gt;&lt;p&gt;其基本思想是利用原型让一个引用类型继承另一个引用类型的属性和方法。&lt;strong&gt;具体操作就是让子类型的原型等于父类型的实例&lt;/strong&gt;，然后此时的原型对象将包含一个指向另一个原型的指针，另一个原型中也包含着一个指向另一个构造函数的指针。假如另一个原型又是另一个类型的实例，那么上述关系依然成立，如此层层递进，就构成了实例与原型的链条。这就是原型链的基本概念。具体实现如下：&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript 继承" scheme="http://yoursite.com/tags/JavaScript-%E7%BB%A7%E6%89%BF/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Ubuntu18.04安装Chrome</title>
     <link href="http://yoursite.com/2020/01/11/Ubuntu18.04%E5%AE%89%E8%A3%85Chrome/"/>
     <id>http://yoursite.com/2020/01/11/Ubuntu18.04安装Chrome/</id>
     <published>2020-01-11T13:32:00.000Z</published>
-    <updated>2020-01-11T13:33:24.811Z</updated>
+    <updated>2020-01-11T13:34:22.668Z</updated>
     
     <summary type="html">
     
@@ -580,70 +629,6 @@ else
     
     
       <category term="JavaScript Prototype" scheme="http://yoursite.com/tags/JavaScript-Prototype/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JS实现JQuery中的链式操作具体实现</title>
-    <link href="http://yoursite.com/2019/07/15/JS%E5%AE%9E%E7%8E%B0JQuery%E4%B8%AD%E7%9A%84%E9%93%BE%E5%BC%8F%E6%93%8D%E4%BD%9C/"/>
-    <id>http://yoursite.com/2019/07/15/JS实现JQuery中的链式操作/</id>
-    <published>2019-07-15T14:41:00.000Z</published>
-    <updated>2019-11-05T13:57:14.621Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;前不久面试某大厂被问到关于JQuery中的链式操作的问题，才疏学浅的我一脸懵逼，这东西只是用过，怎么还要求自己动手实现呢，究其原因还是自己修为不够，达不到大厂的水平，平时“拿来主义”习惯了，也不会去深究其底层原理，可见学习思维与方式还需改进，今天就来好好学
-        
-      
-    
-    </summary>
-    
-    
-      <category term="JavaScript JQuery" scheme="http://yoursite.com/categories/JavaScript-JQuery/"/>
-    
-    
-      <category term="JavaScript JQuery" scheme="http://yoursite.com/tags/JavaScript-JQuery/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ES6 Proxy用法详解</title>
-    <link href="http://yoursite.com/2019/07/11/ES6Proxy%E7%94%A8%E6%B3%95%E8%AF%A6%E8%A7%A3/"/>
-    <id>http://yoursite.com/2019/07/11/ES6Proxy用法详解/</id>
-    <published>2019-07-11T14:02:00.000Z</published>
-    <updated>2019-10-24T14:27:10.511Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;https://upload-images.jianshu.io/upload_images/1741029-96fbd7ec39c2fcb4.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;Proxy&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;前不久换工作的时候面试某大厂被问到关于Proxy的问题，脑子里有点印象但是又说不出具体使用方法，主要还是自己平时积累不够，所以赶紧来恶补一下。&lt;/strong&gt;&lt;/p&gt;
-&lt;h1 id=&quot;Metaprogramming&quot;&gt;&lt;a href=&quot;#Metaprogramming&quot; class=&quot;headerlink&quot; title=&quot;Metaprogramming&quot;&gt;&lt;/a&gt;Metaprogramming&lt;/h1&gt;&lt;p&gt;正式开始之前，先一起来理解下什么是Metaprogramming（元编程），因为Proxy就是一种基于Metaprogramming概念的对象 ，维基百科上这样解释：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Metaprogramming is a programming technique in which computer programs have the ability to treat other programs as their data.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;翻译过来就是&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;元编程就是可以使用其他程序来作为输入数据的一种编程技术&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&quot;Proxy&quot;&gt;&lt;a href=&quot;#Proxy&quot; class=&quot;headerlink&quot; title=&quot;Proxy&quot;&gt;&lt;/a&gt;Proxy&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;Proxy wraps objects and intercepts their behavior through traps&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The Proxy object is used to define custom behavior for fundamental operations (e.g. property lookup, assignment, enumeration, function invocation, etc).&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-    
-      <category term="JavaScript ES6" scheme="http://yoursite.com/categories/JavaScript-ES6/"/>
-    
-    
-      <category term="ES6 Proxy" scheme="http://yoursite.com/tags/ES6-Proxy/"/>
     
   </entry>
   

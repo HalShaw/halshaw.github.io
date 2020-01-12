@@ -86,7 +86,7 @@
 <meta name="keywords" content="Shaw Xiaohao">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Shaw&#39;s blog.">
-<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/JavaScript-继承/index.html">
 <meta property="og:site_name" content="Shaw&#39;s blog.">
 <meta property="og:description" content="Some tech notes and life experience.">
 <meta property="og:locale" content="zh-Hans">
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/page/3/">
+  <link rel="canonical" href="http://yoursite.com/tags/JavaScript-继承/">
 
 
 
 
 
-  <title>Shaw's blog.</title>
+  <title>标签: JavaScript 继承 | Shaw's blog.</title>
   
 
 
@@ -157,8 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -293,507 +292,53 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
-    
+
+  
+  
+  
+  <div class="post-block tag">
+
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h2>JavaScript 继承<small>标签</small>
+        </h2>
+      </div>
+
       
-
-  
-
-  
-  
-  
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/15/JS实现JQuery中的链式操作/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shaw">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/portrait.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shaw's blog.">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h3 class="post-title">
         
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/15/JS实现JQuery中的链式操作/" itemprop="url">JS实现JQuery中的链式操作具体实现</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
+            <a class="post-title-link" href="/2020/01/12/JavaScript继承的几种方式/" itemprop="url">
               
-                <span class="post-meta-item-text">发表于</span>
+                <span itemprop="name">JavaScript继承的几种方式</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-15T22:41:00+08:00">
-                2019-07-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript-JQuery/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript JQuery</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><p>前不久面试某大厂被问到关于JQuery中的链式操作的问题，才疏学浅的我一脸懵逼，这东西只是用过，怎么还要求自己动手实现呢，究其原因还是自己修为不够，达不到大厂的水平，平时“拿来主义”习惯了，也不会去深究其底层原理，可见学习思维与方式还需改进，今天就来好好学习一番。</p>
-</li>
-<li><p>网上查了一下，其原理其实很简单，就是在每次方法执行完后返回this对象，然后后面的方法就可以继续在this环境下执行。</p>
-</li>
-<li><p>然后自己动手实现一下：</p>
-<pre><code>function Employee(){};
-// 在原型上定义对应的方法
-Employee.prototype ={
-  setName:function(name){
-    this.name = name;
-    return this;
-  },
-  setAge:function(age){
-    this.age = age;
-    return this;
-  },
-  setSex:function(sex){
-    this.sex = sex;
-    return this;
-  }
-}
-
-var employee= new Employee();
-employee.setName(&quot;Hal&quot;).setAge(24).setSex(&quot;male&quot;);
-// Employee {name: &quot;Hal&quot;, age: 24, sex: &quot;male&quot;}</code></pre></li>
-<li><p>因为每次返回的结果都是<em>this</em>，所以 ‘.’ 后面的方法就相当于每次都在调用<em>this</em>，如下：</p>
-<pre><code>employee.setName(&quot;Hal&quot;) === employee.setName(&quot;Hal&quot;).setAge(24) // true
-employee.setName(&quot;Hal&quot;) === employee.setName(&quot;Hal&quot;).setAge(24).setSex(&quot;male&quot;) // true</code></pre></li>
-</ul>
-<ul>
-<li><p>优点<br>链式操作使得异步编程的流程更加清晰，不会像回调函数一样相互耦合，难以分辨函数的执行顺序且维护困难，实现了水平扩展。在ES6中，Promise也正是沿用了这一思想，每一个异步任务返回一个Promise对象，通过then方法指定回调函数。</p>
-</li>
-<li><p>缺点<br>只能应用在不需要返回值的情况下，或者说只能最后一步才能设置返回值，因为要支持链式调用返回的只能是<em>this</em>，但jQuery主要是对DOM元素进行操作，只需要改变DOM元素的表现而不需要返回值，所以适合链式操作。</p>
-</li>
-<li><p>参考<br><a href="https://www.cnblogs.com/youhong/p/6899466.html" target="_blank" rel="noopener">https://www.cnblogs.com/youhong/p/6899466.html</a></p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/11/ES6Proxy用法详解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shaw">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/portrait.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shaw's blog.">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/11/ES6Proxy用法详解/" itemprop="url">ES6 Proxy用法详解</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-11T22:02:00+08:00">
-                2019-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript-ES6/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript ES6</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="https://upload-images.jianshu.io/upload_images/1741029-96fbd7ec39c2fcb4.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Proxy"></p>
-<p><strong>前不久换工作的时候面试某大厂被问到关于Proxy的问题，脑子里有点印象但是又说不出具体使用方法，主要还是自己平时积累不够，所以赶紧来恶补一下。</strong></p>
-<h1 id="Metaprogramming"><a href="#Metaprogramming" class="headerlink" title="Metaprogramming"></a>Metaprogramming</h1><p>正式开始之前，先一起来理解下什么是Metaprogramming（元编程），因为Proxy就是一种基于Metaprogramming概念的对象 ，维基百科上这样解释：</p>
-<blockquote>
-<p>Metaprogramming is a programming technique in which computer programs have the ability to treat other programs as their data.</p>
-</blockquote>
-<p>翻译过来就是</p>
-<blockquote>
-<p>元编程就是可以使用其他程序来作为输入数据的一种编程技术</p>
-</blockquote>
-<h1 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h1><blockquote>
-<p>Proxy wraps objects and intercepts their behavior through traps</p>
-</blockquote>
-<blockquote>
-<p>The Proxy object is used to define custom behavior for fundamental operations (e.g. property lookup, assignment, enumeration, function invocation, etc).</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/11/ES6Proxy用法详解/#more" rel="contents">
-              阅读全文 &raquo;
             </a>
-          </div>
-          <!--/noindex-->
         
+      </h3>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2020-01-12T15:56:00+08:00" content="2020-01-12">
+          01-12
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
       
     </div>
-    
-    
-    
 
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
   
   
   
-  </article>
-
-
-    
-      
 
   
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/14/Hexo搭建个人博客部署于Github与Coding/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shaw">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/portrait.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shaw's blog.">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/14/Hexo搭建个人博客部署于Github与Coding/" itemprop="url">Hexo搭建个人博客部署于Github与Coding</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-14T16:07:00+08:00">
-                2016-08-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <ul>
-<li>早就听说可以自己弄一个博客然后免费部署到github上面，但是一直没机会着手去做，前几天，机缘巧合之下，发现了<a href="https://www.npmjs.com/package/hexo" target="_blank" rel="noopener">Hexo</a>这个好东西，这才发现原来它就是我苦苦找寻的的东西啊。真是“<strong>踏破铁鞋无觅处，得来全不费功夫。</strong>”啊。</li>
-<li>那好，lz要开始搭建个人博客啦（入坑了）。期间各种坑只能自己体会，虽然外面已经很多搭建的教程了，但是我也来凑个热闹，其实也算是记录一下自己学习的过程，还有期间所遇的各种坑以至于不得不中断到改日再战的坑，在次记录一下让后面的小伙伴们更方便一些，不至于那么惨。</li>
-<li>首先必须<strong>安装一下<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">Git</a> for windows</strong>,然后申请个<a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>账号啊，建议日后想从事CS相关的童鞋多上上全球最大的同性交友网站（GitHub），里面的好东西真不少，受益匪浅啊。</li>
-<li>Git不会的童鞋网上搜一下，很简单，在此附上一张命令速查表，方便快捷，虽然貌似后面都没用到git命令。<br><img src="http://upload-images.jianshu.io/upload_images/1741029-4f7a27cef1b46665.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/1741029-e5035d2c74ba60c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Git命令"></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/08/14/Hexo搭建个人博客部署于Github与Coding/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-  </nav>
-
 
 
           </div>
