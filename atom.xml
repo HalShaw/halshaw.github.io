@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-01-13T13:59:18.943Z</updated>
+  <updated>2020-01-13T15:03:31.279Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JavaScript中的基本类型和引用类型</title>
+    <link href="http://yoursite.com/2020/01/14/JavaScript%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/"/>
+    <id>http://yoursite.com/2020/01/14/JavaScript中的基本类型和引用类型/</id>
+    <published>2020-01-13T16:01:00.000Z</published>
+    <updated>2020-01-13T15:03:31.279Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;一、前言&quot;&gt;&lt;a href=&quot;#一、前言&quot; class=&quot;headerlink&quot; title=&quot;一、前言&quot;&gt;&lt;/a&gt;一、前言&lt;/h1&gt;&lt;p&gt;&lt;code&gt;ECMAScript&lt;/code&gt;变量包含两种不同数据类型的值，一种是&lt;strong&gt;基本类型&lt;/strong&gt;，另一种是&lt;strong&gt;引用类型&lt;/strong&gt;。&lt;strong&gt;基本类型&lt;/strong&gt;是简单是数据段，不能再有其他属性值；&lt;strong&gt;引用类型&lt;/strong&gt;是指可以有多个值的对象。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ECMAScript&lt;/code&gt;里面有六种基本数据类型：&lt;strong&gt;Undefined、Null、Boolean、Number 、String、Symbol&lt;/strong&gt;。这几种类型是按值访问的，因为可以操作保存在&lt;strong&gt;栈&lt;/strong&gt;中变量的实际的值。&lt;/p&gt;
+&lt;p&gt;引用类型的值是保存在&lt;strong&gt;堆&lt;/strong&gt;中的对象，和其他语言不一样的是，&lt;code&gt;ECMAScript&lt;/code&gt;不允许直接访问内存中的位置，即不能直接操作对象内存空间，所以在操作对象时，其实是在操作对象的引用，而不是实际的对象，所以引用类型的值是按引用访问的。&lt;/p&gt;
+&lt;h1 id=&quot;二、复制变量值&quot;&gt;&lt;a href=&quot;#二、复制变量值&quot; class=&quot;headerlink&quot; title=&quot;二、复制变量值&quot;&gt;&lt;/a&gt;二、复制变量值&lt;/h1&gt;&lt;p&gt;基本类型会在变量对象上创建一个新值，然后把该值复制到为新变量分配的位置上。&lt;/p&gt;
+&lt;p&gt;引用类型同样也会将存储在变量对象中的值复制一份放到为新变量分配的空间中，但是这个值的副本实际上是一个指针，指向原来的对象。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript 基本类型 引用类型" scheme="http://yoursite.com/tags/JavaScript-%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>JavaScript创建对象的几种方式</title>
@@ -46,7 +71,7 @@
     <link href="http://yoursite.com/2020/01/12/JavaScript%E7%BB%A7%E6%89%BF%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
     <id>http://yoursite.com/2020/01/12/JavaScript继承的几种方式/</id>
     <published>2020-01-12T07:56:00.000Z</published>
-    <updated>2020-01-12T07:58:50.454Z</updated>
+    <updated>2020-01-13T14:02:44.095Z</updated>
     
     <summary type="html">
     
@@ -582,51 +607,6 @@ else
     
     
       <category term="JavaScript Web Worker" scheme="http://yoursite.com/tags/JavaScript-Web-Worker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>深入理解Javascript中的Prototype原型</title>
-    <link href="http://yoursite.com/2019/07/17/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Javascript%E4%B8%AD%E7%9A%84Prototype%E5%8E%9F%E5%9E%8B/"/>
-    <id>http://yoursite.com/2019/07/17/深入理解Javascript中的Prototype原型/</id>
-    <published>2019-07-17T14:25:00.000Z</published>
-    <updated>2019-10-28T13:55:54.317Z</updated>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;刚开始学Javascript的时候觉得很简单，其中的东西也就是那是基本的，但是还是太年轻，最近因为面试中常被问到关于原型和原型链的问题，然后自己也是模棱两可的，含含糊糊说不清楚，所以痛下思定，决定好好下一番功夫来搞懂吃透原型与原型链究竟是什么。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&quot;关于new&quot;&gt;&lt;a href=&quot;#关于new&quot; class=&quot;headerlink&quot; title=&quot;关于new&quot;&gt;&lt;/a&gt;关于&lt;code&gt;new&lt;/code&gt;&lt;/h1&gt;&lt;p&gt;&lt;code&gt;new&lt;/code&gt;的过程&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;新生成了一个对象&lt;/li&gt;
-&lt;li&gt;链接到原型&lt;/li&gt;
-&lt;li&gt;绑定 this&lt;/li&gt;
-&lt;li&gt;返回新对象&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;知道了&lt;code&gt;new&lt;/code&gt;的原理后，也可以自己实现一个&lt;code&gt;new&lt;/code&gt;函数：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;function myNew() {
-    // 创建一个空的对象
-    let obj = new Object()
-    // 获得构造函数
-    let Con = [].shift.call(arguments)
-    // 链接到原型
-    obj.__proto__ = Con.prototype
-    // 绑定 this，执行构造函数
-    let result = Con.apply(obj, arguments)
-    // 确保 new 出来的是个对象
-    return typeof result === &amp;apos;object&amp;apos; ? result : obj
-}&lt;/code&gt;&lt;/pre&gt;
-    
-    </summary>
-    
-    
-      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
-    
-    
-      <category term="JavaScript Prototype" scheme="http://yoursite.com/tags/JavaScript-Prototype/"/>
     
   </entry>
   
