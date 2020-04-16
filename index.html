@@ -308,6 +308,157 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/09/CSS之px, em, rem详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shaw">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/portrait.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shaw's blog.">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/09/CSS之px, em, rem详解/" itemprop="url">CSS之px，em，rem详解</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-09T21:35:00+08:00">
+                2020-03-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="一、-背景"><a href="#一、-背景" class="headerlink" title="一、 背景"></a>一、 背景</h1><p>CSS的<code>font-size</code>属性对应的三个单位 px，em，rem 用了好久，发现对<br>rem的理解还不是很透彻，网上查了查资料，打算彻底弄明白这三个单位之间的区别。</p>
+<h1 id="二、px"><a href="#二、px" class="headerlink" title="二、px"></a>二、px</h1><p>px是最常用以及最简单的基本单位，缺点是当浏览器默认字体改变时，其对应的值也不会变，可能会影响用户体验。</p>
+<h1 id="三、em"><a href="#三、em" class="headerlink" title="三、em"></a>三、em</h1><p>一个em是其对应父元素的相对字体大小，如果一个元素字体设置为<code>font-size: 16px;</code>，其子元素的<code>1em = 16px</code>，如果其父元素没有指定字体，会从下到上继承祖先元素，如果都没有的话会继承浏览器提供的默认根元素尺寸。</p>
+<h1 id="四、rem"><a href="#四、rem" class="headerlink" title="四、rem"></a>四、rem</h1><p>rem用的是<code>root element’s font-size</code>，即根元素的尺寸的相对值，若浏览器默认字体大小为<code>16px</code>，则<code>1rem = 16px</code>。通常为了方便计算，可以把根元素的<code>font-size</code>设置为<code>10px</code>，这样<code>1rem = 10px</code>。<br>但是这样就会出现上面说的关于px的问题，即浏览器默认字体改变时，网站对应的字体也不会发生变化，可能会影响用户体验。<br>所以又有了相应的解决方案，使用百分百，浏览器默认字体通常是<code>16px</code>，可以设置根元素<code>font-size: 62.5%;</code>，因为<code>16px</code>的62.5%是<code>10px</code>，这样既使用了相对单位且方便了计算，又解决了px带来的问题。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span> &#123; <span class="attribute">font-size</span>: <span class="number">62.5%</span>; &#125; </span><br><span class="line"><span class="selector-tag">body</span> &#123; <span class="attribute">font-size</span>: <span class="number">1.4rem</span>; &#125; <span class="comment">/* =14px */</span></span><br><span class="line"><span class="selector-tag">h1</span>   &#123; <span class="attribute">font-size</span>: <span class="number">2.4rem</span>; &#125; <span class="comment">/* =24px */</span></span><br></pre></td></tr></table></figure>
+
+<p>但是，老版本浏览器可能不支持rem，可以使用px来解决：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span> &#123; <span class="attribute">font-size</span>: <span class="number">62.5%</span>; &#125; </span><br><span class="line"><span class="selector-tag">body</span> &#123; <span class="attribute">font-size</span>: <span class="number">14px</span>; <span class="attribute">font-size</span>: <span class="number">1.4rem</span>; &#125; <span class="comment">/* =14px */</span></span><br><span class="line"><span class="selector-tag">h1</span>   &#123; <span class="attribute">font-size</span>: <span class="number">24px</span>; <span class="attribute">font-size</span>: <span class="number">2.4rem</span>; &#125; <span class="comment">/* =24px */</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="五、参考"><a href="#五、参考" class="headerlink" title="五、参考"></a>五、参考</h1><p><a href="https://snook.ca/archives/html_and_css/font-size-with-rem" target="_blank" rel="noopener">https://snook.ca/archives/html_and_css/font-size-with-rem</a><br><a href="https://www.sitepoint.com/understanding-and-using-rem-units-in-css/" target="_blank" rel="noopener">https://www.sitepoint.com/understanding-and-using-rem-units-in-css/</a><br><a href="https://medium.com/code-better/css-units-for-font-size-px-em-rem-79f7e592bb97" target="_blank" rel="noopener">https://medium.com/code-better/css-units-for-font-size-px-em-rem-79f7e592bb97</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/14/JavaScript中的基本类型和引用类型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1649,169 +1800,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/26/深入理解CSS布局之Flexbox/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shaw">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/portrait.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shaw's blog.">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/26/深入理解CSS布局之Flexbox/" itemprop="url">深入理解CSS布局之Flexbox</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-26T21:18:00+08:00">
-                2019-11-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CSS/" itemprop="url" rel="index">
-                    <span itemprop="name">CSS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="一、-前言"><a href="#一、-前言" class="headerlink" title="一、 前言"></a>一、 前言</h1><p><code>Flexbox</code>布局提供了一种高效的在容器中布局、对齐、分配空间的方式，即使其<code>item</code>的大小是未知的或者动态的。</p>
-<h1 id="二、属性"><a href="#二、属性" class="headerlink" title="二、属性"></a>二、属性</h1><h3 id="flex-container相关"><a href="#flex-container相关" class="headerlink" title="flex container相关"></a>flex container相关</h3><ul>
-<li>display</li>
-<li>flex-direction</li>
-<li>flex-wrap</li>
-<li>flex-flow</li>
-<li>justify-content</li>
-<li>align-items</li>
-<li>align-content</li>
-</ul>
-<h3 id="flex-items相关"><a href="#flex-items相关" class="headerlink" title="flex items相关"></a>flex items相关</h3><ul>
-<li>order</li>
-<li>flex-grow</li>
-<li>flex-shrink</li>
-<li>flex-basis</li>
-<li>flex</li>
-<li>align-self</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/11/26/深入理解CSS布局之Flexbox/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1864,7 +1852,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1886,7 +1874,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
