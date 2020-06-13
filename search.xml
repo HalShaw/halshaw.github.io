@@ -1416,10 +1416,8 @@ myInstanceof(Foo, Function) // true</code></pre><h1 id="六、总结"><a href="#
 <li>history 提供了 <code>pushState</code> 和 <code>replaceState</code> 两个方法来记录路由状态，这两个方法改变 URL 不会引起页面刷新</li>
 <li>history 提供类似 hashchange 事件的 popstate 事件，但 popstate 事件有些不同：通过浏览器前进后退改变 URL 时会触发 popstate 事件，通过pushState/replaceState或<code>&lt;a&gt;</code>标签改变 URL 不会触发 popstate 事件。好在我们可以拦截 pushState/replaceState的调用和<code>&lt;a&gt;</code>标签的点击事件来检测 URL 变化，所以监听 URL 变化可以实现，只是没有 hashchange 那么方便。</li>
 <li><code>pushState(state, title, url)</code> 和 <code>replaceState(state, title, url)</code>都可以接受三个相同的参数：</li>
-<li>state：需要保存的数据，这个数据在触发popstate事件时，可以在event.state里获取<ul>
+<li>state：需要保存的数据，这个数据在触发popstate事件时，可以在event.state里获取</li>
 <li>title：标题，基本没用，一般传 null</li>
-</ul>
-</li>
 <li>url：设定新的历史记录的 url，新的 url 与当前 url 的 origin 必须是一样的，否则会抛错，url可以是绝对路径，也可以是相对路径。</li>
 </ul>
 <h3 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h3><ul>

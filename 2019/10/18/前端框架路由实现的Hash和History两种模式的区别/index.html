@@ -91,7 +91,7 @@
 <meta property="og:description" content="前言 之前面试的时候就有准备过前端框架中两种路由实现方式及区别，但是当时没专门下功夫去深入了解，就在网上搜了下别人总结的临时抱了下佛脚。但是事实证明，出来混，总是要还的，在后来的面试中又遇到了，而且这次问得更加深入，仅仅靠死记硬背来的知识总是遗忘得很快，网上别人总结的东西终归还是别人的，鉴于网上别人总结的内容有点杂乱无章，还是决定自己在此总结记录一番，以加深印象。  一、何为前端路由 路由的概念">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1741029-9e5d1063264044c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-10-21T14:02:23.781Z">
+<meta property="og:updated_time" content="2020-06-13T03:05:57.976Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端框架路由实现的Hash和History两种模式的区别">
 <meta name="twitter:description" content="前言 之前面试的时候就有准备过前端框架中两种路由实现方式及区别，但是当时没专门下功夫去深入了解，就在网上搜了下别人总结的临时抱了下佛脚。但是事实证明，出来混，总是要还的，在后来的面试中又遇到了，而且这次问得更加深入，仅仅靠死记硬背来的知识总是遗忘得很快，网上别人总结的东西终归还是别人的，鉴于网上别人总结的内容有点杂乱无章，还是决定自己在此总结记录一番，以加深印象。  一、何为前端路由 路由的概念">
@@ -436,10 +436,8 @@
 <li>history 提供了 <code>pushState</code> 和 <code>replaceState</code> 两个方法来记录路由状态，这两个方法改变 URL 不会引起页面刷新</li>
 <li>history 提供类似 hashchange 事件的 popstate 事件，但 popstate 事件有些不同：通过浏览器前进后退改变 URL 时会触发 popstate 事件，通过pushState/replaceState或<code>&lt;a&gt;</code>标签改变 URL 不会触发 popstate 事件。好在我们可以拦截 pushState/replaceState的调用和<code>&lt;a&gt;</code>标签的点击事件来检测 URL 变化，所以监听 URL 变化可以实现，只是没有 hashchange 那么方便。</li>
 <li><code>pushState(state, title, url)</code> 和 <code>replaceState(state, title, url)</code>都可以接受三个相同的参数：</li>
-<li>state：需要保存的数据，这个数据在触发popstate事件时，可以在event.state里获取<ul>
+<li>state：需要保存的数据，这个数据在触发popstate事件时，可以在event.state里获取</li>
 <li>title：标题，基本没用，一般传 null</li>
-</ul>
-</li>
 <li>url：设定新的历史记录的 url，新的 url 与当前 url 的 origin 必须是一样的，否则会抛错，url可以是绝对路径，也可以是相对路径。</li>
 </ul>
 <h3 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
